@@ -8,8 +8,8 @@ currently on the clients ftp servers.</p>
 <ul style="list-style-type:square">
 	<li>Jason Lewis (Jason-LewisG)</li>
 	<li>Kevin Cheddar (K-Cheddar)</li>
-	<li>Timmy Chandy (chandyt)</li>
-	<li>Sabrina Gisselle (sabrina-gisselle)</li>	
+	<li>Sabrina Gisselle (sabrina-gisselle)</li>
+	<li>Timmy Chandy (chandyt)</li>		
 </ul>
 <h2>Tech Stack</h2>
 <p>Microsoft .NET framework, mySQL, and Stardome's ftp servers.</p>
