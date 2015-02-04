@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+
 <h1>Stardome Project</h1>
 <p>This is the repository for the client Stardome. </p>
 
@@ -14,3 +18,6 @@ currently on the clients ftp servers.</p>
 </u1>
 <h2>Tech Stack</h2>
 <p>Microsoft .NET framework, mySQL, and Stardome's ftp servers.</p>
+
+</body>
+</html>
