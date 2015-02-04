@@ -6,7 +6,7 @@ producers (employees) with privileges set by the administrator to see, download,
 currently on the clients ftp servers. </p>
 
 <h2>Team members</h2>
-<u1>
+<u1 class="task-list">
 	<li>Jason Lewis (Jason-LewisG)</li>
 	<li>Kevin Cheddar (K-Cheddar)</li>
 	<li>Timmy Chandy (chandyt)</li>
