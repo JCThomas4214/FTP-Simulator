@@ -1,8 +1,5 @@
-
-<html>
-<body>
-
-<h1>Stardome Project</h1>
+<html><body>
+<h1>Stardome Project (CEN3031)</h1>
 <p>This is the repository for the client Stardome. </p>
 
 <p>We are assigned to develop a file distribution web-app that differentiates users and 
@@ -18,6 +15,4 @@ currently on the clients ftp servers.</p>
 </ul>
 <h2>Tech Stack</h2>
 <p>Microsoft .NET framework, mySQL, and Stardome's ftp servers.</p>
-
-</body>
-</html>
+</body></html>
