@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <body>
 
@@ -10,12 +10,12 @@ producers (employees) with privileges set by the administrators to see, download
 currently on the clients ftp servers.</p>
 
 <h2>Team members</h2>
-<u1 style="list-style-type:square">
+<ul style="list-style-type:square">
 	<li>Jason Lewis (Jason-LewisG)</li>
 	<li>Kevin Cheddar (K-Cheddar)</li>
 	<li>Timmy Chandy (chandyt)</li>
 	<li>Sabrina Gisselle (sabrina-gisselle)</li>	
-</u1>
+</ul>
 <h2>Tech Stack</h2>
 <p>Microsoft .NET framework, mySQL, and Stardome's ftp servers.</p>
 
