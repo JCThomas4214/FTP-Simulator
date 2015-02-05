@@ -12,5 +12,5 @@ currently on the clients servers.</p>
 	<li>Timmy Chandy (chandyt)</li>		
 </ul>
 <h2>Tech Stack</h2>
-<p>Microsoft .NET framework, mySQL, and Stardome's ftp servers.</p>
+<p>Microsoft .NET framework and mySQL</p>
 </body></html>
