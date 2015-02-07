@@ -54,7 +54,7 @@ namespace Stardome.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Users", "Home");
         }
 
         //
@@ -81,7 +81,7 @@ namespace Stardome.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Users", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {

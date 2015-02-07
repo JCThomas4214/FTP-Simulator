@@ -12,7 +12,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Stardome Media", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Stardome Media", "Users", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -21,9 +21,9 @@
                     @if (Request.IsAuthenticated) {
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Users", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Content", "About", "Home")</li>
-                            <li>@Html.ActionLink("Settings", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Users", "Users", "Home")</li>
+                            <li>@Html.ActionLink("Content", "Content", "Home")</li>
+                            <li>@Html.ActionLink("Settings", "Settings", "Home")</li>
                         </ul>
                     </nav>
                     }

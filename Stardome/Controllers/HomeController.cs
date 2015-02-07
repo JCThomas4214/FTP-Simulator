@@ -8,21 +8,21 @@ namespace Stardome.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Users()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Content()
         {
             ViewBag.Message = "Your app description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Settings()
         {
             ViewBag.Message = "Your contact page.";
 
