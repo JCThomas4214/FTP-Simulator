@@ -337,7 +337,7 @@ namespace Stardome.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Users", "Home");
             }
         }
 
