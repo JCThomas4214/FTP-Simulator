@@ -10,21 +10,21 @@ namespace Stardome.Controllers
     {
         public ActionResult Users()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "User Management Page";
 
             return View();
         }
 
         public ActionResult Content()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Content Management Page";
 
             return View();
         }
 
         public ActionResult Settings()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Settings Page.";
 
             return View();
         }
