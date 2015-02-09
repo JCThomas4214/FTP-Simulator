@@ -6,7 +6,7 @@ producers (employees) with privileges set by the administrators to see, download
 currently on the clients servers.</p>
 <h2>Team members</h2>
 <ul style="list-style-type:square">
-	<li>Jason Lewis (Jason-LewisG)</li>
+	<li>Jason Lewis (<a href="https://github.com/Jason-LewisG">Jason-LewisG</a>)</li>
 	<li>Kevin Cheddar (K-Cheddar)</li>
 	<li>Sabrina Gisselle (sabrina-gisselle)</li>
 	<li>Timmy Chandy (chandyt)</li>		
