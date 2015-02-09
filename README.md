@@ -7,9 +7,9 @@ currently on the clients servers.</p>
 <h2>Team members</h2>
 <ul style="list-style-type:square">
 	<li>Jason Lewis (<a href="https://github.com/Jason-LewisG">Jason-LewisG</a>)</li>
-	<li>Kevin Cheddar (K-Cheddar)</li>
-	<li>Sabrina Gisselle (sabrina-gisselle)</li>
-	<li>Timmy Chandy (chandyt)</li>		
+	<li>Kevin Cheddar (<a href="https://github.com/K-Cheddar">K-Cheddar</a>)</li>
+	<li>Sabrina Gisselle (<a href="https://github.com/sabrina-gisselle">sabrina-gisselle</a>)</li>
+	<li>Timmy Chandy (<a href="https://github.com/chandyt">chandyt</a>)</li>		
 </ul>
 <h2>Tech Stack</h2>
 <p>Microsoft .NET framework and mySQL</p>
