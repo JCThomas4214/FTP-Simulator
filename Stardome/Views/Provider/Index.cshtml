@@ -1,4 +1,9 @@
-﻿@{
+﻿@if (Request.IsAuthenticated == false)
+{
+    Response.Redirect("~/Account/Login");
+}
+
+@{
     ViewBag.Title = "Index";
 }
 

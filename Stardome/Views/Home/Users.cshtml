@@ -1,4 +1,10 @@
-﻿@{
+﻿@if (Request.IsAuthenticated == false)
+{
+    Response.Redirect("~/Account/Login");
+
+}
+
+@{
     ViewBag.Title = "Home Page";
 }
 @section featured {
