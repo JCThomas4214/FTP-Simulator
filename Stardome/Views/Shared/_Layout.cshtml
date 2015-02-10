@@ -18,9 +18,13 @@
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
+                    
+
                     @if (Request.IsAuthenticated) {
+                        //Menu visible only for Admin Type Users
                     <nav>
                         <ul id="menu">
+
                             <li>@Html.ActionLink("Users", "Users", "Home")</li>
                             <li>@Html.ActionLink("Content", "Content", "Home")</li>
                             <li>@Html.ActionLink("Settings", "Settings", "Home")</li>
