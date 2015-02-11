@@ -44,6 +44,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -185,6 +187,48 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="DomainObjects\Access.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\Action.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\File.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\Folder.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\Log.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\Role.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\StardomeContent.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StardomeContent.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\StardomeContent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\StardomeContent.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StardomeContent.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\Status.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\UserAuthCredential.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainObjects\UserInformation.cs">
+      <DependentUpon>StardomeContent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +297,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="DomainObjects\StardomeContent.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StardomeContent.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DomainObjects\StardomeContent.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StardomeContent.edmx</DependentUpon>
+      <LastGenOutput>StardomeContent.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DomainObjects\StardomeContent.edmx.diagram">
+      <DependentUpon>StardomeContent.edmx</DependentUpon>
+    </Content>
+    <Content Include="DomainObjects\StardomeContent.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StardomeContent.edmx</DependentUpon>
+      <LastGenOutput>StardomeContent.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\ProviderTile.PNG" />
     <Content Include="Images\SD_Logo_Horz_2lines_April2014.png" />
@@ -312,7 +373,9 @@
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Provider\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
