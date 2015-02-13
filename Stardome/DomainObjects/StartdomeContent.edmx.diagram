@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="StardomeModel.Log" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StardomeModel.Role" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="StardomeModel.Status" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StardomeModel.UserAuthCredential" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.UserAuthCredential" Width="1.75" PointX="3" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StardomeModel.UserInformation" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
         <AssociationConnector Association="StardomeModel.FK_Access_Folder" ManuallyRouted="false" />
         <AssociationConnector Association="StardomeModel.FK_Access_UserAuthCredential" ManuallyRouted="false" />

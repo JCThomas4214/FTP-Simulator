@@ -26,10 +26,6 @@ namespace Stardome.DomainObjects
         public string Password { get; set; }
         public Nullable<System.DateTime> PasswordModifiedOn { get; set; }
         public Nullable<System.DateTime> LastLoginDateTime { get; set; }
-        public string SecurityQuestion1 { get; set; }
-        public string SecurityAnswer1 { get; set; }
-        public string SecurityQuestion2 { get; set; }
-        public string SecurityAnswer2 { get; set; }
         public Nullable<System.DateTime> FailedLoginAttemptDateTime { get; set; }
         public Nullable<int> NumFailedLoginAttempts { get; set; }
         public System.DateTime AccountCreatedOn { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StardomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StardomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Access">
           <Key>
             <PropertyRef Name="Id" />
@@ -76,19 +76,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="512" Nullable="false" />
           <Property Name="PasswordModifiedOn" Type="datetime" />
           <Property Name="LastLoginDateTime" Type="datetime" />
-          <Property Name="SecurityQuestion1" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="SecurityAnswer1" Type="varchar" MaxLength="512" Nullable="false" />
-          <Property Name="SecurityQuestion2" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="SecurityAnswer2" Type="varchar" MaxLength="512" Nullable="false" />
           <Property Name="FailedLoginAttemptDateTime" Type="datetime" />
           <Property Name="NumFailedLoginAttempts" Type="int" />
           <Property Name="AccountCreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="UserInformation">
           <Key>
@@ -96,10 +92,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Prefix" Type="varchar" MaxLength="10" />
-          <Property Name="Suffix" Type="varchar" MaxLength="10" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -262,8 +255,7 @@
             <End Role="UserInformation" EntitySet="UserInformation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StardomeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -356,10 +348,6 @@
           <Property Name="Password" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PasswordModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="LastLoginDateTime" Type="DateTime" Precision="3" />
-          <Property Name="SecurityQuestion1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SecurityAnswer1" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SecurityQuestion2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SecurityAnswer2" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FailedLoginAttemptDateTime" Type="DateTime" Precision="3" />
           <Property Name="NumFailedLoginAttempts" Type="Int32" />
           <Property Name="AccountCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
@@ -375,10 +363,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Suffix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -630,10 +615,6 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="PasswordModifiedOn" ColumnName="PasswordModifiedOn" />
                 <ScalarProperty Name="LastLoginDateTime" ColumnName="LastLoginDateTime" />
-                <ScalarProperty Name="SecurityQuestion1" ColumnName="SecurityQuestion1" />
-                <ScalarProperty Name="SecurityAnswer1" ColumnName="SecurityAnswer1" />
-                <ScalarProperty Name="SecurityQuestion2" ColumnName="SecurityQuestion2" />
-                <ScalarProperty Name="SecurityAnswer2" ColumnName="SecurityAnswer2" />
                 <ScalarProperty Name="FailedLoginAttemptDateTime" ColumnName="FailedLoginAttemptDateTime" />
                 <ScalarProperty Name="NumFailedLoginAttempts" ColumnName="NumFailedLoginAttempts" />
                 <ScalarProperty Name="AccountCreatedOn" ColumnName="AccountCreatedOn" />
@@ -646,10 +627,7 @@
               <MappingFragment StoreEntitySet="UserInformation">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
-                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />

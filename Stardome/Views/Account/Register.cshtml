@@ -16,28 +16,12 @@
         <legend>Registration Form</legend>
         <section>
            <div style="clear:left; float:left;  padding-right:5px; ">
-               Role: @Html.DropDownListFor(m => Model.RoleId, new SelectList(ViewBag.Roles, "Id", "Role1", 0), new { style = "height:25px;" })
+               Role: @Html.DropDownListFor(m => Model.RoleId, new SelectList(ViewBag.Roles, "Id", "Role1", 1), new { style = "height:25px;" })
             </div>
             <div style="clear:left; float:left; padding-right:5px; ">
-                @*@Html.DropDownListFor(m => Model.Prefix, new SelectList(new List<Object>{
-                new { value = 0 , text = ""  },
-                new { value = 1 , text = "Mr." },
-                new { value = 2 , text = "Ms"},
-                new { value = 3 , text = "Mrs"},
-                new { value = 4 , text = "Dr."}
-                },
-            "value", "text", 0))*@
                 @Html.TextBoxFor(m => m.FirstName, new { placeholder = "First Name" })
                 @Html.TextBoxFor(m => m.LastName, new { placeholder = "Last Name" })
-                @*@Html.DropDownListFor(m => Model.Suffix, new SelectList(new List<Object>{
-                new { value = 0 , text = ""  },
-                new { value = 1 , text = "I" },
-                new { value = 2 , text = "II"},
-                new { value = 3 , text = "III"},
-                new { value = 4 , text = "Jr."},
-                new { value = 5 , text = "Sr."}
-                },
-            "value", "text", 0))*@
+
             </div>
             <div style="clear:left; float:left;  padding-right:5px; ">
                 @Html.TextBoxFor(m => m.EmailAddress, new { style = "width:615px;", placeholder = "Email Address" })
@@ -52,14 +36,7 @@
                 </div>
 
 
-                <div style="clear:left; float:left; padding-right:5px; ">
-                    @Html.PasswordFor(m => m.SecurityQuestion1, new { placeholder = "Security Question 1" })<br />
-                    @Html.PasswordFor(m => m.SecurityAnswer1, new { placeholder = "Security Answer 1" })
-                </div>
-                <div style="float:left; ">
-                    @Html.PasswordFor(m => m.SecurityQuestion2, new { placeholder = "Security Question 2" })<br />
-                    @Html.PasswordFor(m => m.SecurityAnswer2, new { placeholder = "Security Answer 2" })
-                </div>
+
                 <div style="width:650px; clear:left; float:left;">
                     <input type="submit" value="Register" />
                 </div>

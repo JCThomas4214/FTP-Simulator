@@ -101,21 +101,7 @@ namespace Stardome.Models
         [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
         public string LastName { get; set; }
 
-        [DataType(DataType.Text)]
-        [Display(Name = "Middle Name")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string MiddleName { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Prefix")]
-        [StringLength(10, ErrorMessage = "The {0} cannot be empty.")]
-        public string Prefix { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Suffix")]
-        [StringLength(10, ErrorMessage = "The {0} cannot be empty.")]
-        public string Suffix { get; set; }
-
+        
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email Address")]
@@ -136,30 +122,7 @@ namespace Stardome.Models
         //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public Int32 RoleId { get; set; }
 
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Security Answer1")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string SecurityAnswer1 { get; set; }
 
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Security Answer2")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string SecurityAnswer2 { get; set; }
-
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Security Question1")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string SecurityQuestion1 { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Security Question2")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string SecurityQuestion2 { get; set; }
 
     }
 

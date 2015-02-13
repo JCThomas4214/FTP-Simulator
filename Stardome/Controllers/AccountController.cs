@@ -98,10 +98,6 @@ namespace Stardome.Controllers
 
                             AccountCreatedOn = DateTime.Now,
                             RoleId = model.RoleId,
-                            SecurityAnswer1 = model.SecurityAnswer1,
-                            SecurityAnswer2 = model.SecurityAnswer2,
-                            SecurityQuestion1 = model.SecurityQuestion1,
-                            SecurityQuestion2 = model.SecurityQuestion2,
                             Password = model.Password
 
                         });
