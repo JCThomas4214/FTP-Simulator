@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using Stardome.DomainObjects;
+using Stardome.Repositories;
+using Stardome.Services.Domain;
 using WebMatrix.WebData;
 using Stardome.Filters;
 using Stardome.Models;
@@ -17,6 +17,12 @@ namespace Stardome.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private readonly UserAuthCredentialService userAuthCredentialService;
+
+        public AccountController()
+        {
+            userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
+        }
         //
         // GET: /Account/Login
 
@@ -37,10 +43,9 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                List<DomainObjects.UserAuthCredential> lstUAC= new DomainObjects.StardomeEntitiesCS().UserAuthCredentials.Where(m => m.Username == model.UserName).ToList();
-                return RedirectToLocal(lstUAC[0].RoleId);
+                int roleId = userAuthCredentialService.GetByUsername(model.UserName).Role.Id;
+                return RedirectToLocal(roleId);
             }
-
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
@@ -246,23 +251,22 @@ namespace Stardome.Controllers
        
 
         #region Helpers
-        private ActionResult RedirectToLocal(int roleID)
+
+        private ActionResult RedirectToLocal(int roleId)
         {
-            switch (roleID)
+            switch (roleId)
                  {
                     case 1: // Admin Users
-                         
                         return RedirectToAction("Users", "Home");
-                        break;
+
                     case 2: // Producers
                         return RedirectToAction("Index", "Producer");
-                        break;
+
                     case 3: // Clients
                         return RedirectToAction("Index", "Clients");
-                        break;
+
                     default:
                         return RedirectToAction("Login", "Account");
-                        break;
                     }
           }
 
