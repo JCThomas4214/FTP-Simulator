@@ -14,7 +14,13 @@ namespace Stardome.DomainObjects
     
     public partial class UserAuthCredential
     {
-        public int UserId { get; set; }
+        public UserAuthCredential()
+        {
+            this.Accesses = new HashSet<Access>();
+            this.Logs = new HashSet<Log>();
+            this.UserInformations = new HashSet<UserInformation>();
+        }
+    
         public int RoleId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -29,7 +35,9 @@ namespace Stardome.DomainObjects
         public System.DateTime AccountCreatedOn { get; set; }
         public int Id { get; set; }
     
+        public virtual ICollection<Access> Accesses { get; set; }
+        public virtual ICollection<Log> Logs { get; set; }
         public virtual Role Role { get; set; }
-        public virtual UserInformation UserInformation { get; set; }
+        public virtual ICollection<UserInformation> UserInformations { get; set; }
     }
 }

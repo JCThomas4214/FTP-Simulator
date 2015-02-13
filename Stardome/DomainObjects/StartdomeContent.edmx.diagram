@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba8e82c8efd44200b6ff116c84eff046" Name="Diagram1">
+        <EntityTypeShape EntityType="StardomeModel.Access" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.Action" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.File" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.Folder" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.Log" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.Role" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.Status" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.UserAuthCredential" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StardomeModel.UserInformation" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="StardomeModel.FK_Access_Folder" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_Access_UserAuthCredential" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_Logs_Action" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_Files_Folder" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_Files_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_Folder_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_Logs_UserAuthCredential" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_UserAuthCredential_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="StardomeModel.FK_UserInformation_UserAuthCredential" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -21,5 +21,6 @@ namespace Stardome.DomainObjects
         public int Id { get; set; }
     
         public virtual Folder Folder { get; set; }
+        public virtual UserAuthCredential UserAuthCredential { get; set; }
     }
 }

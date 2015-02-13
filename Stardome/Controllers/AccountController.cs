@@ -38,6 +38,7 @@ namespace Stardome.Controllers
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
+                
             }
 
             // If we got this far, something failed, redisplay form
@@ -63,6 +64,7 @@ namespace Stardome.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            
             return View();
         }
 
@@ -79,7 +81,58 @@ namespace Stardome.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    //TODO: Change the values in ld object
+
+
+                    //model.UserId = 1;
+                    //model.AccountCreatedOn = DateTime.Now;
+                    model.RoleId = 1;
+                    //model.SecurityAnswer1 = model.SecurityAnswer1;
+                    //model.SecurityAnswer2 = model.SecurityAnswer2;
+                    //model.SecurityQuestion1 = model.SecurityQuestion1;
+                    //model.SecurityQuestion2 = model.SecurityQuestion2;
+                    //model.Password = model.Password;
+                    //model.FirstName = model.FirstName;
+                    //model.LastName = model.LastName;
+                    //model.EmailAddress = model.EmailAddress;
+
+                    try
+                    {
+
+                        var userProfile = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {
+                            
+                            AccountCreatedOn = DateTime.Now,
+                            RoleId = model.RoleId,
+                            SecurityAnswer1 = model.SecurityAnswer1,
+                            SecurityAnswer2 = model.SecurityAnswer2,
+                            SecurityQuestion1 = model.SecurityQuestion1,
+                            SecurityQuestion2 = model.SecurityQuestion2,
+                            Password= model.Password
+
+                        });
+
+                        if (userProfile == null) //This way Userdetail is only created if UserProfile exists so that it can retrieve the foreign key
+                        {
+                            DomainObjects.UserInformation UserInformation = new DomainObjects.UserInformation();
+                            UserInformation.UserId = WebSecurity.GetUserId(model.UserName);
+                            UserInformation.FirstName = model.FirstName;
+                            UserInformation.LastName = model.LastName;
+                            UserInformation.Email = model.EmailAddress ;
+                            UserInformation.CreatedOn = DateTime.Now;
+                            
+                            using (var dbCtx = new DomainObjects.StardomeEntitiesCS())
+                            {
+                                dbCtx.UserInformations.Add(UserInformation);
+                                dbCtx.SaveChanges();
+                            }
+                        }           
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", ex.Message);
+                    }
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Users", "Home");
                 }
@@ -200,7 +253,7 @@ namespace Stardome.Controllers
             return View(model);
         }
 
-    
+       
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)

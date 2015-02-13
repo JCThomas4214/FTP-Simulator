@@ -188,46 +188,46 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="DomainObjects\Access.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\Action.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\File.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\Folder.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\Log.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\Role.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainObjects\StardomeContent.Context.cs">
+    <Compile Include="DomainObjects\StartdomeContent.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StardomeContent.Context.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainObjects\StardomeContent.cs">
+    <Compile Include="DomainObjects\StartdomeContent.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainObjects\StardomeContent.Designer.cs">
+    <Compile Include="DomainObjects\StartdomeContent.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StardomeContent.edmx</DependentUpon>
+      <DependentUpon>StartdomeContent.edmx</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\Status.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\UserAuthCredential.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainObjects\UserInformation.cs">
-      <DependentUpon>StardomeContent.tt</DependentUpon>
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,10 +237,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-Stardome-20150205091543.mdf" />
-    <Content Include="App_Data\aspnet-Stardome-20150205091543_log.ldf">
-      <DependentUpon>aspnet-Stardome-20150205091543.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -297,22 +293,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="DomainObjects\StardomeContent.edmx">
+    <EntityDeploy Include="DomainObjects\StartdomeContent.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StardomeContent.Designer.cs</LastGenOutput>
+      <LastGenOutput>StartdomeContent.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DomainObjects\StardomeContent.Context.tt">
+    <Content Include="DomainObjects\StartdomeContent.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StardomeContent.edmx</DependentUpon>
-      <LastGenOutput>StardomeContent.Context.cs</LastGenOutput>
+      <DependentUpon>StartdomeContent.edmx</DependentUpon>
+      <LastGenOutput>StartdomeContent.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DomainObjects\StardomeContent.edmx.diagram">
-      <DependentUpon>StardomeContent.edmx</DependentUpon>
+    <Content Include="DomainObjects\StartdomeContent.edmx.diagram">
+      <DependentUpon>StartdomeContent.edmx</DependentUpon>
     </Content>
-    <Content Include="DomainObjects\StardomeContent.tt">
+    <Content Include="DomainObjects\StartdomeContent.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StardomeContent.edmx</DependentUpon>
-      <LastGenOutput>StardomeContent.cs</LastGenOutput>
+      <DependentUpon>StartdomeContent.edmx</DependentUpon>
+      <LastGenOutput>StartdomeContent.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\ProviderTile.PNG" />
@@ -331,7 +327,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -378,6 +376,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

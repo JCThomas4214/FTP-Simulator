@@ -14,21 +14,82 @@
 
     <fieldset>
         <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
-        <input type="submit" value="Register" />
+        <section>
+            <table>
+                <tr>
+                    <td style="vertical-align:text-top;padding:15px">
+                        @Html.LabelFor(m => m.Prefix)
+                        @Html.DropDownListFor(m => Model.Prefix, new SelectList(new List<Object>{
+                                        new { value = 0 , text = "Select One"  },
+                                        new { value = 1 , text = "Mr." },
+                                        new { value = 2 , text = "Ms"},
+                                        new { value = 3 , text = "Mrs"},
+                                        new { value = 4 , text = "Dr."}
+                                        },
+                                    "value","text",0))
+
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.TextBoxFor(m => m.FirstName)
+
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.TextBoxFor(m => m.LastName)
+
+                        @Html.LabelFor(m => m.Suffix)
+                        @Html.DropDownListFor(m => Model.Suffix, new SelectList(new List<Object>{
+                                        new { value = 0 , text = "Select One"  },
+                                        new { value = 1 , text = "I" },
+                                        new { value = 2 , text = "II"},
+                                        new { value = 3 , text = "III"},
+                                        new { value = 4 , text = "Jr."},
+                                        new { value = 5 , text = "Sr."}
+                                        },
+                                    "value", "text", 0))
+
+                        @Html.LabelFor(m => m.EmailAddress)
+                        @Html.TextBoxFor(m => m.EmailAddress)
+
+                    </td>
+                    <td style="vertical-align:text-top;padding:15px">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName)
+
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password)
+
+
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword)
+
+                        @Html.LabelFor(m => m.SecurityQuestion1)
+                        @Html.PasswordFor(m => m.SecurityQuestion1)
+
+                        @Html.LabelFor(m => m.SecurityAnswer1)
+                        @Html.PasswordFor(m => m.SecurityAnswer1)
+
+                        @Html.LabelFor(m => m.SecurityQuestion2)
+                        @Html.PasswordFor(m => m.SecurityQuestion2)
+
+                        @Html.LabelFor(m => m.SecurityAnswer2)
+                        @Html.PasswordFor(m => m.SecurityAnswer2)
+
+
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        
+                            <input type="submit" value="Register" />
+                        
+                    </td>
+
+                </tr>
+
+            </table>
+           
+        </section>
+        
     </fieldset>
 }
 

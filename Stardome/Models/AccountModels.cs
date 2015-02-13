@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
-
+  
 namespace Stardome.Models
 {
     public class UsersContext : DbContext
@@ -55,7 +55,7 @@ namespace Stardome.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LoginModel
+    public class LoginModel 
     {
         [Required]
         [Display(Name = "User name")]
@@ -68,6 +68,8 @@ namespace Stardome.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+
     }
 
     public class RegisterModel
@@ -86,12 +88,81 @@ namespace Stardome.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "First Name")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Last Name")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string LastName { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Middle Name")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string MiddleName { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Prefix")]
+        [StringLength(10, ErrorMessage = "The {0} cannot be empty.")]
+        public string Prefix { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Suffix")]
+        [StringLength(10, ErrorMessage = "The {0} cannot be empty.")]
+        public string Suffix { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string EmailAddress { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "AccountCreatedOn")]
+        public DateTime AccountCreatedOn { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "UserId")]
+        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public Int32 UserId { get; set; }
+        
+        [DataType(DataType.Text)]
+        [Display(Name = "RoleId")]
+        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public Int32 RoleId { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Security Answer1")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string SecurityAnswer1 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Security Answer2")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string SecurityAnswer2 { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Security Question1")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string SecurityQuestion1 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Security Question2")]
+        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
+        public string SecurityQuestion2 { get; set; }
+
+
     }
 
-    public class ExternalLogin
-    {
-        public string Provider { get; set; }
-        public string ProviderDisplayName { get; set; }
-        public string ProviderUserId { get; set; }
-    }
+
 }

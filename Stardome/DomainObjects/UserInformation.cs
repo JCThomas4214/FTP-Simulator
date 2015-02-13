@@ -14,12 +14,6 @@ namespace Stardome.DomainObjects
     
     public partial class UserInformation
     {
-        public UserInformation()
-        {
-            this.Logs = new HashSet<Log>();
-            this.UserAuthCredentials = new HashSet<UserAuthCredential>();
-        }
-    
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -31,8 +25,8 @@ namespace Stardome.DomainObjects
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public int UserId { get; set; }
     
-        public virtual ICollection<Log> Logs { get; set; }
-        public virtual ICollection<UserAuthCredential> UserAuthCredentials { get; set; }
+        public virtual UserAuthCredential UserAuthCredential { get; set; }
     }
 }

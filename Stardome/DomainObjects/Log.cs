@@ -21,6 +21,6 @@ namespace Stardome.DomainObjects
         public string Description { get; set; }
     
         public virtual Action Action { get; set; }
-        public virtual UserInformation UserInformation { get; set; }
+        public virtual UserAuthCredential UserAuthCredential { get; set; }
     }
 }
