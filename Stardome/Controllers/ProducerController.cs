@@ -6,13 +6,14 @@ using System.Web.Mvc;
 
 namespace Stardome.Controllers
 {
-    public class ProviderController : Controller
+    public class ProducerController : Controller
     {
         //
-        // GET: /Provider/
+        // GET: /Producer/
 
         public ActionResult Index()
         {
+            ViewBag.showAdminMenu = false;
             return View();
         }
 

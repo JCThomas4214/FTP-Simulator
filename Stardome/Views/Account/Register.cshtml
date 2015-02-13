@@ -15,80 +15,56 @@
     <fieldset>
         <legend>Registration Form</legend>
         <section>
-            <table>
-                <tr>
-                    <td style="vertical-align:text-top;padding:15px">
-                        @Html.LabelFor(m => m.Prefix)
-                        @Html.DropDownListFor(m => Model.Prefix, new SelectList(new List<Object>{
-                                        new { value = 0 , text = "Select One"  },
-                                        new { value = 1 , text = "Mr." },
-                                        new { value = 2 , text = "Ms"},
-                                        new { value = 3 , text = "Mrs"},
-                                        new { value = 4 , text = "Dr."}
-                                        },
-                                    "value","text",0))
+           <div style="clear:left; float:left;  padding-right:5px; ">
+               Role: @Html.DropDownListFor(m => Model.RoleId, new SelectList(ViewBag.Roles, "Id", "Role1", 0), new { style = "height:25px;" })
+            </div>
+            <div style="clear:left; float:left; padding-right:5px; ">
+                @*@Html.DropDownListFor(m => Model.Prefix, new SelectList(new List<Object>{
+                new { value = 0 , text = ""  },
+                new { value = 1 , text = "Mr." },
+                new { value = 2 , text = "Ms"},
+                new { value = 3 , text = "Mrs"},
+                new { value = 4 , text = "Dr."}
+                },
+            "value", "text", 0))*@
+                @Html.TextBoxFor(m => m.FirstName, new { placeholder = "First Name" })
+                @Html.TextBoxFor(m => m.LastName, new { placeholder = "Last Name" })
+                @*@Html.DropDownListFor(m => Model.Suffix, new SelectList(new List<Object>{
+                new { value = 0 , text = ""  },
+                new { value = 1 , text = "I" },
+                new { value = 2 , text = "II"},
+                new { value = 3 , text = "III"},
+                new { value = 4 , text = "Jr."},
+                new { value = 5 , text = "Sr."}
+                },
+            "value", "text", 0))*@
+            </div>
+            <div style="clear:left; float:left;  padding-right:5px; ">
+                @Html.TextBoxFor(m => m.EmailAddress, new { style = "width:615px;", placeholder = "Email Address" })
+            </div>
+                <div style="clear:left; float:left; padding-right:5px;">
+                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
+                </div>
 
-                        @Html.LabelFor(m => m.FirstName)
-                        @Html.TextBoxFor(m => m.FirstName)
-
-                        @Html.LabelFor(m => m.LastName)
-                        @Html.TextBoxFor(m => m.LastName)
-
-                        @Html.LabelFor(m => m.Suffix)
-                        @Html.DropDownListFor(m => Model.Suffix, new SelectList(new List<Object>{
-                                        new { value = 0 , text = "Select One"  },
-                                        new { value = 1 , text = "I" },
-                                        new { value = 2 , text = "II"},
-                                        new { value = 3 , text = "III"},
-                                        new { value = 4 , text = "Jr."},
-                                        new { value = 5 , text = "Sr."}
-                                        },
-                                    "value", "text", 0))
-
-                        @Html.LabelFor(m => m.EmailAddress)
-                        @Html.TextBoxFor(m => m.EmailAddress)
-
-                    </td>
-                    <td style="vertical-align:text-top;padding:15px">
-                        @Html.LabelFor(m => m.UserName)
-                        @Html.TextBoxFor(m => m.UserName)
-
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password)
+                <div style="float:left">
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })<br />
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+                </div>
 
 
-                        @Html.LabelFor(m => m.ConfirmPassword)
-                        @Html.PasswordFor(m => m.ConfirmPassword)
+                <div style="clear:left; float:left; padding-right:5px; ">
+                    @Html.PasswordFor(m => m.SecurityQuestion1, new { placeholder = "Security Question 1" })<br />
+                    @Html.PasswordFor(m => m.SecurityAnswer1, new { placeholder = "Security Answer 1" })
+                </div>
+                <div style="float:left; ">
+                    @Html.PasswordFor(m => m.SecurityQuestion2, new { placeholder = "Security Question 2" })<br />
+                    @Html.PasswordFor(m => m.SecurityAnswer2, new { placeholder = "Security Answer 2" })
+                </div>
+                <div style="width:650px; clear:left; float:left;">
+                    <input type="submit" value="Register" />
+                </div>
 
-                        @Html.LabelFor(m => m.SecurityQuestion1)
-                        @Html.PasswordFor(m => m.SecurityQuestion1)
-
-                        @Html.LabelFor(m => m.SecurityAnswer1)
-                        @Html.PasswordFor(m => m.SecurityAnswer1)
-
-                        @Html.LabelFor(m => m.SecurityQuestion2)
-                        @Html.PasswordFor(m => m.SecurityQuestion2)
-
-                        @Html.LabelFor(m => m.SecurityAnswer2)
-                        @Html.PasswordFor(m => m.SecurityAnswer2)
-
-
-
-
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" >
-                        
-                            <input type="submit" value="Register" />
-                        
-                    </td>
-
-                </tr>
-
-            </table>
-           
-        </section>
+</section>
         
     </fieldset>
 }

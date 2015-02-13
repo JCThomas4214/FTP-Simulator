@@ -8,8 +8,10 @@ namespace Stardome.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Users()
         {
+            ViewBag.showAdminMenu = true;
             ViewBag.Message = "User Management Page";
 
             return View();
@@ -17,6 +19,7 @@ namespace Stardome.Controllers
 
         public ActionResult Content()
         {
+            ViewBag.showAdminMenu = true;
             ViewBag.Message = "Content Management Page";
 
             return View();
@@ -24,6 +27,7 @@ namespace Stardome.Controllers
 
         public ActionResult Settings()
         {
+            ViewBag.showAdminMenu = true;
             ViewBag.Message = "Settings Page.";
 
             return View();

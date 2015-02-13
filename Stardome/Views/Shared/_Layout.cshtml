@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title </title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
@@ -22,14 +22,16 @@
                     </section>
                     
 
-                    @if (Request.IsAuthenticated) {
+                    @if (Request.IsAuthenticated ) {
                         //Menu visible only for Admin Type Users
                     <nav>
                         <ul id="menu">
-
+                        @if (ViewBag.showAdminMenu != null && ViewBag.showAdminMenu)
+                        {
                             <li>@Html.ActionLink("Users", "Users", "Home")</li>
                             <li>@Html.ActionLink("Content", "Content", "Home")</li>
                             <li>@Html.ActionLink("Settings", "Settings", "Home")</li>
+                        }
                         </ul>
                     </nav>
                     }

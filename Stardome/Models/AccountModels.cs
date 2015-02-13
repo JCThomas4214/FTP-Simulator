@@ -161,7 +161,6 @@ namespace Stardome.Models
         [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
         public string SecurityQuestion2 { get; set; }
 
-
     }
 
 

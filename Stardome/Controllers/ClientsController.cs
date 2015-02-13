@@ -13,6 +13,7 @@ namespace Stardome.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.showAdminMenu = false;
             return View();
         }
 

@@ -37,8 +37,8 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
-                
+                List<DomainObjects.UserAuthCredential> lstUAC= new DomainObjects.StardomeEntitiesCS().UserAuthCredentials.Where(m => m.Username == model.UserName).ToList();
+                return RedirectToLocal(lstUAC[0].RoleId);
             }
 
             // If we got this far, something failed, redisplay form
@@ -64,7 +64,11 @@ namespace Stardome.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            
+            ViewBag.showAdminMenu = true;
+            using (var dbCtx = new DomainObjects.StardomeEntitiesCS())
+            {
+                ViewBag.Roles = dbCtx.Roles.ToList();
+            }
             return View();
         }
 
@@ -81,33 +85,19 @@ namespace Stardome.Controllers
                 // Attempt to register the user
                 try
                 {
-                    //TODO: Change the values in ld object
-
-
-                    //model.UserId = 1;
-                    //model.AccountCreatedOn = DateTime.Now;
-                    model.RoleId = 1;
-                    //model.SecurityAnswer1 = model.SecurityAnswer1;
-                    //model.SecurityAnswer2 = model.SecurityAnswer2;
-                    //model.SecurityQuestion1 = model.SecurityQuestion1;
-                    //model.SecurityQuestion2 = model.SecurityQuestion2;
-                    //model.Password = model.Password;
-                    //model.FirstName = model.FirstName;
-                    //model.LastName = model.LastName;
-                    //model.EmailAddress = model.EmailAddress;
-
                     try
                     {
 
-                        var userProfile = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {
-                            
+                        var userProfile = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
+                        {
+
                             AccountCreatedOn = DateTime.Now,
                             RoleId = model.RoleId,
                             SecurityAnswer1 = model.SecurityAnswer1,
                             SecurityAnswer2 = model.SecurityAnswer2,
                             SecurityQuestion1 = model.SecurityQuestion1,
                             SecurityQuestion2 = model.SecurityQuestion2,
-                            Password= model.Password
+                            Password = model.Password
 
                         });
 
@@ -117,9 +107,9 @@ namespace Stardome.Controllers
                             UserInformation.UserId = WebSecurity.GetUserId(model.UserName);
                             UserInformation.FirstName = model.FirstName;
                             UserInformation.LastName = model.LastName;
-                            UserInformation.Email = model.EmailAddress ;
+                            UserInformation.Email = model.EmailAddress;
                             UserInformation.CreatedOn = DateTime.Now;
-                            
+
                             using (var dbCtx = new DomainObjects.StardomeEntitiesCS())
                             {
                                 dbCtx.UserInformations.Add(UserInformation);
@@ -256,17 +246,25 @@ namespace Stardome.Controllers
        
 
         #region Helpers
-        private ActionResult RedirectToLocal(string returnUrl)
+        private ActionResult RedirectToLocal(int roleID)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Users", "Home");
-            }
-        }
+            switch (roleID)
+                 {
+                    case 1: // Admin Users
+                         
+                        return RedirectToAction("Users", "Home");
+                        break;
+                    case 2: // Producers
+                        return RedirectToAction("Index", "Producer");
+                        break;
+                    case 3: // Clients
+                        return RedirectToAction("Index", "Clients");
+                        break;
+                    default:
+                        return RedirectToAction("Login", "Account");
+                        break;
+                    }
+          }
 
         public enum ManageMessageId
         {

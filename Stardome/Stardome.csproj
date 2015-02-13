@@ -186,7 +186,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\ProducerController.cs" />
     <Compile Include="DomainObjects\Access.cs">
       <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
@@ -369,7 +369,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Clients\Index.cshtml" />
-    <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Producer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
