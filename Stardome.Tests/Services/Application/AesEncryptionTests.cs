@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Stardome.Services.Application;
 
-namespace Stardome.Tests.Services
+namespace Stardome.Tests.Services.Application
 {
     [TestClass]
     public class AesEncryptionTests
