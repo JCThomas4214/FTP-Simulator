@@ -30,8 +30,16 @@ namespace Stardome.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (ModelState.IsValid && WebSecurity.IsAuthenticated)
+            {
+                int roleId = userAuthCredentialService.GetByUsername(WebSecurity.CurrentUserName).Role.Id;
+                return RedirectToLocal(roleId);
+            }
+            else
+            { 
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
         }
 
         //
