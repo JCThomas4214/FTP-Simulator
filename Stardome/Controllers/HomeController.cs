@@ -20,13 +20,14 @@ namespace Stardome.Controllers
 
         public ActionResult Users()
         {
+            ViewBag.Message = "User Management Page";
             var model = new UserManagement
             {
                 UserList = userAuthCredentialService.GetUserAuthCredentials().ToList(),
                 Roles = roleService.GetRoles().ToList()
             };
             ViewBag.showAdminMenu = true;
-            ViewBag.Message = "User Management Page";
+            
 
             return View(model);
         }
