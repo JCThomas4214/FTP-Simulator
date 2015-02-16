@@ -239,6 +239,7 @@
     <Compile Include="Repositories\BaseContentRepository.cs" />
     <Compile Include="Repositories\IUserAuthCredentialRepository.cs" />
     <Compile Include="Repositories\UserAuthCredentialRepository.cs" />
+    <Compile Include="Services\Application\AesEncryption.cs" />
     <Compile Include="Services\Domain\IUserAuthCredentialService.cs" />
     <Compile Include="Services\Domain\UserAuthCredentialService.cs" />
   </ItemGroup>
@@ -385,7 +386,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\Application\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

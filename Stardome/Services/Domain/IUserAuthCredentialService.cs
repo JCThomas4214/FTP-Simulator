@@ -6,5 +6,7 @@ namespace Stardome.Services.Domain
     {
         UserAuthCredential GetById(int aUserAuthCredentialId);
         UserAuthCredential GetByUsername(string aUsername);
+        string EncryptPassword(string password);
+        string DecryptPassword(string password);
     }
 }

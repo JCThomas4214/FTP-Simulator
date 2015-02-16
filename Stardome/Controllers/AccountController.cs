@@ -41,7 +41,9 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            string password = userAuthCredentialService.EncryptPassword(model.Password);
+
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, password, model.RememberMe))
             {
                 int roleId = userAuthCredentialService.GetByUsername(model.UserName).Role.Id;
                 return RedirectToLocal(roleId);
@@ -70,7 +72,7 @@ namespace Stardome.Controllers
         public ActionResult Register()
         {
             ViewBag.showAdminMenu = true;
-            using (var dbCtx = new DomainObjects.StardomeEntitiesCS())
+            using (var dbCtx = new StardomeEntitiesCS())
             {
                 ViewBag.Roles = dbCtx.Roles.ToList();
             }
@@ -92,26 +94,27 @@ namespace Stardome.Controllers
                 {
                     try
                     {
+                        string password = userAuthCredentialService.EncryptPassword(model.Password);
 
-                        var userProfile = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
+                        var userProfile = WebSecurity.CreateUserAndAccount(model.UserName, password, new
                         {
 
                             AccountCreatedOn = DateTime.Now,
                             RoleId = model.RoleId,
-                            Password = model.Password
+                            Password = password
 
                         });
 
                         if (userProfile == null) //This way Userdetail is only created if UserProfile exists so that it can retrieve the foreign key
                         {
-                            DomainObjects.UserInformation UserInformation = new DomainObjects.UserInformation();
+                            UserInformation UserInformation = new UserInformation();
                             UserInformation.UserId = WebSecurity.GetUserId(model.UserName);
                             UserInformation.FirstName = model.FirstName;
                             UserInformation.LastName = model.LastName;
                             UserInformation.Email = model.EmailAddress;
                             UserInformation.CreatedOn = DateTime.Now;
 
-                            using (var dbCtx = new DomainObjects.StardomeEntitiesCS())
+                            using (var dbCtx = new StardomeEntitiesCS())
                             {
                                 dbCtx.UserInformations.Add(UserInformation);
                                 dbCtx.SaveChanges();
@@ -124,7 +127,7 @@ namespace Stardome.Controllers
                     {
                         ModelState.AddModelError("", ex.Message);
                     }
-                    WebSecurity.Login(model.UserName, model.Password);
+                    // What happens here?
                     return RedirectToAction("Users", "Home");
                 }
                 catch (MembershipCreateUserException e)
@@ -199,7 +202,10 @@ namespace Stardome.Controllers
                     bool changePasswordSucceeded;
                     try
                     {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                        string OldPassword = userAuthCredentialService.EncryptPassword(model.OldPassword);
+                        string newPassword = userAuthCredentialService.EncryptPassword(model.NewPassword);
+
+                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, OldPassword, newPassword);
                     }
                     catch (Exception)
                     {
