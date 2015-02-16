@@ -238,12 +238,17 @@
     </Compile>
     <Compile Include="Infrastructure\Repository\IObjectRepository.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseContentRepository.cs" />
+    <Compile Include="Repositories\IRoleRepository.cs" />
     <Compile Include="Repositories\IUserAuthCredentialRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\UserAuthCredentialRepository.cs" />
     <Compile Include="Services\Application\AesEncryption.cs" />
+    <Compile Include="Services\Domain\IRoleService.cs" />
     <Compile Include="Services\Domain\IUserAuthCredentialService.cs" />
+    <Compile Include="Services\Domain\RoleService.cs" />
     <Compile Include="Services\Domain\UserAuthCredentialService.cs" />
   </ItemGroup>
   <ItemGroup>

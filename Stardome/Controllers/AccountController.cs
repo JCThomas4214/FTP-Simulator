@@ -18,10 +18,11 @@ namespace Stardome.Controllers
     public class AccountController : Controller
     {
         private readonly UserAuthCredentialService userAuthCredentialService;
-
+        private readonly RoleService roleService;
         public AccountController()
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
+            roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
         }
         //
         // GET: /Account/Login
@@ -72,10 +73,8 @@ namespace Stardome.Controllers
         public ActionResult Register()
         {
             ViewBag.showAdminMenu = true;
-            using (var dbCtx = new StardomeEntitiesCS())
-            {
-                ViewBag.Roles = dbCtx.Roles.ToList();
-            }
+            ViewBag.Roles = roleService.GetRoles();
+            
             return View();
         }
 

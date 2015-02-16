@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Stardome.DomainObjects;
@@ -29,6 +30,11 @@ namespace Stardome.Repositories
             return
                 sdContext.UserAuthCredentials.SingleOrDefault(
                     aUser => aUser.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public IEnumerable<UserAuthCredential> GetAll()
+        {
+            return GetObjectSet();
         }
 
         public override DbSet<UserAuthCredential> GetObjectSet()

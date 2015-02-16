@@ -1,20 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Stardome.DomainObjects;
+using Stardome.Models;
+using Stardome.Repositories;
+using Stardome.Services.Domain;
 
 namespace Stardome.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private readonly UserAuthCredentialService userAuthCredentialService;
+        private readonly RoleService roleService;
+
+        public HomeController()
+        {
+            userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
+            roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
+        }
+
         public ActionResult Users()
         {
+            var model = new UserManagement
+            {
+                UserList = userAuthCredentialService.GetUserAuthCredentials().ToList(),
+                Roles = roleService.GetRoles().ToList()
+            };
             ViewBag.showAdminMenu = true;
             ViewBag.Message = "User Management Page";
 
-            return View();
+            return View(model);
         }
 
         public ActionResult Content()

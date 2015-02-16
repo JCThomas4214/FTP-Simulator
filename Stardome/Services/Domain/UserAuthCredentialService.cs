@@ -1,4 +1,5 @@
-﻿using Stardome.DomainObjects;
+﻿using System.Collections.Generic;
+using Stardome.DomainObjects;
 using Stardome.Repositories;
 using Stardome.Services.Application;
 
@@ -31,6 +32,11 @@ namespace Stardome.Services.Domain
         public string DecryptPassword(string password)
         {
             return AesEncryption.Decrypt(password);
+        }
+
+        public IEnumerable<UserAuthCredential> GetUserAuthCredentials()
+        {
+            return repository.GetAll();
         }
     }
 }

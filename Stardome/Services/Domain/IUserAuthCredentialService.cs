@@ -1,4 +1,5 @@
-﻿using Stardome.DomainObjects;
+﻿using System.Collections.Generic;
+using Stardome.DomainObjects;
 
 namespace Stardome.Services.Domain
 {
@@ -8,5 +9,6 @@ namespace Stardome.Services.Domain
         UserAuthCredential GetByUsername(string aUsername);
         string EncryptPassword(string password);
         string DecryptPassword(string password);
+        IEnumerable<UserAuthCredential> GetUserAuthCredentials();
     }
 }
