@@ -15,6 +15,7 @@ namespace Stardome.Tests.Services.Domain
         private static int id = 1;
         private static string username = "usn";
         private UserAuthCredential userAuthCredential = new UserAuthCredential { Id = id, Username = username };
+        
 
         [TestMethod]
         public void GetById()
