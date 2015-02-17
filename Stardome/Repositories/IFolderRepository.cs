@@ -5,8 +5,8 @@ using Stardome.Models;
 
 namespace Stardome.Repositories
 {
-    public interface IRoleRepository : IObjectRepository<Role>
+    public interface IFolderRepository : IObjectRepository<Folder>
     {
-        IEnumerable<Role> GetAll();
+        IEnumerable<Folder> GetAll();
     }
 }

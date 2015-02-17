@@ -5,33 +5,33 @@ using Stardome.DomainObjects;
 
 namespace Stardome.Repositories
 {
-    public class RoleRepository : BaseContentRepository<Role>, IRoleRepository
+    public class FolderRepository : BaseContentRepository<Folder>, IFolderRepository
     {
         public StardomeEntitiesCS sdContext { get; private set; }
 
-        public RoleRepository(StardomeEntitiesCS ctx)
+        public FolderRepository(StardomeEntitiesCS ctx)
             : base(ctx)
         {
             sdContext = ctx;
         }
 
-        public override Role GetById(object id)
+        public override Folder GetById(object id)
         {
             if (id is int)
             {
-                return sdContext.Roles.SingleOrDefault(x => x.Id == (int) id);
+                return sdContext.Folders.SingleOrDefault(x => x.Id == (int) id);
             }
             return null;
         }
 
-        public IEnumerable<Role> GetAll()
+        public IEnumerable<Folder> GetAll()
         {
             return GetObjectSet();
         }
 
-        public override DbSet<Role> GetObjectSet()
+        public override DbSet<Folder> GetObjectSet()
         {
-            return sdContext.Roles;
+            return sdContext.Folders;
         }
     }
 }

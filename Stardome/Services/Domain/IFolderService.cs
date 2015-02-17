@@ -3,8 +3,8 @@ using Stardome.DomainObjects;
 
 namespace Stardome.Services.Domain
 {
-    public interface IRoleService
+    public interface IFolderService
     {
-        IEnumerable<Role> GetRoles();
+        IEnumerable<Folder> GetFolders();
     }
 }
