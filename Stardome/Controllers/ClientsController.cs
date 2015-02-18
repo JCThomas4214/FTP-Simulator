@@ -21,10 +21,17 @@ namespace Stardome.Controllers
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
             
-            if (ModelState.IsValid && WebSecurity.IsAuthenticated   )
+            if (ModelState.IsValid && WebSecurity.IsAuthenticated )
             {
+                
                 int roleId = userAuthCredentialService.GetByUsername(WebSecurity.CurrentUserName).Role.Id;
-                return (new AccountController()).RedirectToLocal(roleId);
+                if (roleId!=3)
+                    return (new AccountController()).RedirectToLocal(roleId);
+                else
+                { 
+                    ViewBag.showAdminMenu = false;
+                    return View();
+                }
             }
             else
             {

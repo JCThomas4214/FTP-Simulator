@@ -15,9 +15,7 @@ namespace Stardome.Controllers
         //
         // GET: /Producer/
 
-        //
-        // GET: /Clients/
-        private IUserAuthCredentialService userAuthCredentialService;
+         private IUserAuthCredentialService userAuthCredentialService;
         private IRoleService roleService;
         public ActionResult Index()
         {
@@ -26,8 +24,15 @@ namespace Stardome.Controllers
 
             if (ModelState.IsValid && WebSecurity.IsAuthenticated)
             {
+
                 int roleId = userAuthCredentialService.GetByUsername(WebSecurity.CurrentUserName).Role.Id;
-                return (new AccountController()).RedirectToLocal(roleId);
+                if (roleId != 2)
+                    return (new AccountController()).RedirectToLocal(roleId);
+                else
+                {
+                    ViewBag.showAdminMenu = false;
+                    return View();
+                }
             }
             else
             {
