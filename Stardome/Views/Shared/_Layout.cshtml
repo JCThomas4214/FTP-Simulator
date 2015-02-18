@@ -5,7 +5,13 @@
         <title>@ViewBag.Title </title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+        
+        
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jtable")
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/jtable/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
@@ -53,7 +59,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+        
         @RenderSection("scripts", required: false)
     </body>
 </html>

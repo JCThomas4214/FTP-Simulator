@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Stardome
 {
@@ -17,6 +16,10 @@ namespace Stardome
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jtable").Include(
+                        "~/Scripts/jtable/jquery.jtable.min.js",
+                        "~/Scripts/jtable/jquery.jtable.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -38,6 +41,11 @@ namespace Stardome
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new StyleBundle("~/Content/jtable/css").Include(
+                "~/Scripts/jtable/themes/metro/blue/jtable.min.css",
+                "~/Scripts/jtable/themes/metro/blue/jtable.css"
+                ));
         }
     }
 }
