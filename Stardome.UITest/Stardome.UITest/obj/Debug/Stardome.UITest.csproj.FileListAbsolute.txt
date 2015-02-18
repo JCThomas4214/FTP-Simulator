@@ -1,0 +1,4 @@
+D:\UF ENG\CEN3031\Stardome\StardomeNew\trunk\Stardome.UITest\Stardome.UITest\bin\Debug\Stardome.UITest.dll
+D:\UF ENG\CEN3031\Stardome\StardomeNew\trunk\Stardome.UITest\Stardome.UITest\bin\Debug\Stardome.UITest.pdb
+D:\UF ENG\CEN3031\Stardome\StardomeNew\trunk\Stardome.UITest\Stardome.UITest\obj\Debug\Stardome.UITest.dll
+D:\UF ENG\CEN3031\Stardome\StardomeNew\trunk\Stardome.UITest\Stardome.UITest\obj\Debug\Stardome.UITest.pdb
