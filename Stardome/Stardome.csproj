@@ -208,6 +208,9 @@
     <Compile Include="DomainObjects\Role.cs">
       <DependentUpon>StartdomeContent.tt</DependentUpon>
     </Compile>
+    <Compile Include="DomainObjects\SiteSetting.cs">
+      <DependentUpon>StartdomeContent.tt</DependentUpon>
+    </Compile>
     <Compile Include="DomainObjects\StartdomeContent.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -249,6 +252,7 @@
     <Compile Include="Repositories\IUserAuthCredentialRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\FolderRepository.cs" />
+    <Compile Include="Repositories\SiteSettingsRepository.cs" />
     <Compile Include="Repositories\UserAuthCredentialRepository.cs" />
     <Compile Include="Services\Application\AesEncryption.cs" />
     <Compile Include="Services\Domain\FileService.cs" />
@@ -258,6 +262,7 @@
     <Compile Include="Services\Domain\IFolderService.cs" />
     <Compile Include="Services\Domain\IUserAuthCredentialService.cs" />
     <Compile Include="Services\Domain\RoleService.cs" />
+    <Compile Include="Services\Domain\SiteSettingsService.cs" />
     <Compile Include="Services\Domain\UserAuthCredentialService.cs" />
   </ItemGroup>
   <ItemGroup>
