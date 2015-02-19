@@ -20,6 +20,16 @@ namespace Stardome.Services.Domain
         {
             return repository.GetById(aSiteSettingId);
         }
+
+        public String GetSiteName
+        {
+            get{return repository.GetById(1).Value;}
+        }
+
+        public String GetFilePath
+        {
+            get{return repository.GetById(2).Value;}
+        }
    
         public IEnumerable<SiteSetting> GetSiteSettings()
         {
