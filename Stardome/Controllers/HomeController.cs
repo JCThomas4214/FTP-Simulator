@@ -55,6 +55,7 @@ namespace Stardome.Controllers
         [HttpPost]
         public ActionResult Settings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings)
         {
+            ViewBag.UpdateMessage = "";
             if (ModelState.IsValid)
             {
                ViewBag.UpdateMessage= siteSettingsService.UpdateSiteSettings(lstSiteSettings);
