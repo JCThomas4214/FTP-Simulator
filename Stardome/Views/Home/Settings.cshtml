@@ -1,4 +1,5 @@
-﻿@if (Request.IsAuthenticated == false)
+﻿@model List<Stardome.DomainObjects.SiteSetting>
+@if (Request.IsAuthenticated == false)
 {
     Response.Redirect("~/Account/Login");
 }
@@ -17,5 +18,38 @@
         </div>
     </section>
 }
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Registration Form</legend>
+        <section>
+            <table>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
 
-<h2>Landing Page for Admins to Manage Site settings</h2>
+                            <b>
+                                @Html.DisplayFor(m => Model[i].Name)
+                                @Html.HiddenFor(m => Model[i].Name)
+                                @Html.HiddenFor(m => Model[i].Id)
+                            </b>
+                        </td>
+                        <td>@Html.TextBoxFor(m => Model[i].Value)
+                            @*<div class="message-info">
+                                <p>
+                                    Changing these information can affect the websites performance.
+                                </p>
+                            </div>*@
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div style="width:650px; clear:left; float:left;">
+                <input type="submit" value="Update" />
+            </div>
+        </section>
+    </fieldset>
+    <h3> @ViewBag.UpdateMessage </h3>
+}
+

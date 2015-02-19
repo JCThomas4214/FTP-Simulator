@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using Stardome.DomainObjects;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace Stardome.Repositories
 {
-    public class SiteSettingsRepository : BaseContentRepository<SiteSetting>
+    public class SiteSettingsRepository : BaseContentRepository<SiteSetting>, ISiteSettingsRepository
     {
         public StardomeEntitiesCS sdContext { get; private set; }
 
@@ -34,6 +35,25 @@ namespace Stardome.Repositories
         public override DbSet<SiteSetting> GetObjectSet()
         {
             return sdContext.SiteSettings;
+        }
+
+        public String UpdateSiteSettings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings)
+        {
+            try
+            {
+                foreach (Stardome.DomainObjects.SiteSetting siteSettings in lstSiteSettings)
+                {
+                    sdContext.SiteSettings.Attach(siteSettings);
+                    DbEntityEntry<Stardome.DomainObjects.SiteSetting> entry = sdContext.Entry(siteSettings);
+                    entry.State = System.Data.EntityState.Modified;
+                    sdContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "Site Settings Updated Successfully....";
         }
     }
 }

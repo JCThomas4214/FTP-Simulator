@@ -249,6 +249,7 @@
     <Compile Include="Repositories\IFileRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
     <Compile Include="Repositories\IFolderRepository.cs" />
+    <Compile Include="Repositories\ISiteSettingsRepository.cs" />
     <Compile Include="Repositories\IUserAuthCredentialRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\FolderRepository.cs" />

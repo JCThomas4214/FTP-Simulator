@@ -4,6 +4,7 @@ using Stardome.DomainObjects;
 using Stardome.Models;
 using Stardome.Repositories;
 using Stardome.Services.Domain;
+using System.Collections.Generic;
 
 namespace Stardome.Controllers
 {
@@ -11,11 +12,13 @@ namespace Stardome.Controllers
     {
         private readonly UserAuthCredentialService userAuthCredentialService;
         private readonly RoleService roleService;
+        private readonly SiteSettingsService siteSettingsService;
 
         public HomeController()
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
+            siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
         }
 
         public ActionResult Users()
@@ -41,11 +44,28 @@ namespace Stardome.Controllers
 
         public ActionResult Settings()
         {
+            ViewBag.UpdateMessage = "";
+            var model = siteSettingsService.GetSiteSettings().ToList();
             ViewBag.showAdminMenu = true;
             ViewBag.Message = "Settings Page.";
 
-            return View();
+            return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Settings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings)
+        {
+            if (ModelState.IsValid)
+            {
+               ViewBag.UpdateMessage= siteSettingsService.UpdateSiteSettings(lstSiteSettings);
+            }
+
+            var model = siteSettingsService.GetSiteSettings().ToList();
+            ViewBag.showAdminMenu = true;
+            ViewBag.Message = "Settings Page.";
+            return View(model);
+        }
+
     }
 }
 
