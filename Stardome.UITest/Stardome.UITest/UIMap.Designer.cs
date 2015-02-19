@@ -19,6 +19,7 @@ namespace Stardome.UITest
     using Microsoft.VisualStudio.TestTools.UITest.Extension;
     using Microsoft.VisualStudio.TestTools.UITesting;
     using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
+    using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
     using Mouse = Microsoft.VisualStudio.TestTools.UITesting.Mouse;
@@ -363,6 +364,255 @@ namespace Stardome.UITest
             Mouse.Click(uILogoffHyperlink, new Point(17, 8));
         }
         
+        /// <summary>
+        /// UpdateSiteName - Use 'UpdateSiteNameParams' to pass parameters into this method.
+        /// </summary>
+        public void UpdateSiteName()
+        {
+            #region Variable Declarations
+            WinMenuItem uIItemMenuItem = this.UILoginInternetExploreWindow2.UIAddressComboControlToolBar.UIItemMenuItem;
+            BrowserWindow uILoginInternetExploreWindow3 = this.UILoginInternetExploreWindow3;
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlHyperlink uIManageSettingsHyperlink = this.UIHomePageInternetExplWindow.UIHomePageDocument.UIMenuCustom.UIManageSettingsHyperlink;
+            HtmlDiv uIBodyPane = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane;
+            HtmlEdit uIItem0ValueEdit = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIItem0ValueEdit;
+            HtmlInputButton uIUpdateButton = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIUpdateButton;
+            #endregion
+
+            // Click menu item numbered 2 in 'Address Combo Control' menu item
+            Mouse.Click(uIItemMenuItem, new Point(175, 22));
+
+            // Go to web page 'http://localhost:2129/'
+            uILoginInternetExploreWindow3.NavigateToUrl(new System.Uri(this.UpdateSiteNameParams.UILoginInternetExploreWindow3Url));
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.UpdateSiteNameParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.UpdateSiteNameParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.UpdateSiteNameParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(39, 21));
+
+            // Click 'Manage Settings' link
+            Mouse.Click(uIManageSettingsHyperlink, new Point(97, 7));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover 'body' pane at (1, 1)
+            Mouse.Hover(uIBodyPane, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Type 'Stardome1' in '[0].Value' text box
+            uIItem0ValueEdit.Text = this.UpdateSiteNameParams.UIItem0ValueEditText;
+
+            // Click 'Update' button
+            Mouse.Click(uIUpdateButton, new Point(45, 12));
+        }
+        
+        /// <summary>
+        /// AssertSiteNameChange - Use 'AssertSiteNameChangeExpectedValues' to pass parameters into this method.
+        /// </summary>
+        public void AssertSiteNameChange()
+        {
+            #region Variable Declarations
+            HtmlLabel uISiteSettingsUpdatedSLabel = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UISiteSettingsUpdatedSLabel;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+            Assert.AreEqual(this.AssertSiteNameChangeExpectedValues.UISiteSettingsUpdatedSLabelInnerText, uISiteSettingsUpdatedSLabel.InnerText, "Update Failed");
+        }
+        
+        /// <summary>
+        /// SiteNameChangeLogOff
+        /// </summary>
+        public void SiteNameChangeLogOff()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uILogoffHyperlink = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UILogoutFormCustom.UILogoffHyperlink;
+            #endregion
+
+            // Click 'Log off' link
+            Mouse.Click(uILogoffHyperlink, new Point(18, 6));
+        }
+        
+        /// <summary>
+        /// UpdateFilePath - Use 'UpdateFilePathParams' to pass parameters into this method.
+        /// </summary>
+        public void UpdateFilePath()
+        {
+            #region Variable Declarations
+            BrowserWindow uILoginInternetExploreWindow5 = this.UILoginInternetExploreWindow5;
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlHyperlink uIManageSettingsHyperlink = this.UIHomePageInternetExplWindow.UIHomePageDocument.UIMenuCustom.UIManageSettingsHyperlink;
+            HtmlCustom uIItemCustom = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIItemCustom;
+            HtmlEdit uIItem1ValueEdit = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIItem1ValueEdit;
+            HtmlInputButton uIUpdateButton = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIUpdateButton;
+            #endregion
+
+            // Go to web page 'http://localhost:2129/'
+            uILoginInternetExploreWindow5.NavigateToUrl(new System.Uri(this.UpdateFilePathParams.UILoginInternetExploreWindow5Url));
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.UpdateFilePathParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.UpdateFilePathParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.UpdateFilePathParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(33, 22));
+
+            // Click 'Manage Settings' link
+            Mouse.Click(uIManageSettingsHyperlink, new Point(71, 8));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover  custom control at (1, 1)
+            Mouse.Hover(uIItemCustom, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Type 'c:\Stardome\Test' in '[1].Value' text box
+            uIItem1ValueEdit.Text = this.UpdateFilePathParams.UIItem1ValueEditText;
+
+            // Click 'Update' button
+            Mouse.Click(uIUpdateButton, new Point(38, 19));
+        }
+        
+        /// <summary>
+        /// AssertUpdateFilePath - Use 'AssertUpdateFilePathExpectedValues' to pass parameters into this method.
+        /// </summary>
+        public void AssertUpdateFilePath()
+        {
+            #region Variable Declarations
+            HtmlLabel uISiteSettingsUpdatedSLabel = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UISiteSettingsUpdatedSLabel;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+            Assert.AreEqual(this.AssertUpdateFilePathExpectedValues.UISiteSettingsUpdatedSLabelInnerText, uISiteSettingsUpdatedSLabel.InnerText, "FilePath update Failed");
+        }
+        
+        /// <summary>
+        /// UpdateFilePathLogOff
+        /// </summary>
+        public void UpdateFilePathLogOff()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uILogoffHyperlink = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UILogoutFormCustom.UILogoffHyperlink;
+            #endregion
+
+            // Click 'Log off' link
+            Mouse.Click(uILogoffHyperlink, new Point(19, 10));
+        }
+        
+        /// <summary>
+        /// UpdateAllSettings - Use 'UpdateAllSettingsParams' to pass parameters into this method.
+        /// </summary>
+        public void UpdateAllSettings()
+        {
+            #region Variable Declarations
+            BrowserWindow uILoginInternetExploreWindow6 = this.UILoginInternetExploreWindow6;
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlCustom uIItemCustom = this.UIHomePageInternetExplWindow.UIHomePageDocument.UIItemCustom;
+            HtmlHyperlink uIManageSettingsHyperlink = this.UIHomePageInternetExplWindow.UIHomePageDocument.UIMenuCustom.UIManageSettingsHyperlink;
+            HtmlDiv uIHomePageSettingsPagePane = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIHomePageSettingsPagePane;
+            HtmlEdit uIItem0ValueEdit = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIItem0ValueEdit;
+            HtmlEdit uIItem1ValueEdit = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIItem1ValueEdit;
+            HtmlInputButton uIUpdateButton = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIUpdateButton;
+            #endregion
+
+            // Go to web page 'http://localhost:2129/'
+            uILoginInternetExploreWindow6.NavigateToUrl(new System.Uri(this.UpdateAllSettingsParams.UILoginInternetExploreWindow6Url));
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.UpdateAllSettingsParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.UpdateAllSettingsParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.UpdateAllSettingsParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(40, 6));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover  custom control at (1, 1)
+            Mouse.Hover(uIItemCustom, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Click 'Manage Settings' link
+            Mouse.Click(uIManageSettingsHyperlink, new Point(53, 9));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover 'Home Page. Settings Page.' pane at (1, 1)
+            Mouse.Hover(uIHomePageSettingsPagePane, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Type 'Stardome' in '[0].Value' text box
+            uIItem0ValueEdit.Text = this.UpdateAllSettingsParams.UIItem0ValueEditText;
+
+            // Type '{Tab}' in '[0].Value' text box
+            Keyboard.SendKeys(uIItem0ValueEdit, this.UpdateAllSettingsParams.UIItem0ValueEditSendKeys, ModifierKeys.None);
+
+            // Type 'c:\Stardome' in '[1].Value' text box
+            uIItem1ValueEdit.Text = this.UpdateAllSettingsParams.UIItem1ValueEditText;
+
+            // Click 'Update' button
+            Mouse.Click(uIUpdateButton, new Point(31, 10));
+        }
+        
+        /// <summary>
+        /// AssertUpdateAllSettings - Use 'AssertUpdateAllSettingsExpectedValues' to pass parameters into this method.
+        /// </summary>
+        public void AssertUpdateAllSettings()
+        {
+            #region Variable Declarations
+            HtmlLabel uISiteSettingsUpdatedSLabel = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UISiteSettingsUpdatedSLabel;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+            Assert.AreEqual(this.AssertUpdateAllSettingsExpectedValues.UISiteSettingsUpdatedSLabelInnerText, uISiteSettingsUpdatedSLabel.InnerText, "Update All failed");
+        }
+        
+        /// <summary>
+        /// UpdateAllSettingsLogOff
+        /// </summary>
+        public void UpdateAllSettingsLogOff()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uILogoffHyperlink = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UILogoutFormCustom.UILogoffHyperlink;
+            #endregion
+
+            // Click 'Log off' link
+            Mouse.Click(uILogoffHyperlink, new Point(14, 12));
+        }
+        
         #region Properties
         public virtual LoginFailure1Params LoginFailure1Params
         {
@@ -508,6 +758,78 @@ namespace Stardome.UITest
             }
         }
         
+        public virtual UpdateSiteNameParams UpdateSiteNameParams
+        {
+            get
+            {
+                if ((this.mUpdateSiteNameParams == null))
+                {
+                    this.mUpdateSiteNameParams = new UpdateSiteNameParams();
+                }
+                return this.mUpdateSiteNameParams;
+            }
+        }
+        
+        public virtual AssertSiteNameChangeExpectedValues AssertSiteNameChangeExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertSiteNameChangeExpectedValues == null))
+                {
+                    this.mAssertSiteNameChangeExpectedValues = new AssertSiteNameChangeExpectedValues();
+                }
+                return this.mAssertSiteNameChangeExpectedValues;
+            }
+        }
+        
+        public virtual UpdateFilePathParams UpdateFilePathParams
+        {
+            get
+            {
+                if ((this.mUpdateFilePathParams == null))
+                {
+                    this.mUpdateFilePathParams = new UpdateFilePathParams();
+                }
+                return this.mUpdateFilePathParams;
+            }
+        }
+        
+        public virtual AssertUpdateFilePathExpectedValues AssertUpdateFilePathExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertUpdateFilePathExpectedValues == null))
+                {
+                    this.mAssertUpdateFilePathExpectedValues = new AssertUpdateFilePathExpectedValues();
+                }
+                return this.mAssertUpdateFilePathExpectedValues;
+            }
+        }
+        
+        public virtual UpdateAllSettingsParams UpdateAllSettingsParams
+        {
+            get
+            {
+                if ((this.mUpdateAllSettingsParams == null))
+                {
+                    this.mUpdateAllSettingsParams = new UpdateAllSettingsParams();
+                }
+                return this.mUpdateAllSettingsParams;
+            }
+        }
+        
+        public virtual AssertUpdateAllSettingsExpectedValues AssertUpdateAllSettingsExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertUpdateAllSettingsExpectedValues == null))
+                {
+                    this.mAssertUpdateAllSettingsExpectedValues = new AssertUpdateAllSettingsExpectedValues();
+                }
+                return this.mAssertUpdateAllSettingsExpectedValues;
+            }
+        }
+        
         public UIMsnInternetExplorerWindow UIMsnInternetExplorerWindow
         {
             get
@@ -579,6 +901,66 @@ namespace Stardome.UITest
                 return this.mUILoginInternetExploreWindow1;
             }
         }
+        
+        public UILoginInternetExploreWindow2 UILoginInternetExploreWindow2
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow2 == null))
+                {
+                    this.mUILoginInternetExploreWindow2 = new UILoginInternetExploreWindow2();
+                }
+                return this.mUILoginInternetExploreWindow2;
+            }
+        }
+        
+        public UILoginInternetExploreWindow3 UILoginInternetExploreWindow3
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow3 == null))
+                {
+                    this.mUILoginInternetExploreWindow3 = new UILoginInternetExploreWindow3();
+                }
+                return this.mUILoginInternetExploreWindow3;
+            }
+        }
+        
+        public UILoginInternetExploreWindow4 UILoginInternetExploreWindow4
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow4 == null))
+                {
+                    this.mUILoginInternetExploreWindow4 = new UILoginInternetExploreWindow4();
+                }
+                return this.mUILoginInternetExploreWindow4;
+            }
+        }
+        
+        public UILoginInternetExploreWindow5 UILoginInternetExploreWindow5
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow5 == null))
+                {
+                    this.mUILoginInternetExploreWindow5 = new UILoginInternetExploreWindow5();
+                }
+                return this.mUILoginInternetExploreWindow5;
+            }
+        }
+        
+        public UILoginInternetExploreWindow6 UILoginInternetExploreWindow6
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow6 == null))
+                {
+                    this.mUILoginInternetExploreWindow6 = new UILoginInternetExploreWindow6();
+                }
+                return this.mUILoginInternetExploreWindow6;
+            }
+        }
         #endregion
         
         #region Fields
@@ -606,6 +988,18 @@ namespace Stardome.UITest
         
         private AssertAdminLoginExpectedValues mAssertAdminLoginExpectedValues;
         
+        private UpdateSiteNameParams mUpdateSiteNameParams;
+        
+        private AssertSiteNameChangeExpectedValues mAssertSiteNameChangeExpectedValues;
+        
+        private UpdateFilePathParams mUpdateFilePathParams;
+        
+        private AssertUpdateFilePathExpectedValues mAssertUpdateFilePathExpectedValues;
+        
+        private UpdateAllSettingsParams mUpdateAllSettingsParams;
+        
+        private AssertUpdateAllSettingsExpectedValues mAssertUpdateAllSettingsExpectedValues;
+        
         private UIMsnInternetExplorerWindow mUIMsnInternetExplorerWindow;
         
         private UIHomePageInternetExplWindow mUIHomePageInternetExplWindow;
@@ -617,6 +1011,16 @@ namespace Stardome.UITest
         private UIIndexInternetExploreWindow1 mUIIndexInternetExploreWindow1;
         
         private UILoginInternetExploreWindow1 mUILoginInternetExploreWindow1;
+        
+        private UILoginInternetExploreWindow2 mUILoginInternetExploreWindow2;
+        
+        private UILoginInternetExploreWindow3 mUILoginInternetExploreWindow3;
+        
+        private UILoginInternetExploreWindow4 mUILoginInternetExploreWindow4;
+        
+        private UILoginInternetExploreWindow5 mUILoginInternetExploreWindow5;
+        
+        private UILoginInternetExploreWindow6 mUILoginInternetExploreWindow6;
         #endregion
     }
     
@@ -882,6 +1286,166 @@ namespace Stardome.UITest
         /// Verify that the 'InnerText' property of 'Log off' link equals 'Log off'
         /// </summary>
         public string UILogoffHyperlinkInnerText = "Log off";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'UpdateSiteName'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UpdateSiteNameParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow3Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type 'Stardome1' in '[0].Value' text box
+        /// </summary>
+        public string UIItem0ValueEditText = "Stardome1";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertSiteNameChange'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertSiteNameChangeExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+        /// </summary>
+        public string UISiteSettingsUpdatedSLabelInnerText = "Site Settings Updated Successfully....";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'UpdateFilePath'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UpdateFilePathParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow5Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type 'c:\Stardome\Test' in '[1].Value' text box
+        /// </summary>
+        public string UIItem1ValueEditText = "c:\\Stardome\\Test";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertUpdateFilePath'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertUpdateFilePathExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+        /// </summary>
+        public string UISiteSettingsUpdatedSLabelInnerText = "Site Settings Updated Successfully....";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'UpdateAllSettings'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UpdateAllSettingsParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow6Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type 'Stardome' in '[0].Value' text box
+        /// </summary>
+        public string UIItem0ValueEditText = "Stardome";
+        
+        /// <summary>
+        /// Type '{Tab}' in '[0].Value' text box
+        /// </summary>
+        public string UIItem0ValueEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type 'c:\Stardome' in '[1].Value' text box
+        /// </summary>
+        public string UIItem1ValueEditText = "c:\\Stardome";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertUpdateAllSettings'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertUpdateAllSettingsExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+        /// </summary>
+        public string UISiteSettingsUpdatedSLabelInnerText = "Site Settings Updated Successfully....";
         #endregion
     }
     
@@ -1282,6 +1846,7 @@ namespace Stardome.UITest
             this.SearchProperties[UITestControl.PropertyNames.Name] = "Home Page";
             this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
             this.WindowTitles.Add("Home Page");
+            this.WindowTitles.Add("Log in");
             #endregion
         }
         
@@ -1339,10 +1904,47 @@ namespace Stardome.UITest
                 return this.mUILogoutFormCustom;
             }
         }
+        
+        public UIMenuCustom UIMenuCustom
+        {
+            get
+            {
+                if ((this.mUIMenuCustom == null))
+                {
+                    this.mUIMenuCustom = new UIMenuCustom(this);
+                }
+                return this.mUIMenuCustom;
+            }
+        }
+        
+        public HtmlCustom UIItemCustom
+        {
+            get
+            {
+                if ((this.mUIItemCustom == null))
+                {
+                    this.mUIItemCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUIItemCustom.SearchProperties["TagName"] = "FOOTER";
+                    this.mUIItemCustom.SearchProperties["Id"] = null;
+                    this.mUIItemCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUIItemCustom.FilterProperties["Class"] = null;
+                    this.mUIItemCustom.FilterProperties["ControlDefinition"] = null;
+                    this.mUIItemCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUIItemCustom.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItemCustom;
+            }
+        }
         #endregion
         
         #region Fields
         private UILogoutFormCustom mUILogoutFormCustom;
+        
+        private UIMenuCustom mUIMenuCustom;
+        
+        private HtmlCustom mUIItemCustom;
         #endregion
     }
     
@@ -1393,6 +1995,56 @@ namespace Stardome.UITest
         
         #region Fields
         private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIMenuCustom : HtmlCustom
+    {
+        
+        public UIMenuCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "UL";
+            this.SearchProperties["Id"] = "menu";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"menu\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UIManageSettingsHyperlink
+        {
+            get
+            {
+                if ((this.mUIManageSettingsHyperlink == null))
+                {
+                    this.mUIManageSettingsHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Manage Settings";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Home/Settings";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Home/Settings";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/Home/Settings\"";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "3";
+                    this.mUIManageSettingsHyperlink.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIManageSettingsHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUIManageSettingsHyperlink;
         #endregion
     }
     
@@ -1675,6 +2327,451 @@ namespace Stardome.UITest
             this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
             this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
             this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow2 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow2()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIAddressComboControlToolBar UIAddressComboControlToolBar
+        {
+            get
+            {
+                if ((this.mUIAddressComboControlToolBar == null))
+                {
+                    this.mUIAddressComboControlToolBar = new UIAddressComboControlToolBar(this);
+                }
+                return this.mUIAddressComboControlToolBar;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIAddressComboControlToolBar mUIAddressComboControlToolBar;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIAddressComboControlToolBar : WinToolBar
+    {
+        
+        public UIAddressComboControlToolBar(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinToolBar.PropertyNames.Name] = "Address Combo Control";
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        #region Properties
+        public WinMenuItem UIItemMenuItem
+        {
+            get
+            {
+                if ((this.mUIItemMenuItem == null))
+                {
+                    this.mUIItemMenuItem = new WinMenuItem(this);
+                    #region Search Criteria
+                    this.mUIItemMenuItem.SearchProperties[WinMenuItem.PropertyNames.Instance] = "2";
+                    this.mUIItemMenuItem.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUIItemMenuItem;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinMenuItem mUIItemMenuItem;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow3 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow3()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow4 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow4()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            this.WindowTitles.Add("http://localhost:2129/");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIHomePageDocument1 UIHomePageDocument1
+        {
+            get
+            {
+                if ((this.mUIHomePageDocument1 == null))
+                {
+                    this.mUIHomePageDocument1 = new UIHomePageDocument1(this);
+                }
+                return this.mUIHomePageDocument1;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIHomePageDocument1 mUIHomePageDocument1;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIHomePageDocument1 : HtmlDocument
+    {
+        
+        public UIHomePageDocument1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Home Page";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Home/Settings";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Home/Settings";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public UIBodyPane UIBodyPane
+        {
+            get
+            {
+                if ((this.mUIBodyPane == null))
+                {
+                    this.mUIBodyPane = new UIBodyPane(this);
+                }
+                return this.mUIBodyPane;
+            }
+        }
+        
+        public HtmlEdit UIItem0ValueEdit
+        {
+            get
+            {
+                if ((this.mUIItem0ValueEdit == null))
+                {
+                    this.mUIItem0ValueEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = null;
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "[0].Value";
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.LabeledBy] = null;
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"[0].Value\" type=\"text\" value=\"Star";
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "4";
+                    this.mUIItem0ValueEdit.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItem0ValueEdit;
+            }
+        }
+        
+        public UILogoutFormCustom3 UILogoutFormCustom
+        {
+            get
+            {
+                if ((this.mUILogoutFormCustom == null))
+                {
+                    this.mUILogoutFormCustom = new UILogoutFormCustom3(this);
+                }
+                return this.mUILogoutFormCustom;
+            }
+        }
+        
+        public HtmlEdit UIItem1ValueEdit
+        {
+            get
+            {
+                if ((this.mUIItem1ValueEdit == null))
+                {
+                    this.mUIItem1ValueEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = null;
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "[1].Value";
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.LabeledBy] = null;
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"[1].Value\" type=\"text\" value=\"c:\\S";
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "7";
+                    this.mUIItem1ValueEdit.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItem1ValueEdit;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIBodyPane mUIBodyPane;
+        
+        private HtmlEdit mUIItem0ValueEdit;
+        
+        private UILogoutFormCustom3 mUILogoutFormCustom;
+        
+        private HtmlEdit mUIItem1ValueEdit;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane : HtmlDiv
+    {
+        
+        public UIBodyPane(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Home Page. Settings Page. \r\n\r\n\r\n\r\nRegist";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlInputButton UIUpdateButton
+        {
+            get
+            {
+                if ((this.mUIUpdateButton == null))
+                {
+                    this.mUIUpdateButton = new HtmlInputButton(this);
+                    #region Search Criteria
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Update";
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "type=\"submit\" value=\"Update\"";
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "7";
+                    this.mUIUpdateButton.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIUpdateButton;
+            }
+        }
+        
+        public HtmlLabel UISiteSettingsUpdatedSLabel
+        {
+            get
+            {
+                if ((this.mUISiteSettingsUpdatedSLabel == null))
+                {
+                    this.mUISiteSettingsUpdatedSLabel = new HtmlLabel(this);
+                    #region Search Criteria
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.Id] = null;
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.Name] = null;
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.LabelFor] = "lblUpdateMessage";
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.InnerText] = "Site Settings Updated Successfully....";
+                    this.mUISiteSettingsUpdatedSLabel.FilterProperties[HtmlLabel.PropertyNames.Class] = null;
+                    this.mUISiteSettingsUpdatedSLabel.FilterProperties[HtmlLabel.PropertyNames.ControlDefinition] = "for=\"lblUpdateMessage\"";
+                    this.mUISiteSettingsUpdatedSLabel.FilterProperties[HtmlLabel.PropertyNames.TagInstance] = "1";
+                    this.mUISiteSettingsUpdatedSLabel.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUISiteSettingsUpdatedSLabel;
+            }
+        }
+        
+        public HtmlCustom UIItemCustom
+        {
+            get
+            {
+                if ((this.mUIItemCustom == null))
+                {
+                    this.mUIItemCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUIItemCustom.SearchProperties["TagName"] = "HGROUP";
+                    this.mUIItemCustom.SearchProperties["Id"] = null;
+                    this.mUIItemCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUIItemCustom.FilterProperties["Class"] = "title";
+                    this.mUIItemCustom.FilterProperties["ControlDefinition"] = "class=\"title\"";
+                    this.mUIItemCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUIItemCustom.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItemCustom;
+            }
+        }
+        
+        public HtmlDiv UIHomePageSettingsPagePane
+        {
+            get
+            {
+                if ((this.mUIHomePageSettingsPagePane == null))
+                {
+                    this.mUIHomePageSettingsPagePane = new HtmlDiv(this);
+                    #region Search Criteria
+                    this.mUIHomePageSettingsPagePane.SearchProperties[HtmlDiv.PropertyNames.Id] = null;
+                    this.mUIHomePageSettingsPagePane.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Home Page. Settings Page. ";
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.Class] = "content-wrapper";
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "class=\"content-wrapper\"";
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "5";
+                    this.mUIHomePageSettingsPagePane.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIHomePageSettingsPagePane;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlInputButton mUIUpdateButton;
+        
+        private HtmlLabel mUISiteSettingsUpdatedSLabel;
+        
+        private HtmlCustom mUIItemCustom;
+        
+        private HtmlDiv mUIHomePageSettingsPagePane;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILogoutFormCustom3 : HtmlCustom
+    {
+        
+        public UILogoutFormCustom3(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "FORM";
+            this.SearchProperties["Id"] = "logoutForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"logoutForm\" action=\"/Account/LogOff\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILogoffHyperlink
+        {
+            get
+            {
+                if ((this.mUILogoffHyperlink == null))
+                {
+                    this.mUILogoffHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log off";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "javascript:document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"javascript:document.getElementById";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILogoffHyperlink.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUILogoffHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow5 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow5()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("http://localhost:2129/");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow6 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow6()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
             #endregion
         }
         
