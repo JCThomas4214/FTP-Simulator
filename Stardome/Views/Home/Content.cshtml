@@ -1,4 +1,6 @@
-﻿@if (Request.IsAuthenticated == false) {
+﻿@Scripts.Render("~/Scripts/jsTree")
+@Styles.Render("~/Content/jsTree")
+@if (Request.IsAuthenticated == false) {
      Response.Redirect("~/Account/Login");
 
 }
@@ -16,8 +18,58 @@
             </div>
         </section>
     }
-
-    <h2>Landing Page for Admins to Manage Content</h2>
-
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jsTree test</title>   
+    
+</head>
+<body>
+    <!-- 3 setup a container element -->
+    <div id="jstree">
+        <!-- in this example the tree is populated from inline HTML -->
+        <ul>
+            <li>Root node 1
+                <ul>
+                    <li id="child_node_1">Child node 1</li>
+                    <li>Child node 2</li>
+                </ul>
+            </li>
+            <li>Root node 2</li>
+        </ul>
+    </div>    
+    <script>
+        $(function () {
+            
+            // 6 create an instance when the DOM is ready
+            $('#jstree').jstree({
+                "core": {
+                    "check_callback" : true,
+                    "themes": {
+                        "theme": "responsive",
+                        "dots": true,
+                        "icons": true,
+                        "variant" : "large"
+                    }                   
+                },
+                "checkbox" : {
+                    "keep_selected_style" : false
+                },
+                "plugins": ["checkbox", "dnd", "contextmenu"]
+            });
+            // 7 bind to events triggered on the tree
+            $('#jstree').on("changed.jstree", function (e, data) {
+                console.log(data.selected);
+            });
+            // 8 interact with the tree - either way is OK
+            $('button').on('click', function () {
+                $('#jstree').jstree(true).select_node('child_node_1');
+                $('#jstree').jstree('select_node', 'child_node_1');
+                $.jstree.reference('#jstree').select_node('child_node_1');
+            });
+        });
+    </script>
+</body>
+</html>  
 
   

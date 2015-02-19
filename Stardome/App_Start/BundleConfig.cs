@@ -46,6 +46,12 @@ namespace Stardome
                 "~/Scripts/jtable/themes/metro/blue/jtable.min.css",
                 "~/Scripts/jtable/themes/metro/blue/jtable.css"
                 ));
+
+            bundles.Add(new ScriptBundle("~/Scripts/jsTree").Include(
+                       "~/Scripts/jsTreeScript/jstree.js"));
+
+            bundles.Add(new ScriptBundle("~/Content/jsTree").Include(
+                        "~/Content/themes/jsTree/style.css"));
         }
     }
 }
