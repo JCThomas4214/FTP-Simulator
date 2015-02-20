@@ -55,12 +55,14 @@ namespace Stardome.Controllers
                 {
                     ViewBag.Message = "Incorrect file type";
                 }
-
-       
+                
                 
                 else try
                 {
-                    string path = Path.Combine(Server.MapPath("~/TestUploads"),
+                    string filePath = "~/TestUploads";
+                    bool exists = System.IO.Directory.Exists(Server.MapPath(filePath));
+                    if (!exists) { System.IO.Directory.CreateDirectory(Server.MapPath(filePath)); }
+                    string path = Path.Combine(Server.MapPath(filePath),
                                                Path.GetFileName(file.FileName));
                     if (!System.IO.File.Exists(path))
                     {
@@ -90,6 +92,8 @@ namespace Stardome.Controllers
             ViewBag.showAdminMenu = false;
             return View();
         }
+
+
 
     }
 }

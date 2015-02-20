@@ -342,6 +342,7 @@
     </Content>
     <Content Include="Images\ProviderTile.PNG" />
     <Content Include="Images\SD_Logo_Horz_2lines_April2014.png" />
+    <Content Include="Scripts\jquery-prompt.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
