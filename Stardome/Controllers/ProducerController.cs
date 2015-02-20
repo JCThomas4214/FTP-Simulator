@@ -3,6 +3,7 @@ using Stardome.Repositories;
 using Stardome.Services.Domain;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,5 +42,54 @@ namespace Stardome.Controllers
             }
 
         }
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            var allowedExtensions = new[] { ".doc", ".mp3", ".txt", ".jpeg" };
+
+
+            if (file != null && file.ContentLength > 0)
+            {
+                var extension = Path.GetExtension(file.FileName);
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ViewBag.Message = "Incorrect file type";
+                }
+
+       
+                
+                else try
+                {
+                    string path = Path.Combine(Server.MapPath("~/TestUploads"),
+                                               Path.GetFileName(file.FileName));
+                    if (!System.IO.File.Exists(path))
+                    {
+                        file.SaveAs(path);
+                        ViewBag.Message = "File uploaded successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "A file with that name already exists";
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
+            return View();
+        }
+        
+        public ActionResult Upload()
+        {
+            ViewBag.showAdminMenu = false;
+            return View();
+        }
+
     }
 }
