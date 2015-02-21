@@ -41,17 +41,22 @@ namespace Stardome
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
-
+            //jtable
             bundles.Add(new StyleBundle("~/Content/jtable/css").Include(
                 "~/Scripts/jtable/themes/metro/blue/jtable.min.css",
                 "~/Scripts/jtable/themes/metro/blue/jtable.css"
                 ));
-
+            //
+            //jstree
             bundles.Add(new ScriptBundle("~/Scripts/jsTree").Include(
-                       "~/Scripts/jsTreeScript/jstree.js"));
+                      "~/Scripts/jsTreeScript/jstree.js",                      
+                      "~/Scripts/jsTreeScript/jqueryFileTree.js",
+                      "~/Scripts/jsTreeScript/jquery.easing.js"
+                      ));
 
             bundles.Add(new ScriptBundle("~/Content/jsTree").Include(
                         "~/Content/themes/jsTree/style.css"));
+            //
         }
     }
 }
