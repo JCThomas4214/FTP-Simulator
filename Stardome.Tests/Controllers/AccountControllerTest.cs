@@ -20,20 +20,6 @@ namespace Stardome.Tests.Controllers
         private UserAuthCredential userAuthCredential = new UserAuthCredential { Id = id, Username = username };
 
         [TestMethod]
-        public void Login()
-        {
-            AccountController AC = new AccountController(aMockUserAuthCredentialService.Object, aMockRoleService.Object);
-
-            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("ab")).Returns(userAuthCredential);
-           
-            var result = (RedirectToRouteResult)AC.Login("test");
-            Assert.AreEqual("Users", result.RouteValues["action"]);
-          
-
-        }
-
-
-        [TestMethod]
         public void RedirectToLocal()
         {
             var controller = new AccountController();

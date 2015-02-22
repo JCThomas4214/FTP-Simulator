@@ -45,7 +45,7 @@ namespace Stardome.Controllers
         public ActionResult Settings()
         {
             ViewBag.UpdateMessage = "";
-            var model = siteSettingsService.GetSiteSettings().ToList();
+            var model = siteSettingsService.GetAll().ToList();
             ViewBag.showAdminMenu = true;
             ViewBag.Message = "Settings Page.";
 
@@ -61,7 +61,7 @@ namespace Stardome.Controllers
                ViewBag.UpdateMessage= siteSettingsService.UpdateSiteSettings(lstSiteSettings);
             }
 
-            var model = siteSettingsService.GetSiteSettings().ToList();
+            var model = siteSettingsService.GetAll().ToList();
             ViewBag.showAdminMenu = true;
             ViewBag.Message = "Settings Page.";
             return View(model);

@@ -10,8 +10,8 @@ namespace Stardome.Services.Domain
 {
     public class SiteSettingsService
     {
-        private readonly SiteSettingsRepository repository;
-        public SiteSettingsService(SiteSettingsRepository aRepository)
+        private readonly ISiteSettingsRepository repository;
+        public SiteSettingsService(ISiteSettingsRepository aRepository)
         {
             repository = aRepository;
         }
@@ -31,7 +31,7 @@ namespace Stardome.Services.Domain
             get{return repository.GetById(2).Value;}
         }
    
-        public IEnumerable<SiteSetting> GetSiteSettings()
+        public IEnumerable<SiteSetting> GetAll()
         {
             return repository.GetAll();
         }

@@ -13,5 +13,9 @@ namespace Stardome.Repositories
     {
         String UpdateSiteSettings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings);
 
+        IEnumerable<SiteSetting> GetAll();
+
+        
+
     }
 }

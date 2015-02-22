@@ -125,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Services\Application\AesEncryptionTests.cs" />
+    <Compile Include="Services\Domain\SiteSettingServicesTest.cs" />
     <Compile Include="Services\Domain\UserAuthCredentialServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
