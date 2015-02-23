@@ -1,0 +1,25 @@
+﻿
+@if (Request.IsAuthenticated == false)
+{
+    Response.Redirect("~/Account/Login");
+}
+
+@{
+    ViewBag.Title = "Upload";
+}
+
+
+ <h2>File Upload</h2>
+@using (Html.BeginForm("Upload",
+                        "Producer",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+{
+    <label for="file">Upload File:</label>
+    <input type="file" name="files" id="file" /><br><br>
+    <input type="submit" value="Upload File" />
+    <br><br>
+    @ViewBag.Message
+}
+
+
