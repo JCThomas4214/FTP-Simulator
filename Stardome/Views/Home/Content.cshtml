@@ -23,26 +23,26 @@
     <title>jsTree test</title>     
 
     <script type="text/javascript">
-        $(function () {
-            $('#MainTree').jstree({
-                "json_data": {
-                    "ajax": {
-                        "url": "../Scripts/jqueryFileTree.aspx",
-                        "type": "POST",
-                        "dataType": "json",
-                        "contentType": "application/json charset=utf-8"
-                    }
-                },
-                "themes": {
-                    "theme": "default",
-                    "dots": false,
-                    "icons": true,
-                    "url": "~/Content/themes/jsTree/style.css"
-                },
+        //$(function () {
+        //    $('#MainTree').jstree({
+        //        "json_data": {
+        //            "ajax": {
+        //                "url": "../Scripts/jqueryFileTree.aspx",
+        //                "type": "POST",
+        //                "dataType": "json",
+        //                "contentType": "application/json charset=utf-8"
+        //            }
+        //        },
+        //        "themes": {
+        //            "theme": "default",
+        //            "dots": false,
+        //            "icons": true,
+        //            "url": "~/Content/themes/jsTree/style.css"
+        //        },
 
-                "plugins": ["themes", "json_data", "dnd", "contextmenu", "ui", "crrm"]
+        //        "plugins": ["themes", "json_data", "dnd", "contextmenu", "ui", "crrm"]
 
-            });
+        //    });
         // 6 create an instance when the DOM is ready
     //    $('#tree').jstree({
     //        "json_data": {
@@ -79,17 +79,17 @@
     //    });
         
     //});
-    //function openFile(file) {
-    //    window.location = file;
-    //}
-    //$(document).ready(function () {
-    //    $('#MainTree').fileTree({
-    //        root: 'C:/Users/',
-    //        script: '../Scripts/jqueryFileTree.aspx'
-    //    }, function (file) {
-    //        openFile(file);
-    //    });
-    //});
+    function openFile(file) {
+        window.location = file;
+    }
+    $(document).ready(function () {
+        $('#MainTree').fileTree({
+            root: 'C:/Users/',
+            script: '../Scripts/jqueryFileTree.aspx'
+        }, function (file) {
+            openFile(file);
+        });
+    });
     </script>
 
 </head>
