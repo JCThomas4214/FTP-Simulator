@@ -4,6 +4,11 @@
 <p>We are assigned to develop a file distribution web-app that differentiates users and 
 producers (employees) with privileges set by the administrators to see, download, or rename files 
 currently on the clients servers.</p>
+
+User Stories
+
+https://www.pivotaltracker.com/n/projects/1267884
+
 <h2>Team members</h2>
 <ul style="list-style-type:square">
 	<li>Jason Lewis (<a href="https://github.com/Jason-LewisG">Jason-LewisG</a>)</li>
