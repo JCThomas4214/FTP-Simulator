@@ -1,4 +1,5 @@
-﻿
+﻿@Scripts.Render("~/Scripts/jsTree")
+@Styles.Render("~/Content/jsTree")
 @if (Request.IsAuthenticated == false) {
      Response.Redirect("~/Account/Login");
 
@@ -23,7 +24,7 @@
     <title>jsTree test</title>     
 
     <script type="text/javascript">
-        //$(function () {
+        $(function () {
         //    $('#MainTree').jstree({
         //        "json_data": {
         //            "ajax": {
@@ -44,41 +45,41 @@
 
         //    });
         // 6 create an instance when the DOM is ready
-    //    $('#tree').jstree({
-    //        "json_data": {
-    //            "ajax": {
-    //                "url": "C:/Windows",
-    //                "type": "POST",
-    //                "dataType": "json",
-    //                "contentType": "application/json charset=utf-8"
-    //            }
-    //        },
-    //        "core": {
-    //            "check_callback": true,
-    //            "themes": {
-    //                "theme": "media",
-    //                "dots": true,
-    //                "icons": true,
-    //                "variant": "large"
-    //            }
-    //        },
-    //        "checkbox": {
-    //            "keep_selected_style": false
-    //        },
-    //        "plugins": ["themes", "json_data", "checkbox", "dnd", "contextmenu", "ui", "crrm"]
-    //    });
-    //    // 7 bind to events triggered on the tree
-    //    $('#tree').on("changed.tree", function (e, data) {
-    //        console.log(data.selected);
-    //    });
-    //    // 8 interact with the tree - either way is OK
-    //    $('button').on('click', function () {
-    //        $('#tree').jstree(true).select_node('child_node_1');
-    //        $('#tree').jstree('select_node', 'child_node_1');
-    //        $.jstree.reference('#tree').select_node('child_node_1');
-    //    });
+        $('#tree').jstree({
+            "json_data": {
+                "ajax": {
+                    "url": "C:/Windows",
+                    "type": "POST",
+                    "dataType": "json",
+                    "contentType": "application/json charset=utf-8"
+                }
+            },
+            "core": {
+                "check_callback": true,
+                "themes": {
+                    "theme": "media",
+                    "dots": true,
+                    "icons": true,
+                    "variant": "large"
+                }
+            },
+            "checkbox": {
+                "keep_selected_style": false
+            },
+            "plugins": ["themes", "json_data", "checkbox", "dnd", "contextmenu", "ui", "crrm"]
+        });
+        // 7 bind to events triggered on the tree
+        $('#tree').on("changed.tree", function (e, data) {
+            console.log(data.selected);
+        });
+        // 8 interact with the tree - either way is OK
+        $('button').on('click', function () {
+            $('#tree').jstree(true).select_node('child_node_1');
+            $('#tree').jstree('select_node', 'child_node_1');
+            $.jstree.reference('#tree').select_node('child_node_1');
+        });
         
-    //});
+    });
     function openFile(file) {
         window.location = file;
     }
@@ -93,19 +94,22 @@
     </script>
 
 </head>
-<body>
-    <!-- 3 setup a container element -->
-    <div id="MainTree">          
-        @*<ul>
-            <li>Root node 1
+<body>   
+    <h2>This is jqueryFileTree type</h2>
+    <div id="MainTree"></div>  
+    <h2>This is jsTree type</h2>
+    <div id="tree">       
+        <ul>
+            <li>
+                Root node 1
                 <ul>
                     <li id="child_node_1">Child node 1</li>
                     <li>Child node 2</li>
                 </ul>
             </li>
             <li>Root node 2</li>
-        </ul>*@       
-    </div>    
+        </ul> 
+    </div>  
     <script>
         
         

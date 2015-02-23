@@ -58,7 +58,8 @@ namespace Stardome
                       ));
 
             bundles.Add(new ScriptBundle("~/Content/jsTree").Include(
-                        "~/Content/themes/jsTree/style.css"));
+                        "~/Content/themes/jsTree/style.css",
+                        "~/Content/themes/jsTree/jqueryFileTree.css"));
             //
         }
     }
