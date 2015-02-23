@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Stardome.DomainObjects;
 using Stardome.Models;
@@ -23,15 +24,15 @@ namespace Stardome.Controllers
 
         public ActionResult Users()
         {
-            var model = new UserManagement
-            {
-                UserList = userAuthCredentialService.GetUserAuthCredentials().ToList(),
-                Roles = roleService.GetRoles().ToList()
-            };
+            //var model = new UserManagement
+            //{
+            //    UserList = userAuthCredentialService.GetUserAuthCredentials().ToList(),
+            //    Roles = roleService.GetRoles().ToList()
+            //};
             ViewBag.showAdminMenu = true;
             ViewBag.Message = "User Management Page";
 
-            return View(model);
+            return View();
         }
 
         public ActionResult Content()
@@ -67,6 +68,27 @@ namespace Stardome.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public JsonResult GetUsers()
+        {
+            IList<User> users = new List<User>();
+            IList<UserAuthCredential> userAuthCredentials = userAuthCredentialService.GetUserAuthCredentials().ToList();
+            
+            foreach (UserAuthCredential credential in userAuthCredentials)
+            {
+                UserInformation userInformation = credential.UserInformations.First();
+                users.Add(new User
+                {
+                    Id = credential.Id,
+                    EmailAddress = userInformation.Email,
+                    Name = userInformation.FirstName + " " + userInformation.LastName,
+                    Role = credential.Role.Role1,
+                    Username = credential.Username
+                });
+            }
+
+            return Json(new { Result = "OK", Records = users, TotalRecordCount = users.Count });
+        }
     }
 }
 

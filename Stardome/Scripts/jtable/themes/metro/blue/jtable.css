@@ -232,6 +232,7 @@ div.jtable-main-container div.jtable-column-selection-container ul.jtable-column
 form.jtable-dialog-form div.jtable-input-field-container {
   padding: 2px 0px 3px 0px;
   border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 form.jtable-dialog-form div.jtable-input-field-container:last-child {
   border: none;

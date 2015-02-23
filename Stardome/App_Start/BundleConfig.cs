@@ -44,7 +44,10 @@ namespace Stardome
             //jtable
             bundles.Add(new StyleBundle("~/Content/jtable/css").Include(
                 "~/Scripts/jtable/themes/metro/blue/jtable.min.css",
-                "~/Scripts/jtable/themes/metro/blue/jtable.css"
+                "~/Scripts/jtable/themes/metro/blue/jtable.css",
+                "~/Scripts/jtable/themes/basic/jtable_basic.css",
+                "~/Scripts/jtable/themes/basic/jtable_basic.min.css",
+                "~/Scripts/jtable/themes/jqueryui/jtable_jqueryui.css"
                 ));
             //
             //jstree

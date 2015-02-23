@@ -1,4 +1,8 @@
-﻿html {
+﻿html, body {
+    height: 100%;
+}
+
+html {
     background-color: #e2e2e2;
     margin: 0;
     padding: 0;
@@ -745,9 +749,12 @@ tr.pager td {
     }
 
     footer {
+        position: absolute;
+        width: 100%;
         text-align: center;
-        height: auto;
+        height: 35px;
         padding: 10px 0;
+        bottom: 0px;
     }
 
         footer p {
