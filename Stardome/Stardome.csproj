@@ -261,6 +261,7 @@
     <Compile Include="Services\Domain\IFileService.cs" />
     <Compile Include="Services\Domain\IRoleService.cs" />
     <Compile Include="Services\Domain\IFolderService.cs" />
+    <Compile Include="Services\Domain\ISiteSettingsService.cs" />
     <Compile Include="Services\Domain\IUserAuthCredentialService.cs" />
     <Compile Include="Services\Domain\RoleService.cs" />
     <Compile Include="Services\Domain\SiteSettingsService.cs" />

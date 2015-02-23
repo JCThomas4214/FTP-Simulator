@@ -8,7 +8,7 @@ using Stardome.Services.Application;
 
 namespace Stardome.Services.Domain
 {
-    public class SiteSettingsService
+    public class SiteSettingsService : ISiteSettingsService
     {
         private readonly ISiteSettingsRepository repository;
         public SiteSettingsService(ISiteSettingsRepository aRepository)
