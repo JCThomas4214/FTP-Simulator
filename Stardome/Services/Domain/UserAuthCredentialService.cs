@@ -38,5 +38,10 @@ namespace Stardome.Services.Domain
         {
             return repository.GetAll();
         }
+
+        public void DeleteAUser(UserAuthCredential aUser)
+        {
+            repository.Delete(aUser);
+        }
     }
 }
