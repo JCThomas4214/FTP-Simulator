@@ -78,7 +78,7 @@ namespace Stardome.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Users", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -142,7 +142,7 @@ namespace Stardome.Controllers
                         ModelState.AddModelError("", ex.Message);
                     }
                     // What happens here?
-                    return RedirectToAction("Users", "Home");
+                    return RedirectToAction("Users", "Admin");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -273,7 +273,7 @@ namespace Stardome.Controllers
             switch (roleId)
                  {
                     case 1: // Admin Users
-                        return RedirectToAction("Users", "Home");
+                        return RedirectToAction("Users", "Admin");
 
                     case 2: // Producers
                         return RedirectToAction("Index", "Producer");
