@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stardome.DomainObjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,6 +31,8 @@ namespace Stardome.Models
 
     public class LocalPasswordModel
     {
+        [Display(Name = "User Information")]
+        public UserInformation usrInfo { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

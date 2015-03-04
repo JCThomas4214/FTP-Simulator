@@ -58,10 +58,10 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            // Dont need this as password is stored in webpages_membership
-            //string password = userAuthCredentialService.EncryptPassword(model.Password);
+            //TODO: Dont need this as password is stored in webpages_membership
+            string password = userAuthCredentialService.EncryptPassword(model.Password);
 
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, password, model.RememberMe))
             {
                 int roleId = userAuthCredentialService.GetByUsername(model.UserName).Role.Id;
                 return RedirectToLocal(roleId);
