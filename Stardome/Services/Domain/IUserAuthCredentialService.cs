@@ -7,6 +7,7 @@ namespace Stardome.Services.Domain
     {
         UserAuthCredential GetById(int aUserAuthCredentialId);
         UserAuthCredential GetByUsername(string aUsername);
+        UserAuthCredential GetByEmail(string aEmail);
         string EncryptPassword(string password);
         string DecryptPassword(string password);
         IEnumerable<UserAuthCredential> GetUserAuthCredentials();

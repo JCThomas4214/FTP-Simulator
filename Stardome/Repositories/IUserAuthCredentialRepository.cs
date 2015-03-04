@@ -7,6 +7,9 @@ namespace Stardome.Repositories
     public interface IUserAuthCredentialRepository : IObjectRepository<UserAuthCredential>
     {
         UserAuthCredential GetByUsername(string username);
+
+        UserAuthCredential GetByEmail(string email);
+
         IEnumerable<UserAuthCredential> GetAll();
     }
 }

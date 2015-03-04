@@ -10,6 +10,7 @@ using Stardome.Services.Domain;
 using WebMatrix.WebData;
 using Stardome.Filters;
 using Stardome.Models;
+using System.Net.Mail;
 
 namespace Stardome.Controllers
 {
@@ -57,9 +58,10 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            string password = userAuthCredentialService.EncryptPassword(model.Password);
+            // Dont need this as password is stored in webpages_membership
+            //string password = userAuthCredentialService.EncryptPassword(model.Password);
 
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, password, model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
             {
                 int roleId = userAuthCredentialService.GetByUsername(model.UserName).Role.Id;
                 return RedirectToLocal(roleId);
@@ -264,7 +266,101 @@ namespace Stardome.Controllers
             return View(model);
         }
 
-       
+
+        [AllowAnonymous]
+        public ActionResult LostPassword()
+        {
+            ViewBag.EmailSend = false;
+            return View();
+        }
+
+            // POST: Account/LostPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult LostPassword(LostPasswordModel model)
+        {
+           if (ModelState.IsValid)
+           {
+              UserAuthCredential user;
+              user = userAuthCredentialService.GetByEmail(model.Email);
+              ViewBag.EmailSend = false;
+              if (user != null)
+              {
+                 // Generae password token that will be used in the email link to authenticate user
+                 var token = WebSecurity.GeneratePasswordResetToken(user.Username,15);
+                 // Generate the html link sent via email
+                 string resetLink = "<a href='"
+                    + Url.Action("ResetPassword", "Account", new { rt = token }, "http") 
+                    + "'>Reset Password Link</a>";
+ 
+                 // Email stuff
+                 string subject = "Reset your password for stardome.com";
+                 string body = "You link: " + resetLink;
+                 string from = "donotreply@stardome.com";
+ 
+                 MailMessage message = new MailMessage(from, model.Email);
+                 message.Subject = subject;
+                 message.Body = body;
+                 SmtpClient smtp = new SmtpClient();
+                 //Add SMTP Server; Now runs on simulations
+                // Emails will b in c:\email
+              
+                 // Attempt to send the email
+                 try
+                 {
+                     smtp.Send(message);
+                     ViewBag.EmailSend = true;
+                 }
+                 catch (Exception e)
+                 {
+                    ModelState.AddModelError("", "Issue sending email: " + e.Message);
+                 }
+              }         
+              else // Email not found
+              {
+                 ModelState.AddModelError("", "No user found by that email.");
+              }
+           }
+ 
+           /* You may want to send the user to a "Success" page upon the successful
+           * sending of the reset email link. Right now, if we are 100% successful
+           * nothing happens on the page. :P
+           */
+           return View(model);
+        }
+
+    
+            // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string rt)
+        {
+            ResetPasswordModel model = new ResetPasswordModel();
+            model.ReturnToken = rt;
+            return View(model);
+        }
+
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, model.Password);
+                if (resetResponse)
+                {
+                
+                    ViewBag.Message = "Successfully Changed";
+                }
+                else
+                {
+                    ViewBag.Message = "Something went horribly wrong!";
+                }
+            }
+            return View(model);
+        }
 
         #region Helpers
 

@@ -32,6 +32,17 @@ namespace Stardome.Repositories
                     aUser => aUser.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
 
+        public UserAuthCredential GetByEmail(string email)
+        {
+            return
+               (from aUserAuth in sdContext.UserAuthCredentials
+                join aUserInfo in sdContext.UserInformations on
+                  new { aUserAuth.Id } equals  new {Id = aUserInfo.UserId}
+                where aUserInfo.Email.Equals(email,StringComparison.OrdinalIgnoreCase)
+                select aUserAuth).SingleOrDefault();
+
+        }
+
         public IEnumerable<UserAuthCredential> GetAll()
         {
             return GetObjectSet();

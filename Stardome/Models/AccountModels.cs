@@ -27,17 +27,10 @@ namespace Stardome.Models
         public string UserName { get; set; }
     }
 
-    public class RegisterExternalLoginModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        public string ExternalLoginData { get; set; }
-    }
 
     public class LocalPasswordModel
     {
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
@@ -126,5 +119,28 @@ namespace Stardome.Models
 
     }
 
+    public class LostPasswordModel
+    {
+        [Required(ErrorMessage = "We need your email to send you a reset link!")]
+        [Display(Name = "Your account email")]
+        [EmailAddress(ErrorMessage = "Not a valid email")]
+        public string Email { get; set; }
+    }
 
+    public class ResetPasswordModel
+    {
+        [Required]
+        [Display(Name = "New Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "New password and confirmation does not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string ReturnToken { get; set; }
+    }
 }

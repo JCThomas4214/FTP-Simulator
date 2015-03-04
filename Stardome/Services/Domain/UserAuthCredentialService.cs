@@ -24,6 +24,11 @@ namespace Stardome.Services.Domain
             return repository.GetByUsername(aUsername);
         }
 
+        public UserAuthCredential GetByEmail(string aEmal)
+        {
+            return repository.GetByEmail(aEmal);
+        }
+
         public string EncryptPassword(string password)
         {
             return AesEncryption.Encrypt(password);
