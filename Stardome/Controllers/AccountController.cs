@@ -194,7 +194,7 @@ namespace Stardome.Controllers
         public ActionResult Manage(LocalPasswordModel model)
         {
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && WebSecurity.IsAuthenticated)
             {
                 
                 bool changePasswordSucceeded;
