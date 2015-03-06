@@ -44,7 +44,7 @@ namespace Stardome.Controllers
                 return RedirectToLocal(roleId);
             }
             else
-            { 
+            {
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
@@ -91,7 +91,7 @@ namespace Stardome.Controllers
         {
             ViewBag.showAdminMenu = true;
             ViewBag.Roles = roleService.GetRoles();
-            
+
             return View();
         }
 
@@ -135,7 +135,7 @@ namespace Stardome.Controllers
                                 dbCtx.UserInformations.Add(UserInformation);
                                 dbCtx.SaveChanges();
                             }
-                        }           
+                        }
 
 
                     }
@@ -156,48 +156,34 @@ namespace Stardome.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/Disassociate
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Disassociate(string provider, string providerUserId)
-        {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            ManageMessageId? message = null;
-
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == User.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        message = ManageMessageId.RemoveLoginSuccess;
-                    }
-                }
-            }
-
-            return RedirectToAction("Manage", new { Message = message });
-        }
 
         //
         // GET: /Account/Manage
 
-        public ActionResult Manage(ManageMessageId? message)
+        public ActionResult Manage()
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            if (WebSecurity.IsAuthenticated)
+            {
+                UserAuthCredential usrInfo = userAuthCredentialService.GetByUsername(User.Identity.Name);
+                int roleId = usrInfo.Role.Id;
+                if (roleId == 1)
+                    ViewBag.showAdminMenu = true;
+                else
+                {
+                    ViewBag.showAdminMenu = false;
+                }
+                ViewBag.HasLocalPassword = true;
+                ViewBag.Name = usrInfo.UserInformations.FirstOrDefault().FirstName + " " + usrInfo.UserInformations.FirstOrDefault().LastName;
+                ViewBag.Email = usrInfo.UserInformations.FirstOrDefault().Email;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+
         }
 
         //
@@ -207,62 +193,34 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.HasLocalPassword = hasLocalAccount;
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasLocalAccount)
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                
+                bool changePasswordSucceeded;
+                try
                 {
-                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
-                    bool changePasswordSucceeded;
-                    try
-                    {
-                        string OldPassword = userAuthCredentialService.EncryptPassword(model.OldPassword);
-                        string newPassword = userAuthCredentialService.EncryptPassword(model.NewPassword);
+                    string OldPassword = userAuthCredentialService.EncryptPassword(model.OldPassword);
+                    string newPassword = userAuthCredentialService.EncryptPassword(model.NewPassword);
 
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, OldPassword, newPassword);
-                    }
-                    catch (Exception)
-                    {
-                        changePasswordSucceeded = false;
-                    }
-
-                    if (changePasswordSucceeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, OldPassword, newPassword);
                 }
-            }
-            else
-            {
-                // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
+                catch (Exception)
                 {
-                    state.Errors.Clear();
+                    changePasswordSucceeded = false;
                 }
-
-                if (ModelState.IsValid)
+                
+                if (changePasswordSucceeded)
                 {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception)
-                    {
-                        ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
-                    }
+                    ViewBag.changePasswordSucceeded = "Your Password has been changed successfully";
+                    return RedirectToAction("Manage");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -274,64 +232,64 @@ namespace Stardome.Controllers
             return View();
         }
 
-            // POST: Account/LostPassword
+        // POST: Account/LostPassword
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LostPassword(LostPasswordModel model)
         {
-           if (ModelState.IsValid)
-           {
-              UserAuthCredential user;
-              user = userAuthCredentialService.GetByEmail(model.Email);
-              ViewBag.EmailSend = false;
-              if (user != null)
-              {
-                 // Generae password token that will be used in the email link to authenticate user
-                 var token = WebSecurity.GeneratePasswordResetToken(user.Username,15);
-                 // Generate the html link sent via email
-                 string resetLink = "<a href='"
-                    + Url.Action("ResetPassword", "Account", new { rt = token }, "http") 
-                    + "'>Reset Password Link</a>";
- 
-                 // Email stuff
-                 string subject = "Reset your password for stardome.com";
-                 string body = "You link: " + resetLink;
-                 string from = "donotreply@stardome.com";
- 
-                 MailMessage message = new MailMessage(from, model.Email);
-                 message.Subject = subject;
-                 message.Body = body;
-                 SmtpClient smtp = new SmtpClient();
-                 //Add SMTP Server; Now runs on simulations
-                // Emails will b in c:\email
-              
-                 // Attempt to send the email
-                 try
-                 {
-                     smtp.Send(message);
-                     ViewBag.EmailSend = true;
-                 }
-                 catch (Exception e)
-                 {
-                    ModelState.AddModelError("", "Issue sending email: " + e.Message);
-                 }
-              }         
-              else // Email not found
-              {
-                 ModelState.AddModelError("", "No user found by that email.");
-              }
-           }
- 
-           /* You may want to send the user to a "Success" page upon the successful
-           * sending of the reset email link. Right now, if we are 100% successful
-           * nothing happens on the page. :P
-           */
-           return View(model);
+            if (ModelState.IsValid)
+            {
+                UserAuthCredential user;
+                user = userAuthCredentialService.GetByEmail(model.Email);
+                ViewBag.EmailSend = false;
+                if (user != null)
+                {
+                    // Generae password token that will be used in the email link to authenticate user
+                    var token = WebSecurity.GeneratePasswordResetToken(user.Username, 15);
+                    // Generate the html link sent via email
+                    string resetLink = "<a href='"
+                       + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
+                       + "'>Reset Password Link</a>";
+
+                    // Email stuff
+                    string subject = "Reset your password for stardome.com";
+                    string body = "You link: " + resetLink;
+                    string from = "donotreply@stardome.com";
+
+                    MailMessage message = new MailMessage(from, model.Email);
+                    message.Subject = subject;
+                    message.Body = body;
+                    SmtpClient smtp = new SmtpClient();
+                    //Add SMTP Server; Now runs on simulations
+                    // Emails will b in c:\email
+
+                    // Attempt to send the email
+                    try
+                    {
+                        smtp.Send(message);
+                        ViewBag.EmailSend = true;
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", "Issue sending email: " + e.Message);
+                    }
+                }
+                else // Email not found
+                {
+                    ModelState.AddModelError("", "No user found by that email.");
+                }
+            }
+
+            /* You may want to send the user to a "Success" page upon the successful
+            * sending of the reset email link. Right now, if we are 100% successful
+            * nothing happens on the page. :P
+            */
+            return View(model);
         }
 
-    
-            // GET: /Account/ResetPassword
+
+        // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string rt)
         {
@@ -348,10 +306,11 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, model.Password);
+                
+                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, userAuthCredentialService.EncryptPassword(model.Password));
                 if (resetResponse)
                 {
-                
+
                     ViewBag.Message = "Successfully Changed";
                 }
                 else
@@ -367,20 +326,20 @@ namespace Stardome.Controllers
         public ActionResult RedirectToLocal(int roleId)
         {
             switch (roleId)
-                 {
-                    case 1: // Admin Users
-                        return RedirectToAction("Users", "Admin");
+            {
+                case 1: // Admin Users
+                    return RedirectToAction("Users", "Admin");
 
-                    case 2: // Producers
-                        return RedirectToAction("Index", "Producer");
+                case 2: // Producers
+                    return RedirectToAction("Index", "Producer");
 
-                    case 3: // Clients
-                        return RedirectToAction("Index", "Clients");
+                case 3: // Clients
+                    return RedirectToAction("Index", "Clients");
 
-                    default:
-                        return RedirectToAction("Login", "Account");
-                    }
-          }
+                default:
+                    return RedirectToAction("Login", "Account");
+            }
+        }
 
         public enum ManageMessageId
         {

@@ -31,8 +31,6 @@ namespace Stardome.Models
 
     public class LocalPasswordModel
     {
-        [Display(Name = "User Information")]
-        public UserInformation usrInfo { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

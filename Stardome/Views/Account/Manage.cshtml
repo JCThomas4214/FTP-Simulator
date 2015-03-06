@@ -1,27 +1,55 @@
 ﻿@model Stardome.Models.LocalPasswordModel
 @{
-    ViewBag.Title = "Manage Account";
+    ViewBag.Title = "Manage your Account";
+}
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+            
+        </hgroup>
+    </div>
+</section>
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<p class="message-success">@ViewBag.StatusMessage</p>
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
-@if (ViewBag.HasLocalPassword)
-{
-    @Html.Partial("_ChangePasswordPartial")
-}
-else
-{ 
-    @Html.Partial("_SetPasswordPartial")
-}
+
+<p>
+    Name: <strong>@ViewBag.Name</strong></p>
+
+<p>
+    Email: <strong> @ViewBag.Email</strong></p>
 
 
+    @using (Html.BeginForm("Manage", "Account"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        <fieldset>
+            <legend>Change Password Form</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.OldPassword)
+                    @Html.PasswordFor(m => m.OldPassword)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.NewPassword)
+                    @Html.PasswordFor(m => m.NewPassword)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.PasswordFor(m => m.ConfirmPassword)
+                </li>
+            </ol>
+            <input type="submit" value="Update password" />
+            <input type="submit" value="Cancel" />
+        </fieldset>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
