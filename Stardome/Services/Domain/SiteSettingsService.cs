@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Stardome.DomainObjects;
 using Stardome.Repositories;
-using Stardome.Services.Application;
 
 namespace Stardome.Services.Domain
 {
@@ -37,7 +34,7 @@ namespace Stardome.Services.Domain
         }
 
 
-        public String UpdateSiteSettings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings)
+        public String UpdateSiteSettings(List<SiteSetting> lstSiteSettings)
         {
             return repository.UpdateSiteSettings(lstSiteSettings);
            
