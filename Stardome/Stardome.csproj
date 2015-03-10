@@ -268,6 +268,7 @@
     <Compile Include="Services\Domain\UserAuthCredentialService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -398,6 +399,7 @@
     <Content Include="Scripts\jsTreeScript\jquery.easing.js" />
     <Content Include="Scripts\jsTreeScript\jqueryFileTree.js" />
     <Content Include="Scripts\jsTreeScript\jstree.js" />
+    <Content Include="Scripts\jtablesite.js" />
     <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.js" />
     <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.min.js" />
     <Content Include="Scripts\jtable\external\json2.js" />

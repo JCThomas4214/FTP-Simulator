@@ -5,14 +5,16 @@
         <title>@ViewBag.Title </title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        
-        
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/jtable")
+        @Scripts.Render("~/bundles/modernizr")
         @Styles.Render("~/Content/jtable/css")
         @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jtable")
+        <link href="@Url.Content("/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+
+
     </head>
     <body>
         <header>
