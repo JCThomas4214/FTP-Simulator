@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Stardome.DomainObjects;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -37,14 +36,14 @@ namespace Stardome.Repositories
             return sdContext.SiteSettings;
         }
 
-        public String UpdateSiteSettings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings)
+        public String UpdateSiteSettings(List<SiteSetting> lstSiteSettings)
         {
             try
             {
-                foreach (Stardome.DomainObjects.SiteSetting siteSettings in lstSiteSettings)
+                foreach (SiteSetting siteSettings in lstSiteSettings)
                 {
                     sdContext.SiteSettings.Attach(siteSettings);
-                    DbEntityEntry<Stardome.DomainObjects.SiteSetting> entry = sdContext.Entry(siteSettings);
+                    DbEntityEntry<SiteSetting> entry = sdContext.Entry(siteSettings);
                     entry.State = System.Data.EntityState.Modified;
                     sdContext.SaveChanges();
                 }
