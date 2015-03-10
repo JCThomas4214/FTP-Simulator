@@ -4,15 +4,11 @@
     Response.Redirect("~/Account/Login");
 }
 
-@{
-    ViewBag.Title = "Home Page";
-}
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
+                <h1>@ViewBag.Message</h1>
             </hgroup>
 
         </div>
@@ -31,7 +27,14 @@
                 {
                     <tr>
                         <td>
-
+                            <b>
+                                @Html.DisplayFor(m => Model[i].Category)
+                                @Html.HiddenFor(m => Model[i].Category)
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <b>
                                 @Html.DisplayFor(m => Model[i].Name)
                                 @Html.HiddenFor(m => Model[i].Name)
@@ -39,11 +42,6 @@
                             </b>
                         </td>
                         <td>@Html.TextBoxFor(m => Model[i].Value)
-                            @*<div class="message-info">
-                                <p>
-                                    Changing these information can affect the websites performance.
-                                </p>
-                            </div>*@
                         </td>
                     </tr>
                 }
