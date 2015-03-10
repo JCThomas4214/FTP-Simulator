@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Stardome.DomainObjects;
 using Stardome.Models;
@@ -35,7 +36,8 @@ namespace Stardome.Controllers
             //    Roles = roleService.GetRoles().ToList()
             //};
             ViewBag.showAdminMenu = true;
-            ViewBag.Message = "User Management Page";
+            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Users)).Value;
+            ViewBag.Message = message;
 
             return View();
         }
@@ -43,8 +45,10 @@ namespace Stardome.Controllers
         public ActionResult Content()
         {
             ViewBag.showAdminMenu = true;
-            ViewBag.Message = "Content Management Page";
-
+            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Content)).Value;
+            ViewBag.Message = message;
+            
+           
             return View();
         }
 
@@ -53,13 +57,14 @@ namespace Stardome.Controllers
             ViewBag.UpdateMessage = "";
             var model = siteSettingsService.GetAll().ToList();
             ViewBag.showAdminMenu = true;
-            ViewBag.Message = "Settings Page.";
-
+            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Settings)).Value;
+            ViewBag.Message = message;
+            
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Settings(List<Stardome.DomainObjects.SiteSetting> lstSiteSettings)
+        public ActionResult Settings(List<SiteSetting> lstSiteSettings)
         {
             ViewBag.UpdateMessage = "";
             if (ModelState.IsValid)
@@ -69,7 +74,8 @@ namespace Stardome.Controllers
 
             var model = siteSettingsService.GetAll().ToList();
             ViewBag.showAdminMenu = true;
-            ViewBag.Message = "Settings Page.";
+            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Settings)).Value;
+            ViewBag.Message = message;
             return View(model);
         }
 

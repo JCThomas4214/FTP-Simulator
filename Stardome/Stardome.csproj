@@ -239,6 +239,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Headers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Headers.resx</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Repository\IObjectRepository.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\HomeModel.cs" />
@@ -582,6 +587,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Headers.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Headers.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

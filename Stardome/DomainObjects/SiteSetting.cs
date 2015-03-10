@@ -28,6 +28,8 @@ public partial class SiteSetting
     [Required(ErrorMessage = "A Value is required for Settings")]
     public string Value { get; set; }
 
+    public string Category { get; set; }
+
 }
 
 }

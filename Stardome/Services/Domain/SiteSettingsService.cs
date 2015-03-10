@@ -36,8 +36,11 @@ namespace Stardome.Services.Domain
 
         public String UpdateSiteSettings(List<SiteSetting> lstSiteSettings)
         {
-            return repository.UpdateSiteSettings(lstSiteSettings);
-           
+            if (lstSiteSettings != null)
+            {
+                return repository.UpdateSiteSettings(lstSiteSettings);
+            }
+            return "No changes were made.";
         }
     }
 }
