@@ -5,38 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
+
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 
 namespace Stardome.Controllers
 {
-    [DataContract]
-    internal class Files
-    {
-        [DataMember]
-        internal string name;
-
-        [DataMember]
-        internal int size;
-
-        [DataMember]
-        internal string url;
-
-        [DataMember]
-        internal string thumbnailUrl;
-
-        [DataMember]
-        internal string deleteUrl;
-
-        [DataMember]
-        internal string deleteType;
-
-        [DataMember]
-        internal string error;
-    }
+    
     public class ProducerController : Controller
     {
         //
@@ -68,30 +44,10 @@ namespace Stardome.Controllers
             }
 
         }
-        [HttpPost]
-        public Tuple<ActionResult,DataContractJsonSerializer> Upload(IEnumerable<HttpPostedFileBase> files)
+
+        public ActionResult Upload(IEnumerable<HttpPostedFileBase> files)
         {
-            Files f = new Files();
-            f.name = "picture1.jpg";
-            f.size = 902604;
-            f.url = @"http:\/\/example.org\/files\/picture1.jpg";
-            f.thumbnailUrl = @"http:\/\/example.org\/files\/thumbnail\/picture1.jpg";
-            f.deleteUrl = @"http:\/\/example.org\/files\/picture1.jpg";
-            f.deleteType = "DELETE";
-            f.error = "Filetype not allowed";
-
-            Files g = new Files();
-            g.name = "picture2.jpg";
-            g.size = 841946;
-            g.url = @"http:\/\/example.org\/files\/picture2.jpg";
-            g.thumbnailUrl = @"http:\/\/example.org\/files\/thumbnail\/picture2.jpg";
-            g.deleteUrl = @"http:\/\/example.org\/files\/picture2.jpg";
-            g.deleteType = "DELETE";
-            g.error = "Filetype not allowed";
-
-            MemoryStream stream1 = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Files));
-
+           
             var allowedExtensions = new[] { ".doc", ".mp3", ".txt", ".jpeg" };
 
             foreach (var file in files)
@@ -131,8 +87,8 @@ namespace Stardome.Controllers
                 {
                     ViewBag.Message = "You have not specified a file.";
                 }
-            Tuple<ActionResult, DataContractJsonSerializer> fileTuple = new Tuple<ActionResult, DataContractJsonSerializer>(View(), ser);
-            return fileTuple;
+            
+            return View();
         }
 
         public ActionResult Upload()
@@ -144,33 +100,5 @@ namespace Stardome.Controllers
 
         }
 
-       /* public DataContractJsonSerializer Uploader()
-        {
-            Files f = new Files();
-            f.name = "picture1.jpg";
-            f.size = 902604;
-            f.url = @"http:\/\/example.org\/files\/picture1.jpg";
-            f.thumbnailUrl = @"http:\/\/example.org\/files\/thumbnail\/picture1.jpg";
-            f.deleteUrl = @"http:\/\/example.org\/files\/picture1.jpg";
-            f.deleteType = "DELETE";
-            f.error = "Filetype not allowed";
-
-            Files g = new Files();
-            g.name = "picture2.jpg";
-            g.size = 841946;
-            g.url = @"http:\/\/example.org\/files\/picture2.jpg";
-            g.thumbnailUrl = @"http:\/\/example.org\/files\/thumbnail\/picture2.jpg";
-            g.deleteUrl = @"http:\/\/example.org\/files\/picture2.jpg";
-            g.deleteType = "DELETE";
-            g.error = "Filetype not allowed";
-
-            MemoryStream stream1 = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Files));
-
-            return ser;
-        }*/
-
-
-
-    }
+      }
 }
