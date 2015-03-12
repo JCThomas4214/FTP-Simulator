@@ -175,6 +175,7 @@ namespace Stardome.Controllers
                 ViewBag.HasLocalPassword = true;
                 ViewBag.Name = usrInfo.UserInformations.FirstOrDefault().FirstName + " " + usrInfo.UserInformations.FirstOrDefault().LastName;
                 ViewBag.Email = usrInfo.UserInformations.FirstOrDefault().Email;
+                ViewBag.Role = usrInfo.Role.Role1;
                 return View();
 
             }

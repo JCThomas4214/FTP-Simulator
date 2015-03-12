@@ -3,53 +3,73 @@
     ViewBag.Title = "Manage your Account";
 }
 @section featured {
-<section class="featured">
-    <div class="content-wrapper">
-        <hgroup class="title">
-            <h1>@ViewBag.Title.</h1>
-            
-        </hgroup>
-    </div>
-</section>
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+
+            </hgroup>
+        </div>
+    </section>
 }
 
+<table>
+    <tr >
+        <td >
+            <div style="float:left; padding-right:50px;">
+                <img src="~/Images/UserProfile.png" alt="users" style="height:200px" />
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+            </div>
+           
+            <div style="float:left">
+
+                <div>
+                    
+                    <div style="font-size:20px; font-weight:bold; color:DarkBlue; padding-bottom:20px;">@ViewBag.Name</div> 
 
 
-<p>
-    Name: <strong>@ViewBag.Name</strong></p>
+                    <div style="padding-bottom:5px;">
+                        User Id: <strong>@User.Identity.Name</strong> </div>
+                    <div style="padding-bottom:5px;">
+                        Email: <strong> @ViewBag.Email</strong>
+                    </div>
+                    <div style="padding-bottom:5px;">
+                        Role: <strong> @ViewBag.Role</strong>
+                    </div>
+               </div>
 
-<p>
-    Email: <strong> @ViewBag.Email</strong></p>
+                @using (Html.BeginForm("Manage", "Account"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+
+                    <fieldset>
+                        <legend>Change Password Form</legend>
+                        <ol>
+                            <li>
+                                @Html.LabelFor(m => m.OldPassword)
+                                @Html.PasswordFor(m => m.OldPassword)
+                            </li>
+                            <li>
+                                @Html.LabelFor(m => m.NewPassword)
+                                @Html.PasswordFor(m => m.NewPassword)
+                            </li>
+                            <li>
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                                @Html.PasswordFor(m => m.ConfirmPassword)
+                            </li>
+                        </ol>
+                        <input type="submit" value="Update password" />
+                        <input type="submit" value="Cancel" />
+                    </fieldset>
+                }
+            </div>
+        </td>
+
+    </tr>
+</table>
 
 
-    @using (Html.BeginForm("Manage", "Account"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary()
-
-        <fieldset>
-            <legend>Change Password Form</legend>
-            <ol>
-                <li>
-                    @Html.LabelFor(m => m.OldPassword)
-                    @Html.PasswordFor(m => m.OldPassword)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.NewPassword)
-                    @Html.PasswordFor(m => m.NewPassword)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.ConfirmPassword)
-                    @Html.PasswordFor(m => m.ConfirmPassword)
-                </li>
-            </ol>
-            <input type="submit" value="Update password" />
-            <input type="submit" value="Cancel" />
-        </fieldset>
-    }
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
