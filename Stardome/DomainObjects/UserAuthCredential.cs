@@ -34,8 +34,6 @@ public partial class UserAuthCredential
 
     public string Username { get; set; }
 
-    public string Password { get; set; }
-
     public Nullable<System.DateTime> PasswordModifiedOn { get; set; }
 
     public Nullable<System.DateTime> LastLoginDateTime { get; set; }

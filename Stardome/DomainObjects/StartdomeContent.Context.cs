@@ -52,6 +52,8 @@ public partial class StardomeEntitiesCS : DbContext
 
     public DbSet<SiteSetting> SiteSettings { get; set; }
 
+    public DbSet<webpages_Membership> webpages_Membership { get; set; }
+
 }
 
 }

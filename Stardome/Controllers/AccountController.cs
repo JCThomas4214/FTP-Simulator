@@ -117,7 +117,7 @@ namespace Stardome.Controllers
 
                             AccountCreatedOn = DateTime.Now,
                             RoleId = model.RoleId,
-                            Password = password //TODO: dont need this
+                            
 
                         });
 

@@ -24,6 +24,7 @@
         <AssociationConnector Association="StardomeModel.FK_UserAuthCredential_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="StardomeModel.FK_UserInformation_UserAuthCredential" ManuallyRouted="false" />
         <EntityTypeShape EntityType="StardomeModel.SiteSetting" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="StardomeModel.webpages_Membership" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
