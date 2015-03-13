@@ -29,20 +29,2982 @@ namespace Stardome.UITest
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
     public partial class UIMap
     {
-        
-
-        #region Properties
   
-   
+        public void AssertUpdateFilePath()
+        {
+            #region Variable Declarations
+            HtmlLabel uISiteSettingsUpdatedSLabel = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UISiteSettingsUpdatedSLabel;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+            Assert.AreEqual(this.AssertUpdateFilePathExpectedValues.UISiteSettingsUpdatedSLabelInnerText, uISiteSettingsUpdatedSLabel.InnerText, "FilePath update Failed");
+        }
+        
+        /// <summary>
+        /// UpdateFilePathLogOff
+        /// </summary>
+        public void UpdateFilePathLogOff()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uILogoffHyperlink = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UILogoutFormCustom.UILogoffHyperlink;
+            #endregion
+
+            // Click 'Log off' link
+            Mouse.Click(uILogoffHyperlink, new Point(19, 10));
+        }
+        
+        /// <summary>
+        /// UpdateAllSettings - Use 'UpdateAllSettingsParams' to pass parameters into this method.
+        /// </summary>
+        public void UpdateAllSettings()
+        {
+            #region Variable Declarations
+            BrowserWindow uILoginInternetExploreWindow6 = this.UILoginInternetExploreWindow6;
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlCustom uIItemCustom = this.UIHomePageInternetExplWindow.UIHomePageDocument.UIItemCustom;
+            HtmlHyperlink uIManageSettingsHyperlink = this.UIHomePageInternetExplWindow.UIHomePageDocument.UIMenuCustom.UIManageSettingsHyperlink;
+            HtmlDiv uIHomePageSettingsPagePane = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIHomePageSettingsPagePane;
+            HtmlEdit uIItem0ValueEdit = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIItem0ValueEdit;
+            HtmlEdit uIItem1ValueEdit = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIItem1ValueEdit;
+            HtmlInputButton uIUpdateButton = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UIUpdateButton;
+            #endregion
+
+            // Go to web page 'http://localhost:2129/'
+            uILoginInternetExploreWindow6.NavigateToUrl(new System.Uri(this.UpdateAllSettingsParams.UILoginInternetExploreWindow6Url));
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.UpdateAllSettingsParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.UpdateAllSettingsParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.UpdateAllSettingsParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(40, 6));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover  custom control at (1, 1)
+            Mouse.Hover(uIItemCustom, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Click 'Manage Settings' link
+            Mouse.Click(uIManageSettingsHyperlink, new Point(53, 9));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover 'Home Page. Settings Page.' pane at (1, 1)
+            Mouse.Hover(uIHomePageSettingsPagePane, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Type 'Stardome' in '[0].Value' text box
+            uIItem0ValueEdit.Text = this.UpdateAllSettingsParams.UIItem0ValueEditText;
+
+            // Type '{Tab}' in '[0].Value' text box
+            Keyboard.SendKeys(uIItem0ValueEdit, this.UpdateAllSettingsParams.UIItem0ValueEditSendKeys, ModifierKeys.None);
+
+            // Type 'c:\Stardome' in '[1].Value' text box
+            uIItem1ValueEdit.Text = this.UpdateAllSettingsParams.UIItem1ValueEditText;
+
+            // Click 'Update' button
+            Mouse.Click(uIUpdateButton, new Point(31, 10));
+        }
+        
+        /// <summary>
+        /// AssertUpdateAllSettings - Use 'AssertUpdateAllSettingsExpectedValues' to pass parameters into this method.
+        /// </summary>
+        public void AssertUpdateAllSettings()
+        {
+            #region Variable Declarations
+            HtmlLabel uISiteSettingsUpdatedSLabel = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UIBodyPane.UISiteSettingsUpdatedSLabel;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+            Assert.AreEqual(this.AssertUpdateAllSettingsExpectedValues.UISiteSettingsUpdatedSLabelInnerText, uISiteSettingsUpdatedSLabel.InnerText, "Update All failed");
+        }
+        
+        /// <summary>
+        /// UpdateAllSettingsLogOff
+        /// </summary>
+        public void UpdateAllSettingsLogOff()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uILogoffHyperlink = this.UILoginInternetExploreWindow4.UIHomePageDocument1.UILogoutFormCustom.UILogoffHyperlink;
+            #endregion
+
+            // Click 'Log off' link
+            Mouse.Click(uILogoffHyperlink, new Point(14, 12));
+        }
+        
+        /// <summary>
+        /// ProfileResetPassword - Use 'ProfileResetPasswordParams' to pass parameters into this method.
+        /// </summary>
+        public void ProfileResetPassword()
+        {
+            #region Variable Declarations
+            WinClient uIChromeLegacyWindowClient = this.UILoginGoogleChromeWindow.UIChromeLegacyWindowWindow.UIChromeLegacyWindowClient;
+            WinControl uILoginGoogleChromeDocument = this.UILoginGoogleChromeWindow.UIChromeLegacyWindowWindow.UILoginGoogleChromeDocument;
+            WinControl uIChromeLegacyWindowDocument = this.UILoginGoogleChromeWindow.UIChromeLegacyWindowWindow.UIChromeLegacyWindowDocument;
+            #endregion
+
+            // Move 'Chrome Legacy Window' client
+            Mouse.StartDragging(uIChromeLegacyWindowClient, new Point(454, 263));
+            Mouse.StopDragging(uIChromeLegacyWindowClient, -107, 10);
+
+            // Type 'c' in 'Log in - Google Chrome' document
+            Keyboard.SendKeys(uILoginGoogleChromeDocument, this.ProfileResetPasswordParams.UILoginGoogleChromeDocumentSendKeys, ModifierKeys.None);
+
+            // Type 'lient{Tab}qwert1234' in 'Chrome Legacy Window' document
+            Keyboard.SendKeys(uIChromeLegacyWindowDocument, this.ProfileResetPasswordParams.UIChromeLegacyWindowDocumentSendKeys, ModifierKeys.None);
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(506, 435));
+
+            // Move 'Chrome Legacy Window' document
+            Mouse.StartDragging(uIChromeLegacyWindowDocument, new Point(497, 268));
+            Mouse.StopDragging(uIChromeLegacyWindowDocument, -255, -16);
+
+            // Type 'client{Tab}qwert123' in 'Chrome Legacy Window' document
+            Keyboard.SendKeys(uIChromeLegacyWindowDocument, this.ProfileResetPasswordParams.UIChromeLegacyWindowDocumentSendKeys1, ModifierKeys.None);
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(509, 437));
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(1359, 41));
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(785, 394));
+
+            // Type '123456' in 'Chrome Legacy Window' document
+            Keyboard.SendKeys(uIChromeLegacyWindowDocument, this.ProfileResetPasswordParams.UIChromeLegacyWindowDocumentSendKeys2, ModifierKeys.None);
+
+            // Move 'Chrome Legacy Window' document
+            Mouse.StartDragging(uIChromeLegacyWindowDocument, new Point(787, 400));
+            Mouse.StopDragging(uIChromeLegacyWindowDocument, -190, -5);
+
+            // Type 'qwert123' in 'Chrome Legacy Window' document
+            Keyboard.SendKeys(uIChromeLegacyWindowDocument, this.ProfileResetPasswordParams.UIChromeLegacyWindowDocumentSendKeys3, ModifierKeys.None);
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(819, 480));
+
+            // Type '123456' in 'Chrome Legacy Window' document
+            Keyboard.SendKeys(uIChromeLegacyWindowDocument, this.ProfileResetPasswordParams.UIChromeLegacyWindowDocumentSendKeys4, ModifierKeys.None);
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(768, 547));
+
+            // Type '123456' in 'Chrome Legacy Window' document
+            Keyboard.SendKeys(uIChromeLegacyWindowDocument, this.ProfileResetPasswordParams.UIChromeLegacyWindowDocumentSendKeys5, ModifierKeys.None);
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(787, 597));
+
+            // Click 'Chrome Legacy Window' document
+            Mouse.Click(uIChromeLegacyWindowDocument, new Point(1422, 37));
+        }
+        
+        /// <summary>
+        /// ResetProfilePassword - Use 'ResetProfilePasswordParams' to pass parameters into this method.
+        /// </summary>
+        public void ResetProfilePassword()
+        {
+            #region Variable Declarations
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlHyperlink uIClientHyperlink = this.UIIndexInternetExploreWindow1.UIIndexDocument.UILoginCustom.UIClientHyperlink;
+            HtmlEdit uICurrentpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit;
+            HtmlEdit uINewpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit;
+            HtmlEdit uIConfirmnewpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIConfirmnewpasswordEdit;
+            HtmlInputButton uIUpdatepasswordButton = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane.UIUpdatepasswordButton;
+            HtmlHyperlink uILogoffHyperlink = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UILogoutFormCustom.UILogoffHyperlink;
+            #endregion
+
+            // Type 'client' in 'User name' text box
+            uIUsernameEdit.Text = this.ResetProfilePasswordParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.ResetProfilePasswordParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.ResetProfilePasswordParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(43, 2));
+
+            // Click 'client' link
+            Mouse.Click(uIClientHyperlink, new Point(23, 5));
+            Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.Disabled;
+
+            // Type '********' in 'Current password' text box
+            uICurrentpasswordEdit.Password = this.ResetProfilePasswordParams.UICurrentpasswordEditPassword;
+
+            // Type '********' in 'New password' text box
+            uINewpasswordEdit.Password = this.ResetProfilePasswordParams.UINewpasswordEditPassword;
+
+            // Type '********' in 'Confirm new password' text box
+            uIConfirmnewpasswordEdit.Password = this.ResetProfilePasswordParams.UIConfirmnewpasswordEditPassword;
+
+            // Click 'Update password' button
+            Mouse.Click(uIUpdatepasswordButton, new Point(49, 13));
+            //Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.UIThreadOnly;
+            // Click 'Log off' link
+            //Mouse.Click(uILogoffHyperlink, new Point(19, 8));
+            
+        }
+        
+        #region Properties
+        public virtual LoginFailure1Params LoginFailure1Params
+        {
+            get
+            {
+                if ((this.mLoginFailure1Params == null))
+                {
+                    this.mLoginFailure1Params = new LoginFailure1Params();
+                }
+                return this.mLoginFailure1Params;
+            }
+        }
+        
+        public virtual LoginFailureParams LoginFailureParams
+        {
+            get
+            {
+                if ((this.mLoginFailureParams == null))
+                {
+                    this.mLoginFailureParams = new LoginFailureParams();
+                }
+                return this.mLoginFailureParams;
+            }
+        }
+        
+        public virtual LoginFailureAssertExpectedValues LoginFailureAssertExpectedValues
+        {
+            get
+            {
+                if ((this.mLoginFailureAssertExpectedValues == null))
+                {
+                    this.mLoginFailureAssertExpectedValues = new LoginFailureAssertExpectedValues();
+                }
+                return this.mLoginFailureAssertExpectedValues;
+            }
+        }
+        
+        public virtual AdminLoginSuccessParams AdminLoginSuccessParams
+        {
+            get
+            {
+                if ((this.mAdminLoginSuccessParams == null))
+                {
+                    this.mAdminLoginSuccessParams = new AdminLoginSuccessParams();
+                }
+                return this.mAdminLoginSuccessParams;
+            }
+        }
+        
+        public virtual LoginAssertExpectedValues LoginAssertExpectedValues
+        {
+            get
+            {
+                if ((this.mLoginAssertExpectedValues == null))
+                {
+                    this.mLoginAssertExpectedValues = new LoginAssertExpectedValues();
+                }
+                return this.mLoginAssertExpectedValues;
+            }
+        }
+        
+        public virtual LoginSuccessParams LoginSuccessParams
+        {
+            get
+            {
+                if ((this.mLoginSuccessParams == null))
+                {
+                    this.mLoginSuccessParams = new LoginSuccessParams();
+                }
+                return this.mLoginSuccessParams;
+            }
+        }
+        
+        public virtual AssertLoginSuccessExpectedValues AssertLoginSuccessExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertLoginSuccessExpectedValues == null))
+                {
+                    this.mAssertLoginSuccessExpectedValues = new AssertLoginSuccessExpectedValues();
+                }
+                return this.mAssertLoginSuccessExpectedValues;
+            }
+        }
+        
+        public virtual ProducerLoginSuccessParams ProducerLoginSuccessParams
+        {
+            get
+            {
+                if ((this.mProducerLoginSuccessParams == null))
+                {
+                    this.mProducerLoginSuccessParams = new ProducerLoginSuccessParams();
+                }
+                return this.mProducerLoginSuccessParams;
+            }
+        }
+        
+        public virtual AssertProducerLoginSuccessExpectedValues AssertProducerLoginSuccessExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertProducerLoginSuccessExpectedValues == null))
+                {
+                    this.mAssertProducerLoginSuccessExpectedValues = new AssertProducerLoginSuccessExpectedValues();
+                }
+                return this.mAssertProducerLoginSuccessExpectedValues;
+            }
+        }
+        
+        public virtual ClientLoginSuccessParams ClientLoginSuccessParams
+        {
+            get
+            {
+                if ((this.mClientLoginSuccessParams == null))
+                {
+                    this.mClientLoginSuccessParams = new ClientLoginSuccessParams();
+                }
+                return this.mClientLoginSuccessParams;
+            }
+        }
+        
+        public virtual AssertClientLoginExpectedValues AssertClientLoginExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertClientLoginExpectedValues == null))
+                {
+                    this.mAssertClientLoginExpectedValues = new AssertClientLoginExpectedValues();
+                }
+                return this.mAssertClientLoginExpectedValues;
+            }
+        }
+        
+        public virtual AssertAdminLoginExpectedValues AssertAdminLoginExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertAdminLoginExpectedValues == null))
+                {
+                    this.mAssertAdminLoginExpectedValues = new AssertAdminLoginExpectedValues();
+                }
+                return this.mAssertAdminLoginExpectedValues;
+            }
+        }
+        
+        public virtual UpdateSiteNameParams UpdateSiteNameParams
+        {
+            get
+            {
+                if ((this.mUpdateSiteNameParams == null))
+                {
+                    this.mUpdateSiteNameParams = new UpdateSiteNameParams();
+                }
+                return this.mUpdateSiteNameParams;
+            }
+        }
+        
+        public virtual AssertSiteNameChangeExpectedValues AssertSiteNameChangeExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertSiteNameChangeExpectedValues == null))
+                {
+                    this.mAssertSiteNameChangeExpectedValues = new AssertSiteNameChangeExpectedValues();
+                }
+                return this.mAssertSiteNameChangeExpectedValues;
+            }
+        }
+        
+        public virtual UpdateFilePathParams UpdateFilePathParams
+        {
+            get
+            {
+                if ((this.mUpdateFilePathParams == null))
+                {
+                    this.mUpdateFilePathParams = new UpdateFilePathParams();
+                }
+                return this.mUpdateFilePathParams;
+            }
+        }
+        
+        public virtual AssertUpdateFilePathExpectedValues AssertUpdateFilePathExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertUpdateFilePathExpectedValues == null))
+                {
+                    this.mAssertUpdateFilePathExpectedValues = new AssertUpdateFilePathExpectedValues();
+                }
+                return this.mAssertUpdateFilePathExpectedValues;
+            }
+        }
+        
+        public virtual UpdateAllSettingsParams UpdateAllSettingsParams
+        {
+            get
+            {
+                if ((this.mUpdateAllSettingsParams == null))
+                {
+                    this.mUpdateAllSettingsParams = new UpdateAllSettingsParams();
+                }
+                return this.mUpdateAllSettingsParams;
+            }
+        }
+        
+        public virtual AssertUpdateAllSettingsExpectedValues AssertUpdateAllSettingsExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertUpdateAllSettingsExpectedValues == null))
+                {
+                    this.mAssertUpdateAllSettingsExpectedValues = new AssertUpdateAllSettingsExpectedValues();
+                }
+                return this.mAssertUpdateAllSettingsExpectedValues;
+            }
+        }
+        
+        public virtual ProfileResetPasswordParams ProfileResetPasswordParams
+        {
+            get
+            {
+                if ((this.mProfileResetPasswordParams == null))
+                {
+                    this.mProfileResetPasswordParams = new ProfileResetPasswordParams();
+                }
+                return this.mProfileResetPasswordParams;
+            }
+        }
+        
+        public virtual ResetProfilePasswordParams ResetProfilePasswordParams
+        {
+            get
+            {
+                if ((this.mResetProfilePasswordParams == null))
+                {
+                    this.mResetProfilePasswordParams = new ResetProfilePasswordParams();
+                }
+                return this.mResetProfilePasswordParams;
+            }
+        }
+        
+        public UIMsnInternetExplorerWindow UIMsnInternetExplorerWindow
+        {
+            get
+            {
+                if ((this.mUIMsnInternetExplorerWindow == null))
+                {
+                    this.mUIMsnInternetExplorerWindow = new UIMsnInternetExplorerWindow();
+                }
+                return this.mUIMsnInternetExplorerWindow;
+            }
+        }
+        
+        public UIHomePageInternetExplWindow UIHomePageInternetExplWindow
+        {
+            get
+            {
+                if ((this.mUIHomePageInternetExplWindow == null))
+                {
+                    this.mUIHomePageInternetExplWindow = new UIHomePageInternetExplWindow();
+                }
+                return this.mUIHomePageInternetExplWindow;
+            }
+        }
+        
+        public UIIndexInternetExploreWindow UIIndexInternetExploreWindow
+        {
+            get
+            {
+                if ((this.mUIIndexInternetExploreWindow == null))
+                {
+                    this.mUIIndexInternetExploreWindow = new UIIndexInternetExploreWindow();
+                }
+                return this.mUIIndexInternetExploreWindow;
+            }
+        }
+        
+        public UILoginInternetExploreWindow UILoginInternetExploreWindow
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow == null))
+                {
+                    this.mUILoginInternetExploreWindow = new UILoginInternetExploreWindow();
+                }
+                return this.mUILoginInternetExploreWindow;
+            }
+        }
+        
+        public UIIndexInternetExploreWindow1 UIIndexInternetExploreWindow1
+        {
+            get
+            {
+                if ((this.mUIIndexInternetExploreWindow1 == null))
+                {
+                    this.mUIIndexInternetExploreWindow1 = new UIIndexInternetExploreWindow1();
+                }
+                return this.mUIIndexInternetExploreWindow1;
+            }
+        }
+        
+        public UILoginInternetExploreWindow1 UILoginInternetExploreWindow1
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow1 == null))
+                {
+                    this.mUILoginInternetExploreWindow1 = new UILoginInternetExploreWindow1();
+                }
+                return this.mUILoginInternetExploreWindow1;
+            }
+        }
+        
+        public UILoginInternetExploreWindow2 UILoginInternetExploreWindow2
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow2 == null))
+                {
+                    this.mUILoginInternetExploreWindow2 = new UILoginInternetExploreWindow2();
+                }
+                return this.mUILoginInternetExploreWindow2;
+            }
+        }
+        
+        public UILoginInternetExploreWindow3 UILoginInternetExploreWindow3
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow3 == null))
+                {
+                    this.mUILoginInternetExploreWindow3 = new UILoginInternetExploreWindow3();
+                }
+                return this.mUILoginInternetExploreWindow3;
+            }
+        }
+        
+        public UILoginInternetExploreWindow4 UILoginInternetExploreWindow4
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow4 == null))
+                {
+                    this.mUILoginInternetExploreWindow4 = new UILoginInternetExploreWindow4();
+                }
+                return this.mUILoginInternetExploreWindow4;
+            }
+        }
+        
+        public UILoginInternetExploreWindow5 UILoginInternetExploreWindow5
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow5 == null))
+                {
+                    this.mUILoginInternetExploreWindow5 = new UILoginInternetExploreWindow5();
+                }
+                return this.mUILoginInternetExploreWindow5;
+            }
+        }
+        
+        public UILoginInternetExploreWindow6 UILoginInternetExploreWindow6
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow6 == null))
+                {
+                    this.mUILoginInternetExploreWindow6 = new UILoginInternetExploreWindow6();
+                }
+                return this.mUILoginInternetExploreWindow6;
+            }
+        }
+        
+        public UILoginGoogleChromeWindow UILoginGoogleChromeWindow
+        {
+            get
+            {
+                if ((this.mUILoginGoogleChromeWindow == null))
+                {
+                    this.mUILoginGoogleChromeWindow = new UILoginGoogleChromeWindow();
+                }
+                return this.mUILoginGoogleChromeWindow;
+            }
+        }
+        
+        public UILoginInternetExploreWindow7 UILoginInternetExploreWindow7
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow7 == null))
+                {
+                    this.mUILoginInternetExploreWindow7 = new UILoginInternetExploreWindow7();
+                }
+                return this.mUILoginInternetExploreWindow7;
+            }
+        }
         #endregion
         
         #region Fields
-       
+        private LoginFailure1Params mLoginFailure1Params;
         
+        private LoginFailureParams mLoginFailureParams;
+        
+        private LoginFailureAssertExpectedValues mLoginFailureAssertExpectedValues;
+        
+        private AdminLoginSuccessParams mAdminLoginSuccessParams;
+        
+        private LoginAssertExpectedValues mLoginAssertExpectedValues;
+        
+        private LoginSuccessParams mLoginSuccessParams;
+        
+        private AssertLoginSuccessExpectedValues mAssertLoginSuccessExpectedValues;
+        
+        private ProducerLoginSuccessParams mProducerLoginSuccessParams;
+        
+        private AssertProducerLoginSuccessExpectedValues mAssertProducerLoginSuccessExpectedValues;
+        
+        private ClientLoginSuccessParams mClientLoginSuccessParams;
+        
+        private AssertClientLoginExpectedValues mAssertClientLoginExpectedValues;
+        
+        private AssertAdminLoginExpectedValues mAssertAdminLoginExpectedValues;
+        
+        private UpdateSiteNameParams mUpdateSiteNameParams;
+        
+        private AssertSiteNameChangeExpectedValues mAssertSiteNameChangeExpectedValues;
+        
+        private UpdateFilePathParams mUpdateFilePathParams;
+        
+        private AssertUpdateFilePathExpectedValues mAssertUpdateFilePathExpectedValues;
+        
+        private UpdateAllSettingsParams mUpdateAllSettingsParams;
+        
+        private AssertUpdateAllSettingsExpectedValues mAssertUpdateAllSettingsExpectedValues;
+        
+        private ProfileResetPasswordParams mProfileResetPasswordParams;
+        
+        private ResetProfilePasswordParams mResetProfilePasswordParams;
+        
+        private UIMsnInternetExplorerWindow mUIMsnInternetExplorerWindow;
+        
+        private UIHomePageInternetExplWindow mUIHomePageInternetExplWindow;
+        
+        private UIIndexInternetExploreWindow mUIIndexInternetExploreWindow;
+        
+        private UILoginInternetExploreWindow mUILoginInternetExploreWindow;
+        
+        private UIIndexInternetExploreWindow1 mUIIndexInternetExploreWindow1;
+        
+        private UILoginInternetExploreWindow1 mUILoginInternetExploreWindow1;
+        
+        private UILoginInternetExploreWindow2 mUILoginInternetExploreWindow2;
+        
+        private UILoginInternetExploreWindow3 mUILoginInternetExploreWindow3;
+        
+        private UILoginInternetExploreWindow4 mUILoginInternetExploreWindow4;
+        
+        private UILoginInternetExploreWindow5 mUILoginInternetExploreWindow5;
+        
+        private UILoginInternetExploreWindow6 mUILoginInternetExploreWindow6;
+        
+        private UILoginGoogleChromeWindow mUILoginGoogleChromeWindow;
+        
+        private UILoginInternetExploreWindow7 mUILoginInternetExploreWindow7;
         #endregion
     }
     
-
+    /// <summary>
+    /// Parameters to be passed into 'LoginFailure1'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class LoginFailure1Params
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UIMsnInternetExplorerWindowUrl = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "+qUTaefO8fRWnJYzb/wnJH5uwOKVQ1J8";
+        #endregion
+    }
     
-
+    /// <summary>
+    /// Parameters to be passed into 'LoginFailure'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class LoginFailureParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UIMsnInternetExplorerWindowUrl = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "ycUhFwSm1VMlhHwbjt3WBO0kbpageHHu";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'LoginFailureAssert'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class LoginFailureAssertExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'TagName' property of 'The user name or password provided is in' custom control equals 'LI'
+        /// </summary>
+        public string UITheusernameorpassworCustomTagName = "LI";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AdminLoginSuccess'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AdminLoginSuccessParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow1Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'LoginAssert'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class LoginAssertExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Log off' link equals 'Log off'
+        /// </summary>
+        public string UILogoffHyperlinkInnerText = "Log off";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'LoginSuccess'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class LoginSuccessParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UIMsnInternetExplorerWindowUrl = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertLoginSuccess'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertLoginSuccessExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Log off' link equals 'Log off'
+        /// </summary>
+        public string UILogoffHyperlinkInnerText = "Log off";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ProducerLoginSuccess'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ProducerLoginSuccessParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UIMsnInternetExplorerWindowUrl = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'producer' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "producer";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertProducerLoginSuccess'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertProducerLoginSuccessExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Log off' link equals 'Log off'
+        /// </summary>
+        public string UILogoffHyperlinkInnerText = "Log off";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ClientLoginSuccess'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ClientLoginSuccessParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindowUrl = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'client' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "client";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertClientLogin'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertClientLoginExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Log off' link equals 'Log off'
+        /// </summary>
+        public string UILogoffHyperlinkInnerText = "Log off";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertAdminLogin'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertAdminLoginExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Log off' link equals 'Log off'
+        /// </summary>
+        public string UILogoffHyperlinkInnerText = "Log off";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'UpdateSiteName'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UpdateSiteNameParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow3Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type 'Stardome1' in '[0].Value' text box
+        /// </summary>
+        public string UIItem0ValueEditText = "Stardome1";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertSiteNameChange'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertSiteNameChangeExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+        /// </summary>
+        public string UISiteSettingsUpdatedSLabelInnerText = "Site Settings Updated Successfully....";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'UpdateFilePath'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UpdateFilePathParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow5Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type 'c:\Stardome\Test' in '[1].Value' text box
+        /// </summary>
+        public string UIItem1ValueEditText = "c:\\Stardome\\Test";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertUpdateFilePath'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertUpdateFilePathExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+        /// </summary>
+        public string UISiteSettingsUpdatedSLabelInnerText = "Site Settings Updated Successfully....";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'UpdateAllSettings'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UpdateAllSettingsParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Go to web page 'http://localhost:2129/'
+        /// </summary>
+        public string UILoginInternetExploreWindow6Url = "http://localhost:2129/";
+        
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type 'Stardome' in '[0].Value' text box
+        /// </summary>
+        public string UIItem0ValueEditText = "Stardome";
+        
+        /// <summary>
+        /// Type '{Tab}' in '[0].Value' text box
+        /// </summary>
+        public string UIItem0ValueEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type 'c:\Stardome' in '[1].Value' text box
+        /// </summary>
+        public string UIItem1ValueEditText = "c:\\Stardome";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AssertUpdateAllSettings'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AssertUpdateAllSettingsExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'Site Settings Updated Successfully....' label equals 'Site Settings Updated Successfully....'
+        /// </summary>
+        public string UISiteSettingsUpdatedSLabelInnerText = "Site Settings Updated Successfully....";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ProfileResetPassword'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ProfileResetPasswordParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Type 'c' in 'Log in - Google Chrome' document
+        /// </summary>
+        public string UILoginGoogleChromeDocumentSendKeys = "c";
+        
+        /// <summary>
+        /// Type 'lient{Tab}qwert1234' in 'Chrome Legacy Window' document
+        /// </summary>
+        public string UIChromeLegacyWindowDocumentSendKeys = "lient{Tab}qwert1234";
+        
+        /// <summary>
+        /// Type 'client{Tab}qwert123' in 'Chrome Legacy Window' document
+        /// </summary>
+        public string UIChromeLegacyWindowDocumentSendKeys1 = "client{Tab}qwert123";
+        
+        /// <summary>
+        /// Type '123456' in 'Chrome Legacy Window' document
+        /// </summary>
+        public string UIChromeLegacyWindowDocumentSendKeys2 = "123456";
+        
+        /// <summary>
+        /// Type 'qwert123' in 'Chrome Legacy Window' document
+        /// </summary>
+        public string UIChromeLegacyWindowDocumentSendKeys3 = "qwert123";
+        
+        /// <summary>
+        /// Type '123456' in 'Chrome Legacy Window' document
+        /// </summary>
+        public string UIChromeLegacyWindowDocumentSendKeys4 = "123456";
+        
+        /// <summary>
+        /// Type '123456' in 'Chrome Legacy Window' document
+        /// </summary>
+        public string UIChromeLegacyWindowDocumentSendKeys5 = "123456";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ResetProfilePassword'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ResetProfilePasswordParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Type 'client' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "client";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        
+        /// <summary>
+        /// Type '********' in 'Current password' text box
+        /// </summary>
+        public string UICurrentpasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        
+        /// <summary>
+        /// Type '********' in 'New password' text box
+        /// </summary>
+        public string UINewpasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        
+        /// <summary>
+        /// Type '********' in 'Confirm new password' text box
+        /// </summary>
+        public string UIConfirmnewpasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIMsnInternetExplorerWindow : BrowserWindow
+    {
+        
+        public UIMsnInternetExplorerWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "msn";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("msn");
+            this.WindowTitles.Add("Blank Page");
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIMsnDocument UIMsnDocument
+        {
+            get
+            {
+                if ((this.mUIMsnDocument == null))
+                {
+                    this.mUIMsnDocument = new UIMsnDocument(this);
+                }
+                return this.mUIMsnDocument;
+            }
+        }
+        
+        public UILoginDocument UILoginDocument
+        {
+            get
+            {
+                if ((this.mUILoginDocument == null))
+                {
+                    this.mUILoginDocument = new UILoginDocument(this);
+                }
+                return this.mUILoginDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIMsnDocument mUIMsnDocument;
+        
+        private UILoginDocument mUILoginDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIMsnDocument : HtmlDocument
+    {
+        
+        public UIMsnDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "msn";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://www.msn.com/?ocid=iehp";
+            this.WindowTitles.Add("msn");
+            #endregion
+        }
+        
+        #region Properties
+        public UIMainCustom UIMainCustom
+        {
+            get
+            {
+                if ((this.mUIMainCustom == null))
+                {
+                    this.mUIMainCustom = new UIMainCustom(this);
+                }
+                return this.mUIMainCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIMainCustom mUIMainCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIMainCustom : HtmlCustom
+    {
+        
+        public UIMainCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "main";
+            this.SearchProperties["Id"] = "main";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"main\" role=\"main\" data-m=\"{\'i\':35,\'n";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("msn");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UIScarlettsdaughtermakHyperlink
+        {
+            get
+            {
+                if ((this.mUIScarlettsdaughtermakHyperlink == null))
+                {
+                    this.mUIScarlettsdaughtermakHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIScarlettsdaughtermakHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIScarlettsdaughtermakHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIScarlettsdaughtermakHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIScarlettsdaughtermakHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = " \r\nScarlett\'s daughter makes her debut and more celeb news\r\n Wonderwall  ";
+                    this.mUIScarlettsdaughtermakHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/en-us/entertainment/celebrity/celebrity-news-for-feb-17-2015/ss-BBhGlSX";
+                    this.mUIScarlettsdaughtermakHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIScarlettsdaughtermakHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://www.msn.com/en-us/entertainment/celebrity/celebrity-news-for-feb-17-2015/s" +
+                        "s-BBhGlSX";
+                    this.mUIScarlettsdaughtermakHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIScarlettsdaughtermakHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/en-us/entertainment/celebrity/cel";
+                    this.mUIScarlettsdaughtermakHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "71";
+                    this.mUIScarlettsdaughtermakHyperlink.WindowTitles.Add("msn");
+                    #endregion
+                }
+                return this.mUIScarlettsdaughtermakHyperlink;
+            }
+        }
+        
+        public HtmlImage UIBruceJennerisdevastaImage
+        {
+            get
+            {
+                if ((this.mUIBruceJennerisdevastaImage == null))
+                {
+                    this.mUIBruceJennerisdevastaImage = new HtmlImage(this);
+                    #region Search Criteria
+                    this.mUIBruceJennerisdevastaImage.SearchProperties[HtmlImage.PropertyNames.Id] = null;
+                    this.mUIBruceJennerisdevastaImage.SearchProperties[HtmlImage.PropertyNames.Name] = null;
+                    this.mUIBruceJennerisdevastaImage.SearchProperties[HtmlImage.PropertyNames.Alt] = "Bruce Jenner is \'devastated\' following fatal accident";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.AbsolutePath] = "/tenant/amp/entityid/BBhBYAJ.img";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.Src] = "http://img.s-msn.com/tenant/amp/entityid/BBhBYAJ.img?h=75&w=100&m=6&q=60&u=t&o=t&" +
+                        "l=f&f=jpg&x=810&y=545";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.LinkAbsolutePath] = "/en-us/tv/celebrity/new-video-shows-bruce-jenner-may-be-at-fault-in-fatal-car-cra" +
+                        "sh/ar-BBhGZ76";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.Href] = "http://www.msn.com/en-us/tv/celebrity/new-video-shows-bruce-jenner-may-be-at-faul" +
+                        "t-in-fatal-car-crash/ar-BBhGZ76";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.Class] = "image loaded";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.ControlDefinition] = "width=\"100\" title=\"Mark Von Holden/Invis";
+                    this.mUIBruceJennerisdevastaImage.FilterProperties[HtmlImage.PropertyNames.TagInstance] = "59";
+                    this.mUIBruceJennerisdevastaImage.WindowTitles.Add("msn");
+                    #endregion
+                }
+                return this.mUIBruceJennerisdevastaImage;
+            }
+        }
+        
+        public HtmlHyperlink UINewvideoshowsBruceJeHyperlink
+        {
+            get
+            {
+                if ((this.mUINewvideoshowsBruceJeHyperlink == null))
+                {
+                    this.mUINewvideoshowsBruceJeHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUINewvideoshowsBruceJeHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUINewvideoshowsBruceJeHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUINewvideoshowsBruceJeHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUINewvideoshowsBruceJeHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = " \r\nNew video shows Bruce Jenner may be at fault in fatal car crash\r\n Wonderwall  " +
+                        "";
+                    this.mUINewvideoshowsBruceJeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/en-us/tv/celebrity/new-video-shows-bruce-jenner-may-be-at-fault-in-fatal-car-cra" +
+                        "sh/ar-BBhGZ76";
+                    this.mUINewvideoshowsBruceJeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUINewvideoshowsBruceJeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://www.msn.com/en-us/tv/celebrity/new-video-shows-bruce-jenner-may-be-at-faul" +
+                        "t-in-fatal-car-crash/ar-BBhGZ76";
+                    this.mUINewvideoshowsBruceJeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUINewvideoshowsBruceJeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/en-us/tv/celebrity/new-video-show";
+                    this.mUINewvideoshowsBruceJeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "70";
+                    this.mUINewvideoshowsBruceJeHyperlink.WindowTitles.Add("msn");
+                    #endregion
+                }
+                return this.mUINewvideoshowsBruceJeHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUIScarlettsdaughtermakHyperlink;
+        
+        private HtmlImage mUIBruceJennerisdevastaImage;
+        
+        private HtmlHyperlink mUINewvideoshowsBruceJeHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginDocument : HtmlDocument
+    {
+        
+        public UILoginDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Log in";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/";
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILoginHyperlink
+        {
+            get
+            {
+                if ((this.mUILoginHyperlink == null))
+                {
+                    this.mUILoginHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILoginHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = "loginLink";
+                    this.mUILoginHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILoginHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILoginHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log in";
+                    this.mUILoginHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/";
+                    this.mUILoginHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILoginHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/";
+                    this.mUILoginHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILoginHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "id=\"loginLink\" href=\"/\"";
+                    this.mUILoginHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILoginHyperlink.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUILoginHyperlink;
+            }
+        }
+        
+        public HtmlEdit UIUsernameEdit
+        {
+            get
+            {
+                if ((this.mUIUsernameEdit == null))
+                {
+                    this.mUIUsernameEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIUsernameEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "UserName";
+                    this.mUIUsernameEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "UserName";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "User name";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"UserName\" id=\"UserName\" type=\"text";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "2";
+                    this.mUIUsernameEdit.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUIUsernameEdit;
+            }
+        }
+        
+        public HtmlEdit UIPasswordEdit
+        {
+            get
+            {
+                if ((this.mUIPasswordEdit == null))
+                {
+                    this.mUIPasswordEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIPasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "Password";
+                    this.mUIPasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "Password";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "Password";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"Password\" id=\"Password\" type=\"pass";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "3";
+                    this.mUIPasswordEdit.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUIPasswordEdit;
+            }
+        }
+        
+        public UILoginFormCustom UILoginFormCustom
+        {
+            get
+            {
+                if ((this.mUILoginFormCustom == null))
+                {
+                    this.mUILoginFormCustom = new UILoginFormCustom(this);
+                }
+                return this.mUILoginFormCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILoginHyperlink;
+        
+        private HtmlEdit mUIUsernameEdit;
+        
+        private HtmlEdit mUIPasswordEdit;
+        
+        private UILoginFormCustom mUILoginFormCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginFormCustom : HtmlCustom
+    {
+        
+        public UILoginFormCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "SECTION";
+            this.SearchProperties["Id"] = "loginForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"loginForm\"";
+            this.FilterProperties["TagInstance"] = "3";
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlInputButton UILoginButton
+        {
+            get
+            {
+                if ((this.mUILoginButton == null))
+                {
+                    this.mUILoginButton = new HtmlInputButton(this);
+                    #region Search Criteria
+                    this.mUILoginButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUILoginButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUILoginButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Log in";
+                    this.mUILoginButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUILoginButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUILoginButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUILoginButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "type=\"submit\" value=\"Log in\"";
+                    this.mUILoginButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "6";
+                    this.mUILoginButton.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUILoginButton;
+            }
+        }
+        
+        public HtmlCustom UITheusernameorpassworCustom
+        {
+            get
+            {
+                if ((this.mUITheusernameorpassworCustom == null))
+                {
+                    this.mUITheusernameorpassworCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUITheusernameorpassworCustom.SearchProperties["TagName"] = "LI";
+                    this.mUITheusernameorpassworCustom.SearchProperties["Id"] = null;
+                    this.mUITheusernameorpassworCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUITheusernameorpassworCustom.FilterProperties["Class"] = null;
+                    this.mUITheusernameorpassworCustom.FilterProperties["ControlDefinition"] = null;
+                    this.mUITheusernameorpassworCustom.FilterProperties["InnerText"] = "The user name or password provided is in";
+                    this.mUITheusernameorpassworCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUITheusernameorpassworCustom.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUITheusernameorpassworCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlInputButton mUILoginButton;
+        
+        private HtmlCustom mUITheusernameorpassworCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIHomePageInternetExplWindow : BrowserWindow
+    {
+        
+        public UIHomePageInternetExplWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Home Page";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Home Page");
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIHomePageDocument UIHomePageDocument
+        {
+            get
+            {
+                if ((this.mUIHomePageDocument == null))
+                {
+                    this.mUIHomePageDocument = new UIHomePageDocument(this);
+                }
+                return this.mUIHomePageDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIHomePageDocument mUIHomePageDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIHomePageDocument : HtmlDocument
+    {
+        
+        public UIHomePageDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Home Page";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Home/Users";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Home/Users";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public UILogoutFormCustom UILogoutFormCustom
+        {
+            get
+            {
+                if ((this.mUILogoutFormCustom == null))
+                {
+                    this.mUILogoutFormCustom = new UILogoutFormCustom(this);
+                }
+                return this.mUILogoutFormCustom;
+            }
+        }
+        
+        public UIMenuCustom UIMenuCustom
+        {
+            get
+            {
+                if ((this.mUIMenuCustom == null))
+                {
+                    this.mUIMenuCustom = new UIMenuCustom(this);
+                }
+                return this.mUIMenuCustom;
+            }
+        }
+        
+        public HtmlCustom UIItemCustom
+        {
+            get
+            {
+                if ((this.mUIItemCustom == null))
+                {
+                    this.mUIItemCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUIItemCustom.SearchProperties["TagName"] = "FOOTER";
+                    this.mUIItemCustom.SearchProperties["Id"] = null;
+                    this.mUIItemCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUIItemCustom.FilterProperties["Class"] = null;
+                    this.mUIItemCustom.FilterProperties["ControlDefinition"] = null;
+                    this.mUIItemCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUIItemCustom.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItemCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UILogoutFormCustom mUILogoutFormCustom;
+        
+        private UIMenuCustom mUIMenuCustom;
+        
+        private HtmlCustom mUIItemCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILogoutFormCustom : HtmlCustom
+    {
+        
+        public UILogoutFormCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "FORM";
+            this.SearchProperties["Id"] = "logoutForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"logoutForm\" action=\"/Account/LogOff\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILogoffHyperlink
+        {
+            get
+            {
+                if ((this.mUILogoffHyperlink == null))
+                {
+                    this.mUILogoffHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log off";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "javascript:document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"javascript:document.getElementById";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILogoffHyperlink.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUILogoffHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIMenuCustom : HtmlCustom
+    {
+        
+        public UIMenuCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "UL";
+            this.SearchProperties["Id"] = "menu";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"menu\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UIManageSettingsHyperlink
+        {
+            get
+            {
+                if ((this.mUIManageSettingsHyperlink == null))
+                {
+                    this.mUIManageSettingsHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIManageSettingsHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Manage Settings";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Home/Settings";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Home/Settings";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/Home/Settings\"";
+                    this.mUIManageSettingsHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "3";
+                    this.mUIManageSettingsHyperlink.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIManageSettingsHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUIManageSettingsHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIIndexInternetExploreWindow : BrowserWindow
+    {
+        
+        public UIIndexInternetExploreWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Index";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIIndexDocument UIIndexDocument
+        {
+            get
+            {
+                if ((this.mUIIndexDocument == null))
+                {
+                    this.mUIIndexDocument = new UIIndexDocument(this);
+                }
+                return this.mUIIndexDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIIndexDocument mUIIndexDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIIndexDocument : HtmlDocument
+    {
+        
+        public UIIndexDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Index";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Producer/Index";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Producer/Index";
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        #region Properties
+        public UILogoutFormCustom1 UILogoutFormCustom
+        {
+            get
+            {
+                if ((this.mUILogoutFormCustom == null))
+                {
+                    this.mUILogoutFormCustom = new UILogoutFormCustom1(this);
+                }
+                return this.mUILogoutFormCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UILogoutFormCustom1 mUILogoutFormCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILogoutFormCustom1 : HtmlCustom
+    {
+        
+        public UILogoutFormCustom1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "FORM";
+            this.SearchProperties["Id"] = "logoutForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"logoutForm\" action=\"/Account/LogOff\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILogoffHyperlink
+        {
+            get
+            {
+                if ((this.mUILogoffHyperlink == null))
+                {
+                    this.mUILogoffHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log off";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "javascript:document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"javascript:document.getElementById";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILogoffHyperlink.WindowTitles.Add("Index");
+                    #endregion
+                }
+                return this.mUILogoffHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("http://localhost:2129/");
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIIndexInternetExploreWindow1 : BrowserWindow
+    {
+        
+        public UIIndexInternetExploreWindow1()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Index";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Index");
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Manage your Account");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIIndexDocument1 UIIndexDocument
+        {
+            get
+            {
+                if ((this.mUIIndexDocument == null))
+                {
+                    this.mUIIndexDocument = new UIIndexDocument1(this);
+                }
+                return this.mUIIndexDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIIndexDocument1 mUIIndexDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIIndexDocument1 : HtmlDocument
+    {
+        
+        public UIIndexDocument1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Index";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Clients/Index";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Clients/Index";
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        #region Properties
+        public UILogoutFormCustom2 UILogoutFormCustom
+        {
+            get
+            {
+                if ((this.mUILogoutFormCustom == null))
+                {
+                    this.mUILogoutFormCustom = new UILogoutFormCustom2(this);
+                }
+                return this.mUILogoutFormCustom;
+            }
+        }
+        
+        public UILoginCustom UILoginCustom
+        {
+            get
+            {
+                if ((this.mUILoginCustom == null))
+                {
+                    this.mUILoginCustom = new UILoginCustom(this);
+                }
+                return this.mUILoginCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UILogoutFormCustom2 mUILogoutFormCustom;
+        
+        private UILoginCustom mUILoginCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILogoutFormCustom2 : HtmlCustom
+    {
+        
+        public UILogoutFormCustom2(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "FORM";
+            this.SearchProperties["Id"] = "logoutForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"logoutForm\" action=\"/Account/LogOff\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILogoffHyperlink
+        {
+            get
+            {
+                if ((this.mUILogoffHyperlink == null))
+                {
+                    this.mUILogoffHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log off";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "javascript:document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"javascript:document.getElementById";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILogoffHyperlink.WindowTitles.Add("Index");
+                    #endregion
+                }
+                return this.mUILogoffHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginCustom : HtmlCustom
+    {
+        
+        public UILoginCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "SECTION";
+            this.SearchProperties["Id"] = "login";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"login\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Index");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UIClientHyperlink
+        {
+            get
+            {
+                if ((this.mUIClientHyperlink == null))
+                {
+                    this.mUIClientHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIClientHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIClientHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIClientHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIClientHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "client";
+                    this.mUIClientHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Account/Manage";
+                    this.mUIClientHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = "Manage";
+                    this.mUIClientHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Account/Manage";
+                    this.mUIClientHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = "username";
+                    this.mUIClientHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "title=\"Manage\" class=\"username\" href=\"/A";
+                    this.mUIClientHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUIClientHyperlink.WindowTitles.Add("Index");
+                    #endregion
+                }
+                return this.mUIClientHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUIClientHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow1 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow1()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow2 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow2()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIAddressComboControlToolBar UIAddressComboControlToolBar
+        {
+            get
+            {
+                if ((this.mUIAddressComboControlToolBar == null))
+                {
+                    this.mUIAddressComboControlToolBar = new UIAddressComboControlToolBar(this);
+                }
+                return this.mUIAddressComboControlToolBar;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIAddressComboControlToolBar mUIAddressComboControlToolBar;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIAddressComboControlToolBar : WinToolBar
+    {
+        
+        public UIAddressComboControlToolBar(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinToolBar.PropertyNames.Name] = "Address Combo Control";
+            this.WindowTitles.Add("Log in");
+            #endregion
+        }
+        
+        #region Properties
+        public WinMenuItem UIItemMenuItem
+        {
+            get
+            {
+                if ((this.mUIItemMenuItem == null))
+                {
+                    this.mUIItemMenuItem = new WinMenuItem(this);
+                    #region Search Criteria
+                    this.mUIItemMenuItem.SearchProperties[WinMenuItem.PropertyNames.Instance] = "2";
+                    this.mUIItemMenuItem.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUIItemMenuItem;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinMenuItem mUIItemMenuItem;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow3 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow3()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow4 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow4()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            this.WindowTitles.Add("http://localhost:2129/");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIHomePageDocument1 UIHomePageDocument1
+        {
+            get
+            {
+                if ((this.mUIHomePageDocument1 == null))
+                {
+                    this.mUIHomePageDocument1 = new UIHomePageDocument1(this);
+                }
+                return this.mUIHomePageDocument1;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIHomePageDocument1 mUIHomePageDocument1;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIHomePageDocument1 : HtmlDocument
+    {
+        
+        public UIHomePageDocument1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Home Page";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Home/Settings";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Home/Settings";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public UIBodyPane UIBodyPane
+        {
+            get
+            {
+                if ((this.mUIBodyPane == null))
+                {
+                    this.mUIBodyPane = new UIBodyPane(this);
+                }
+                return this.mUIBodyPane;
+            }
+        }
+        
+        public HtmlEdit UIItem0ValueEdit
+        {
+            get
+            {
+                if ((this.mUIItem0ValueEdit == null))
+                {
+                    this.mUIItem0ValueEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = null;
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "[0].Value";
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.LabeledBy] = null;
+                    this.mUIItem0ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"[0].Value\" type=\"text\" value=\"Star";
+                    this.mUIItem0ValueEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "4";
+                    this.mUIItem0ValueEdit.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItem0ValueEdit;
+            }
+        }
+        
+        public UILogoutFormCustom3 UILogoutFormCustom
+        {
+            get
+            {
+                if ((this.mUILogoutFormCustom == null))
+                {
+                    this.mUILogoutFormCustom = new UILogoutFormCustom3(this);
+                }
+                return this.mUILogoutFormCustom;
+            }
+        }
+        
+        public HtmlEdit UIItem1ValueEdit
+        {
+            get
+            {
+                if ((this.mUIItem1ValueEdit == null))
+                {
+                    this.mUIItem1ValueEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = null;
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "[1].Value";
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.LabeledBy] = null;
+                    this.mUIItem1ValueEdit.SearchProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"[1].Value\" type=\"text\" value=\"c:\\S";
+                    this.mUIItem1ValueEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "7";
+                    this.mUIItem1ValueEdit.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItem1ValueEdit;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIBodyPane mUIBodyPane;
+        
+        private HtmlEdit mUIItem0ValueEdit;
+        
+        private UILogoutFormCustom3 mUILogoutFormCustom;
+        
+        private HtmlEdit mUIItem1ValueEdit;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane : HtmlDiv
+    {
+        
+        public UIBodyPane(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Home Page. Settings Page. \r\n\r\n\r\n\r\nRegist";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlInputButton UIUpdateButton
+        {
+            get
+            {
+                if ((this.mUIUpdateButton == null))
+                {
+                    this.mUIUpdateButton = new HtmlInputButton(this);
+                    #region Search Criteria
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Update";
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "type=\"submit\" value=\"Update\"";
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "7";
+                    this.mUIUpdateButton.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIUpdateButton;
+            }
+        }
+        
+        public HtmlLabel UISiteSettingsUpdatedSLabel
+        {
+            get
+            {
+                if ((this.mUISiteSettingsUpdatedSLabel == null))
+                {
+                    this.mUISiteSettingsUpdatedSLabel = new HtmlLabel(this);
+                    #region Search Criteria
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.Id] = null;
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.Name] = null;
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.LabelFor] = "lblUpdateMessage";
+                    this.mUISiteSettingsUpdatedSLabel.SearchProperties[HtmlLabel.PropertyNames.InnerText] = "Site Settings Updated Successfully....";
+                    this.mUISiteSettingsUpdatedSLabel.FilterProperties[HtmlLabel.PropertyNames.Class] = null;
+                    this.mUISiteSettingsUpdatedSLabel.FilterProperties[HtmlLabel.PropertyNames.ControlDefinition] = "for=\"lblUpdateMessage\"";
+                    this.mUISiteSettingsUpdatedSLabel.FilterProperties[HtmlLabel.PropertyNames.TagInstance] = "1";
+                    this.mUISiteSettingsUpdatedSLabel.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUISiteSettingsUpdatedSLabel;
+            }
+        }
+        
+        public HtmlCustom UIItemCustom
+        {
+            get
+            {
+                if ((this.mUIItemCustom == null))
+                {
+                    this.mUIItemCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUIItemCustom.SearchProperties["TagName"] = "HGROUP";
+                    this.mUIItemCustom.SearchProperties["Id"] = null;
+                    this.mUIItemCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUIItemCustom.FilterProperties["Class"] = "title";
+                    this.mUIItemCustom.FilterProperties["ControlDefinition"] = "class=\"title\"";
+                    this.mUIItemCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUIItemCustom.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIItemCustom;
+            }
+        }
+        
+        public HtmlDiv UIHomePageSettingsPagePane
+        {
+            get
+            {
+                if ((this.mUIHomePageSettingsPagePane == null))
+                {
+                    this.mUIHomePageSettingsPagePane = new HtmlDiv(this);
+                    #region Search Criteria
+                    this.mUIHomePageSettingsPagePane.SearchProperties[HtmlDiv.PropertyNames.Id] = null;
+                    this.mUIHomePageSettingsPagePane.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Home Page. Settings Page. ";
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.Class] = "content-wrapper";
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "class=\"content-wrapper\"";
+                    this.mUIHomePageSettingsPagePane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "5";
+                    this.mUIHomePageSettingsPagePane.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUIHomePageSettingsPagePane;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlInputButton mUIUpdateButton;
+        
+        private HtmlLabel mUISiteSettingsUpdatedSLabel;
+        
+        private HtmlCustom mUIItemCustom;
+        
+        private HtmlDiv mUIHomePageSettingsPagePane;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILogoutFormCustom3 : HtmlCustom
+    {
+        
+        public UILogoutFormCustom3(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "FORM";
+            this.SearchProperties["Id"] = "logoutForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"logoutForm\" action=\"/Account/LogOff\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILogoffHyperlink
+        {
+            get
+            {
+                if ((this.mUILogoffHyperlink == null))
+                {
+                    this.mUILogoffHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log off";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "javascript:document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"javascript:document.getElementById";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILogoffHyperlink.WindowTitles.Add("Home Page");
+                    #endregion
+                }
+                return this.mUILogoffHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow5 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow5()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("http://localhost:2129/");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow6 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow6()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Home Page");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginGoogleChromeWindow : WinWindow
+    {
+        
+        public UILoginGoogleChromeWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "Log in - Google Chrome";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "Chrome_WidgetWin_1";
+            this.WindowTitles.Add("Log in - Google Chrome");
+            #endregion
+        }
+        
+        #region Properties
+        public UIChromeLegacyWindowWindow UIChromeLegacyWindowWindow
+        {
+            get
+            {
+                if ((this.mUIChromeLegacyWindowWindow == null))
+                {
+                    this.mUIChromeLegacyWindowWindow = new UIChromeLegacyWindowWindow(this);
+                }
+                return this.mUIChromeLegacyWindowWindow;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIChromeLegacyWindowWindow mUIChromeLegacyWindowWindow;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIChromeLegacyWindowWindow : WinWindow
+    {
+        
+        public UIChromeLegacyWindowWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.ControlId] = "190782456";
+            this.WindowTitles.Add("Log in - Google Chrome");
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UIChromeLegacyWindowClient
+        {
+            get
+            {
+                if ((this.mUIChromeLegacyWindowClient == null))
+                {
+                    this.mUIChromeLegacyWindowClient = new WinClient(this);
+                    #region Search Criteria
+                    this.mUIChromeLegacyWindowClient.SearchProperties[WinControl.PropertyNames.Name] = "Chrome Legacy Window";
+                    this.mUIChromeLegacyWindowClient.WindowTitles.Add("Log in - Google Chrome");
+                    #endregion
+                }
+                return this.mUIChromeLegacyWindowClient;
+            }
+        }
+        
+        public WinControl UILoginGoogleChromeDocument
+        {
+            get
+            {
+                if ((this.mUILoginGoogleChromeDocument == null))
+                {
+                    this.mUILoginGoogleChromeDocument = new WinControl(this);
+                    #region Search Criteria
+                    this.mUILoginGoogleChromeDocument.SearchProperties[UITestControl.PropertyNames.ControlType] = "Document";
+                    this.mUILoginGoogleChromeDocument.WindowTitles.Add("Log in - Google Chrome");
+                    #endregion
+                }
+                return this.mUILoginGoogleChromeDocument;
+            }
+        }
+        
+        public WinControl UIChromeLegacyWindowDocument
+        {
+            get
+            {
+                if ((this.mUIChromeLegacyWindowDocument == null))
+                {
+                    this.mUIChromeLegacyWindowDocument = new WinControl(this);
+                    #region Search Criteria
+                    this.mUIChromeLegacyWindowDocument.SearchProperties[UITestControl.PropertyNames.ControlType] = "Document";
+                    this.mUIChromeLegacyWindowDocument.WindowTitles.Add("Log in - Google Chrome");
+                    #endregion
+                }
+                return this.mUIChromeLegacyWindowDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUIChromeLegacyWindowClient;
+        
+        private WinControl mUILoginGoogleChromeDocument;
+        
+        private WinControl mUIChromeLegacyWindowDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow7 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow7()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Index");
+            this.WindowTitles.Add("Manage your Account");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIManageyourAccountDocument UIManageyourAccountDocument
+        {
+            get
+            {
+                if ((this.mUIManageyourAccountDocument == null))
+                {
+                    this.mUIManageyourAccountDocument = new UIManageyourAccountDocument(this);
+                }
+                return this.mUIManageyourAccountDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIManageyourAccountDocument mUIManageyourAccountDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIManageyourAccountDocument : HtmlDocument
+    {
+        
+        public UIManageyourAccountDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Manage your Account";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Account/Manage";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Account/Manage";
+            this.WindowTitles.Add("Manage your Account");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlEdit UICurrentpasswordEdit
+        {
+            get
+            {
+                if ((this.mUICurrentpasswordEdit == null))
+                {
+                    this.mUICurrentpasswordEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUICurrentpasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "OldPassword";
+                    this.mUICurrentpasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "OldPassword";
+                    this.mUICurrentpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "Current password";
+                    this.mUICurrentpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
+                    this.mUICurrentpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUICurrentpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUICurrentpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"OldPassword\" id=\"OldPassword\" type";
+                    this.mUICurrentpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "3";
+                    this.mUICurrentpasswordEdit.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUICurrentpasswordEdit;
+            }
+        }
+        
+        public HtmlEdit UINewpasswordEdit
+        {
+            get
+            {
+                if ((this.mUINewpasswordEdit == null))
+                {
+                    this.mUINewpasswordEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUINewpasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "NewPassword";
+                    this.mUINewpasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "NewPassword";
+                    this.mUINewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "New password";
+                    this.mUINewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
+                    this.mUINewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUINewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUINewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"NewPassword\" id=\"NewPassword\" type";
+                    this.mUINewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "4";
+                    this.mUINewpasswordEdit.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUINewpasswordEdit;
+            }
+        }
+        
+        public HtmlEdit UIConfirmnewpasswordEdit
+        {
+            get
+            {
+                if ((this.mUIConfirmnewpasswordEdit == null))
+                {
+                    this.mUIConfirmnewpasswordEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIConfirmnewpasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "ConfirmPassword";
+                    this.mUIConfirmnewpasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "ConfirmPassword";
+                    this.mUIConfirmnewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "Confirm new password";
+                    this.mUIConfirmnewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
+                    this.mUIConfirmnewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIConfirmnewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIConfirmnewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"ConfirmPassword\" id=\"ConfirmPasswo";
+                    this.mUIConfirmnewpasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "5";
+                    this.mUIConfirmnewpasswordEdit.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUIConfirmnewpasswordEdit;
+            }
+        }
+        
+        public UIBodyPane1 UIBodyPane
+        {
+            get
+            {
+                if ((this.mUIBodyPane == null))
+                {
+                    this.mUIBodyPane = new UIBodyPane1(this);
+                }
+                return this.mUIBodyPane;
+            }
+        }
+        
+        public UILogoutFormCustom4 UILogoutFormCustom
+        {
+            get
+            {
+                if ((this.mUILogoutFormCustom == null))
+                {
+                    this.mUILogoutFormCustom = new UILogoutFormCustom4(this);
+                }
+                return this.mUILogoutFormCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlEdit mUICurrentpasswordEdit;
+        
+        private HtmlEdit mUINewpasswordEdit;
+        
+        private HtmlEdit mUIConfirmnewpasswordEdit;
+        
+        private UIBodyPane1 mUIBodyPane;
+        
+        private UILogoutFormCustom4 mUILogoutFormCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane1 : HtmlDiv
+    {
+        
+        public UIBodyPane1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Manage your Account. \r\n\r\n\r\n\r\n \r\n\r\n\r\n\r\nCl";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\" style=\"min-height: 700px;\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Manage your Account");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlInputButton UIUpdatepasswordButton
+        {
+            get
+            {
+                if ((this.mUIUpdatepasswordButton == null))
+                {
+                    this.mUIUpdatepasswordButton = new HtmlInputButton(this);
+                    #region Search Criteria
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Update password";
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "type=\"submit\" value=\"Update password\"";
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "5";
+                    this.mUIUpdatepasswordButton.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUIUpdatepasswordButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlInputButton mUIUpdatepasswordButton;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILogoutFormCustom4 : HtmlCustom
+    {
+        
+        public UILogoutFormCustom4(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "FORM";
+            this.SearchProperties["Id"] = "logoutForm";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"logoutForm\" action=\"/Account/LogOff\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("Manage your Account");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UILogoffHyperlink
+        {
+            get
+            {
+                if ((this.mUILogoffHyperlink == null))
+                {
+                    this.mUILogoffHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUILogoffHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Log off";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "javascript:document.getElementById(\'logoutForm\').submit()";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"javascript:document.getElementById";
+                    this.mUILogoffHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUILogoffHyperlink.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUILogoffHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
 }

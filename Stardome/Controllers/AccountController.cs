@@ -160,10 +160,14 @@ namespace Stardome.Controllers
         //
         // GET: /Account/Manage
 
-        public ActionResult Manage()
+        public ActionResult Manage(ManageMessageId? message)
         {
             if (WebSecurity.IsAuthenticated)
             {
+                ViewBag.StatusMessage =
+                        message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                        : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                        : "";
                 UserAuthCredential usrInfo = userAuthCredentialService.GetByUsername(User.Identity.Name);
                 int roleId = usrInfo.Role.Id;
                 if (roleId == 1)
@@ -173,6 +177,7 @@ namespace Stardome.Controllers
                     ViewBag.showAdminMenu = false;
                 }
                 ViewBag.HasLocalPassword = true;
+                ViewBag.UpdateMessage = "";
                 ViewBag.Name = usrInfo.UserInformations.FirstOrDefault().FirstName + " " + usrInfo.UserInformations.FirstOrDefault().LastName;
                 ViewBag.Email = usrInfo.UserInformations.FirstOrDefault().Email;
                 ViewBag.Role = usrInfo.Role.Role1;
@@ -205,6 +210,7 @@ namespace Stardome.Controllers
                     string newPassword = userAuthCredentialService.EncryptPassword(model.NewPassword);
 
                     changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, OldPassword, newPassword);
+                    
                 }
                 catch (Exception)
                 {
@@ -213,8 +219,8 @@ namespace Stardome.Controllers
                 
                 if (changePasswordSucceeded)
                 {
-                    ViewBag.changePasswordSucceeded = "Your Password has been changed successfully";
-                    return RedirectToAction("Manage");
+                   // ViewBag.changePasswordSucceeded = "Your Password has been changed successfully";
+                    return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
                 else
                 {
@@ -262,6 +268,7 @@ namespace Stardome.Controllers
                     message.Subject = subject;
                     message.Body = body;
                     SmtpClient smtp = new SmtpClient();
+                    
                     //Add SMTP Server; Now runs on simulations
                     // Emails will b in c:\email
 
