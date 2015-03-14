@@ -20,6 +20,7 @@ namespace Stardome.Controllers
     {
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly IRoleService roleService;
+        private readonly SiteSettingsService siteSettingsService;
         public AccountController(IUserAuthCredentialService aUserAuthCredentialService, IRoleService aRoleService)
         {
             userAuthCredentialService = aUserAuthCredentialService;
@@ -30,6 +31,7 @@ namespace Stardome.Controllers
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
+            siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
         }
 
         //
@@ -135,9 +137,8 @@ namespace Stardome.Controllers
                                 dbCtx.UserInformations.Add(UserInformation);
                                 dbCtx.SaveChanges();
                             }
+                            GenerateAndSendEmail(model.UserName, EmailType.AccountVerify);
                         }
-
-
                     }
                     catch (Exception ex)
                     {
@@ -252,47 +253,13 @@ namespace Stardome.Controllers
                 ViewBag.EmailSend = false;
                 if (user != null)
                 {
-                    // Generae password token that will be used in the email link to authenticate user
-                    var token = WebSecurity.GeneratePasswordResetToken(user.Username, 15);
-                    // Generate the html link sent via email
-                    string resetLink = "<a href='"
-                       + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
-                       + "'>Reset Password Link</a>";
-
-                    // Email stuff
-                    string subject = "Reset your password for stardome.com";
-                    string body = "You link: " + resetLink;
-                    string from = "donotreply@stardome.com";
-
-                    MailMessage message = new MailMessage(from, model.Email);
-                    message.Subject = subject;
-                    message.Body = body;
-                    SmtpClient smtp = new SmtpClient();
-                    
-                    //Add SMTP Server; Now runs on simulations
-                    // Emails will b in c:\email
-
-                    // Attempt to send the email
-                    try
-                    {
-                        smtp.Send(message);
-                        ViewBag.EmailSend = true;
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", "Issue sending email: " + e.Message);
-                    }
+                    GenerateAndSendEmail(user.Username, EmailType.ChangePassword);
                 }
                 else // Email not found
                 {
                     ModelState.AddModelError("", "No user found by that email.");
                 }
             }
-
-            /* You may want to send the user to a "Success" page upon the successful
-            * sending of the reset email link. Right now, if we are 100% successful
-            * nothing happens on the page. :P
-            */
             return View(model);
         }
 
@@ -354,6 +321,62 @@ namespace Stardome.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+        }
+
+        public enum EmailType
+        {
+            ChangePassword,
+            AccountVerify,
+        }
+
+
+        // This function Generate and Sends the email for User Register and Password Reset
+        private void GenerateAndSendEmail(String userName, EmailType emailType)
+        {
+            // Generae password token that will be used in the email link to authenticate user
+            var token = WebSecurity.GeneratePasswordResetToken(userName);
+            // Generate the html link sent via email
+            string resetLink = "<a href='"
+               + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
+               + "'>Reset Password Link</a>";
+
+            string subject="", body="";
+            UserInformation aUser = userAuthCredentialService.GetByUsername(userName).UserInformations.FirstOrDefault();
+            // Email stuff
+            body = "Dear " + aUser.LastName + "<\br>";
+            if (emailType==EmailType.AccountVerify)
+            {
+                 subject = "Welcome to stardome.com. Activate your Account";
+                 body += siteSettingsService.GetById(6).Value.ToString();  
+            }
+            else if (emailType==EmailType.ChangePassword)
+            {
+                subject = "Reset your password for stardome.com";
+                body += siteSettingsService.GetById(7).Value.ToString(); 
+            }
+            body += "<\br> You link: " + resetLink;
+
+            string from = "donotreply@stardome.com";
+                        
+            MailMessage message = new MailMessage(from, aUser.Email);
+            message.Subject = subject;
+            message.Body = body;
+            SmtpClient smtp = new SmtpClient();
+
+            //Add SMTP Server; Now runs on simulations
+            // Emails will b in c:\email
+
+            // Attempt to send the email
+            try
+            {
+                smtp.Send(message);
+                ViewBag.EmailSend = true;
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Issue sending email: " + e.Message);
+            }
+        
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
