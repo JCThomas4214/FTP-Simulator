@@ -12,29 +12,25 @@ namespace Stardome.Controllers
     public class AdminController : Controller
     {
         private readonly IUserAuthCredentialService userAuthCredentialService;
-        private readonly IRoleService roleService;
+        private readonly IUserInformationService userInformationService;
         private readonly SiteSettingsService siteSettingsService;
 
         public AdminController()
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
-            roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
+            userInformationService = new UserInformationService(new UserInformationRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
         }
 
-        //public HomeController(IUserAuthCredentialService a)
-        //{
-        //    userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
-        //    roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
-        //    siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
-        //}
+        public AdminController(UserAuthCredentialService aUserAuthCredentialService, UserInformationService aUserInformationService, SiteSettingsService aSiteSettingsService)
+        {
+            userAuthCredentialService = aUserAuthCredentialService;
+            userInformationService = aUserInformationService;
+            siteSettingsService = aSiteSettingsService;
+        }
+
         public ActionResult Users()
         {
-            //var model = new UserManagement
-            //{
-            //    UserList = userAuthCredentialService.GetUserAuthCredentials().ToList(),
-            //    Roles = roleService.GetRoles().ToList()
-            //};
             ViewBag.showAdminMenu = true;
             String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Users)).Value;
             ViewBag.Message = message;
@@ -92,36 +88,88 @@ namespace Stardome.Controllers
                 {
                     Id = credential.Id,
                     EmailAddress = userInformation.Email,
-                    Name = userInformation.FirstName + " " + userInformation.LastName,
-                    Role = credential.Role.Role1,
+                    FirstName = userInformation.FirstName,
+                    LastName = userInformation.LastName,
+                    Role = credential.Role.Id,
                     Username = credential.Username
                 });
             }
-
             return Json(new { Result = "OK", Records = users, TotalRecordCount = users.Count });
         }
 
-        /*[HttpPost]
-        public JsonResult DeleteUser(int userId)
+        [HttpPost]
+        public JsonResult DeleteUser(User user)
         {
+            try
+            {
+                UserAuthCredential delUser = userAuthCredentialService.GetById(user.Id);
 
+                userInformationService.DeleteAUser(delUser.UserInformations.First());
+                userAuthCredentialService.DeleteAUser(delUser);
+                return Json(new { Result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", ex.Message });
+            }
         }
-        */
-        /*
-         *     [HttpPost]
-    public JsonResult DeleteStudent(int studentId)
-    {
-        try
+
+        [HttpPost]
+        public JsonResult UpdateUser(User user)
         {
-            _repository.StudentRepository.DeleteStudent(studentId);
-            return Json(new { Result = "OK" });
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new { Result = "ERROR", Message = "Form is not valid! Please correct it and try again." });
+                }
+                UserAuthCredential oldUser = userAuthCredentialService.GetById(user.Id);
+                oldUser.Username = user.Username;
+                oldUser.UserInformations.First().FirstName = user.FirstName;
+                oldUser.UserInformations.First().LastName = user.LastName;
+                oldUser.UserInformations.First().Email = user.EmailAddress;
+                oldUser.RoleId = user.Role;
+
+                userAuthCredentialService.UpdateAUser(oldUser);
+                return Json(new { Result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", ex.Message });
+            }
         }
-        catch (Exception ex)
+
+        [HttpPost]
+        public JsonResult CreateUser(User addedUser)
         {
-            return Json(new { Result = "ERROR", Message = ex.Message });
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new { Result = "ERROR", Message = "Form is not valid! Please correct it and try again." });
+                }
+
+                RegisterModel model = new RegisterModel()
+                {
+                    FirstName = addedUser.FirstName,
+                    LastName = addedUser.LastName,
+                    AccountCreatedOn = DateTime.Now,
+                    ConfirmPassword = "deFa8lt",
+                    EmailAddress = addedUser.EmailAddress,
+                    Password = "deFa8lt",
+                    RoleId = addedUser.Role,
+                    UserName = addedUser.Username
+                };
+                AccountController accountController = new AccountController();
+                accountController.Register(model);
+                accountController.LostPasswordHelper(new LostPasswordModel(){Email = model.EmailAddress});
+                return Json(new { Result = "OK", Record = addedUser });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", ex.Message });
+            }
         }
-    }
-         * */
     }
 }
 

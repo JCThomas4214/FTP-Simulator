@@ -4,7 +4,56 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="StardomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StardomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="StardomeModelStoreContainer">
+          <EntitySet Name="Access" EntityType="StardomeModel.Store.Access" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Action" EntityType="StardomeModel.Store.Action" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Files" EntityType="StardomeModel.Store.Files" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Folder" EntityType="StardomeModel.Store.Folder" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Logs" EntityType="StardomeModel.Store.Logs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="StardomeModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SiteSettings" EntityType="StardomeModel.Store.SiteSettings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="StardomeModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAuthCredential" EntityType="StardomeModel.Store.UserAuthCredential" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserInformation" EntityType="StardomeModel.Store.UserInformation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="StardomeModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Access_Folder" Association="StardomeModel.Store.FK_Access_Folder">
+            <End Role="Folder" EntitySet="Folder" />
+            <End Role="Access" EntitySet="Access" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Access_UserAuthCredential" Association="StardomeModel.Store.FK_Access_UserAuthCredential">
+            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
+            <End Role="Access" EntitySet="Access" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_Folder" Association="StardomeModel.Store.FK_Files_Folder">
+            <End Role="Folder" EntitySet="Folder" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_Status" Association="StardomeModel.Store.FK_Files_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Folder_Status" Association="StardomeModel.Store.FK_Folder_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Folder" EntitySet="Folder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_Action" Association="StardomeModel.Store.FK_Logs_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_UserAuthCredential" Association="StardomeModel.Store.FK_Logs_UserAuthCredential">
+            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAuthCredential_Roles" Association="StardomeModel.Store.FK_UserAuthCredential_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInformation_UserAuthCredential" Association="StardomeModel.Store.FK_UserInformation_UserAuthCredential">
+            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
+            <End Role="UserInformation" EntitySet="UserInformation" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Access">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,21 +62,21 @@
           <Property Name="FolderId" Type="int" Nullable="false" />
           <Property Name="DateGiven" Type="datetime" />
           <Property Name="DateTaken" Type="datetime" />
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Action">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Action" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Files">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="FolderId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -39,9 +88,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Path" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="512" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -52,7 +101,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" />
           <Property Name="ActionId" Type="int" Nullable="false" />
@@ -62,32 +111,32 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="SiteSettings">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Value" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Value" Type="varchar" Nullable="false" MaxLength="250" />
           <Property Name="Category" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserAuthCredential">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="PasswordModifiedOn" Type="datetime" />
           <Property Name="LastLoginDateTime" Type="datetime" />
           <Property Name="FailedLoginAttemptDateTime" Type="datetime" />
@@ -98,10 +147,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -118,15 +167,15 @@
           <Property Name="IsConfirmed" Type="bit" />
           <Property Name="LastPasswordFailureDate" Type="datetime" />
           <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
           <Property Name="PasswordChangedDate" Type="datetime" />
-          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
           <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
           <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
         </EntityType>
         <Association Name="FK_Access_Folder">
-          <End Role="Folder" Type="Self.Folder" Multiplicity="1" />
-          <End Role="Access" Type="Self.Access" Multiplicity="*" />
+          <End Role="Folder" Type="StardomeModel.Store.Folder" Multiplicity="1" />
+          <End Role="Access" Type="StardomeModel.Store.Access" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Folder">
               <PropertyRef Name="Id" />
@@ -137,8 +186,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Access_UserAuthCredential">
-          <End Role="UserAuthCredential" Type="Self.UserAuthCredential" Multiplicity="1" />
-          <End Role="Access" Type="Self.Access" Multiplicity="*" />
+          <End Role="UserAuthCredential" Type="StardomeModel.Store.UserAuthCredential" Multiplicity="1" />
+          <End Role="Access" Type="StardomeModel.Store.Access" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserAuthCredential">
               <PropertyRef Name="Id" />
@@ -149,8 +198,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Files_Folder">
-          <End Role="Folder" Type="Self.Folder" Multiplicity="1" />
-          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <End Role="Folder" Type="StardomeModel.Store.Folder" Multiplicity="1" />
+          <End Role="Files" Type="StardomeModel.Store.Files" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Folder">
               <PropertyRef Name="Id" />
@@ -161,8 +210,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Files_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="1" />
-          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <End Role="Status" Type="StardomeModel.Store.Status" Multiplicity="1" />
+          <End Role="Files" Type="StardomeModel.Store.Files" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
               <PropertyRef Name="Id" />
@@ -173,8 +222,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Folder_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="1" />
-          <End Role="Folder" Type="Self.Folder" Multiplicity="*" />
+          <End Role="Status" Type="StardomeModel.Store.Status" Multiplicity="1" />
+          <End Role="Folder" Type="StardomeModel.Store.Folder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
               <PropertyRef Name="Id" />
@@ -185,8 +234,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Logs_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="1" />
-          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <End Role="Action" Type="StardomeModel.Store.Action" Multiplicity="1" />
+          <End Role="Logs" Type="StardomeModel.Store.Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Action">
               <PropertyRef Name="Id" />
@@ -197,8 +246,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Logs_UserAuthCredential">
-          <End Role="UserAuthCredential" Type="Self.UserAuthCredential" Multiplicity="1" />
-          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <End Role="UserAuthCredential" Type="StardomeModel.Store.UserAuthCredential" Multiplicity="1" />
+          <End Role="Logs" Type="StardomeModel.Store.Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserAuthCredential">
               <PropertyRef Name="Id" />
@@ -209,8 +258,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAuthCredential_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="UserAuthCredential" Type="Self.UserAuthCredential" Multiplicity="*" />
+          <End Role="Roles" Type="StardomeModel.Store.Roles" Multiplicity="1" />
+          <End Role="UserAuthCredential" Type="StardomeModel.Store.UserAuthCredential" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="Id" />
@@ -221,8 +270,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserInformation_UserAuthCredential">
-          <End Role="UserAuthCredential" Type="Self.UserAuthCredential" Multiplicity="1" />
-          <End Role="UserInformation" Type="Self.UserInformation" Multiplicity="*" />
+          <End Role="UserAuthCredential" Type="StardomeModel.Store.UserAuthCredential" Multiplicity="1" />
+          <End Role="UserInformation" Type="StardomeModel.Store.UserInformation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserAuthCredential">
               <PropertyRef Name="Id" />
@@ -232,55 +281,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StardomeModelStoreContainer">
-          <EntitySet Name="Access" EntityType="Self.Access" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Folder" EntityType="Self.Folder" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SiteSettings" EntityType="Self.SiteSettings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserAuthCredential" EntityType="Self.UserAuthCredential" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserInformation" EntityType="Self.UserInformation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Access_Folder" Association="Self.FK_Access_Folder">
-            <End Role="Folder" EntitySet="Folder" />
-            <End Role="Access" EntitySet="Access" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Access_UserAuthCredential" Association="Self.FK_Access_UserAuthCredential">
-            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
-            <End Role="Access" EntitySet="Access" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Files_Folder" Association="Self.FK_Files_Folder">
-            <End Role="Folder" EntitySet="Folder" />
-            <End Role="Files" EntitySet="Files" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Files_Status" Association="Self.FK_Files_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Files" EntitySet="Files" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Folder_Status" Association="Self.FK_Folder_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Folder" EntitySet="Folder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Logs_Action" Association="Self.FK_Logs_Action">
-            <End Role="Action" EntitySet="Action" />
-            <End Role="Logs" EntitySet="Logs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Logs_UserAuthCredential" Association="Self.FK_Logs_UserAuthCredential">
-            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
-            <End Role="Logs" EntitySet="Logs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAuthCredential_Roles" Association="Self.FK_UserAuthCredential_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserInformation_UserAuthCredential" Association="Self.FK_UserInformation_UserAuthCredential">
-            <End Role="UserAuthCredential" EntitySet="UserAuthCredential" />
-            <End Role="UserInformation" EntitySet="UserInformation" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>

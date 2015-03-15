@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
-using Microsoft.Web.WebPages.OAuth;
 using Stardome.DomainObjects;
 using Stardome.Repositories;
 using Stardome.Services.Domain;
@@ -248,19 +246,23 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserAuthCredential user;
-                user = userAuthCredentialService.GetByEmail(model.Email);
-                ViewBag.EmailSend = false;
-                if (user != null)
-                {
-                    GenerateAndSendEmail(user.Username, EmailType.ChangePassword);
-                }
-                else // Email not found
-                {
-                    ModelState.AddModelError("", "No user found by that email.");
-                }
+                LostPasswordHelper(model);
             }
             return View(model);
+        }
+
+        public void LostPasswordHelper(LostPasswordModel model)
+        {
+            UserAuthCredential user = userAuthCredentialService.GetByEmail(model.Email);
+            ViewBag.EmailSend = false;
+            if (user != null)
+            {
+                GenerateAndSendEmail(user.Username, EmailType.ChangePassword);
+            }
+            else // Email not found
+            {
+                ModelState.AddModelError("", "No user found by that email.");
+            }
         }
 
 
@@ -281,19 +283,23 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, userAuthCredentialService.EncryptPassword(model.Password));
-                if (resetResponse)
-                {
-
-                    ViewBag.Message = "Successfully Changed";
-                }
-                else
-                {
-                    ViewBag.Message = "Something went horribly wrong!";
-                }
+                ResetPasswordHelper(model);
             }
             return View(model);
+        }
+
+        private void ResetPasswordHelper(ResetPasswordModel model)
+        {
+            bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken,
+                userAuthCredentialService.EncryptPassword(model.Password));
+            if (resetResponse)
+            {
+                ViewBag.Message = "Successfully Changed";
+            }
+            else
+            {
+                ViewBag.Message = "Something went horribly wrong!";
+            }
         }
 
         #region Helpers

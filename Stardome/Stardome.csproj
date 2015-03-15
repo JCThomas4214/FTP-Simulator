@@ -259,10 +259,16 @@
     <Compile Include="Repositories\IFolderRepository.cs" />
     <Compile Include="Repositories\ISiteSettingsRepository.cs" />
     <Compile Include="Repositories\IUserAuthCredentialRepository.cs" />
+    <Compile Include="Repositories\IUserInformationRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\FolderRepository.cs" />
     <Compile Include="Repositories\SiteSettingsRepository.cs" />
     <Compile Include="Repositories\UserAuthCredentialRepository.cs" />
+    <Compile Include="Repositories\UserInformationRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Application\AesEncryption.cs" />
     <Compile Include="Services\Domain\FileService.cs" />
     <Compile Include="Services\Domain\FolderService.cs" />
@@ -271,9 +277,15 @@
     <Compile Include="Services\Domain\IFolderService.cs" />
     <Compile Include="Services\Domain\ISiteSettingsService.cs" />
     <Compile Include="Services\Domain\IUserAuthCredentialService.cs" />
+    <Compile Include="Services\Domain\IUserInformationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Domain\RoleService.cs" />
     <Compile Include="Services\Domain\SiteSettingsService.cs" />
     <Compile Include="Services\Domain\UserAuthCredentialService.cs" />
+    <Compile Include="Services\Domain\UserInformationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\jquery-ui.css" />

@@ -11,5 +11,7 @@ namespace Stardome.Services.Domain
         string EncryptPassword(string password);
         string DecryptPassword(string password);
         IEnumerable<UserAuthCredential> GetUserAuthCredentials();
+        void DeleteAUser(UserAuthCredential aUser);
+        void UpdateAUser(UserAuthCredential aUser);
     }
 }

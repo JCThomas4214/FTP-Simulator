@@ -11,7 +11,7 @@
                 listAction: '@Url.Action("GetUsers", "Admin")',
                 deleteAction: '@Url.Action("DeleteUser", "Admin")',
                 updateAction: '@Url.Action("UpdateUser", "Admin")',
-                createAction: '@Url.Action("Register", "Account")',
+                createAction: '@Url.Action("CreateUser", "Admin")',
             },
             fields: {
                 Id: {
@@ -20,8 +20,12 @@
                     edit: false,
                     list: false
                 },
-                Name: {
-                    title: 'Name',
+                FirstName: {
+                    title: 'First Name',
+                    width: '23%'
+                },
+                LastName: {
+                    title: 'Last Name',
                     width: '23%'
                 },
                 EmailAddress: {
