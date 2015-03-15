@@ -38,7 +38,6 @@ namespace Stardome.Filters
                         }
                     }
                     
-                    //WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                     WebSecurity.InitializeDatabaseConnection("StardomeLogin", "UserAuthCredential", "Id", "Username", autoCreateTables: false);
                 }
                 catch (Exception ex)
