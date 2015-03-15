@@ -4,11 +4,12 @@ using Stardome.DomainObjects;
 
 namespace Stardome.Services.Domain
 {
-    interface ISiteSettingsService
+    public interface ISiteSettingsService
     {
 
         SiteSetting GetById(int aSiteSettingId);
         IEnumerable<SiteSetting> GetAll();
         String UpdateSiteSettings(List<SiteSetting> lstSiteSettings);
+        SiteSetting FindSiteSetting(String header);
     }
 }

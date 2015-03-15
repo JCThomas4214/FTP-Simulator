@@ -13,7 +13,7 @@ namespace Stardome.Controllers
     {
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly IUserInformationService userInformationService;
-        private readonly SiteSettingsService siteSettingsService;
+        private readonly ISiteSettingsService siteSettingsService;
 
         public AdminController()
         {
@@ -22,7 +22,7 @@ namespace Stardome.Controllers
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
         }
 
-        public AdminController(UserAuthCredentialService aUserAuthCredentialService, UserInformationService aUserInformationService, SiteSettingsService aSiteSettingsService)
+        public AdminController(IUserAuthCredentialService aUserAuthCredentialService, IUserInformationService aUserInformationService, ISiteSettingsService aSiteSettingsService)
         {
             userAuthCredentialService = aUserAuthCredentialService;
             userInformationService = aUserInformationService;
@@ -31,19 +31,15 @@ namespace Stardome.Controllers
 
         public ActionResult Users()
         {
-            ViewBag.showAdminMenu = true;
-            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Users)).Value;
-            ViewBag.Message = message;
+            GetValue(Headers.Users);
 
             return View();
         }
 
         public ActionResult Content()
         {
-            ViewBag.showAdminMenu = true;
-            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Content)).Value;
-            ViewBag.Message = message;
-            
+
+            GetValue(Headers.Content);
            
             return View();
         }
@@ -52,9 +48,8 @@ namespace Stardome.Controllers
         {
             ViewBag.UpdateMessage = "";
             var model = siteSettingsService.GetAll().ToList();
-            ViewBag.showAdminMenu = true;
-            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Settings)).Value;
-            ViewBag.Message = message;
+
+            GetValue(Headers.Settings);
             
             return View(model);
         }
@@ -69,10 +64,15 @@ namespace Stardome.Controllers
             }
 
             var model = siteSettingsService.GetAll().ToList();
-            ViewBag.showAdminMenu = true;
-            String message = siteSettingsService.GetAll().FirstOrDefault(aSiteSetting => aSiteSetting.Name.Equals(Headers.Settings)).Value;
-            ViewBag.Message = message;
+            GetValue(Headers.Settings);
             return View(model);
+        }
+
+        private void GetValue(String header)
+        {
+            ViewBag.showAdminMenu = true;
+            String message = siteSettingsService.FindSiteSetting(header).Value;
+            ViewBag.Message = message;
         }
 
         [HttpPost]

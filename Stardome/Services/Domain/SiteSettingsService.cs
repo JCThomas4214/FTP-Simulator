@@ -42,5 +42,10 @@ namespace Stardome.Services.Domain
             }
             return "No changes were made.";
         }
+
+        public SiteSetting FindSiteSetting(String header)
+        {
+            return repository.FindOne(aSiteSetting => aSiteSetting.Name.Equals(header));
+        }
     }
 }
