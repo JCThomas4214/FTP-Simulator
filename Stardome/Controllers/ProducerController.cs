@@ -44,7 +44,7 @@ namespace Stardome.Controllers
             }
 
         }
-
+        [HttpPost]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> files)
         {
            
@@ -57,11 +57,12 @@ namespace Stardome.Controllers
                     if (!allowedExtensions.Contains(extension))
                     {
                         ViewBag.Message = "Incorrect file type";
+                        //Files with an extension that we don't allow, won't be uploaded
                     }
 
 
                     else try
-                        {
+                        {   //Upload files to the folder TestUploads. If the folder doesn't exist, it creates it.
                             string filePath = "~/TestUploads";
                             bool exists = System.IO.Directory.Exists(Server.MapPath(filePath));
                             if (!exists) { System.IO.Directory.CreateDirectory(Server.MapPath(filePath)); }
