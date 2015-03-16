@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using Stardome.DomainObjects;
@@ -15,17 +16,20 @@ namespace Stardome.Controllers
     {
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly ISiteSettingsService siteSettingsService;
+        private readonly IRoleService roleService;
 
         public AdminController()
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
+            roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
         }
 
-        public AdminController(IUserAuthCredentialService aUserAuthCredentialService, ISiteSettingsService aSiteSettingsService)
+        public AdminController(IUserAuthCredentialService aUserAuthCredentialService, ISiteSettingsService aSiteSettingsService, IRoleService aRoleService)
         {
             userAuthCredentialService = aUserAuthCredentialService;
             siteSettingsService = aSiteSettingsService;
+            roleService = aRoleService;
         }
 
         public ActionResult Users()
@@ -130,6 +134,13 @@ namespace Stardome.Controllers
             {
                 return Json(new { Result = "ERROR", Message = "Unable to update user" });
             }
+        }
+
+        [HttpPost]
+        public JsonResult GetRoles()
+        {
+            var roles = roleService.GetRoles().Select(aRole => new { DisplayText = aRole.Role1, Value = aRole.Id});
+            return Json(new { Result = "OK", Options = roles });
         }
 
         private void UpdateUserRole(User user)

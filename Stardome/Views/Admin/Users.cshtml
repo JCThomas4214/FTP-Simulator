@@ -39,11 +39,8 @@
                 Role: {
                     title: 'Role',
                     list: true,
-                    options: {
-                        '1': 'Admin',
-                        '2': 'Producer',
-                        '3': 'User',
-                        '4': 'InActive'
+                    options: function () {
+                        return '@Url.Action("GetRoles", "Admin")';
                     }
                 }
             }
@@ -51,6 +48,7 @@
 
         $('#UserTableContainer').jtable('load');
     });
+
 </script>
 
 @if (Request.IsAuthenticated == false)
