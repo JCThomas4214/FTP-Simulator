@@ -284,7 +284,7 @@ namespace Stardome.Controllers
                     return RedirectToAction("Users", "Admin");
 
                 case 2: // Producers
-                    return RedirectToAction("Index", "Producer");
+                    return RedirectToAction("Upload", "Producer");
 
                 case 3: // Clients
                     return RedirectToAction("Index", "Clients");
