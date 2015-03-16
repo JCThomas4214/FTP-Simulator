@@ -21,5 +21,10 @@ namespace Stardome.Services.Domain
         {
             repository.Delete(aUser);
         }
+
+        public void AddAUser(UserInformation aUser)
+        {
+            repository.Save(aUser);
+        }
     }
 }

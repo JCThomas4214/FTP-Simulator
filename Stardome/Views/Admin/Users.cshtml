@@ -11,7 +11,7 @@
                 listAction: '@Url.Action("GetUsers", "Admin")',
                 deleteAction: '@Url.Action("DeleteUser", "Admin")',
                 updateAction: '@Url.Action("UpdateUser", "Admin")',
-                createAction: '@Url.Action("CreateUser", "Admin")',
+                createAction: '@Url.Action("Register", "Account")',
             },
             fields: {
                 Id: {
@@ -39,7 +39,6 @@
                 Role: {
                     title: 'Role',
                     list: true,
-                    //type: 'radiobutton',
                     options: {
                         '1': 'Admin',
                         '2': 'Producer',
@@ -69,10 +68,4 @@
         </div>
     </section>
 }
-<p>
-    @Html.ActionLink("Register", "Register", "Account") Create a New Account.
-</p>
-
-<h2>Landing Page for Admins to Manage User accounts</h2>
-
 <div id="UserTableContainer"></div>

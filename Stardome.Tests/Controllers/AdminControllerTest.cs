@@ -14,11 +14,10 @@ namespace Stardome.Tests.Controllers
     public class AdminControllerTest
     {
         static readonly Mock<IUserAuthCredentialService> aMockUserAuthCredentialService = new Mock<IUserAuthCredentialService>();
-        static readonly Mock<IUserInformationService> aMockUserInformationService = new Mock<IUserInformationService>();
         static readonly Mock<ISiteSettingsService> aMockSiteSettingsService = new Mock<ISiteSettingsService>();
 
 
-        AdminController controller = new AdminController(aMockUserAuthCredentialService.Object, aMockUserInformationService.Object, aMockSiteSettingsService.Object);
+        AdminController controller = new AdminController(aMockUserAuthCredentialService.Object, aMockSiteSettingsService.Object);
         [TestMethod]
         public void Users()
         {

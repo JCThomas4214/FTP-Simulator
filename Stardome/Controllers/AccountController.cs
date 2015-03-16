@@ -19,6 +19,8 @@ namespace Stardome.Controllers
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly IRoleService roleService;
         private readonly SiteSettingsService siteSettingsService;
+        private const string defaultPassword = "deFa8lt";
+
         public AccountController(IUserAuthCredentialService aUserAuthCredentialService, IRoleService aRoleService)
         {
             userAuthCredentialService = aUserAuthCredentialService;
@@ -27,7 +29,8 @@ namespace Stardome.Controllers
 
         public AccountController()
         {
-            userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
+            userAuthCredentialService =
+                new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
         }
@@ -58,7 +61,7 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            
+
             string password = userAuthCredentialService.EncryptPassword(model.Password);
 
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, password, model.RememberMe))
@@ -84,79 +87,59 @@ namespace Stardome.Controllers
         }
 
         //
-        // GET: /Account/Register
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            ViewBag.showAdminMenu = true;
-            ViewBag.Roles = roleService.GetRoles();
-
-            return View();
-        }
-
-        //
         // POST: /Account/Register
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(User model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Attempt to register the user
-                try
+                if (ModelState.IsValid)
                 {
-                    try
+                    // Attempt to register the user
+
+                    string password = userAuthCredentialService.EncryptPassword(defaultPassword);
+
+                    var userProfile = WebSecurity.CreateUserAndAccount(model.Username, password, new
                     {
-                        string password = userAuthCredentialService.EncryptPassword(model.Password);
 
-                        var userProfile = WebSecurity.CreateUserAndAccount(model.UserName, password, new
+                        AccountCreatedOn = DateTime.Now,
+                        RoleId = model.Role,
+
+
+                    });
+
+                    if (userProfile == null)
+                        //This way Userdetail is only created if UserProfile exists so that it can retrieve the foreign key
+                    {
+                        UserInformation UserInformation = new UserInformation();
+                        UserInformation.UserId = WebSecurity.GetUserId(model.Username);
+                        UserInformation.FirstName = model.FirstName;
+                        UserInformation.LastName = model.LastName;
+                        UserInformation.Email = model.EmailAddress;
+                        UserInformation.CreatedOn = DateTime.Now;
+
+                        using (var dbCtx = new StardomeEntitiesCS())
                         {
-
-                            AccountCreatedOn = DateTime.Now,
-                            RoleId = model.RoleId,
-                            
-
-                        });
-
-                        if (userProfile == null) //This way Userdetail is only created if UserProfile exists so that it can retrieve the foreign key
-                        {
-                            UserInformation UserInformation = new UserInformation();
-                            UserInformation.UserId = WebSecurity.GetUserId(model.UserName);
-                            UserInformation.FirstName = model.FirstName;
-                            UserInformation.LastName = model.LastName;
-                            UserInformation.Email = model.EmailAddress;
-                            UserInformation.CreatedOn = DateTime.Now;
-
-                            using (var dbCtx = new StardomeEntitiesCS())
-                            {
-                                dbCtx.UserInformations.Add(UserInformation);
-                                dbCtx.SaveChanges();
-                            }
-                            GenerateAndSendEmail(model.UserName, EmailType.AccountVerify);
+                            dbCtx.UserInformations.Add(UserInformation);
+                            dbCtx.SaveChanges();
                         }
+                        GenerateAndSendEmail(model.Username, EmailType.AccountVerify);
+                        return Json(new {Result = "OK", Record = model});
                     }
-                    catch (Exception ex)
-                    {
-                        ModelState.AddModelError("", ex.Message);
-                    }
-                    // What happens here?
-                    return RedirectToAction("Users", "Admin");
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    throw new Exception();
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            catch (Exception)
+            {
+            }
+            return Json(new { Result = "ERROR", Message = "Unable to create user" });
         }
 
 
-        //
+
+    //
         // GET: /Account/Manage
 
         public ActionResult Manage(ManageMessageId? message)
@@ -246,25 +229,19 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                LostPasswordHelper(model);
+                UserAuthCredential user = userAuthCredentialService.GetByEmail(model.Email);
+                ViewBag.EmailSend = false;
+                if (user != null)
+                {
+                    GenerateAndSendEmail(user.Username, EmailType.ChangePassword);
+                }
+                else // Email not found
+                {
+                    ModelState.AddModelError("", "No user found by that email.");
+                }
             }
             return View(model);
         }
-
-        public void LostPasswordHelper(LostPasswordModel model)
-        {
-            UserAuthCredential user = userAuthCredentialService.GetByEmail(model.Email);
-            ViewBag.EmailSend = false;
-            if (user != null)
-            {
-                GenerateAndSendEmail(user.Username, EmailType.ChangePassword);
-            }
-            else // Email not found
-            {
-                ModelState.AddModelError("", "No user found by that email.");
-            }
-        }
-
 
         // GET: /Account/ResetPassword
         [AllowAnonymous]
@@ -283,25 +260,20 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                ResetPasswordHelper(model);
+                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken,
+                userAuthCredentialService.EncryptPassword(model.Password));
+                if (resetResponse)
+                {
+                    ViewBag.Message = "Successfully Changed";
+                }
+                else
+                {
+                    ViewBag.Message = "Something went horribly wrong!";
+                }
             }
             return View(model);
         }
-
-        private void ResetPasswordHelper(ResetPasswordModel model)
-        {
-            bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken,
-                userAuthCredentialService.EncryptPassword(model.Password));
-            if (resetResponse)
-            {
-                ViewBag.Message = "Successfully Changed";
-            }
-            else
-            {
-                ViewBag.Message = "Something went horribly wrong!";
-            }
-        }
-
+        
         #region Helpers
 
         public ActionResult RedirectToLocal(int roleId)
@@ -353,12 +325,12 @@ namespace Stardome.Controllers
             if (emailType==EmailType.AccountVerify)
             {
                  subject = "Welcome to stardome.com. Activate your Account";
-                 body += siteSettingsService.GetById(6).Value.ToString();  
+                 body += siteSettingsService.GetById(6).Value;  
             }
             else if (emailType==EmailType.ChangePassword)
             {
                 subject = "Reset your password for stardome.com";
-                body += siteSettingsService.GetById(7).Value.ToString(); 
+                body += siteSettingsService.GetById(7).Value; 
             }
             body += "<\br> You link: " + resetLink;
 

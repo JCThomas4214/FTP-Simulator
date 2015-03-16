@@ -14,12 +14,14 @@
         </div>
     </section>
 }
+
+<div style="horiz-align:center; width: 800px">
 @using (Html.BeginForm())
 {
     <fieldset>
-        <legend>Registration Form</legend>
         <section>
-            <table>
+            
+                <table style="horiz-align:center;">
                 @Html.ValidationSummary()
 
 
@@ -46,6 +48,7 @@
                     </tr>
                 }
             </table>
+            
             <div style="width:650px; clear:left; float:left;">
                 <input type="submit" value="Update" />
             </div>
@@ -54,3 +57,4 @@
     <p class="message-success">
         @Html.Label("lblUpdateMessage", (string)ViewBag.UpdateMessage) </p>
 }
+</div>

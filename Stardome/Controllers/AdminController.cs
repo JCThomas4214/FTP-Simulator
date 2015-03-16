@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using Stardome.DomainObjects;
 using Stardome.Models;
 using Stardome.Repositories;
 using Stardome.Services.Domain;
 using System.Collections.Generic;
+using WebMatrix.WebData;
 
 namespace Stardome.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IUserAuthCredentialService userAuthCredentialService;
-        private readonly IUserInformationService userInformationService;
         private readonly ISiteSettingsService siteSettingsService;
 
         public AdminController()
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
-            userInformationService = new UserInformationService(new UserInformationRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
         }
 
-        public AdminController(IUserAuthCredentialService aUserAuthCredentialService, IUserInformationService aUserInformationService, ISiteSettingsService aSiteSettingsService)
+        public AdminController(IUserAuthCredentialService aUserAuthCredentialService, ISiteSettingsService aSiteSettingsService)
         {
             userAuthCredentialService = aUserAuthCredentialService;
-            userInformationService = aUserInformationService;
             siteSettingsService = aSiteSettingsService;
         }
 
@@ -68,13 +67,6 @@ namespace Stardome.Controllers
             return View(model);
         }
 
-        private void GetValue(String header)
-        {
-            ViewBag.showAdminMenu = true;
-            String message = siteSettingsService.FindSiteSetting(header).Value;
-            ViewBag.Message = message;
-        }
-
         [HttpPost]
         public JsonResult GetUsers()
         {
@@ -83,16 +75,19 @@ namespace Stardome.Controllers
 
             foreach (UserAuthCredential credential in userAuthCredentials)
             {
-                UserInformation userInformation = credential.UserInformations.First();
-                users.Add(new User
+                UserInformation userInformation = credential.UserInformations.FirstOrDefault();
+                if (userInformation != null && credential.Role.Role1 != Enums.Roles.InActive.ToString())
                 {
-                    Id = credential.Id,
-                    EmailAddress = userInformation.Email,
-                    FirstName = userInformation.FirstName,
-                    LastName = userInformation.LastName,
-                    Role = credential.Role.Id,
-                    Username = credential.Username
-                });
+                    users.Add(new User
+                    {
+                        Id = credential.Id,
+                        EmailAddress = userInformation.Email,
+                        FirstName = userInformation.FirstName,
+                        LastName = userInformation.LastName,
+                        Role = credential.Role.Id,
+                        Username = credential.Username
+                    });
+                }
             }
             return Json(new { Result = "OK", Records = users, TotalRecordCount = users.Count });
         }
@@ -102,15 +97,13 @@ namespace Stardome.Controllers
         {
             try
             {
-                UserAuthCredential delUser = userAuthCredentialService.GetById(user.Id);
-
-                userInformationService.DeleteAUser(delUser.UserInformations.First());
-                userAuthCredentialService.DeleteAUser(delUser);
+                user.Role = (int) Enums.Roles.InActive;
+                UpdateUserRole(user);
                 return Json(new { Result = "OK" });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { Result = "ERROR", ex.Message });
+                return Json(new { Result = "ERROR", Message = "Unable to delete user" });
             }
         }
 
@@ -133,42 +126,24 @@ namespace Stardome.Controllers
                 userAuthCredentialService.UpdateAUser(oldUser);
                 return Json(new { Result = "OK" });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { Result = "ERROR", ex.Message });
+                return Json(new { Result = "ERROR", Message = "Unable to update user" });
             }
         }
 
-        [HttpPost]
-        public JsonResult CreateUser(User addedUser)
+        private void UpdateUserRole(User user)
         {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return Json(new { Result = "ERROR", Message = "Form is not valid! Please correct it and try again." });
-                }
+            UserAuthCredential oldUser = userAuthCredentialService.GetById(user.Id);
+            oldUser.RoleId = user.Role;
 
-                RegisterModel model = new RegisterModel()
-                {
-                    FirstName = addedUser.FirstName,
-                    LastName = addedUser.LastName,
-                    AccountCreatedOn = DateTime.Now,
-                    ConfirmPassword = "deFa8lt",
-                    EmailAddress = addedUser.EmailAddress,
-                    Password = "deFa8lt",
-                    RoleId = addedUser.Role,
-                    UserName = addedUser.Username
-                };
-                AccountController accountController = new AccountController();
-                accountController.Register(model);
-                accountController.LostPasswordHelper(new LostPasswordModel(){Email = model.EmailAddress});
-                return Json(new { Result = "OK", Record = addedUser });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Result = "ERROR", ex.Message });
-            }
+            userAuthCredentialService.UpdateAUser(oldUser);
+        }
+
+        private void GetValue(String header)
+        {
+            ViewBag.showAdminMenu = true;
+            ViewBag.Message = siteSettingsService.FindSiteSetting(header).Value;
         }
     }
 }

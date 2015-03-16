@@ -494,7 +494,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserInformation_UserAuthCredential">
-          <End Role="UserAuthCredential" Type="Self.UserAuthCredential" Multiplicity="1" />
+          <End Role="UserAuthCredential" Type="Self.UserAuthCredential" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UserInformation" Type="Self.UserInformation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserAuthCredential">

@@ -6,5 +6,6 @@ namespace Stardome.Services.Domain
     {
         UserInformation GetById(int aUserInformationId);
         void DeleteAUser(UserInformation aUser);
+        void AddAUser(UserInformation aUser);
     }
 }

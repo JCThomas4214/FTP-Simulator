@@ -63,6 +63,7 @@ namespace Stardome.Repositories
             if (obj != null)
             {
                 GetObjectSet().Remove(obj);
+                context.SaveChanges();
             }
             else
             {
