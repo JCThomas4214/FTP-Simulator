@@ -7,9 +7,9 @@
     Response.Redirect("~/Account/Login");
 
 }
-@if (Model.RoleId != (int)Enums.Roles.Admin || Model.RoleId != (int)Enums.Roles.Producer || Model.RoleId != (int)Enums.Roles.User)
+@if (Model.RoleId != (int)Enums.Roles.Admin && Model.RoleId != (int)Enums.Roles.Producer && Model.RoleId != (int)Enums.Roles.User)
 {
-    Response.Redirect("~/Admin/Content");
+    Response.Redirect("~/Account/Login");
 }
     @section featured {
         <section class="featured">

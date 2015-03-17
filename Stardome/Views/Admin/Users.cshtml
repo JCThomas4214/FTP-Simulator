@@ -1,5 +1,5 @@
 ﻿@using Stardome.DomainObjects
-@Model Stardome.Models.MainModel
+@model Stardome.Models.MainModel
 @if (Model.RoleId != (int) Enums.Roles.Admin)
 {
     Response.Redirect("~/Admin/Content");
