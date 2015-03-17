@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Stardome.DomainObjects;
 
 namespace Stardome.Models
 {
@@ -19,8 +20,7 @@ namespace Stardome.Models
 
     public class SettingModel : MainModel
     {
-        public List<string> Categories { get; set; }
-        public List<Tuple<string, string, string, int>> Settings { get; set; } 
+        public List<SiteSetting> Settings { get; set; } 
     }
 
     public class ContentModel : MainModel

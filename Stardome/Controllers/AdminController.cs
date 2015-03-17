@@ -56,33 +56,24 @@ namespace Stardome.Controllers
 
         public ActionResult Settings()
         {
+
             ViewBag.UpdateMessage = String.Empty;
-            List<SiteSetting> list = siteSettingsService.GetAll().ToList();
-            List<string> categories = list.Select(aSetting => aSetting.Category).Distinct().ToList();
-            List<Tuple<string, string, string, int>> data = list.OrderBy(aSetting => aSetting.Name).Select(aSetting => new Tuple<string, string, string, int>(aSetting.Category, aSetting.Name, aSetting.Value, aSetting.Id)).ToList();
             
-            SettingModel model = new SettingModel{
-                RoleId = GetUserId(),
-                Categories = categories,
-                Settings = data
-            };
-            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            GetValue(Headers.Settings);
-            
+            SettingModel model = SettingsHelper();
+
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Settings(List<SiteSetting> lstSiteSettings)
+        public ActionResult Settings(SettingModel settingModel)
         {
-            ViewBag.UpdateMessage = "";
+            ViewBag.UpdateMessage = String.Empty;
             if (ModelState.IsValid)
             {
-                ViewBag.UpdateMessage = siteSettingsService.UpdateSiteSettings(lstSiteSettings);
+                ViewBag.UpdateMessage = siteSettingsService.UpdateSiteSettings(settingModel.Settings);
             }
 
-            var model = siteSettingsService.GetAll().ToList();
-            GetValue(Headers.Settings);
+            SettingModel model = SettingsHelper();
             return View(model);
         }
 
@@ -201,6 +192,20 @@ namespace Stardome.Controllers
         private void GetValue(String header)
         {
             ViewBag.Message = siteSettingsService.FindSiteSetting(header).Value;
+        }
+
+        private SettingModel SettingsHelper()
+        {
+            List<SiteSetting> list = siteSettingsService.GetAll().OrderBy(aSettings => aSettings.Category).ToList();
+            
+            SettingModel model = new SettingModel
+            {
+                RoleId = GetUserId(),
+                Settings = list
+            };
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
+            GetValue(Headers.Settings);
+            return model;
         }
     }
 }

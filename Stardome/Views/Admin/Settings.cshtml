@@ -1,6 +1,5 @@
 ﻿@using Stardome.DomainObjects
-@model Stardome.Models.SettingModel
-
+﻿@model Stardome.Models.SettingModel
 @if (Request.IsAuthenticated == false)
 {
     Response.Redirect("~/Account/Login");
@@ -15,7 +14,6 @@
             <hgroup class="title">
                 <h1>@ViewBag.Message</h1>
             </hgroup>
-
         </div>
     </section>
 }
@@ -25,39 +23,37 @@
 {
     <fieldset>
         <section>
-            
                 <table style="margin:0 auto; align=center;">
                 @Html.ValidationSummary()
 
-
-                @foreach (string category in Model.Categories)
-                {
-                    <tr style="border-width: 2px; border-bottom-width:2px; border-bottom-color:black; border-bottom-style: solid;">
-                        <td>
-                            <h3>
-                                @Html.DisplayFor(m => category)
-                                @Html.HiddenFor(m => category)
-                            </h3>
-                        </td>
-                        <td></td>
-                    </tr>
-                    foreach (var setting in Model.Settings.Where(aSetting => aSetting.Item1.Equals(category)))
-                    {
-                        <tr>
-                        <td>
-                            <b>
-                                @Html.DisplayFor(m => setting.Item2)
-                                @Html.HiddenFor(m => setting.Item2)
-                                @Html.HiddenFor(m => setting.Item4)
-                            </b>
-                        </td>
-                        <td>@Html.TextBoxFor(m => setting.Item3)
-                        </td>
-                    </tr>
-                    }
+                
+                    @for (int i = 0; i < Model.Settings.Count; i++){
                     
-                }
-            </table>
+                        <tr style="border-width: 2px; border-bottom-width:2px; border-bottom-color:black; border-bottom-style: solid;">
+                            @if (i == 0 || (i > 0 && Model.Settings[i].Category != Model.Settings[i - 1].Category)){
+
+                                <td colspan="2">
+                                    <h3>
+                                        @Html.DisplayFor(m => Model.Settings[i].Category)
+                                        @Html.HiddenFor(m => Model.Settings[i].Category)
+                                    </h3>
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>
+                                    @Html.DisplayFor(m => Model.Settings[i].Name)
+                                    @Html.HiddenFor(m => Model.Settings[i].Name)
+                                    @Html.HiddenFor(m => Model.Settings[i].Id)
+                                    @Html.HiddenFor(m => Model.Settings[i].Category)
+                                </b>
+                            </td>
+                            <td>@Html.TextBoxFor(m => Model.Settings[i].Value)
+                            </td>
+                        </tr>
+                    }
+                </table>
             
             <div style="width:650px; clear:left; float:left;">
                 <input type="submit" value="Update" />
