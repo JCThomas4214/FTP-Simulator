@@ -47,26 +47,24 @@
     <h2>Files</h2>
     <div id="MainTree"></div>
     
-    @using (Html.BeginForm("Upload", "Producer", FormMethod.Post,
-                        new { enctype = "multipart/form-data", /*selectPath = "C:/Users/" */}))
+
+    @using (Html.BeginForm("Upload", "Producer", new { selectPath = "~/TestUploads" },
+    FormMethod.Post, new { enctype = "multipart/form-data", }))
     {
         <label for="file">Upload File</label>
         <input type="file" name="files" multiple="multiple" /><br><br>
-        //<input type="text" name=" selectPath" data ="C:/Users"/><br><br>
-        <input type="submit" value="Upload Selected Files" /><br><br>
+        <input type="submit" value="Upload Selected Files" /><br>
         @ViewBag.Message<br>
-        @ViewBag.Uploaded<br>
-        @ViewBag.Existing<br>
-        @ViewBag.Incorrect
        
     }
+    
 
-    <!-- Replace #'s with AT symbol
-        #model List<string>
-    #foreach (var element in Model)
+    <!-- Replace #'s with AT symbol -->
+    @model List<string>
+    @foreach (var element in Model)
     {
-        <p>#Html.DisplayFor(m => element)</p>
-    } -->
+        <p>@Html.DisplayFor(m => element)</p>
+    } 
 
     <!--#foreach (string results in ViewBag.Results)
     {

@@ -47,8 +47,7 @@ namespace Stardome.Controllers
 
         }
 
-        
-
+     
         [HttpPost]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> files, string selectPath)
         {
@@ -71,7 +70,7 @@ namespace Stardome.Controllers
 
                     else try
                         {   //Upload files to the folder TestUploads. If the folder doesn't exist, it creates it.
-                            string filePath = "~/TestUploads";
+                            string filePath = selectPath;
                             bool exists = System.IO.Directory.Exists(Server.MapPath(filePath));
                             if (!exists) { System.IO.Directory.CreateDirectory(Server.MapPath(filePath)); }
                             string path = Path.Combine(Server.MapPath(filePath),
@@ -101,41 +100,43 @@ namespace Stardome.Controllers
             if (existingFiles > 0)
             {
                 if (existingFiles == 1)
-                    ViewBag.Existing = "1 file already exists. Please rename it.";
-                    //results.Add(String.Format("1 file already exists. Please rename it."));
+                    //ViewBag.Existing = "1 file already exists. Please rename it.";
+                    results.Add(String.Format("1 file already exists. Please rename it."));
                 else
-                    ViewBag.Existing = existingFiles + " files already exist. Please rename them.";
-                    //results.Add(String.Format(existingFiles + " files already exist. Please rename them."));
+                    //ViewBag.Existing = existingFiles + " files already exist. Please rename them.";
+                    results.Add(String.Format(existingFiles + " files already exist. Please rename them."));
                                      
             }
 
             if (incorrectFiles > 0)
             {
                 if (incorrectFiles == 1)
-                    ViewBag.Incorrect = " 1 file is of the wrong type.";
-                    //results.Add(String.Format(" 1 file is of the wrong type."));
+                    //ViewBag.Incorrect = " 1 file is of the wrong type.";
+                    results.Add(String.Format(" 1 file is of the wrong type."));
                 else
-                    ViewBag.Incorrect = incorrectFiles + " files are of the wrong type.";
-                    //results.Add(String.Format(incorrectFiles + " files are of the wrong type."));
+                    //ViewBag.Incorrect = incorrectFiles + " files are of the wrong type.";
+                    results.Add(String.Format(incorrectFiles + " files are of the wrong type."));
             }
 
             if (uploadedFiles == 1)
-                ViewBag.Uploaded = " 1 file uploaded successfully.";
-            //results.Add(String.Format(" 1 file uploaded successfully."));
+                //ViewBag.Uploaded = " 1 file uploaded successfully.";
+            results.Add(String.Format(" 1 file uploaded successfully."));
             else
-                ViewBag.Uploaded = uploadedFiles + " files uploaded successfully.";
-                //results.Add(String.Format(uploadedFiles + " files uploaded successfully."));
+                //ViewBag.Uploaded = uploadedFiles + " files uploaded successfully.";
+                results.Add(String.Format(uploadedFiles + " files uploaded successfully."));
             //string[] resultArray = results.ToArray();
             //ViewBag.Results = resultArray;
              
+            //return View();
+            ViewBag.Message = "Uploading to " + selectPath;
             return View(results);
-            //return View(results);
         }
 
         public ActionResult Upload()
         {
+            List<string> results = new List<string>();
             ViewBag.showAdminMenu = false;
-            return View();
+            return View(results);
 
 
 
