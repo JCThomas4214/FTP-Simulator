@@ -66,60 +66,6 @@ namespace Stardome.Models
 
     }
 
-    public class RegisterModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "First Name")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Last Name")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string LastName { get; set; }
-
-        
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email Address")]
-        [StringLength(100, ErrorMessage = "The {0} cannot be empty.")]
-        public string EmailAddress { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "AccountCreatedOn")]
-        public DateTime AccountCreatedOn { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "UserId")]
-        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public Int32 UserId { get; set; }
-        
-        [DataType(DataType.Text)]
-        [Display(Name = "RoleId")]
-        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public Int32 RoleId { get; set; }
-
-
-
-    }
-
     public class LostPasswordModel
     {
         [Required(ErrorMessage = "We need your email to send you a reset link!")]

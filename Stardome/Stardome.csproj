@@ -250,7 +250,7 @@
     </Compile>
     <Compile Include="Infrastructure\Repository\IObjectRepository.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Structure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseContentRepository.cs" />
@@ -418,6 +418,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryFileTree.aspx" />
     <Content Include="Scripts\jsTreeScript\jquery.easing.js" />
     <Content Include="Scripts\jsTreeScript\jqueryFileTree.js" />
     <Content Include="Scripts\jsTreeScript\jstree.js" />
@@ -565,8 +566,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Clients\Index.cshtml" />
-    <Content Include="Views\Producer\Index.cshtml" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.less" />
     <Content Include="Scripts\jtable\themes\jtable_theme_base.less" />
@@ -603,6 +602,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Clients\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Headers.resx">

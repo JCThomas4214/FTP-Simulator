@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
-using System.Web.Security;
+using Microsoft.Ajax.Utilities;
 using Stardome.DomainObjects;
 using Stardome.Models;
 using Stardome.Repositories;
 using Stardome.Services.Domain;
 using System.Collections.Generic;
-using WebMatrix.WebData;
 
 namespace Stardome.Controllers
 {
@@ -34,24 +32,41 @@ namespace Stardome.Controllers
 
         public ActionResult Users()
         {
+            MainModel model = new MainModel
+            {
+                RoleId = GetUserId()
+            };
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             GetValue(Headers.Users);
-
-            return View();
+            return View(model);
         }
 
         public ActionResult Content()
         {
-
+            ContentModel model = new ContentModel
+            {
+                RootPath = GetMainPath(GetUserId()),
+                RoleId = GetUserId()
+            };
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             GetValue(Headers.Content);
            
-            return View();
+            return View(model);
         }
 
         public ActionResult Settings()
         {
-            ViewBag.UpdateMessage = "";
-            var model = siteSettingsService.GetAll().ToList();
-
+            ViewBag.UpdateMessage = String.Empty;
+            List<SiteSetting> list = siteSettingsService.GetAll().ToList();
+            List<string> categories = list.Select(aSetting => aSetting.Category).Distinct().ToList();
+            List<Tuple<string, string, string, int>> data = list.OrderBy(aSetting => aSetting.Name).Select(aSetting => new Tuple<string, string, string, int>(aSetting.Category, aSetting.Name, aSetting.Value, aSetting.Id)).ToList();
+            
+            SettingModel model = new SettingModel{
+                RoleId = GetUserId(),
+                Categories = categories,
+                Settings = data
+            };
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             GetValue(Headers.Settings);
             
             return View(model);
@@ -88,7 +103,7 @@ namespace Stardome.Controllers
                         EmailAddress = userInformation.Email,
                         FirstName = userInformation.FirstName,
                         LastName = userInformation.LastName,
-                        Role = credential.Role.Id,
+                        RoleId = credential.Role.Id,
                         Username = credential.Username
                     });
                 }
@@ -101,7 +116,7 @@ namespace Stardome.Controllers
         {
             try
             {
-                user.Role = (int) Enums.Roles.InActive;
+                user.RoleId = (int)Enums.Roles.InActive;
                 UpdateUserRole(user);
                 return Json(new { Result = "OK" });
             }
@@ -125,7 +140,7 @@ namespace Stardome.Controllers
                 oldUser.UserInformations.First().FirstName = user.FirstName;
                 oldUser.UserInformations.First().LastName = user.LastName;
                 oldUser.UserInformations.First().Email = user.EmailAddress;
-                oldUser.RoleId = user.Role;
+                oldUser.RoleId = user.RoleId;
 
                 userAuthCredentialService.UpdateAUser(oldUser);
                 return Json(new { Result = "OK" });
@@ -143,17 +158,48 @@ namespace Stardome.Controllers
             return Json(new { Result = "OK", Options = roles });
         }
 
+        private int GetUserId()
+        {
+            int userId = userAuthCredentialService.GetByUsername(User.Identity.Name).RoleId;
+            return userId;
+        }
+
+        public string GetMainPath(int roleId)
+        {
+            string path = String.Empty;
+            switch (roleId)
+            {
+                case (int) Enums.Roles.Admin:
+                    path = siteSettingsService.GetFilePath();
+                    break;
+                case (int) Enums.Roles.Producer:
+                    // Falls through
+                case (int) Enums.Roles.User:
+                    path = siteSettingsService.GetFilePath();
+                    break;
+            }
+            if (path.IsNullOrWhiteSpace())
+            {
+                return null;
+            }
+            path = path.Replace("\\", "/");
+            if (path.EndsWith("/"))
+            {
+                return path;
+            }
+            return path + "/";
+        }
+
         private void UpdateUserRole(User user)
         {
             UserAuthCredential oldUser = userAuthCredentialService.GetById(user.Id);
-            oldUser.RoleId = user.Role;
+            oldUser.RoleId = user.RoleId;
 
             userAuthCredentialService.UpdateAUser(oldUser);
         }
 
         private void GetValue(String header)
         {
-            ViewBag.showAdminMenu = true;
             ViewBag.Message = siteSettingsService.FindSiteSetting(header).Value;
         }
     }

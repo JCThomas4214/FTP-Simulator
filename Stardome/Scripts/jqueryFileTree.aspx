@@ -12,7 +12,8 @@
 	//
 	string dir;
 	if(Request.Form["dir"] == null || Request.Form["dir"].Length <= 0)
-		dir = "/";
+		//todo fix this
+        dir = "/";
 	else
 		dir = Server.UrlDecode(Request.Form["dir"]);
 	System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(dir);

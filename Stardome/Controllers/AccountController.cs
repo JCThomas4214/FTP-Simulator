@@ -105,7 +105,7 @@ namespace Stardome.Controllers
                     {
 
                         AccountCreatedOn = DateTime.Now,
-                        RoleId = model.Role,
+                        model.RoleId,
 
 
                     });
@@ -284,10 +284,10 @@ namespace Stardome.Controllers
                     return RedirectToAction("Users", "Admin");
 
                 case 2: // Producers
-                    return RedirectToAction("Upload", "Producer");
+                    // Fall Through
 
                 case 3: // Clients
-                    return RedirectToAction("Index", "Clients");
+                    return RedirectToAction("Content", "Admin");
 
                 default:
                     return RedirectToAction("Login", "Account");

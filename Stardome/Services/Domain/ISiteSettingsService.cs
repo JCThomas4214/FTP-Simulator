@@ -11,5 +11,6 @@ namespace Stardome.Services.Domain
         IEnumerable<SiteSetting> GetAll();
         String UpdateSiteSettings(List<SiteSetting> lstSiteSettings);
         SiteSetting FindSiteSetting(String header);
+        string GetFilePath();
     }
 }

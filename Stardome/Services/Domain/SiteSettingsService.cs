@@ -23,11 +23,11 @@ namespace Stardome.Services.Domain
             get{return repository.GetById(1).Value;}
         }
 
-        public String GetFilePath
+        public string GetFilePath()
         {
-            get{return repository.GetById(2).Value;}
+            return repository.GetById(2).Value;
         }
-   
+
         public IEnumerable<SiteSetting> GetAll()
         {
             return repository.GetAll();

@@ -1,4 +1,10 @@
-﻿<script type="text/javascript">
+﻿@using Stardome.DomainObjects
+@Model Stardome.Models.MainModel
+@if (Model.RoleId != (int) Enums.Roles.Admin)
+{
+    Response.Redirect("~/Admin/Content");
+}
+<script type="text/javascript">
     $(document).ready(function () {
 
         $('#UserTableContainer').jtable({
@@ -36,7 +42,7 @@
                     title: 'Username',
                     list: true
                 },
-                Role: {
+                RoleId: {
                     title: 'Role',
                     list: true,
                     options: function () {

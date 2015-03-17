@@ -1,9 +1,14 @@
-﻿﻿@model List<Stardome.DomainObjects.SiteSetting>
+﻿@using Stardome.DomainObjects
+@model Stardome.Models.SettingModel
+
 @if (Request.IsAuthenticated == false)
 {
     Response.Redirect("~/Account/Login");
 }
-
+@if (Model.RoleId != (int) Enums.Roles.Admin)
+{
+    Response.Redirect("~/Admin/Content");
+}
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -21,31 +26,36 @@
     <fieldset>
         <section>
             
-                <table style="horiz-align:center;">
+                <table style="margin:0 auto; align=center;">
                 @Html.ValidationSummary()
 
 
-                @for (int i = 0; i < Model.Count; i++)
+                @foreach (string category in Model.Categories)
                 {
-                    <tr>
+                    <tr style="border-width: 2px; border-bottom-width:2px; border-bottom-color:black; border-bottom-style: solid;">
+                        <td>
+                            <h3>
+                                @Html.DisplayFor(m => category)
+                                @Html.HiddenFor(m => category)
+                            </h3>
+                        </td>
+                        <td></td>
+                    </tr>
+                    foreach (var setting in Model.Settings.Where(aSetting => aSetting.Item1.Equals(category)))
+                    {
+                        <tr>
                         <td>
                             <b>
-                                @Html.DisplayFor(m => Model[i].Category)
-                                @Html.HiddenFor(m => Model[i].Category)
+                                @Html.DisplayFor(m => setting.Item2)
+                                @Html.HiddenFor(m => setting.Item2)
+                                @Html.HiddenFor(m => setting.Item4)
                             </b>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>
-                                @Html.DisplayFor(m => Model[i].Name)
-                                @Html.HiddenFor(m => Model[i].Name)
-                                @Html.HiddenFor(m => Model[i].Id)
-                            </b>
-                        </td>
-                        <td>@Html.TextBoxFor(m => Model[i].Value)
+                        <td>@Html.TextBoxFor(m => setting.Item3)
                         </td>
                     </tr>
+                    }
+                    
                 }
             </table>
             
