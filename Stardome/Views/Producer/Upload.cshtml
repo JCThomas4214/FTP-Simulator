@@ -28,43 +28,7 @@
     <title>jsTree test</title>
 
     <script type="text/javascript">
-        $(function () {
-  
-            $('#tree').jstree({
-                "json_data": {
-                    "ajax": {
-                        "url": "C:/Windows",
-                        "type": "POST",
-                        "dataType": "json",
-                        "contentType": "application/json charset=utf-8"
-                    }
-                },
-                "core": {
-                    "check_callback": true,
-                    "themes": {
-                        "theme": "media",
-                        "dots": true,
-                        "icons": true,
-                        "variant": "large"
-                    }
-                },
-                "checkbox": {
-                    "keep_selected_style": false
-                },
-                "plugins": ["themes", "json_data", "checkbox", "dnd", "contextmenu", "ui", "crrm"]
-            });
-            // 7 bind to events triggered on the tree
-            $('#tree').on("changed.tree", function (e, data) {
-                console.log(data.selected);
-            });
-            // 8 interact with the tree - either way is OK
-            $('button').on('click', function () {
-                $('#tree').jstree(true).select_node('child_node_1');
-                $('#tree').jstree('select_node', 'child_node_1');
-                $.jstree.reference('#tree').select_node('child_node_1');
-            });
-
-        });
+        var path = 'C:/Users/';
         function openFile(file) {
             window.location = file;
         }
@@ -74,7 +38,7 @@
                 script: '../Scripts/jqueryFileTree.aspx'
             }, function (file) {
                 openFile(file);
-            });
+            }); 
         });
     </script>
 
@@ -83,18 +47,32 @@
     <h2>Files</h2>
     <div id="MainTree"></div>
     
-    @using (Html.BeginForm("Upload",
-                        "Producer",
-                        FormMethod.Post,
-                        new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Upload", "Producer", FormMethod.Post,
+                        new { enctype = "multipart/form-data", /*selectPath = "C:/Users/" */}))
     {
         <label for="file">Upload File</label>
-        <input type="file" name="files" id="file" /><br><br>
-        <input type="submit" value="Upload Selected File" />
-        <br><br>
-        @ViewBag.Message
+        <input type="file" name="files" multiple="multiple" /><br><br>
+        //<input type="text" name=" selectPath" data ="C:/Users"/><br><br>
+        <input type="submit" value="Upload Selected Files" /><br><br>
+        @ViewBag.Message<br>
+        @ViewBag.Uploaded<br>
+        @ViewBag.Existing<br>
+        @ViewBag.Incorrect
+       
     }
 
+    <!-- Replace #'s with AT symbol
+        #model List<string>
+    #foreach (var element in Model)
+    {
+        <p>#Html.DisplayFor(m => element)</p>
+    } -->
+
+    <!--#foreach (string results in ViewBag.Results)
+    {
+        #Html.Label(results)
+        <br />
+    } -->
 
 </body>
 </html>  
