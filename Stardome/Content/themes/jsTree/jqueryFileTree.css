@@ -10,9 +10,8 @@ UL.jqueryFileTree {
 UL.jqueryFileTree LI {
 	list-style: none;
 	padding: 0px;
-	padding-left: 20px;
-        
-	margin: 10px;
+	padding-left: 20px;        
+	margin: 5px;
 	white-space: nowrap;
 }
 

@@ -20,7 +20,8 @@
     <title>Content</title>         
     <script type="text/javascript">  
 
-    var fileList = new Array;
+        var fileList = new Array;
+        var html = '';
     $(document).ready(function () {
         $('#MainTree').fileTree({
             root: 'C:/Users/',
@@ -28,18 +29,27 @@
             multiSelect: true,
             multiFolder: false,
             folderEvent: 'dblclick'
-        }, function (file) {           
-            fileList.push(file);            
-            for (var i = 0; i < fileList.length; i++) {
-                window.alert()
-                if (fileList[i].Name == file) {
-                    window.alert();
+        }, function (file) {
+            var found = false;
+            var position = null;
+            for (var i = 0; i < fileList.length; i++) {                
+                if (fileList[i] == '<li style=\"list-style-type: none;\">' + file + '</li>') {
+                    found = true;
+                    position = i;                    
                     break;
                 }
             }
+            if (found == true) {
+                fileList.splice(position, 1);
+                position = null;
+            }
+            else {
+                fileList.push('<li style=\"list-style-type: none;\">' + file + '</li>');
+            } 
             fileList.forEach(function (file) {
                 console.log(file);
-            });
+            });            
+            document.getElementById('selectedFileList').innerHTML = fileList.join("");
         }, function (dir) {
             console.log(dir);
         });       
@@ -48,12 +58,11 @@
     </script>
 
 </head>
-<body>       
-    <div id="MainTree"></div> 
-    <div id="selectedFileList">
-        <script>
-            
-        </script>
-    </div>    
+<body> 
+    <div class="outer">
+    <div class="innerwrap">
+            <div id="MainTree"></div>
+            <div id="selectedFileList"></div>
+        </div></div>    
 </body>
 </html>  
