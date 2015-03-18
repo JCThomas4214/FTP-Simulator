@@ -21,8 +21,7 @@
     <script type="text/javascript">  
 
         var fileList = new Array;
-        var htmlList = new Array;
-        var end = null;
+        var htmlList = new Array;        
         
         function check(file) {
             var found = false;           
@@ -38,15 +37,14 @@
             console.log(items);
             return items;
         }
-        function insertItem(number, file) {
-            end = number + 1;            
+        function insertItem(number, file) {                     
             htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + number + '\">' + file + '</li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
         function deleteItem(number) {
-            var tmp = number;
+            var tmp = number;            
             htmlList.splice(number, 1);
             fileList.splice(number, 1);
             for (var i = number; i < htmlList.length; i++) {                      
