@@ -29,82 +29,9 @@ namespace Stardome.UITest
         {
             Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.Disabled;
             BrowserWindow browzer = BrowserWindow.Launch("http://localhost:2129/");
-
-            UITestControl uIUserName = new UITestControl(browzer);
-            uIUserName.TechnologyName = "Web";
-            uIUserName.SearchProperties.Add("ControlType", "Edit");
-            uIUserName.SearchProperties.Add("Id", "UserName");
-            Keyboard.SendKeys(uIUserName, "ab");
-
-            UITestControl uIPassword = new UITestControl(browzer);
-            uIPassword.TechnologyName = "Web";
-            uIPassword.SearchProperties.Add("ControlType", "Edit");
-            uIPassword.SearchProperties.Add("Id", "Password");
-            Keyboard.SendKeys(uIPassword, "password");
-
-            UITestControl uILoginBtn = new UITestControl(browzer);
-            uILoginBtn.TechnologyName = "Web";
-            uILoginBtn.SearchProperties.Add("ControlType", "Button");
-            uILoginBtn.SearchProperties.Add("Type", "submit");
-            Mouse.Click(uILoginBtn);
-
-           // Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.UIThreadOnly;
-           
-            HtmlHyperlink uIManageSettings = new HtmlHyperlink(browzer);
-            uIManageSettings.TechnologyName = "Web";
-            uIManageSettings.SearchProperties.Add("ControlType", "Hyperlink");
-            uIManageSettings.SearchProperties.Add("TagName", "A");
-            uIManageSettings.SearchProperties.Add("Innertext", "Manage Settings");
-            Mouse.Click(uIManageSettings);
-
-            UITestControl uISiteName = new UITestControl(browzer);
-            uISiteName.TechnologyName = "Web";
-            uISiteName.SearchProperties.Add("ControlType", "Edit");
-            uISiteName.SearchProperties.Add("Name", "[0].Value");
-            uISiteName.SetFocus();
-            // Delete existing content in the control and insert new content.
-            SendKeys.SendWait("^{HOME}");   // Move to start of control
-            SendKeys.SendWait("^+{END}");   // Select everything
-            SendKeys.SendWait("{DEL}");     // Delete selection
-            Keyboard.SendKeys(uISiteName, "Stardome1");
-            
-
-            UITestControl uIFilePath = new UITestControl(browzer);
-            uIFilePath.TechnologyName = "Web";
-            uIFilePath.SearchProperties.Add("ControlType", "Edit");
-            uIFilePath.SearchProperties.Add("Name", "[1].Value");
-            uIFilePath.SetFocus();
-            // Delete existing content in the control and insert new content.
-            SendKeys.SendWait("^{HOME}");   // Move to start of control
-            SendKeys.SendWait("^+{END}");   // Select everything
-            SendKeys.SendWait("{DEL}");     // Delete selection
-            Keyboard.SendKeys(uIFilePath, "C:\\Stardome1");
-
-            UITestControl uIUpdate = new UITestControl(browzer);
-            uILoginBtn.TechnologyName = "Web";
-            uILoginBtn.SearchProperties.Add("ControlType", "Button");
-            uILoginBtn.SearchProperties.Add("Type", "submit");
-            uILoginBtn.SearchProperties.Add("DisplayText", "Update");
-            Mouse.Click(uILoginBtn);
-
-            Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.AllThreads;
-
-            UITestControl uIUpdateSuccessfully = new UITestControl(browzer);
-            uIUpdateSuccessfully.TechnologyName = "Web";
-            uIUpdateSuccessfully.SearchProperties.Add("ControlType", "Label");
-            uIUpdateSuccessfully.SearchProperties.Add("LabelFor", "lblUpdateMesssage");
-            uIUpdateSuccessfully.SearchProperties.Add("TagName", "LABEL");
-
-            Assert.AreEqual("Label", uIUpdateSuccessfully.ControlType.ToString());
-
-            HtmlHyperlink uILogOff = new HtmlHyperlink(browzer);
-            uILogOff.TechnologyName = "Web";
-            uILogOff.SearchProperties.Add("ControlType", "Hyperlink");
-            uILogOff.SearchProperties.Add("TagName", "A");
-            uILogOff.SearchProperties.Add("Innertext", "Log off");
-            Mouse.Click(uILogOff);
-           
-
+            this.UIMap.UpdateAllSettings();
+            this.UIMap.AssertUpdateAllSettings();
+            this.UIMap.UpdateAllSettingsLogOff();
         }
 
 

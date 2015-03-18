@@ -100,7 +100,8 @@ namespace Stardome.Controllers
                     // Attempt to register the user
 
                     string password = userAuthCredentialService.EncryptPassword(defaultPassword);
-
+                    if (model.RoleId < 1) //TODO: Diasble this
+                        model.RoleId=1;
                     var userProfile = WebSecurity.CreateUserAndAccount(model.Username, password, new
                     {
 
