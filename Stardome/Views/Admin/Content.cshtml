@@ -21,7 +21,21 @@
     <script type="text/javascript">  
 
         var fileList = new Array;
-        var html = '';
+        
+        function replaceAt(s, n, t) {
+            return s.substring(0, n) + t + s.substring(n + 1);
+        }
+        function deleteItem(number) {
+            var tmp = number;
+            fileList.splice(number, 1);
+            if (number < 10) {
+                for (var i = number; i < fileList.length; i++) {                      
+                    tmp++;                    
+                    fileList[i] = fileList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
+                }
+            }
+            document.getElementById('selectedFileList').innerHTML = fileList.join("");
+        }
     $(document).ready(function () {
         $('#MainTree').fileTree({
             root: 'C:/Users/',
@@ -33,18 +47,22 @@
             var found = false;
             var position = null;
             for (var i = 0; i < fileList.length; i++) {                
-                if (fileList[i] == '<li style=\"list-style-type: none;\">' + file + '</li>') {
+                if (fileList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
                     found = true;
                     position = i;                    
                     break;
                 }
             }
             if (found == true) {
+                var tmp = position;
                 fileList.splice(position, 1);
-                position = null;
+                for (var i = position; i < fileList.length; i++) {
+                    tmp++;                   
+                    fileList[i] = fileList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
+                }
             }
             else {
-                fileList.push('<li style=\"list-style-type: none;\">' + file + '</li>');
+                fileList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>');
             } 
             fileList.forEach(function (file) {
                 console.log(file);
@@ -52,7 +70,7 @@
             document.getElementById('selectedFileList').innerHTML = fileList.join("");
         }, function (dir) {
             console.log(dir);
-        });       
+        });
     });
     
     </script>

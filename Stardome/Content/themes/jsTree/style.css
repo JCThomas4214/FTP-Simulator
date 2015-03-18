@@ -26,3 +26,9 @@ div .innerwrap {
     /*border:2px solid salmon;*/ 
     float:left;
 }
+
+li {
+    cursor: pointer;
+    list-style-type: none;
+    padding: 3px;
+}
