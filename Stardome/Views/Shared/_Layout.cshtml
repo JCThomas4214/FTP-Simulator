@@ -1,67 +1,76 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title </title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/modernizr")
-        @Styles.Render("~/Content/jtable/css")
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/jtable")
-        <link href="@Url.Content("/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title </title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/jtable/css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jtable")
+    <link href="@Url.Content("/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
 
 
 
-    </head>
-    <body style="border:0px;">
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">
-                        <img src="~/Images/SD_Logo_Horz_2lines_April2014.png" alt="stardome media group" style="height:50px"/>
-                             </p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    
+</head>
+<body style="border:0px;">
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    <img src="~/Images/SD_Logo_Horz_2lines_April2014.png" alt="stardome media group" style="height:50px" />
+                </p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
 
-                    @if (Request.IsAuthenticated ) {
-                        //Menu visible only for Admin Type Users
+
+                @if (Request.IsAuthenticated)
+                {
+                    //Menu visible only for Admin Type Users
                     <nav>
-                        <ul id="menu">
-                        @if (ViewBag.showAdminMenu != null && ViewBag.showAdminMenu)
-                           
-                        {
-                            <li>@Html.ActionLink("Manage Users", "Users", "Admin")</li>
-                            <li>@Html.ActionLink("Manage Content", "Content", "Admin")</li>
-                            <li>@Html.ActionLink("Manage Settings", "Settings", "Admin")</li>
-                        }
-                        </ul>
-                    </nav>
-                    }
-                </div>
-            </div>
-        </header>
-        <div id="body" style="min-height:700px">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Stardome Media Group</p>
-                </div>
-            </div>
-        </footer>
 
-        
-        @RenderSection("scripts", required: false)
-    </body>
+                        @if (ViewBag.showAdminMenu != null && ViewBag.showAdminMenu)
+                        {
+                            <ul id="menu">
+                                <li>@Html.ActionLink("Manage Users", "Users", "Admin")</li>
+                                <li>
+                                    @Html.ActionLink("Manage Content", "Content", "Admin")<b class="caret"></b>
+                                    <ul id="ContentMenu">
+                                        <li>@Html.ActionLink("Manage Contents", "Users", "Admin")</li>
+                                        <li>@Html.ActionLink("Manage Permissions by User", "Users", "Admin")</li>
+                                        <li>@Html.ActionLink("Manage Permissions by Folder", "Users", "Admin")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Manage Settings", "Settings", "Admin")</li>
+
+                            </ul>
+                        }
+                    </nav>
+                }
+            </div>
+        </div>
+    </header>
+    <div id="body" style="min-height:700px">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Stardome Media Group</p>
+            </div>
+        </div>
+    </footer>
+
+
+    @RenderSection("scripts", required: false)
+</body>
 </html>

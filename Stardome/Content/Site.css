@@ -207,8 +207,37 @@ ul#menu {
             color: #333;
             text-decoration: none;
         }
+        ul#menu ul{
+            display : none;
+        }
+        ul#menu li:hover ul{
+            display : block;
+            position :absolute;
+            z-index: 1000;
+            float: right;
+            margin-left: 150px;
+            padding-left:0 !important;
+            padding-top:5px;
+        }
 
+    ul#ContentMenu li{
+        display:list-item;
+        text-align:left;
+        background-color: #f7f7f7;
+        padding: 5px 10px 5px 10px;
+        border: 1px solid #7ac0da;
+    } 
 
+   .caret {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          margin-left: 2px;
+          vertical-align: middle;
+          border-top: 4px solid;
+          border-right: 4px solid transparent;
+          border-left: 4px solid transparent;
+        }
 /* page elements
 ----------------------------------------------------------*/
 /* featured */
@@ -655,6 +684,7 @@ tr.pager td {
             margin: 0;
             padding: 0;
         }
+
 
 
     /* main layout
