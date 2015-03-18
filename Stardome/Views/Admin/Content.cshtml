@@ -70,6 +70,35 @@
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }, function (dir) {
             console.log(dir);
+            var ask = confirm('would you like to upload to '+ dir +'?');
+        });
+        $('.jqueryFileTree').contextMenu({
+            // define which elements trigger this menu
+            selector: "li a",           
+            // define the elements of the menu
+            items: {
+                upload: {
+                    name: "Upload",
+                    icon: "edit",
+                    callback: function (key, opt) {                        
+                        var m = "clicked: " + key + " on " + $(this).attr('rel');
+                        window.console && console.log(m) || alert(m);                        
+                    }
+                },
+                "sep1": "---------",
+                quit: {
+                    name: "Quit",
+                    icon: "quit"                    
+                }
+            }
+            // there's more, have a look at the demos and docs...
+        }, function (action, el, pos) {
+            alert(
+                'Action: ' + action + '\n\n' +
+                'Element ID: ' + $(el).attr('id') + '\n\n' +
+                'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
+                'X: ' + pos.docX + '  Y: ' + pos.docY + ' (relative to document)'
+                );
         });
     });
     

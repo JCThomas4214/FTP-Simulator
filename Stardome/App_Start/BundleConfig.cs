@@ -54,12 +54,15 @@ namespace Stardome
             bundles.Add(new ScriptBundle("~/Scripts/jsTree").Include(
                       "~/Scripts/jsTreeScript/jstree.js",                      
                       "~/Scripts/jsTreeScript/jqueryFileTree.js",
+                      "~/Scripts/jsTreeScript/jquery.contextMenu.js",
+                      "~/Scripts/jsTreeScript/jquery.ui.position.js",
                       "~/Scripts/jsTreeScript/jquery.easing.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/Content/jsTree").Include(
                         "~/Content/themes/jsTree/style.css",
-                        "~/Content/themes/jsTree/jqueryFileTree.css"));
+                        "~/Content/themes/jsTree/jqueryFileTree.css",
+                        "~/Content/themes/jsTree/jquery.contextMenu.css"));
             //
         }
     }
