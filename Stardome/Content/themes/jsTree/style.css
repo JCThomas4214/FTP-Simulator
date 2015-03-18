@@ -27,8 +27,15 @@ div .innerwrap {
     float:left;
 }
 
-li {
+#selectedFileList li {
     cursor: pointer;
     list-style-type: none;
     padding: 3px;
+    font-weight: bold; 
+}
+
+#selectedFileList li:hover {    
+    color: red;
+    font-weight: bold; 
+    font-style: italic;
 }
