@@ -21,20 +21,20 @@
     <script type="text/javascript">  
 
         var fileList = new Array;
-        
-        function replaceAt(s, n, t) {
-            return s.substring(0, n) + t + s.substring(n + 1);
-        }
+        var htmlList = new Array;
+        //function replaceAt(s, n, t) {
+        //    return s.substring(0, n) + t + s.substring(n + 1);
+        //}
         function deleteItem(number) {
             var tmp = number;
+            htmlList.splice(number, 1);
             fileList.splice(number, 1);
-            if (number < 10) {
-                for (var i = number; i < fileList.length; i++) {                      
-                    tmp++;                    
-                    fileList[i] = fileList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
-                }
+            for (var i = number; i < htmlList.length; i++) {                      
+                tmp++;                    
+                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
             }
-            document.getElementById('selectedFileList').innerHTML = fileList.join("");
+            console.log(fileList);
+            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
     $(document).ready(function () {
         $('#MainTree').fileTree({
@@ -46,8 +46,8 @@
         }, function (file) {
             var found = false;
             var position = null;
-            for (var i = 0; i < fileList.length; i++) {                
-                if (fileList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
+            for (var i = 0; i < htmlList.length; i++) {                
+                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
                     found = true;
                     position = i;                    
                     break;
@@ -55,19 +55,19 @@
             }
             if (found == true) {
                 var tmp = position;
+                htmlList.splice(position, 1);
                 fileList.splice(position, 1);
-                for (var i = position; i < fileList.length; i++) {
+                for (var i = position; i < htmlList.length; i++) {
                     tmp++;                   
-                    fileList[i] = fileList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
+                    htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
                 }
             }
             else {
-                fileList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>');
-            } 
-            fileList.forEach(function (file) {
-                console.log(file);
-            });            
-            document.getElementById('selectedFileList').innerHTML = fileList.join("");
+                htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>');
+                fileList.push(file);
+            }       
+            console.log(fileList);
+            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }, function (dir) {
             console.log(dir);
         });
