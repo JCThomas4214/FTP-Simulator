@@ -22,9 +22,29 @@
 
         var fileList = new Array;
         var htmlList = new Array;
-        //function replaceAt(s, n, t) {
-        //    return s.substring(0, n) + t + s.substring(n + 1);
-        //}
+        var end = null;
+        
+        function check(file) {
+            var found = false;           
+            var items = new Array;
+            for (var i = 0; i < htmlList.length; i++) {
+                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
+                    found = true;                    
+                    break;
+                }                
+            }
+            items[0] = found;
+            items[1] = i;
+            console.log(items);
+            return items;
+        }
+        function insertItem(number, file) {
+            end = number + 1;            
+            htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + number + '\">' + file + '</li>');
+            fileList.push(file);
+            console.log(fileList);
+            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+        }
         function deleteItem(number) {
             var tmp = number;
             htmlList.splice(number, 1);
@@ -43,52 +63,50 @@
             multiSelect: true,
             multiFolder: false,
             folderEvent: 'dblclick'
-        }, function (file) {
-            var found = false;
-            var position = null;
-            for (var i = 0; i < htmlList.length; i++) {                
-                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
-                    found = true;
-                    position = i;                    
-                    break;
-                }
+        }, function (file) {            
+            var items = new Array;
+            items = check(file);
+            if (items[0] == true) {               
+                deleteItem(items[1]);
             }
-            if (found == true) {
-                var tmp = position;
-                htmlList.splice(position, 1);
-                fileList.splice(position, 1);
-                for (var i = position; i < htmlList.length; i++) {
-                    tmp++;                   
-                    htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
-                }
-            }
-            else {
-                htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>');
-                fileList.push(file);
-            }       
-            console.log(fileList);
-            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+            else {                
+                insertItem(items[1], file);
+            }                 
         }, function (dir) {
-            console.log(dir);
-            var ask = confirm('would you like to upload to '+ dir +'?');
+            console.log(dir);            
         });
         $('.jqueryFileTree').contextMenu({
             // define which elements trigger this menu
             selector: "li a",           
             // define the elements of the menu
             items: {
-                upload: {
-                    name: "Upload",
+                "download": {
+                    name: "Download",
                     icon: "edit",
+                    callback: function (key, opt) {
+                        var items = new Array;
+                        items = check($(this).attr('rel'));
+                        if (items[0] == true) {
+                            deleteItem(items[1]);
+                        }
+                        else {
+                            insertItem(items[1], $(this).attr('rel'));
+                        }
+                    }
+                },
+                "upload": {
+                    name: "Upload",
+                    icon: "add",
                     callback: function (key, opt) {                        
                         var m = "clicked: " + key + " on " + $(this).attr('rel');
                         window.console && console.log(m) || alert(m);                        
                     }
                 },
                 "sep1": "---------",
-                quit: {
+                "quit": {
                     name: "Quit",
-                    icon: "quit"                    
+                    icon: "quit"
+                    
                 }
             }
             // there's more, have a look at the demos and docs...
