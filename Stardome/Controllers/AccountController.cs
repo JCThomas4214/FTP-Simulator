@@ -288,7 +288,7 @@ namespace Stardome.Controllers
                     // Fall Through
 
                 case 3: // Clients
-                    return RedirectToAction("Content", "Admin");
+                    return RedirectToAction("Actions", "Manage");
 
                 default:
                     return RedirectToAction("Login", "Account");

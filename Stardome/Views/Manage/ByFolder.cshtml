@@ -1,0 +1,140 @@
+﻿@Scripts.Render("~/Scripts/jsTree")
+@Styles.Render("~/Content/jsTree")
+@if (Request.IsAuthenticated == false) {
+     Response.Redirect("~/Account/Login");
+
+}
+    @section featured {
+        <section class="featured">
+            <div class="content-wrapper">
+                <hgroup class="title">
+                    <h1>@ViewBag.Message</h1>
+                </hgroup>
+
+            </div>
+        </section>
+    }
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Content</title>         
+    <script type="text/javascript">  
+
+        var fileList = new Array;
+        var htmlList = new Array;        
+        
+        function check(file) {
+            var found = false;           
+            var items = new Array;
+            for (var i = 0; i < htmlList.length; i++) {
+                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
+                    found = true;                    
+                    break;
+                }                
+            }
+            items[0] = found;
+            items[1] = i;
+            console.log(items);
+            return items;
+        }
+        function insertItem(number, file) {                     
+            htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + number + '\">' + file + '</li>');
+            fileList.push(file);
+            console.log(fileList);
+            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+        }
+        function deleteItem(number) {
+            var tmp = number;            
+            htmlList.splice(number, 1);
+            fileList.splice(number, 1);
+            for (var i = number; i < htmlList.length; i++) {                      
+                tmp++;                    
+                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
+            }
+            console.log(fileList);
+            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+        }
+    $(document).ready(function () {
+        $('#MainTree').fileTree({
+            root: 'C:/Users/',
+            script: '../Scripts/jqueryFileTree.aspx',
+            multiSelect: true,
+            multiFolder: false,
+            folderEvent: 'dblclick'
+        }, function (file) {            
+            var items = new Array;
+            items = check(file);
+            if (items[0] == true) {               
+                deleteItem(items[1]);
+            }
+            else {                
+                insertItem(items[1], file);
+            }                 
+        }, function (dir) {
+            console.log(dir);            
+        });
+        $('.jqueryFileTree').contextMenu({
+            // define which elements trigger this menu
+            selector: "li a",           
+            // define the elements of the menu
+            items: {
+                "download": {
+                    name: "Download",
+                    icon: "edit",
+                    callback: function (key, opt) {
+                        var items = new Array;
+                        items = check($(this).attr('rel'));
+                        if (items[0] == true) {
+                            deleteItem(items[1]);
+                        }
+                        else {
+                            insertItem(items[1], $(this).attr('rel'));
+                        }
+                    }
+                },
+                "upload": {
+                    name: "Upload",
+                    icon: "add",
+                    callback: function (key, opt) {                        
+                        var m = "clicked: " + key + " on " + $(this).attr('rel');
+                        window.console && console.log(m) || alert(m);                        
+                    }
+                },
+                "sep1": "---------",
+                "quit": {
+                    name: "Quit",
+                    icon: "quit",
+                    callback: function (key, opt) {
+                        console.log(key);
+                    }
+                    
+                }
+            }
+            // there's more, have a look at the demos and docs...
+        }, function (action, el, pos) {
+            alert(
+                'Action: ' + action + '\n\n' +
+                'Element ID: ' + $(el).attr('id') + '\n\n' +
+                'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
+                'X: ' + pos.docX + '  Y: ' + pos.docY + ' (relative to document)'
+                );
+        });
+    });
+    
+    </script>
+
+</head>
+<body> 
+    <div><table id="labels">
+        <tr>
+            <td>Files & Folders</td>
+            <td>Files For Download</td>
+        </tr>    
+    </table></div>
+    <div class="outer">
+    <div class="innerwrap">
+            <div id="MainTree"></div>
+            <div id="selectedFileList"></div>
+        </div></div>    
+</body>
+</html>  

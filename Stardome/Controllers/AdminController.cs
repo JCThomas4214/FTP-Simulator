@@ -34,7 +34,7 @@ namespace Stardome.Controllers
         {
             MainModel model = new MainModel
             {
-                RoleId = GetUserRoleId()
+                RoleId = GetUserRoleId(User.Identity.Name)
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             GetValue(Headers.Users);
@@ -45,8 +45,8 @@ namespace Stardome.Controllers
         {
             ContentModel model = new ContentModel
             {
-                RootPath = GetMainPath(GetUserRoleId()),
-                RoleId = GetUserRoleId()
+                RootPath = GetMainPath(GetUserRoleId(User.Identity.Name)),
+                RoleId = GetUserRoleId(User.Identity.Name)
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             GetValue(Headers.Content);
@@ -149,9 +149,9 @@ namespace Stardome.Controllers
             return Json(new { Result = "OK", Options = roles });
         }
 
-        private int GetUserRoleId()
+        public int GetUserRoleId(string username)
         {
-            int roleId = userAuthCredentialService.GetByUsername(User.Identity.Name).RoleId;
+            int roleId = userAuthCredentialService.GetByUsername(username).RoleId;
             return roleId;
         }
 
@@ -189,7 +189,7 @@ namespace Stardome.Controllers
             userAuthCredentialService.UpdateAUser(oldUser);
         }
 
-        private void GetValue(String header)
+        public void GetValue(String header)
         {
             ViewBag.Message = siteSettingsService.FindSiteSetting(header).Value;
         }
@@ -200,7 +200,7 @@ namespace Stardome.Controllers
             
             SettingModel model = new SettingModel
             {
-                RoleId = GetUserRoleId(),
+                RoleId = GetUserRoleId(User.Identity.Name),
                 Settings = list
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
