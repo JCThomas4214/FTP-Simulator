@@ -22,12 +22,6 @@
 
         var fileList = new Array;
         var htmlList = new Array;        
-        
-        function listFunc(position, file) {
-            deleteItem(position);
-            console.log(file);
-            uncheck('\"'+file+'\"');
-        }
 
         function checkB(file) {
             console.log(file);
@@ -49,14 +43,14 @@
 
         function uncheck(box) {
             //var tmp = subS(box);
-            //console.log(tmp);
+            console.log(box);
             document.getElementById(box).checked = false;           
         }
         function checkVal(file) {
             var found = false;           
             var items = new Array;
             for (var i = 0; i < htmlList.length; i++) {
-                if (htmlList[i] == '<li ondblclick=\"listFunc(this.id,this.value)\" id=\"' + i + '\" value=\"' + file + '\">' + file + '</li>') {
+                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\" id=\"' + i + '\" name=\"' + file + '\">' + file + '</li>') {
                     found = true;                    
                     break;
                 }                
@@ -67,7 +61,7 @@
             return items;
         }
         function insertItem(number, file) {                     
-            htmlList.push('<li ondblclick=\"listFunc(this.id,this.value)\" id=\"' + number + '\" value=\"' + file + '\">' + file + '</li>');
+            htmlList.push('<li ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\" id=\"' + number + '\" name=\"' + file + '\">' + file + '</li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
@@ -109,7 +103,7 @@
             // define the elements of the menu
             items: {
                 "download": {
-                    name: "Download",
+                    name: "Add to download list",
                     icon: "edit",
                     callback: function (key, opt) {
                         var items = new Array;
@@ -125,7 +119,7 @@
                     }
                 },
                 "upload": {
-                    name: "Upload",
+                    name: "Upload to",
                     icon: "add",
                     callback: function (key, opt) {                        
                         var m = "clicked: " + key + " on " + $(this).attr('rel');
