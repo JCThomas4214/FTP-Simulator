@@ -42,6 +42,19 @@
             window.open("/Services/Application/FileDownloadPage.aspx?FilePath=" + file); //TODO: Change the location for Filedownloadpage.aspx
         }
 
+        function aud_play_pause(file) {
+            var myAudio = document.getElementById('MP3Player');
+            if (myAudio.paused) {
+                myAudio.src = file;
+                myAudio.load();
+                myAudio.play();
+                document.getElementById(file).src = "/Images/Pause.png";
+            } else {
+                myAudio.pause();
+                document.getElementById(file).src = "/Images/play.png";
+            }
+        }
+
         function insertItem(number, file) {                     
             htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + file + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\"></li>');
             fileList.push(file);

@@ -42,4 +42,5 @@
                         "\n");
 	}
 	Response.Write("</ul>");
+    Response.Write("<audio id='MP3Player'> <source src='' type='audio/mp3'></audio>");
  %>
