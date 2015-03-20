@@ -28,7 +28,7 @@
 if(jQuery) (function($){
 
 	$.extend($.fn, {
-		fileTree: function(options, file, dire, files) {
+		fileTree: function(options, file) {
 			// Default options
 			if( options.root			=== undefined ) options.root			= '/';
 			if( options.script			=== undefined ) options.script			= '/files/filetree';
@@ -55,10 +55,11 @@ if(jQuery) (function($){
 						multiSelect: options.multiSelect
 					})					
 					.done(function (data) {
-					    console.log(data);					    
+					    //console.log(data);					    
 						$(element).find('.start').html('');
 						$(element).removeClass('wait').append(data);
 						if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });
+						console.log("in showtree");
 						bindTree(element);
 
 						//$(this).parent().removeClass('collapsed').addClass('expanded');
@@ -82,27 +83,28 @@ if(jQuery) (function($){
 
 						if( $(this).parent().hasClass('directory') ) {
 						    if ($(this).parent().hasClass('collapsed')) {
-						        dire($(this).attr('rel'));
+						        //dire($(this).attr('rel'));
 								// Expand
 								_trigger($(this), 'filetreeexpand', data);
-
+								console.log("in expand");
+                                debugger
 								if( !options.multiFolder ) {
 									$(this).parent().parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 									$(this).parent().parent().find('LI.directory').removeClass('expanded').addClass('collapsed');
 								}
 
 								$(this).parent().removeClass('collapsed').addClass('expanded');
-								$(this).parent().find('UL').remove(); // cleanup
-								console.log(encodeURIComponent($(this).attr('rel').match(/.*\//)));
+								$(this).parent().find('UL').remove(); // cleanup								
 								showTree( $(this).parent(), encodeURIComponent($(this).attr('rel').match( /.*\// )) );
 							} else {
 								// Collapse
 								_trigger($(this), 'filetreecollapse', data);
-
+								console.log("in collapse");
+                                debugger
 								$(this).parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 								$(this).parent().removeClass('expanded').addClass('collapsed');
 
-								_trigger($(this), 'filetreecollapsed', data);
+								//_trigger($(this), 'filetreecollapsed', data);
 							}
 						} else {
 							// this is a file click, return file information
