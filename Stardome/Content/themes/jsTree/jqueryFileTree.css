@@ -23,7 +23,7 @@ UL.jqueryFileTree LI {
 	white-space: nowrap;
 }
 
-input {
+.FTCB {
     width: 18px;
     height: 18px;
     padding: 0;
@@ -33,8 +33,17 @@ input {
     margin-bottom: 0;
     vertical-align: bottom;
     position: relative;
-    top: px;
+    
     *overflow: hidden;
+}
+
+#FTbutton {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    vertical-align: middle;
+    position: relative;
+    margin-bottom: 2px;
 }
 
 UL.jqueryFileTree LI .clicked {

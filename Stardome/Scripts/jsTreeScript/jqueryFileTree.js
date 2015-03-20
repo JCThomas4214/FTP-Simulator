@@ -86,8 +86,7 @@ if(jQuery) (function($){
 						        //dire($(this).attr('rel'));
 								// Expand
 								_trigger($(this), 'filetreeexpand', data);
-								console.log("in expand");
-                                debugger
+								console.log("in expand");                                
 								if( !options.multiFolder ) {
 									$(this).parent().parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 									$(this).parent().parent().find('LI.directory').removeClass('expanded').addClass('collapsed');
@@ -99,8 +98,7 @@ if(jQuery) (function($){
 							} else {
 								// Collapse
 								_trigger($(this), 'filetreecollapse', data);
-								console.log("in collapse");
-                                debugger
+								console.log("in collapse");                                
 								$(this).parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 								$(this).parent().removeClass('expanded').addClass('collapsed');
 
