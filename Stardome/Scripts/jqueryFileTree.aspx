@@ -30,14 +30,16 @@
 		string ext = ""; 
 		if(fi.Extension.Length > 1)
 			ext = fi.Extension.Substring(1).ToLower();
-       
+        string filePath = dir.Remove(0, Server.MapPath("~").Length);
+        filePath = "/" + filePath.Remove(filePath.Length - 1) + "\\" + fi.Name;
+        
         Response.Write("\t<li id=\"file\" class=\"file ext_" + ext + "\"><input class=\"FTCB\" type=\"checkbox\" onclick=\"checkB(this.id)\" id=\"" + dir + fi.Name + 
                     "\" rel=\"" + dir + fi.Name + "\"><a href=\"#\" rel=\"" + dir + fi.Name + "\">" + fi.Name +
-                    "</a>&nbsp;&nbsp;<img id=\"FTbutton\" src='\\Images\\Play.png' Title='Play the file' style='width:15px;Height:15px' >" + 
+                    "</a>&nbsp;&nbsp;<a href='#' ><img src='\\Images\\Play.png' Title='Play the file' id='" + filePath + "' style='width:15px;Height:15px' onclick='aud_play_pause(this.id);' ></a>" + 
                     "&nbsp;<img id=\"FTbutton\" src='\\Images\\Delete.png' Title='Delete file' style='width:15px;Height:15px'>&nbsp;"+
-                    "<img id=\"FTbutton\" src='\\Images\\download.ico' Title='Download the file' style='width:15px;Height:15px'/></li>" +
-                    "<audio id='contentMP3'> <source src='" + dir.Replace("C:/Stardome","file:///localhost/Stardome") + fi.Name + "' type='audio/mp3'></audio>" + "\n");
-        
+                    "<a href='#' >" +
+                    "<img src='\\Images\\download.ico' Title='Download the file' style='width:15px;Height:15px' id='" + filePath + "' onclick ='downloadMP3(this.id);'/></a></li>" +
+                        "\n");
 	}
 	Response.Write("</ul>");
  %>

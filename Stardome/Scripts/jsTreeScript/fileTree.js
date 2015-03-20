@@ -10,6 +10,7 @@
         function uncheck(box) {            
             document.getElementById(box).checked = false;           
         }
+
         function checkB(file) {
             console.log(file);
             var items = new Array;
@@ -21,6 +22,7 @@
                 insertItem(items[1], file);
             }
         }
+
         function checkVal(file) {
             var found = false;           
             var items = new Array;
@@ -35,12 +37,18 @@
             console.log(items);
             return items;
         }
+
+        function downloadMP3(file) {
+            window.open("/Services/Application/FileDownloadPage.aspx?FilePath=" + file); //TODO: Change the location for Filedownloadpage.aspx
+        }
+
         function insertItem(number, file) {                     
             htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + file + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\"></li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
+
         function deleteItem(number) {
             var tmp = number;            
             htmlList.splice(number, 1);
@@ -52,6 +60,7 @@
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
+
 		 $(document).ready(function () {
         $('#MainTree').fileTree({
             root: root,
