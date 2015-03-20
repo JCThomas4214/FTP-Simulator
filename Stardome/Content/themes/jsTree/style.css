@@ -41,6 +41,7 @@ div .innerwrap {
     user-select: none;
 }
 
+
 #selectedFileList li:hover {    
     color: red;
     font-weight: bold; 

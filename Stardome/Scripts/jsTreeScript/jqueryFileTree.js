@@ -28,7 +28,7 @@
 if(jQuery) (function($){
 
 	$.extend($.fn, {
-		fileTree: function(options, file, dire) {
+		fileTree: function(options, file, dire, files) {
 			// Default options
 			if( options.root			=== undefined ) options.root			= '/';
 			if( options.script			=== undefined ) options.script			= '/files/filetree';
@@ -39,21 +39,23 @@ if(jQuery) (function($){
 			if( options.collapseEasing	=== undefined ) options.collapseEasing	= null;
 			if( options.multiFolder		=== undefined ) options.multiFolder		= true;
 			if( options.loadMessage		=== undefined ) options.loadMessage		= 'Loading...';
-			if( options.multiSelect		=== undefined ) options.multiSelect		= true;
+			if( options.multiSelect		=== undefined ) options.multiSelect		= false;
 
-
-			
+						
 			$(this).each( function() {
 
-				function showTree(element, dir) {
+			    function showTree(element, dir) {
+			        console.log(element);
+			        console.log(dir);
 					$(element).addClass('wait');
 					$(".jqueryFileTree.start").remove();
 					$.post(options.script,
 					{
 						dir: dir,
 						multiSelect: options.multiSelect
-					})
-					.done(function(data){
+					})					
+					.done(function (data) {
+					    console.log(data);					    
 						$(element).find('.start').html('');
 						$(element).removeClass('wait').append(data);
 						if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });
@@ -73,10 +75,10 @@ if(jQuery) (function($){
 					$(element).find('LI A').on(options.folderEvent, function() {
 						// set up data object to send back via trigger
 						var data = {};
-						data.li = $(this).closest('li');
-						data.type = ( data.li.hasClass('directory') ? 'directory' : 'file' );
+						data.li = $(this).closest('li');						
+						data.type = (data.li.hasClass('directory') ? 'directory' : 'file');						
 						data.value	= $(this).text();
-						data.rel	= $(this).prop('rel');
+						data.rel = $(this).prop('rel');						
 
 						if( $(this).parent().hasClass('directory') ) {
 						    if ($(this).parent().hasClass('collapsed')) {
@@ -91,6 +93,7 @@ if(jQuery) (function($){
 
 								$(this).parent().removeClass('collapsed').addClass('expanded');
 								$(this).parent().find('UL').remove(); // cleanup
+								console.log(encodeURIComponent($(this).attr('rel').match(/.*\//)));
 								showTree( $(this).parent(), encodeURIComponent($(this).attr('rel').match( /.*\// )) );
 							} else {
 								// Collapse

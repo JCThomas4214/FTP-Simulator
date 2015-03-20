@@ -23,11 +23,40 @@
         var fileList = new Array;
         var htmlList = new Array;        
         
-        function check(file) {
+        function listFunc(position, file) {
+            deleteItem(position);
+            console.log(file);
+            uncheck('\"'+file+'\"');
+        }
+
+        function checkB(file) {
+            console.log(file);
+            var items = new Array;
+            items = checkVal(file);
+            if (items[0] == true) {
+                deleteItem(items[1]);
+            }
+            else {
+                insertItem(items[1], file);                
+            }
+        }
+
+        function check(box) {
+            //var tmp = subS(box);
+            //console.log(tmp);
+            document.getElementById(box).checked = true;            
+        }
+
+        function uncheck(box) {
+            //var tmp = subS(box);
+            //console.log(tmp);
+            document.getElementById(box).checked = false;           
+        }
+        function checkVal(file) {
             var found = false;           
             var items = new Array;
             for (var i = 0; i < htmlList.length; i++) {
-                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
+                if (htmlList[i] == '<li ondblclick=\"listFunc(this.id,this.value)\" id=\"' + i + '\" value=\"' + file + '\">' + file + '</li>') {
                     found = true;                    
                     break;
                 }                
@@ -38,7 +67,7 @@
             return items;
         }
         function insertItem(number, file) {                     
-            htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + number + '\">' + file + '</li>');
+            htmlList.push('<li ondblclick=\"listFunc(this.id,this.value)\" id=\"' + number + '\" value=\"' + file + '\">' + file + '</li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
@@ -57,18 +86,19 @@
     $(document).ready(function () {
         $('#MainTree').fileTree({
             root: 'C:/Users/',
-            script: '../Scripts/jqueryFileTree.aspx',
-            multiSelect: true,
+            script: '../Scripts/jqueryFileTree.aspx',            
             multiFolder: false,
             folderEvent: 'dblclick'
         }, function (file) {            
-            var items = new Array;
-            items = check(file);
+            var items = new Array; //array that contrains check outputs
+            items = checkVal(file);    //check will return, true or false and position if the file is already in the list
             if (items[0] == true) {               
-                deleteItem(items[1]);
+                deleteItem(items[1]); //deleteItem will delete an object in the list at position item[1]
+                uncheck(file);
             }
             else {                
-                insertItem(items[1], file);
+                insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]
+                check(file);
             }                 
         }, function (dir) {
             console.log(dir);            
@@ -83,12 +113,14 @@
                     icon: "edit",
                     callback: function (key, opt) {
                         var items = new Array;
-                        items = check($(this).attr('rel'));
+                        items = checkVal($(this).attr('rel'));
                         if (items[0] == true) {
                             deleteItem(items[1]);
+                            uncheck($(this).attr('rel'));
                         }
                         else {
                             insertItem(items[1], $(this).attr('rel'));
+                            check($(this).attr('rel'));
                         }
                     }
                 },
@@ -111,13 +143,6 @@
                 }
             }
             // there's more, have a look at the demos and docs...
-        }, function (action, el, pos) {
-            alert(
-                'Action: ' + action + '\n\n' +
-                'Element ID: ' + $(el).attr('id') + '\n\n' +
-                'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
-                'X: ' + pos.docX + '  Y: ' + pos.docY + ' (relative to document)'
-                );
         });
     });
     
