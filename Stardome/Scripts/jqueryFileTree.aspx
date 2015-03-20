@@ -23,6 +23,8 @@
     }
     //Response.Write("</ul>");
     //Response.Write("<ul id=\"file\" class=\"jqueryFileTree\" style=\"display: none;\">\n");
+
+    
 	foreach (System.IO.FileInfo fi in di.GetFiles())
 	{
 		string ext = ""; 
