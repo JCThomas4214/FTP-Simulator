@@ -25,7 +25,7 @@
             var found = false;           
             var items = new Array;
             for (var i = 0; i < htmlList.length; i++) {
-                if (htmlList[i] == '<li  id=\"' + i + '\" name=\"' + file + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\">' + file + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\"></li>') {
+                if (htmlList[i] == '<li  id=\"' + i + '\" name=\"' + file + '\">' + file + '<img src="\\Images\\Delete.png" id=\"' + i + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\"></li>') {
                     found = true;                    
                     break;
                 }                
@@ -36,7 +36,7 @@
             return items;
         }
         function insertItem(number, file) {                     
-            htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\" >' + file + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\"></li>');
+            htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + file + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id);uncheck(\'' + file + '\');\"></li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
