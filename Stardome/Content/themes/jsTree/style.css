@@ -28,7 +28,7 @@ div .innerwrap {
 }
 
 #selectedFileList LI {
-    cursor: pointer;
+    cursor: default;
     list-style-type: none;
     padding: 3px;
     font-weight: bold; 
@@ -42,10 +42,8 @@ div .innerwrap {
 }
 
 
-#selectedFileList LI:hover {    
-    color: red;
-    font-weight: bold; 
-    
+#selectedFileList LI img:hover {  
+    cursor: pointer;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
