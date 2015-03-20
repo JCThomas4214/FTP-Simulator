@@ -42,8 +42,31 @@
             items[1] = i;
             return items;
         }
+
+        function aud_play_pause(file) {
+
+            var myAudio = document.getElementById("contentMP3");
+            if (myAudio.paused) {
+                myAudio.play();
+            } else {
+                myAudio.pause();
+            }
+
+            //var found = false;
+            //var items = new Array;
+            //for (var i = 0; i < htmlList.length; i++) {
+            //    if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id)\" id=\"' + i + '\">' + file + '</li>') {
+            //        found = true;
+            //        break;
+            //    }
+            //}
+            //items[0] = found;
+            //items[1] = i;
+            //return items;
+        }
+
         function insertItem(number, file) {
-            htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + number + '\">' + file + '</li>');
+            htmlList.push('<li ondblclick=\"deleteItem(this.id)\" id=\"' + number + '\">' + file + 'xx</li>');
             currentPath = '<label>' + file + '</label>';
             fileList.push(file);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");

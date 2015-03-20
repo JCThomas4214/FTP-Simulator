@@ -61,7 +61,7 @@
             return items;
         }
         function insertItem(number, file) {                     
-            htmlList.push('<li ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\" id=\"' + number + '\" name=\"' + file + '\">' + file + '</li>');
+            htmlList.push('<li ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\" id=\"' + number + '\" name=\"' + file + '\">' + file + 'xx</li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
