@@ -27,7 +27,7 @@ div .innerwrap {
     float:left;
 }
 
-#selectedFileList li {
+#selectedFileList LI {
     cursor: pointer;
     list-style-type: none;
     padding: 3px;
@@ -42,10 +42,10 @@ div .innerwrap {
 }
 
 
-#selectedFileList li:hover {    
+#selectedFileList LI:hover {    
     color: red;
     font-weight: bold; 
-    font-style: italic;
+    
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -53,6 +53,15 @@ div .innerwrap {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#selectedFileList li img {
+    width:18px;
+    height:18px;
+    vertical-align:bottom;
+    position:relative;
+    margin-left: 8px;
+    margin-top: 4px;
 }
 
 #labels {

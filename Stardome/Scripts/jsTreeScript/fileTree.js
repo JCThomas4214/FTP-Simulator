@@ -1,5 +1,7 @@
 		var fileList = new Array;
-        var htmlList = new Array;         
+		var htmlList = new Array;
+		var root = "C:/Users/";
+		var t = new String;
 
         function check(box) {            
             document.getElementById(box).checked = true;            
@@ -23,7 +25,7 @@
             var found = false;           
             var items = new Array;
             for (var i = 0; i < htmlList.length; i++) {
-                if (htmlList[i] == '<li ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\" id=\"' + i + '\" name=\"' + file + '\">' + file + '</li>') {
+                if (htmlList[i] == '<li  id=\"' + i + '\" name=\"' + file + '\" ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\">' + file + '<img src="\\Images\\Delete.png"></li>') {
                     found = true;                    
                     break;
                 }                
@@ -34,7 +36,7 @@
             return items;
         }
         function insertItem(number, file) {                     
-            htmlList.push('<li ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\" id=\"' + number + '\" name=\"' + file + '\">' + file + '</li>');
+            htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\" ondblclick=\"deleteItem(this.id);uncheck(\''+file+'\');\">' + file + '<img src="\\Images\\Delete.png"></li>');
             fileList.push(file);
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
@@ -52,7 +54,7 @@
         }
 		 $(document).ready(function () {
         $('#MainTree').fileTree({
-            root: 'C:/Users/',
+            root: root,
             script: '../Scripts/jqueryFileTree.aspx',            
             multiFolder: false,
             folderEvent: 'dblclick'
@@ -74,8 +76,23 @@
             // define which elements trigger this menu
             selector: "li a",           
             // define the elements of the menu
+                
             items: {
-                "download": {
+                download : {
+                    name: "Download",
+                    icon: "copy",
+                    callback: function (key, opt) {
+
+                    },
+                    disabled: function (key, opt) {
+                        if ($(this).parent().attr('id') == "folder") {
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                },
+                "download list": {
                     name: "Add/Remove file",
                     icon: "edit",
                     callback: function (key, opt) {
@@ -89,6 +106,13 @@
                             insertItem(items[1], $(this).attr('rel'));
                             check($(this).attr('rel'));
                         }
+                    },
+                    disabled: function (key, opt) {
+                        if ($(this).parent().attr('id') == "folder") {
+                            return true;
+                        }
+                        else
+                            return false;
                     }
                 },
                 "upload": {
@@ -97,6 +121,13 @@
                     callback: function (key, opt) {                        
                         var m = "clicked: " + key + " on " + $(this).attr('rel');
                         window.console && console.log(m) || alert(m);                        
+                    },
+                    disabled: function (key, opt) {                        
+                        if ($(this).parent().attr('id') == "file") {
+                            return true;
+                        }
+                        else
+                            return false;
                     }
                 },
                 "sep1": "---------",
@@ -111,4 +142,5 @@
             }
             // there's more, have a look at the demos and docs...
         });
+
     });
