@@ -56,10 +56,10 @@ div .innerwrap {
 #selectedFileList li img {
     width:18px;
     height:18px;
-    vertical-align:bottom;
+    vertical-align:middle;
     position:relative;
     margin-left: 8px;
-    margin-top: 4px;
+    margin-bottom: 2px;
 }
 
 #labels {
