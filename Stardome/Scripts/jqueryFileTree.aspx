@@ -20,10 +20,7 @@
 	foreach (System.IO.DirectoryInfo di_child in di.GetDirectories())
     {
         Response.Write("\t<li id=\"folder\" class=\"directory collapsed\"><a href=\"#\" rel=\"" + dir + di_child.Name + "/\">" + di_child.Name + "</a></li>\n");
-    }
-    //Response.Write("</ul>");
-    //Response.Write("<ul id=\"file\" class=\"jqueryFileTree\" style=\"display: none;\">\n");
-
+    }  
     
 	foreach (System.IO.FileInfo fi in di.GetFiles())
 	{

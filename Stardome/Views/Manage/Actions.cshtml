@@ -1,7 +1,9 @@
 ﻿@using Stardome.DomainObjects
 ﻿@model Stardome.Models.ContentModel
 @Scripts.Render("~/Scripts/jsTree")
+@Scripts.Render("~/Scripts/bootstrap")
 @Styles.Render("~/Content/jsTree")
+@Styles.Render("~/Content/bootstrap")
 @if (Request.IsAuthenticated == false)
 {
     Response.Redirect("~/Account/Login");
@@ -26,7 +28,30 @@
     <meta charset="utf-8">
     <title>Content</title>
     <script type="text/javascript">
-        root =   '@Model.RootPath';
+        root = '@Model.RootPath';
+
+        var htmlDDlist = new Array;
+        var subList = new Array;
+        subList = ["Test1", "Test2", "Test3"];
+
+
+
+        $(document).ready(function () {
+            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">Dropdown<span class=\"caret\"></span></button>');
+            htmlDDlist.push('<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">');
+            for (var i = 0; i < subList.length; i++) {
+                htmlDDlist.push('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + subList[i] + '</a></li>');
+            }
+            htmlDDlist.push('</div>');
+            document.getElementById('dropD').innerHTML = htmlDDlist.join("");
+
+            $(function () {
+                $(".dropdown-menu li a").click(function () {
+                    $(".btn:first-child").text($(this).text());
+                    $(".btn:first-child").val($(this).text());
+                });
+            });
+        });
     </script>
 
 </head>
@@ -40,6 +65,7 @@
         </table>
     </div>
     <div class="outer">
+        <div id="dropD"></div>
         <div class="innerwrap">
             <div id="MainTree"></div>
             <div id="selectedFileList"></div>
