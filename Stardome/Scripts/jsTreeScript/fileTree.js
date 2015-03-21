@@ -38,8 +38,8 @@
             return items;
         }
 
-        function downloadMP3(file) {
-            window.open("/Services/Application/FileDownloadPage.aspx?FilePath=" + file); //TODO: Change the location for Filedownloadpage.aspx
+        function downloadMP3(filePath) {
+            window.open("/Services/Application/FileDownloadPage.aspx?FilePath=" + filePath); //TODO: Change the location for Filedownloadpage.aspx
         }
 
         function aud_play_pause(file) {
@@ -52,6 +52,51 @@
             } else {
                 myAudio.pause();
                 document.getElementById(file).src = "/Images/play.png";
+            }
+        }
+
+        function deleteFile(file)
+        {
+
+            $("#dialog-confirm").html("This will delete the file permanently. Are you sure?");
+            // Define the Dialog and its properties.
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                modal: true,
+                title: "Are you sure?",
+                height: 150,
+                width: 400,
+                buttons: {
+                    "Yes": function () {
+                        $(this).dialog('close');
+                        callback(true, file);
+                    },
+                    "No": function () {
+                        $(this).dialog('close');
+                        callback(false, file);
+                    }
+                }
+            });
+        }
+
+        function callback(value, filePath) {
+            if (value) {
+                $.ajax({
+                    url: "/Manage/DeleteFile/?filePath=" + filePath,
+                    type: "POST",
+                    data: { filePath: filePath },
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                    },
+                    async: true,
+                    processData: false
+                });
+
+
+            } else {
+                //Clicked No; do Nothing
             }
         }
 

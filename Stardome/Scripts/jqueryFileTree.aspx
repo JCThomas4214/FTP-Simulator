@@ -35,8 +35,8 @@
         
         Response.Write("\t<li id=\"file\" class=\"file ext_" + ext + "\"><input class=\"FTCB\" type=\"checkbox\" onclick=\"checkB(this.id)\" id=\"" + dir + fi.Name + 
                     "\" rel=\"" + dir + fi.Name + "\"><a href=\"#\" rel=\"" + dir + fi.Name + "\">" + fi.Name +
-                    "</a>&nbsp;&nbsp;<a href='#' ><img src='\\Images\\Play.png' Title='Play the file' id='" + filePath + "' style='width:15px;Height:15px' onclick='aud_play_pause(this.id);' ></a>" + 
-                    "&nbsp;<img id=\"FTbutton\" src='\\Images\\Delete.png' Title='Delete file' style='width:15px;Height:15px'>&nbsp;"+
+                    "</a>&nbsp;&nbsp;<a href='#' ><img src='\\Images\\Play.png' Title='Play the file' id='" + filePath + "' style='width:15px;Height:15px' onclick='aud_play_pause(this.id);' ></a>" +
+                    "&nbsp;<a href='#' ><img id='" + filePath + "' src='\\Images\\Delete.png' Title='Delete file' style='width:15px;Height:15px' onclick ='deleteFile(this.id);'></a>&nbsp;" +
                     "<a href='#' >" +
                     "<img src='\\Images\\download.ico' Title='Download the file' style='width:15px;Height:15px' id='" + filePath + "' onclick ='downloadMP3(this.id);'/></a></li>" +
                         "\n");

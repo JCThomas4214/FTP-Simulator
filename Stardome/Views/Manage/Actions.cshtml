@@ -2,8 +2,9 @@
 ﻿@model Stardome.Models.ContentModel
 @Scripts.Render("~/Scripts/jsTree")
 @Styles.Render("~/Content/jsTree")
-@if (Request.IsAuthenticated == false) {
-     Response.Redirect("~/Account/Login");
+@if (Request.IsAuthenticated == false)
+{
+    Response.Redirect("~/Account/Login");
 
 }
 @if (Model.RoleId != (int)Enums.Roles.Admin && Model.RoleId != (int)Enums.Roles.Producer && Model.RoleId != (int)Enums.Roles.User)
@@ -23,40 +24,45 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Content</title>         
+    <title>Content</title>
     <script type="text/javascript">
-        root = '@Model.RootPath';
+        root =   '@Model.RootPath';
     </script>
 
 </head>
-<body> 
-    <div><table id="labels">
-        <tr>
-            <td>Files & Folders</td>
-            <td>Files For Download</td>
-        </tr>    
-    </table></div>
+<body>
+    <div>
+        <table id="labels">
+            <tr>
+                <td>Files & Folders</td>
+                <td>Files For Download</td>
+            </tr>
+        </table>
+    </div>
     <div class="outer">
-    <div class="innerwrap">
+        <div class="innerwrap">
             <div id="MainTree"></div>
-        <div id="selectedFileList"></div>
-    </div></div>    
-  
+            <div id="selectedFileList"></div>
+        </div>
+    </div>
+
+    <div id="dialog-confirm"></div>
+
     @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
     {
         using (Html.BeginForm("Actions", "Manage", FormMethod.Post))
-         {
-             <label id="lastDir"></label>
-             <input type="hidden" name="lastSelected" id="lastSelected" value=""/>
-             <label for="file">Upload File</label>
-             <input type="file" name="files" multiple="multiple" />
-             <br>
-             <br>
-             <input type="submit" value="Upload Selected Files" />
-             <br>
-             @ViewBag.Message<br>
-         }
+        {
+            <label id="lastDir"></label>
+            <input type="hidden" name="lastSelected" id="lastSelected" value="" />
+            <label for="file">Upload File</label>
+            <input type="file" name="files" multiple="multiple" />
+            <br>
+            <br>
+            <input type="submit" value="Upload Selected Files" />
+            <br>
+            @ViewBag.Message<br>
+        }
     }
 </body>
-</html>  
+</html>
 
