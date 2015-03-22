@@ -9,6 +9,8 @@ using WebMatrix.WebData;
 using Stardome.Filters;
 using Stardome.Models;
 using System.Net.Mail;
+using Stardome.Services.Application;
+
 
 namespace Stardome.Controllers
 {
@@ -18,13 +20,16 @@ namespace Stardome.Controllers
     {
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly IRoleService roleService;
+        private readonly IAuthenticationProvider authenticationProvider;
+
         private readonly SiteSettingsService siteSettingsService;
         private const string defaultPassword = "deFa8lt";
 
-        public AccountController(IUserAuthCredentialService aUserAuthCredentialService, IRoleService aRoleService)
+        public AccountController(IUserAuthCredentialService aUserAuthCredentialService, IRoleService aRoleService, IAuthenticationProvider aAuthenticationProvider)
         {
             userAuthCredentialService = aUserAuthCredentialService;
             roleService = aRoleService;
+            authenticationProvider = aAuthenticationProvider;
         }
 
         public AccountController()
@@ -33,6 +38,7 @@ namespace Stardome.Controllers
                 new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
+            authenticationProvider = new AuthenticationProvider();
         }
 
         //
@@ -41,9 +47,10 @@ namespace Stardome.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.IsAuthenticated)
+            if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
-                int roleId = userAuthCredentialService.GetByUsername(WebSecurity.CurrentUserName).Role.Id;
+                
+                int roleId = userAuthCredentialService.GetByUsername(authenticationProvider.CurrentUserName()).Role.Id;
                 return RedirectToLocal(roleId);
             }
             else
@@ -64,7 +71,7 @@ namespace Stardome.Controllers
 
             string password = userAuthCredentialService.EncryptPassword(model.Password);
 
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, password, model.RememberMe))
+            if (ModelState.IsValid && authenticationProvider.Login(model.UserName, password, model.RememberMe))
             {
                 int roleId = userAuthCredentialService.GetByUsername(model.UserName).Role.Id;
                 return RedirectToLocal(roleId);
@@ -81,8 +88,7 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
-
+            authenticationProvider.Logout();
             return RedirectToAction("Login", "Account");
         }
 
@@ -102,7 +108,7 @@ namespace Stardome.Controllers
                     string password = userAuthCredentialService.EncryptPassword(defaultPassword);
                     if (model.RoleId < 1) //TODO: Diasble this
                         model.RoleId=1;
-                    var userProfile = WebSecurity.CreateUserAndAccount(model.Username, password, new
+                    var userProfile = authenticationProvider.CreateUserAndAccount(model.Username, password, new
                     {
 
                         AccountCreatedOn = DateTime.Now,
@@ -115,7 +121,7 @@ namespace Stardome.Controllers
                         //This way Userdetail is only created if UserProfile exists so that it can retrieve the foreign key
                     {
                         UserInformation UserInformation = new UserInformation();
-                        UserInformation.UserId = WebSecurity.GetUserId(model.Username);
+                        UserInformation.UserId = authenticationProvider.GetUserId(model.Username);
                         UserInformation.FirstName = model.FirstName;
                         UserInformation.LastName = model.LastName;
                         UserInformation.Email = model.EmailAddress;
@@ -126,7 +132,7 @@ namespace Stardome.Controllers
                             dbCtx.UserInformations.Add(UserInformation);
                             dbCtx.SaveChanges();
                         }
-                        GenerateAndSendEmail(model.Username, EmailType.AccountVerify);
+                        GenerateAndSendEmail(model.Username, Stardome.DomainObjects.Enums.EmailType.AccountVerify);
                         return Json(new {Result = "OK", Record = model});
                     }
                     throw new Exception();
@@ -143,13 +149,13 @@ namespace Stardome.Controllers
     //
         // GET: /Account/Manage
 
-        public ActionResult Manage(ManageMessageId? message)
+        public ActionResult Manage(Enums.ManageMessageId? message)
         {
-            if (WebSecurity.IsAuthenticated)
+            if (authenticationProvider.IsAuthenticated())
             {
                 ViewBag.StatusMessage =
-                        message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                        : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                        message == Enums.ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                        : message == Enums.ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                         : "";
                 UserAuthCredential usrInfo = userAuthCredentialService.GetByUsername(User.Identity.Name);
                 int roleId = usrInfo.Role.Id;
@@ -183,7 +189,7 @@ namespace Stardome.Controllers
         public ActionResult Manage(LocalPasswordModel model)
         {
 
-            if (ModelState.IsValid && WebSecurity.IsAuthenticated)
+            if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
                 
                 bool changePasswordSucceeded;
@@ -192,7 +198,7 @@ namespace Stardome.Controllers
                     string OldPassword = userAuthCredentialService.EncryptPassword(model.OldPassword);
                     string newPassword = userAuthCredentialService.EncryptPassword(model.NewPassword);
 
-                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, OldPassword, newPassword);
+                    changePasswordSucceeded = authenticationProvider.ChangePassword(User.Identity.Name, OldPassword, newPassword);
                     
                 }
                 catch (Exception)
@@ -203,7 +209,7 @@ namespace Stardome.Controllers
                 if (changePasswordSucceeded)
                 {
                    // ViewBag.changePasswordSucceeded = "Your Password has been changed successfully";
-                    return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    return RedirectToAction("Manage", new { Message = Enums.ManageMessageId.ChangePasswordSuccess });
                 }
                 else
                 {
@@ -234,7 +240,7 @@ namespace Stardome.Controllers
                 ViewBag.EmailSend = false;
                 if (user != null)
                 {
-                    GenerateAndSendEmail(user.Username, EmailType.ChangePassword);
+                    GenerateAndSendEmail(user.Username, Enums.EmailType.ChangePassword);
                 }
                 else // Email not found
                 {
@@ -261,7 +267,7 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken,
+                bool resetResponse = authenticationProvider.ResetPassword(model.ReturnToken,
                 userAuthCredentialService.EncryptPassword(model.Password));
                 if (resetResponse)
                 {
@@ -294,26 +300,12 @@ namespace Stardome.Controllers
                     return RedirectToAction("Login", "Account");
             }
         }
-
-        public enum ManageMessageId
-        {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-        }
-
-        public enum EmailType
-        {
-            ChangePassword,
-            AccountVerify,
-        }
-
-
+        
         // This function Generate and Sends the email for User Register and Password Reset
-        private void GenerateAndSendEmail(String userName, EmailType emailType)
+        private void GenerateAndSendEmail(String userName, Enums.EmailType emailType)
         {
             // Generae password token that will be used in the email link to authenticate user
-            var token = WebSecurity.GeneratePasswordResetToken(userName);
+            var token = authenticationProvider.GeneratePasswordResetToken(userName);
             // Generate the html link sent via email
             string resetLink = "<a href='"
                + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
@@ -323,12 +315,12 @@ namespace Stardome.Controllers
             UserInformation aUser = userAuthCredentialService.GetByUsername(userName).UserInformations.FirstOrDefault();
             // Email stuff
             body = "Dear " + aUser.LastName + "<\br>";
-            if (emailType==EmailType.AccountVerify)
+            if (emailType == Enums.EmailType.AccountVerify)
             {
                  subject = "Welcome to stardome.com. Activate your Account";
                  body += siteSettingsService.GetById(6).Value;  
             }
-            else if (emailType==EmailType.ChangePassword)
+            else if (emailType == Enums.EmailType.ChangePassword)
             {
                 subject = "Reset your password for stardome.com";
                 body += siteSettingsService.GetById(7).Value; 

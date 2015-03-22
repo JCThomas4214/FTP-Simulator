@@ -9,5 +9,18 @@
             User = 3,
             InActive = 4
         };
+
+        public enum ManageMessageId
+        {
+            ChangePasswordSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+        }
+
+        public enum EmailType
+        {
+            ChangePassword,
+            AccountVerify,
+        }
     }
 }

@@ -271,6 +271,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Application\AesEncryption.cs" />
+    <Compile Include="Services\Application\AuthenticationProvider.cs" />
+    <Compile Include="Services\Application\IAuthenticationProvider.cs" />
     <Compile Include="Services\Domain\FileService.cs" />
     <Compile Include="Services\Domain\FolderService.cs" />
     <Compile Include="Services\Domain\IFileService.cs" />

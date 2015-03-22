@@ -110,8 +110,7 @@ namespace Stardome.Controllers
 
             return View(model);
         }
-
-
+        
         [HttpPost]
         public ActionResult DeleteFile(string filePath)
         {
