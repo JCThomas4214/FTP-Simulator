@@ -105,19 +105,12 @@ namespace Stardome.Tests.Controllers
         {
 
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredential1);
-
-            HttpContext.Current = new HttpContext( new HttpRequest("", "http://tempuri.org", ""), new HttpResponse(new StringWriter()) );
-            // User is logged in
-            HttpContext.Current.User = new GenericPrincipal( new GenericIdentity("username"), new string[0] );
-
+            aMockAuthenticationProvider.Setup(AP => AP.IsAuthenticated()).Returns(true);
             ViewResult result = controller.Manage(Enums.ManageMessageId.ChangePasswordSuccess) as ViewResult;
-            
-            // User is logged out
-            HttpContext.Current.User = new GenericPrincipal( new GenericIdentity(String.Empty), new string[0] );
             Boolean isTrue = Equals(result.ViewBag.StatusMessage, "Your password has been changed.");
             isTrue = isTrue && result.ViewBag.showAdminMenu;
             isTrue = isTrue && Equals(result.ViewBag.Name, "Jane Doe");
-            isTrue = isTrue && Equals(result.ViewBag.Email, "email1");
+            isTrue = isTrue && Equals(result.ViewBag.Email, "email1@email.com");
             isTrue = isTrue && Equals(result.ViewBag.Role, "Admin");
 
             Assert.IsTrue(isTrue);
@@ -128,15 +121,8 @@ namespace Stardome.Tests.Controllers
         {
 
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredential1);
-
-            HttpContext.Current = new HttpContext(new HttpRequest("", "http://tempuri.org", ""), new HttpResponse(new StringWriter()));
-            // User is logged in
-            HttpContext.Current.User = new GenericPrincipal(new GenericIdentity("username"), new string[0]);
-
+            aMockAuthenticationProvider.Setup(AP => AP.IsAuthenticated()).Returns(true);
             ViewResult result = controller.Manage(Enums.ManageMessageId.SetPasswordSuccess) as ViewResult;
-
-            // User is logged out
-            HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(String.Empty), new string[0]);
             Boolean isTrue = Equals(result.ViewBag.StatusMessage, "Your password has been set.");
 
             Assert.IsTrue(isTrue);
@@ -145,17 +131,9 @@ namespace Stardome.Tests.Controllers
         [TestMethod]
         public void Manage_NullUserInfo()
         {
-
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialNoUserInfo);
-
-            HttpContext.Current = new HttpContext(new HttpRequest("", "http://tempuri.org", ""), new HttpResponse(new StringWriter()));
-            // User is logged in
-            HttpContext.Current.User = new GenericPrincipal(new GenericIdentity("username"), new string[0]);
-
+            aMockAuthenticationProvider.Setup(AP => AP.IsAuthenticated()).Returns(true);
             ViewResult result = controller.Manage(Enums.ManageMessageId.ChangePasswordSuccess) as ViewResult;
-
-            // User is logged out
-            HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(String.Empty), new string[0]);
             Boolean isTrue = !result.ViewBag.showAdminMenu;
             isTrue = isTrue && String.IsNullOrEmpty(result.ViewBag.Name);
             isTrue = isTrue && String.IsNullOrEmpty(result.ViewBag.Email);
