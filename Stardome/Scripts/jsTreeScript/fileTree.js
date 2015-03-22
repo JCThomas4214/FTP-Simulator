@@ -126,6 +126,7 @@
             for (var i = number; i < htmlList.length; i++) {                      
                 tmp++;                    
                 htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
+                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
             }
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
