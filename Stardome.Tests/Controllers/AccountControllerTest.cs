@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using Moq;
 using Stardome.DomainObjects;
 using Stardome.Services.Domain;
+using Stardome.Services.Application;
+using Stardome.Models;
+using System.Collections.Generic;
 
 namespace Stardome.Tests.Controllers
 {
@@ -20,6 +23,7 @@ namespace Stardome.Tests.Controllers
         private Mock<IUserInformationService> aMockUserInformationService;
         private Mock<ControllerContext> controllerContext;
         private Mock<IPrincipal> principal;
+        readonly Mock<IAuthenticationProvider> aMockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
         private AccountController controller;
 
@@ -34,7 +38,8 @@ namespace Stardome.Tests.Controllers
             aMockUserInformationService = new Mock<IUserInformationService>();
             controllerContext = new Mock<ControllerContext>();
             principal = new Mock<IPrincipal>();
-            controller = new AccountController(aMockUserAuthCredentialService.Object, aMockSiteSettingsService.Object, aMockUserInformationService.Object);
+            controller = new AccountController(aMockUserAuthCredentialService.Object, aMockSiteSettingsService.Object, aMockUserInformationService.Object, aMockAuthenticationProvider.Object);
+
             principal.SetupGet(x => x.Identity.Name).Returns("username");
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
             controller.ControllerContext = controllerContext.Object;
@@ -49,7 +54,7 @@ namespace Stardome.Tests.Controllers
                 {
                     new UserInformation
                     {
-                        Email = "email1",
+                        Email = "email1@email.com",
                         FirstName = "Jane",
                         LastName = "Doe"
                     }
@@ -93,18 +98,7 @@ namespace Stardome.Tests.Controllers
             Assert.IsTrue(Equals("Login", result.RouteValues["action"]) && Equals("Account", result.RouteValues["controller"]));
         }
 
-        //[TestMethod]
-        //public void Register()
-        //{
-        //    // Does register add the userInfo and UserAuthCredential
-        //    //User addedUser = new User
-        //    //{
-                
-        //    //};
-        //    //controller.Register(user);
-        //    //var result = controller.Register();
-        //    //Assert.IsInstanceOfType(result, typeof(ViewResult));
-        //}
+
 
         [TestMethod]
         public void Manage_ChangePasswordSuccess()
@@ -168,6 +162,92 @@ namespace Stardome.Tests.Controllers
             isTrue = isTrue && Equals(result.ViewBag.Role, "User");
 
             Assert.IsTrue(isTrue);
+        }
+
+        [TestMethod]
+         public void LoginTest()  //POST Method
+         {
+            LoginModel lm =new LoginModel();
+            lm.UserName = "username";
+            lm.Password = null;
+            lm.RememberMe = false;
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredential1);
+            aMockAuthenticationProvider.Setup(AP => AP.Login("username",null,false)).Returns(true);
+            var result =(RedirectToRouteResult) controller.Login(lm, "") ;
+            Assert.AreEqual("Users", result.RouteValues["action"]);
+         }
+
+        [TestMethod]
+        public void InavlidLoginTest()  //POST Method
+        {
+            LoginModel lm = new LoginModel();
+            lm.UserName = "username";
+            lm.Password = null;
+            lm.RememberMe = false;
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredential1);
+            aMockAuthenticationProvider.Setup(AP => AP.Login("username1", null, false)).Returns(true);
+            var result = (ViewResult)controller.Login(lm, "");
+            Assert.AreEqual(false,result.ViewData.ModelState.IsValid);
+        }
+ 
+        [TestMethod]
+        public void LogOffTest() //POST Method
+        { 
+            RedirectToRouteResult result = (RedirectToRouteResult)controller.LogOff();
+            Assert.AreEqual("Login", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void Manage() //POST Method
+        {
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredential1);
+            aMockAuthenticationProvider.Setup(AP => AP.Login("username", null, false)).Returns(true);
+            aMockAuthenticationProvider.Setup(AP => AP.IsAuthenticated()).Returns(true);
+            var result = (ViewResult)controller.Manage(Enums.ManageMessageId.ChangePasswordSuccess);
+            Assert.AreEqual(true, result.ViewData.ModelState.IsValid);
+        }
+
+        [TestMethod]
+        public void ManageNotAuthenticated() //POST Method
+        {
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredential1);
+            aMockAuthenticationProvider.Setup(AP => AP.Login("username", null, false)).Returns(true);
+            aMockAuthenticationProvider.Setup(AP => AP.IsAuthenticated()).Returns(false);
+            var result = (RedirectToRouteResult)controller.Manage(Enums.ManageMessageId.ChangePasswordSuccess);
+            Assert.AreEqual("Login", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void LostPassword() //POST Method
+        {
+            aMockAuthenticationProvider.Setup(AP => AP.GeneratePasswordResetToken("username1", 15)).Returns("token");
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByEmail("email1@email.com")).Returns(userAuthCredential1);
+            LostPasswordModel lpm = new LostPasswordModel();
+            lpm.Email = "email1@email.com";
+            var result = (ViewResult)controller.LostPassword(lpm);
+            Assert.AreEqual(true, result.ViewData.ModelState.IsValid);
+        }
+
+        [TestMethod]
+        public void ResetPassword() //POST Method
+        {
+            aMockAuthenticationProvider.Setup(AP => AP.ResetPassword("token",null)).Returns(true);
+            ResetPasswordModel rpm = new ResetPasswordModel();
+            rpm.ReturnToken = "token";
+            rpm.Password = null;
+            var result = (ViewResult)controller.ResetPassword(rpm);
+            Assert.AreEqual("Successfully Changed", result.ViewBag.Message);
+        }
+
+        [TestMethod]
+        public void ResetPasswordWrongToken() //POST Method
+        {
+            aMockAuthenticationProvider.Setup(AP => AP.ResetPassword("token", null)).Returns(true);
+            ResetPasswordModel rpm = new ResetPasswordModel();
+            rpm.ReturnToken = "token1";
+            rpm.Password = null;
+            var result = (ViewResult)controller.ResetPassword(rpm);
+            Assert.AreEqual("Something went horribly wrong!", result.ViewBag.Message);
         }
 
     }

@@ -9,6 +9,7 @@ using WebMatrix.WebData;
 using Stardome.Filters;
 using Stardome.Models;
 using System.Net.Mail;
+using Stardome.Services.Application;
 
 namespace Stardome.Controllers
 {
@@ -19,13 +20,16 @@ namespace Stardome.Controllers
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly ISiteSettingsService siteSettingsService;
         private readonly IUserInformationService userInformationService;
+        private readonly IAuthenticationProvider authenticationProvider;
+
         private const string defaultPassword = "deFa8lt";
 
-        public AccountController(IUserAuthCredentialService aUserAuthCredentialService, ISiteSettingsService aSiteSettingsService, IUserInformationService aUserInformationService)
+        public AccountController(IUserAuthCredentialService aUserAuthCredentialService, ISiteSettingsService aSiteSettingsService, IUserInformationService aUserInformationService, IAuthenticationProvider aAuthenticationProvider)
         {
             userAuthCredentialService = aUserAuthCredentialService;
             siteSettingsService = aSiteSettingsService;
             userInformationService = aUserInformationService;
+            authenticationProvider = aAuthenticationProvider;
         }
 
         public AccountController()
@@ -33,6 +37,7 @@ namespace Stardome.Controllers
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
             userInformationService = new UserInformationService(new UserInformationRepository(new StardomeEntitiesCS()));
+            authenticationProvider = new AuthenticationProvider();
         }
 
         //
@@ -41,9 +46,9 @@ namespace Stardome.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.IsAuthenticated)
+            if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
-                int roleId = userAuthCredentialService.GetByUsername(WebSecurity.CurrentUserName).Role.Id;
+                int roleId = userAuthCredentialService.GetByUsername(authenticationProvider.CurrentUserName()).Role.Id;
                 return RedirectToLocal(roleId);
             }
             else
@@ -62,9 +67,10 @@ namespace Stardome.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
 
-            string password = userAuthCredentialService.EncryptPassword(model.Password);
+           string password = userAuthCredentialService.EncryptPassword(model.Password);
+           
 
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, password, model.RememberMe))
+            if (ModelState.IsValid && authenticationProvider.Login(model.UserName, password, model.RememberMe))
             {
                 int roleId = userAuthCredentialService.GetByUsername(model.UserName).Role.Id;
                 return RedirectToLocal(roleId);
@@ -81,7 +87,7 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            authenticationProvider.Logout();
 
             return RedirectToAction("Login", "Account");
         }
@@ -100,7 +106,7 @@ namespace Stardome.Controllers
                     // Attempt to register the user
 
                     string password = userAuthCredentialService.EncryptPassword(defaultPassword);
-                    var userProfile = WebSecurity.CreateUserAndAccount(model.Username, password, new
+                    var userProfile = authenticationProvider.CreateUserAndAccount(model.Username, password, new
                     {
                         AccountCreatedOn = DateTime.Now,
                         model.RoleId,
@@ -111,7 +117,7 @@ namespace Stardome.Controllers
                     {
                         UserInformation userInformation = new UserInformation
                         {
-                            UserId = WebSecurity.GetUserId(model.Username),
+                            UserId = authenticationProvider.GetUserId(model.Username),
                             FirstName = model.FirstName,
                             LastName = model.LastName,
                             Email = model.EmailAddress,
@@ -137,7 +143,7 @@ namespace Stardome.Controllers
 
         public ActionResult Manage(Enums.ManageMessageId? message)
         {
-            if (WebSecurity.IsAuthenticated)
+            if (authenticationProvider.IsAuthenticated())
             {
                 ViewBag.StatusMessage =
                         message == Enums.ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -179,7 +185,7 @@ namespace Stardome.Controllers
         public ActionResult Manage(LocalPasswordModel model)
         {
 
-            if (ModelState.IsValid && WebSecurity.IsAuthenticated)
+            if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
                 bool changePasswordSucceeded;
                 try
@@ -187,7 +193,7 @@ namespace Stardome.Controllers
                     string OldPassword = userAuthCredentialService.EncryptPassword(model.OldPassword);
                     string newPassword = userAuthCredentialService.EncryptPassword(model.NewPassword);
 
-                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, OldPassword, newPassword);
+                    changePasswordSucceeded = authenticationProvider.ChangePassword(User.Identity.Name, OldPassword, newPassword);
                     
                 }
                 catch (Exception)
@@ -256,7 +262,7 @@ namespace Stardome.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken,
+                bool resetResponse = authenticationProvider.ResetPassword(model.ReturnToken,
                 userAuthCredentialService.EncryptPassword(model.Password));
                 if (resetResponse)
                 {
@@ -294,7 +300,7 @@ namespace Stardome.Controllers
         private void GenerateAndSendEmail(String userName, Enums.EmailType emailType)
         {
             // Generae password token that will be used in the email link to authenticate user
-            var token = WebSecurity.GeneratePasswordResetToken(userName);
+            var token = authenticationProvider.GeneratePasswordResetToken(userName);
             // Generate the html link sent via email
             string resetLink = "<a href='"
                + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
