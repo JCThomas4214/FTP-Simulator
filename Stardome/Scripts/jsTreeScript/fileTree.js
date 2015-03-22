@@ -4,20 +4,19 @@
 		var t = new String;
 
 		function call(number) {
-		    for (var i = 0; i < fileList.length; i++) {
-		        console.log(fileList.length);
+		    for (var i = 0; i < fileList.length; i++) {		        
 		        try{check(fileList[i]);}
-                catch(e){}
+                catch(e){console.log(fileList[i] + "is not in the current file tree")}
 		    }
 		}
 
 		function check(box) {
-		    console.log(box);
+		    //console.log(box);
             document.getElementById(box).checked = true;            
         }
 
         function uncheck(box) {
-            console.log(box);
+            //console.log(box);
             document.getElementById(box).checked = false;           
         }
 
@@ -36,7 +35,7 @@
             var found = false;           
             var items = new Array;
             for (var i = 0; i < htmlList.length; i++) {
-                if (htmlList[i] == '<li  id=\"' + i + '\" name=\"' + file + '\">' + file + '<img src="\\Images\\Delete.png" id=\"' + i + '\" onclick=\"deleteItem(this.id)\"></li>') {
+                if (fileList[i] == file) {
                     found = true;                    
                     break;
                 }                
@@ -119,7 +118,10 @@
         function deleteItem(number) {
             var tmp = number;            
             htmlList.splice(number, 1);
-            uncheck(fileList[number]);
+
+            try { uncheck(fileList[number]); }
+            catch (e) { }
+
             fileList.splice(number, 1);
             for (var i = number; i < htmlList.length; i++) {                      
                 tmp++;                    
@@ -127,6 +129,27 @@
             }
             console.log(fileList);
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+        }
+
+        function dropD() {
+            console.log(subList[0][1]);
+            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">Dropdown<span class=\"caret\"></span></button>');
+            htmlDDlist.push('<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">');
+            for (var i = 0; i < subList.length; i++) {
+                htmlDDlist.push('<li role="presentation"><a role="menuitem" tabindex="-1" id=\"' + subList[i][0] + '\" href="#">' + subList[i][1] + '</a></li>');
+            }
+            htmlDDlist.push('</div>');
+            document.getElementById('dropD').innerHTML = htmlDDlist.join("");
+
+            $(function () {
+                $(".dropdown-menu li a").click(function () {
+                    $(".btn:first-child").text($(this).text());
+                    $(".btn:first-child").val($(this).text());
+                    Tree($(this).attr('id'));
+
+                    setTimeout(function () { call(); }, 100);
+                });
+            });
         }
 
         function Tree(root) {
@@ -222,6 +245,7 @@
             
         }
 
-		 $(document).ready(function () {
+        $(document).ready(function () {
+             dropD();
 		     Tree(root);    
          });

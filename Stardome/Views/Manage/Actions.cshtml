@@ -35,31 +35,7 @@
         subList[1] = ["C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\CNN\\", "CNN"];
         subList[2] = ["C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\FOX\\", "FOX"];
 
-        root = subList[0][0];@*'@Model.RootPath';*@
-        
-
-        $(document).ready(function () {
-            console.log(subList[0][1]);
-            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">Dropdown<span class=\"caret\"></span></button>');
-            htmlDDlist.push('<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">');
-            for (var i = 0; i < subList.length; i++) {
-                htmlDDlist.push('<li role="presentation"><a role="menuitem" tabindex="-1" id=\"' + subList[i][0] + '\" href="#">' + subList[i][1] + '</a></li>');
-            }
-            htmlDDlist.push('</div>');
-            document.getElementById('dropD').innerHTML = htmlDDlist.join("");
-
-            $(function () {
-                $(".dropdown-menu li a").click(function () {
-                    $(".btn:first-child").text($(this).text());
-                    $(".btn:first-child").val($(this).text());
-                    Tree($(this).attr('id'));                    
-                    
-                    setTimeout(function () { call(); }, 100);
-                });
-                
-                
-            });
-        });
+        root = subList[0][0];@*'@Model.RootPath';*@        
     </script>
 
 </head>
