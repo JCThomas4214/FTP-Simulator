@@ -817,26 +817,101 @@
       <WorkItemId>0</WorkItemId>
       <MarkerRegionType>Action</MarkerRegionType>
     </TestStepMarkerAction>
-    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit">
+    <SetValueAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit">
       <ParameterName />
-      <Value Encoded="true">MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy</Value>
+      <Value Encoded="false">ab</Value>
       <Type>String</Type>
     </SetValueAction>
-    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit">
-      <ParameterName />
-      <Value Encoded="true">MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy</Value>
-      <Type>String</Type>
-    </SetValueAction>
-    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIConfirmnewpasswordEdit">
-      <ParameterName />
-      <Value Encoded="true">MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy</Value>
-      <Type>String</Type>
-    </SetValueAction>
-    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane.UIUpdatepasswordButton">
+    <SendKeysAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit">
       <ParameterName />
       <ModifierKeys>None</ModifierKeys>
       <IsGlobalHotkey>false</IsGlobalHotkey>
-      <Location X="99" Y="7" />
+      <Text Encoded="false">{Tab}</Text>
+    </SendKeysAction>
+    <SetValueAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <MouseAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="25" Y="24" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UIUserTableContainerPane1.UIItemPane">
+      <ContinueOnError>True</ContinueOnError>
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="1" Y="1" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Hover</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UILoginCustom">
+      <ContinueOnError>True</ContinueOnError>
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="1" Y="1" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Hover</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UILoginCustom.UIABHyperlink">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="9" Y="9" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane1.UICurrentpasswordCustom">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="37" Y="59" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <SendKeysAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Text Encoded="false">{Tab}</Text>
+    </SendKeysAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <SendKeysAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Text Encoded="false">{Tab}</Text>
+    </SendKeysAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIConfirmnewpasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane1.UIUpdatepasswordButton">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="90" Y="10" />
       <WheelDirection>0</WheelDirection>
       <ActionType>Click</ActionType>
       <MouseButton>Left</MouseButton>
@@ -1489,6 +1564,203 @@
       <WorkItemId>0</WorkItemId>
       <MarkerRegionType>Action</MarkerRegionType>
     </TestStepMarkerAction>
+    <MouseAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UIRecoverHyperlink">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="20" Y="12" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane">
+      <ContinueOnError>True</ContinueOnError>
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="1" Y="1" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Hover</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIYouraccountemailEdit">
+      <ParameterName />
+      <Value Encoded="false">timmychandy@gmail.com</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane.UIEmailLinkButton">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="54" Y="14" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <TestStepMarkerAction Comment="" MarkerInformation="ForgotPassword">
+      <ParameterName />
+      <StepId>-1</StepId>
+      <Direction>Start</Direction>
+      <Outcome />
+      <Disabled>false</Disabled>
+      <WorkItemId>0</WorkItemId>
+      <MarkerRegionType>Action</MarkerRegionType>
+    </TestStepMarkerAction>
+    <AssertAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane1.UIAnemailhasbeensendtoPane">
+      <ParameterName />
+      <PropertyName>InnerText</PropertyName>
+      <ExpectedValue> An email has been send to your email address. Please check your email for instructions on resetting the password</ExpectedValue>
+      <MessageOnValidationFailure />
+      <Type>String</Type>
+      <PropertyCondition>AreEqual</PropertyCondition>
+    </AssertAction>
+    <TestStepMarkerAction Comment="" MarkerInformation="ForgotPasswordAssert">
+      <ParameterName />
+      <StepId>-1</StepId>
+      <Direction>Start</Direction>
+      <Outcome />
+      <Disabled>false</Disabled>
+      <WorkItemId>0</WorkItemId>
+      <MarkerRegionType>Assertion</MarkerRegionType>
+    </TestStepMarkerAction>
+    <MouseAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UIRecoverHyperlink">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="14" Y="7" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIYouraccountemailEdit">
+      <ParameterName />
+      <Value Encoded="false">timmychandy@hotmail.com</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane.UIEmailLinkButton">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="34" Y="23" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <TestStepMarkerAction Comment="" MarkerInformation="ForgotPasswordInvalidEmail">
+      <ParameterName />
+      <StepId>-1</StepId>
+      <Direction>Start</Direction>
+      <Outcome />
+      <Disabled>false</Disabled>
+      <WorkItemId>0</WorkItemId>
+      <MarkerRegionType>Action</MarkerRegionType>
+    </TestStepMarkerAction>
+    <AssertAction UIObjectName="UIMap.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane2.UINouserfoundbythatemaCustom">
+      <ParameterName />
+      <PropertyName>InnerText</PropertyName>
+      <ExpectedValue>No user found by that email.</ExpectedValue>
+      <MessageOnValidationFailure />
+      <Type>String</Type>
+      <PropertyCondition>AreEqual</PropertyCondition>
+    </AssertAction>
+    <TestStepMarkerAction Comment="" MarkerInformation="ForgotPasswordInvalidEmailAssert">
+      <ParameterName />
+      <StepId>-1</StepId>
+      <Direction>Start</Direction>
+      <Outcome />
+      <Disabled>false</Disabled>
+      <WorkItemId>0</WorkItemId>
+      <MarkerRegionType>Assertion</MarkerRegionType>
+    </TestStepMarkerAction>
+    <SetValueAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit">
+      <ParameterName />
+      <Value Encoded="false">ab</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <SendKeysAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Text Encoded="false">{Tab}</Text>
+    </SendKeysAction>
+    <SetValueAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <MouseAction UIObjectName="UIMap.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="24" Y="22" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UIBodyPane.UIUserManagementPagePane">
+      <ContinueOnError>True</ContinueOnError>
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="1" Y="1" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Hover</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UILoginCustom.UIABHyperlink">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="4" Y="6" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <SendKeysAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Text Encoded="false">{Tab}</Text>
+    </SendKeysAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <SendKeysAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Text Encoded="false">{Tab}</Text>
+    </SendKeysAction>
+    <SetValueAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIConfirmnewpasswordEdit">
+      <ParameterName />
+      <Value Encoded="true">QWwOodIXpSM441BCNCWNvH9k+8fhegdI</Value>
+      <Type>String</Type>
+    </SetValueAction>
+    <MouseAction UIObjectName="UIMap.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane1.UIUpdatepasswordButton">
+      <ParameterName />
+      <ModifierKeys>None</ModifierKeys>
+      <IsGlobalHotkey>false</IsGlobalHotkey>
+      <Location X="90" Y="10" />
+      <WheelDirection>0</WheelDirection>
+      <ActionType>Click</ActionType>
+      <MouseButton>Left</MouseButton>
+    </MouseAction>
+    <TestStepMarkerAction Comment="" MarkerInformation="ProfilePasswordReset">
+      <ParameterName />
+      <StepId>-1</StepId>
+      <Direction>Start</Direction>
+      <Outcome />
+      <Disabled>false</Disabled>
+      <WorkItemId>0</WorkItemId>
+      <MarkerRegionType>Action</MarkerRegionType>
+    </TestStepMarkerAction>
   </ExecuteActions>
   <CleanupActions />
   <OnErrorActions />
@@ -1501,6 +1773,7 @@
             <WindowTitle>msn</WindowTitle>
             <WindowTitle>Blank Page</WindowTitle>
             <WindowTitle>Log in</WindowTitle>
+            <WindowTitle>Lost Password</WindowTitle>
           </WindowTitles>
           <SearchConfigurations>
             <SearchConfiguration>VisibleOnly</SearchConfiguration>
@@ -1794,6 +2067,32 @@ New video shows Bruce Jenner may be at fault in fatal car crash
                           <PropertyCondition Name="Class" />
                           <PropertyCondition Name="ControlDefinition" />
                           <PropertyCondition Name="InnerText">The user name or password provided is in</PropertyCondition>
+                          <PropertyCondition Name="TagInstance">1</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                    <UIObject ControlType="Hyperlink" Id="UIRecoverHyperlink" FriendlyName="Recover" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>Log in</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Hyperlink</PropertyCondition>
+                          <PropertyCondition Name="TagName">A</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                          <PropertyCondition Name="Target" />
+                          <PropertyCondition Name="InnerText">Recover</PropertyCondition>
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="AbsolutePath">/Account/LostPassword</PropertyCondition>
+                          <PropertyCondition Name="Title" />
+                          <PropertyCondition Name="Href">http://localhost:2129/Account/LostPassword</PropertyCondition>
+                          <PropertyCondition Name="Class" />
+                          <PropertyCondition Name="ControlDefinition">href="/Account/LostPassword"</PropertyCondition>
                           <PropertyCondition Name="TagInstance">1</PropertyCondition>
                         </FilterCondition>
                       </AndCondition>
@@ -2587,6 +2886,7 @@ Regist</PropertyCondition>
           <WindowTitles>
             <WindowTitle>Log in - Google Chrome</WindowTitle>
             <WindowTitle>localhost:2129/Admin/Users - Google Chrome</WindowTitle>
+            <WindowTitle>Lost Password - Google Chrome</WindowTitle>
           </WindowTitles>
           <SearchConfigurations>
             <SearchConfiguration>VisibleOnly</SearchConfiguration>
@@ -3214,6 +3514,37 @@ Regist</PropertyCondition>
                 </UIObject>
               </Descendants>
             </UIObject>
+            <UIObject ControlType="Window" Id="UILoginGoogleChromeWindow1" FriendlyName="Log in - Google Chrome" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>Log in - Google Chrome</WindowTitle>
+                <WindowTitle>Lost Password - Google Chrome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                <SearchConfiguration>Distinct</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="Name">Log in - Google Chrome</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants />
+            </UIObject>
+            <UIObject ControlType="Document" Id="UILostPasswordGoogleChDocument" FriendlyName="Lost Password - Google Chrome" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>Lost Password - Google Chrome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlType">Document</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants />
+            </UIObject>
           </Descendants>
         </TopLevelWindow>
         <TopLevelWindow ControlType="Window" Id="UILoginInternetExploreWindow7" FriendlyName="Log in - Internet Explorer" SpecialControlType="BrowserWindow" SessionId="67500">
@@ -3222,6 +3553,7 @@ Regist</PropertyCondition>
             <WindowTitle>Log in</WindowTitle>
             <WindowTitle>Index</WindowTitle>
             <WindowTitle>Manage your Account</WindowTitle>
+            <WindowTitle>http://localhost:2129/Admin/Users</WindowTitle>
           </WindowTitles>
           <SearchConfigurations>
             <SearchConfiguration>VisibleOnly</SearchConfiguration>
@@ -3430,6 +3762,85 @@ Cl</PropertyCondition>
                     </UIObject>
                   </Descendants>
                 </UIObject>
+                <UIObject ControlType="Pane" Id="UIBodyPane1" FriendlyName="body" SpecialControlType="None">
+                  <TechnologyName>Web</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>Manage your Account</WindowTitle>
+                  </WindowTitles>
+                  <AndCondition Id="SearchCondition">
+                    <AndCondition Id="Primary">
+                      <PropertyCondition Name="ControlType">Pane</PropertyCondition>
+                      <PropertyCondition Name="TagName">DIV</PropertyCondition>
+                      <PropertyCondition Name="Id">body</PropertyCondition>
+                      <PropertyCondition Name="Name" />
+                    </AndCondition>
+                    <FilterCondition Id="Secondary">
+                      <PropertyCondition Name="InnerText">Manage your Account. 
+
+
+
+ 
+
+
+
+Si</PropertyCondition>
+                      <PropertyCondition Name="Title" />
+                      <PropertyCondition Name="Class" />
+                      <PropertyCondition Name="ControlDefinition">id="body" style="min-height: 700px;"</PropertyCondition>
+                      <PropertyCondition Name="TagInstance">4</PropertyCondition>
+                    </FilterCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants>
+                    <UIObject ControlType="Custom" Id="UICurrentpasswordCustom" FriendlyName="Current password" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>Manage your Account</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Custom</PropertyCondition>
+                          <PropertyCondition Name="TagName">LI</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="Class" />
+                          <PropertyCondition Name="ControlDefinition" />
+                          <PropertyCondition Name="InnerText">Current password
+ </PropertyCondition>
+                          <PropertyCondition Name="TagInstance">2</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                    <UIObject ControlType="Button" Id="UIUpdatepasswordButton" FriendlyName="Update password" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>Manage your Account</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                          <PropertyCondition Name="TagName">INPUT</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                          <PropertyCondition Name="DisplayText">Update password</PropertyCondition>
+                          <PropertyCondition Name="Type">submit</PropertyCondition>
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="Title" />
+                          <PropertyCondition Name="Class" />
+                          <PropertyCondition Name="ControlDefinition">type="submit" value="Update password"</PropertyCondition>
+                          <PropertyCondition Name="TagInstance">5</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                  </Descendants>
+                </UIObject>
               </Descendants>
             </UIObject>
           </Descendants>
@@ -3440,6 +3851,7 @@ Cl</PropertyCondition>
             <WindowTitle>Log in</WindowTitle>
             <WindowTitle>http://localhost:2129/Admin/Users</WindowTitle>
             <WindowTitle>http://localhost:2129/Admin/Settings</WindowTitle>
+            <WindowTitle>Manage your Account</WindowTitle>
           </WindowTitles>
           <SearchConfigurations>
             <SearchConfiguration>VisibleOnly</SearchConfiguration>
@@ -4681,6 +5093,29 @@ Email add</PropertyCondition>
                       <SupportLevel>0</SupportLevel>
                       <Descendants />
                     </UIObject>
+                    <UIObject ControlType="Pane" Id="UIItemPane" FriendlyName="" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>http://localhost:2129/Admin/Users</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Pane</PropertyCondition>
+                          <PropertyCondition Name="TagName">DIV</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="InnerText" />
+                          <PropertyCondition Name="Title" />
+                          <PropertyCondition Name="Class">jtable-busy-panel-background jtable-busy-panel-background-invisible</PropertyCondition>
+                          <PropertyCondition Name="ControlDefinition">class="jtable-busy-panel-background jtable-busy-panel-background-invisible" style="width: 960px; height: 132px; display: block;"</PropertyCondition>
+                          <PropertyCondition Name="TagInstance">8</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
                   </Descendants>
                 </UIObject>
                 <UIObject ControlType="Pane" Id="UIFirstNameLastNameEPane" FriendlyName="First Name Last Name E" SpecialControlType="None">
@@ -4996,6 +5431,54 @@ close</PropertyCondition>
                           <PropertyCondition Name="Class">ui-button-text</PropertyCondition>
                           <PropertyCondition Name="ControlDefinition">class="ui-button-text"</PropertyCondition>
                           <PropertyCondition Name="TagInstance">48</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                  </Descendants>
+                </UIObject>
+                <UIObject ControlType="Custom" Id="UILoginCustom" FriendlyName="login" SpecialControlType="None">
+                  <TechnologyName>Web</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>http://localhost:2129/Admin/Users</WindowTitle>
+                  </WindowTitles>
+                  <AndCondition Id="SearchCondition">
+                    <AndCondition Id="Primary">
+                      <PropertyCondition Name="ControlType">Custom</PropertyCondition>
+                      <PropertyCondition Name="TagName">SECTION</PropertyCondition>
+                      <PropertyCondition Name="Id">login</PropertyCondition>
+                      <PropertyCondition Name="Name" />
+                    </AndCondition>
+                    <FilterCondition Id="Secondary">
+                      <PropertyCondition Name="Class" />
+                      <PropertyCondition Name="ControlDefinition">id="login"</PropertyCondition>
+                      <PropertyCondition Name="TagInstance">1</PropertyCondition>
+                    </FilterCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants>
+                    <UIObject ControlType="Hyperlink" Id="UIABHyperlink" FriendlyName="ab" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>http://localhost:2129/Admin/Users</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Hyperlink</PropertyCondition>
+                          <PropertyCondition Name="TagName">A</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                          <PropertyCondition Name="Target" />
+                          <PropertyCondition Name="InnerText">ab</PropertyCondition>
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="AbsolutePath">/Account/Manage</PropertyCondition>
+                          <PropertyCondition Name="Title">Manage</PropertyCondition>
+                          <PropertyCondition Name="Href">http://localhost:2129/Account/Manage</PropertyCondition>
+                          <PropertyCondition Name="Class">username</PropertyCondition>
+                          <PropertyCondition Name="ControlDefinition">title="Manage" class="username" href="/A</PropertyCondition>
+                          <PropertyCondition Name="TagInstance">1</PropertyCondition>
                         </FilterCondition>
                       </AndCondition>
                       <SupportLevel>0</SupportLevel>
@@ -5526,6 +6009,220 @@ Ema</PropertyCondition>
                           <PropertyCondition Name="Href">javascript:document.getElementById('logoutForm').submit()</PropertyCondition>
                           <PropertyCondition Name="Class" />
                           <PropertyCondition Name="ControlDefinition">href="javascript:document.getElementById</PropertyCondition>
+                          <PropertyCondition Name="TagInstance">1</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                  </Descendants>
+                </UIObject>
+              </Descendants>
+            </UIObject>
+          </Descendants>
+        </TopLevelWindow>
+        <TopLevelWindow ControlType="Window" Id="UILoginInternetExploreWindow11" FriendlyName="Log in - Internet Explorer" SpecialControlType="BrowserWindow" SessionId="133292">
+          <TechnologyName>MSAA</TechnologyName>
+          <WindowTitles>
+            <WindowTitle>Log in</WindowTitle>
+            <WindowTitle>Lost Password</WindowTitle>
+          </WindowTitles>
+          <SearchConfigurations>
+            <SearchConfiguration>VisibleOnly</SearchConfiguration>
+          </SearchConfigurations>
+          <AndCondition Id="SearchCondition">
+            <PropertyCondition Name="Name">Log in</PropertyCondition>
+            <PropertyCondition Name="ClassName">IEFrame</PropertyCondition>
+            <PropertyCondition Name="ControlType">Window</PropertyCondition>
+          </AndCondition>
+          <SupportLevel>0</SupportLevel>
+          <Descendants>
+            <UIObject ControlType="Document" Id="UILostPasswordDocument" FriendlyName="Lost Password" SpecialControlType="None">
+              <TechnologyName>Web</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>Lost Password</WindowTitle>
+              </WindowTitles>
+              <AndCondition Id="SearchCondition">
+                <AndCondition Id="Primary">
+                  <PropertyCondition Name="ControlType">Document</PropertyCondition>
+                  <PropertyCondition Name="TagName">BODY</PropertyCondition>
+                  <PropertyCondition Name="Id" />
+                  <PropertyCondition Name="RedirectingPage">False</PropertyCondition>
+                  <PropertyCondition Name="FrameDocument">False</PropertyCondition>
+                </AndCondition>
+                <FilterCondition Id="Secondary">
+                  <PropertyCondition Name="Title">Lost Password</PropertyCondition>
+                  <PropertyCondition Name="AbsolutePath">/Account/LostPassword</PropertyCondition>
+                  <PropertyCondition Name="PageUrl">http://localhost:2129/Account/LostPassword</PropertyCondition>
+                </FilterCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Pane" Id="UIBodyPane" FriendlyName="body" SpecialControlType="None">
+                  <TechnologyName>Web</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>Lost Password</WindowTitle>
+                  </WindowTitles>
+                  <AndCondition Id="SearchCondition">
+                    <AndCondition Id="Primary">
+                      <PropertyCondition Name="ControlType">Pane</PropertyCondition>
+                      <PropertyCondition Name="TagName">DIV</PropertyCondition>
+                      <PropertyCondition Name="Id">body</PropertyCondition>
+                      <PropertyCondition Name="Name" />
+                    </AndCondition>
+                    <FilterCondition Id="Secondary">
+                      <PropertyCondition Name="InnerText">Password Recovery
+
+
+
+
+Lost Password</PropertyCondition>
+                      <PropertyCondition Name="Title" />
+                      <PropertyCondition Name="Class" />
+                      <PropertyCondition Name="ControlDefinition">id="body" style="min-height: 700px;"</PropertyCondition>
+                      <PropertyCondition Name="TagInstance">4</PropertyCondition>
+                    </FilterCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants>
+                    <UIObject ControlType="Button" Id="UIEmailLinkButton" FriendlyName="Email Link" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>Lost Password</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                          <PropertyCondition Name="TagName">INPUT</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                          <PropertyCondition Name="DisplayText">Email Link</PropertyCondition>
+                          <PropertyCondition Name="Type">submit</PropertyCondition>
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="Title" />
+                          <PropertyCondition Name="Class" />
+                          <PropertyCondition Name="ControlDefinition">type="submit" value="Email Link"</PropertyCondition>
+                          <PropertyCondition Name="TagInstance">3</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                  </Descendants>
+                </UIObject>
+                <UIObject ControlType="Edit" Id="UIYouraccountemailEdit" FriendlyName="Your account email" SpecialControlType="None">
+                  <TechnologyName>Web</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>Lost Password</WindowTitle>
+                  </WindowTitles>
+                  <AndCondition Id="SearchCondition">
+                    <AndCondition Id="Primary">
+                      <PropertyCondition Name="ControlType">Edit</PropertyCondition>
+                      <PropertyCondition Name="TagName">INPUT</PropertyCondition>
+                      <PropertyCondition Name="Id">Email</PropertyCondition>
+                      <PropertyCondition Name="Name">Email</PropertyCondition>
+                    </AndCondition>
+                    <FilterCondition Id="Secondary">
+                      <PropertyCondition Name="LabeledBy">Your account email</PropertyCondition>
+                      <PropertyCondition Name="Type">SINGLELINE</PropertyCondition>
+                      <PropertyCondition Name="Title" />
+                      <PropertyCondition Name="Class" />
+                      <PropertyCondition Name="ControlDefinition">name="Email" id="Email" type="text" valu</PropertyCondition>
+                      <PropertyCondition Name="TagInstance">2</PropertyCondition>
+                    </FilterCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants />
+                </UIObject>
+                <UIObject ControlType="Pane" Id="UIBodyPane1" FriendlyName="body" SpecialControlType="None">
+                  <TechnologyName>Web</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>Lost Password</WindowTitle>
+                  </WindowTitles>
+                  <AndCondition Id="SearchCondition">
+                    <AndCondition Id="Primary">
+                      <PropertyCondition Name="ControlType">Pane</PropertyCondition>
+                      <PropertyCondition Name="TagName">DIV</PropertyCondition>
+                      <PropertyCondition Name="Id">body</PropertyCondition>
+                      <PropertyCondition Name="Name" />
+                    </AndCondition>
+                    <FilterCondition Id="Secondary">
+                      <PropertyCondition Name="InnerText">An email has been send to your email add</PropertyCondition>
+                      <PropertyCondition Name="Title" />
+                      <PropertyCondition Name="Class" />
+                      <PropertyCondition Name="ControlDefinition">id="body" style="min-height: 700px;"</PropertyCondition>
+                      <PropertyCondition Name="TagInstance">4</PropertyCondition>
+                    </FilterCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants>
+                    <UIObject ControlType="Pane" Id="UIAnemailhasbeensendtoPane" FriendlyName="An email has been send to your email add" SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>Lost Password</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Pane</PropertyCondition>
+                          <PropertyCondition Name="TagName">SPAN</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="InnerText">An email has been send to your email add</PropertyCondition>
+                          <PropertyCondition Name="Title" />
+                          <PropertyCondition Name="Class" />
+                          <PropertyCondition Name="ControlDefinition" />
+                          <PropertyCondition Name="TagInstance">1</PropertyCondition>
+                        </FilterCondition>
+                      </AndCondition>
+                      <SupportLevel>0</SupportLevel>
+                      <Descendants />
+                    </UIObject>
+                  </Descendants>
+                </UIObject>
+                <UIObject ControlType="Pane" Id="UIBodyPane2" FriendlyName="body" SpecialControlType="None">
+                  <TechnologyName>Web</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>Lost Password</WindowTitle>
+                  </WindowTitles>
+                  <AndCondition Id="SearchCondition">
+                    <AndCondition Id="Primary">
+                      <PropertyCondition Name="ControlType">Pane</PropertyCondition>
+                      <PropertyCondition Name="TagName">DIV</PropertyCondition>
+                      <PropertyCondition Name="Id">body</PropertyCondition>
+                      <PropertyCondition Name="Name" />
+                    </AndCondition>
+                    <FilterCondition Id="Secondary">
+                      <PropertyCondition Name="InnerText">Password Recovery
+
+
+No user found by </PropertyCondition>
+                      <PropertyCondition Name="Title" />
+                      <PropertyCondition Name="Class" />
+                      <PropertyCondition Name="ControlDefinition">id="body" style="min-height: 700px;"</PropertyCondition>
+                      <PropertyCondition Name="TagInstance">4</PropertyCondition>
+                    </FilterCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants>
+                    <UIObject ControlType="Custom" Id="UINouserfoundbythatemaCustom" FriendlyName="No user found by that email." SpecialControlType="None">
+                      <TechnologyName>Web</TechnologyName>
+                      <WindowTitles>
+                        <WindowTitle>Lost Password</WindowTitle>
+                      </WindowTitles>
+                      <AndCondition Id="SearchCondition">
+                        <AndCondition Id="Primary">
+                          <PropertyCondition Name="ControlType">Custom</PropertyCondition>
+                          <PropertyCondition Name="TagName">LI</PropertyCondition>
+                          <PropertyCondition Name="Id" />
+                          <PropertyCondition Name="Name" />
+                        </AndCondition>
+                        <FilterCondition Id="Secondary">
+                          <PropertyCondition Name="Class" />
+                          <PropertyCondition Name="ControlDefinition" />
+                          <PropertyCondition Name="InnerText">No user found by that email.</PropertyCondition>
                           <PropertyCondition Name="TagInstance">1</PropertyCondition>
                         </FilterCondition>
                       </AndCondition>

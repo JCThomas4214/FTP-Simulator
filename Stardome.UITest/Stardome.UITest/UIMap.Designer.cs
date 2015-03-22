@@ -585,23 +585,66 @@ namespace Stardome.UITest
         public void ProfileResetPassword()
         {
             #region Variable Declarations
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlDiv uIItemPane = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UIUserTableContainerPane1.UIItemPane;
+            HtmlCustom uILoginCustom = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UILoginCustom;
+            HtmlHyperlink uIABHyperlink = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UILoginCustom.UIABHyperlink;
+            HtmlCustom uICurrentpasswordCustom = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane1.UICurrentpasswordCustom;
             HtmlEdit uICurrentpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit;
             HtmlEdit uINewpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit;
             HtmlEdit uIConfirmnewpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIConfirmnewpasswordEdit;
-            HtmlInputButton uIUpdatepasswordButton = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane.UIUpdatepasswordButton;
+            HtmlInputButton uIUpdatepasswordButton = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane1.UIUpdatepasswordButton;
             #endregion
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.ProfileResetPasswordParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.ProfileResetPasswordParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.ProfileResetPasswordParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(25, 24));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover  pane at (1, 1)
+            Mouse.Hover(uIItemPane, new Point(1, 1));
+
+            // Mouse hover 'login' custom control at (1, 1)
+            Mouse.Hover(uILoginCustom, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Click 'ab' link
+            Mouse.Click(uIABHyperlink, new Point(9, 9));
+
+            // Click 'Current password' custom control
+            Mouse.Click(uICurrentpasswordCustom, new Point(37, 59));
 
             // Type '********' in 'Current password' text box
             uICurrentpasswordEdit.Password = this.ProfileResetPasswordParams.UICurrentpasswordEditPassword;
 
+            // Type '{Tab}' in 'Current password' text box
+            Keyboard.SendKeys(uICurrentpasswordEdit, this.ProfileResetPasswordParams.UICurrentpasswordEditSendKeys, ModifierKeys.None);
+
             // Type '********' in 'New password' text box
             uINewpasswordEdit.Password = this.ProfileResetPasswordParams.UINewpasswordEditPassword;
+
+            // Type '{Tab}' in 'New password' text box
+            Keyboard.SendKeys(uINewpasswordEdit, this.ProfileResetPasswordParams.UINewpasswordEditSendKeys, ModifierKeys.None);
 
             // Type '********' in 'Confirm new password' text box
             uIConfirmnewpasswordEdit.Password = this.ProfileResetPasswordParams.UIConfirmnewpasswordEditPassword;
 
             // Click 'Update password' button
-            Mouse.Click(uIUpdatepasswordButton, new Point(99, 7));
+            Mouse.Click(uIUpdatepasswordButton, new Point(90, 10));
         }
         
         /// <summary>
@@ -1042,6 +1085,144 @@ namespace Stardome.UITest
             Mouse.Click(uILoginButton, new Point(28, 11));
         }
         
+        /// <summary>
+        /// ForgotPassword - Use 'ForgotPasswordParams' to pass parameters into this method.
+        /// </summary>
+        public void ForgotPassword()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uIRecoverHyperlink = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UIRecoverHyperlink;
+            HtmlDiv uIBodyPane = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane;
+            HtmlEdit uIYouraccountemailEdit = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIYouraccountemailEdit;
+            HtmlInputButton uIEmailLinkButton = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane.UIEmailLinkButton;
+            #endregion
+
+            // Click 'Recover' link
+            Mouse.Click(uIRecoverHyperlink, new Point(20, 12));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover 'body' pane at (1, 1)
+            Mouse.Hover(uIBodyPane, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Type 'timmychandy@gmail.com' in 'Your account email' text box
+            uIYouraccountemailEdit.Text = this.ForgotPasswordParams.UIYouraccountemailEditText;
+
+            // Click 'Email Link' button
+            Mouse.Click(uIEmailLinkButton, new Point(54, 14));
+        }
+        
+        /// <summary>
+        /// ForgotPasswordAssert - Use 'ForgotPasswordAssertExpectedValues' to pass parameters into this method.
+        /// </summary>
+        public void ForgotPasswordAssert()
+        {
+            #region Variable Declarations
+            HtmlSpan uIAnemailhasbeensendtoPane = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane1.UIAnemailhasbeensendtoPane;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'An email has been send to your email add' pane equals ' An email has been send to your email address. Please check your email for instructions on resetting the password'
+            Assert.AreEqual(this.ForgotPasswordAssertExpectedValues.UIAnemailhasbeensendtoPaneInnerText, uIAnemailhasbeensendtoPane.InnerText);
+        }
+        
+        /// <summary>
+        /// ForgotPasswordInvalidEmail - Use 'ForgotPasswordInvalidEmailParams' to pass parameters into this method.
+        /// </summary>
+        public void ForgotPasswordInvalidEmail()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uIRecoverHyperlink = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UIRecoverHyperlink;
+            HtmlEdit uIYouraccountemailEdit = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIYouraccountemailEdit;
+            HtmlInputButton uIEmailLinkButton = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane.UIEmailLinkButton;
+            #endregion
+
+            // Click 'Recover' link
+            Mouse.Click(uIRecoverHyperlink, new Point(14, 7));
+
+            // Type 'timmychandy@hotmail.com' in 'Your account email' text box
+            uIYouraccountemailEdit.Text = this.ForgotPasswordInvalidEmailParams.UIYouraccountemailEditText;
+
+            // Click 'Email Link' button
+            Mouse.Click(uIEmailLinkButton, new Point(34, 23));
+        }
+        
+        /// <summary>
+        /// ForgotPasswordInvalidEmailAssert - Use 'ForgotPasswordInvalidEmailAssertExpectedValues' to pass parameters into this method.
+        /// </summary>
+        public void ForgotPasswordInvalidEmailAssert()
+        {
+            #region Variable Declarations
+            HtmlCustom uINouserfoundbythatemaCustom = this.UILoginInternetExploreWindow11.UILostPasswordDocument.UIBodyPane2.UINouserfoundbythatemaCustom;
+            #endregion
+
+            // Verify that the 'InnerText' property of 'No user found by that email.' custom control equals 'No user found by that email.'
+            Assert.AreEqual(this.ForgotPasswordInvalidEmailAssertExpectedValues.UINouserfoundbythatemaCustomInnerText, uINouserfoundbythatemaCustom.InnerText);
+        }
+        
+        /// <summary>
+        /// ProfilePasswordReset - Use 'ProfilePasswordResetParams' to pass parameters into this method.
+        /// </summary>
+        public void ProfilePasswordReset()
+        {
+            #region Variable Declarations
+            HtmlEdit uIUsernameEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UIMsnInternetExplorerWindow.UILoginDocument.UIPasswordEdit;
+            HtmlInputButton uILoginButton = this.UIMsnInternetExplorerWindow.UILoginDocument.UILoginFormCustom.UILoginButton;
+            HtmlDiv uIUserManagementPagePane = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UIBodyPane.UIUserManagementPagePane;
+            HtmlHyperlink uIABHyperlink = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UILoginCustom.UIABHyperlink;
+            HtmlEdit uICurrentpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UICurrentpasswordEdit;
+            HtmlEdit uINewpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UINewpasswordEdit;
+            HtmlEdit uIConfirmnewpasswordEdit = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIConfirmnewpasswordEdit;
+            HtmlInputButton uIUpdatepasswordButton = this.UILoginInternetExploreWindow7.UIManageyourAccountDocument.UIBodyPane1.UIUpdatepasswordButton;
+            #endregion
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.ProfilePasswordResetParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.ProfilePasswordResetParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.ProfilePasswordResetParams.UIPasswordEditPassword;
+
+            // Click 'Log in' button
+            Mouse.Click(uILoginButton, new Point(24, 22));
+
+            // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
+            Playback.PlaybackSettings.ContinueOnError = true;
+
+            // Mouse hover 'User Management Page' pane at (1, 1)
+            Mouse.Hover(uIUserManagementPagePane, new Point(1, 1));
+
+            // Reset flag to ensure that play back stops if there is an error.
+            Playback.PlaybackSettings.ContinueOnError = false;
+
+            // Click 'ab' link
+            Mouse.Click(uIABHyperlink, new Point(4, 6));
+
+            // Type '********' in 'Current password' text box
+            uICurrentpasswordEdit.Password = this.ProfilePasswordResetParams.UICurrentpasswordEditPassword;
+
+            // Type '{Tab}' in 'Current password' text box
+            Keyboard.SendKeys(uICurrentpasswordEdit, this.ProfilePasswordResetParams.UICurrentpasswordEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'New password' text box
+            uINewpasswordEdit.Password = this.ProfilePasswordResetParams.UINewpasswordEditPassword;
+
+            // Type '{Tab}' in 'New password' text box
+            Keyboard.SendKeys(uINewpasswordEdit, this.ProfilePasswordResetParams.UINewpasswordEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Confirm new password' text box
+            uIConfirmnewpasswordEdit.Password = this.ProfilePasswordResetParams.UIConfirmnewpasswordEditPassword;
+
+            // Click 'Update password' button
+            Mouse.Click(uIUpdatepasswordButton, new Point(90, 10));
+        }
+        
         #region Properties
         public virtual LoginFailure1Params LoginFailure1Params
         {
@@ -1367,6 +1548,66 @@ namespace Stardome.UITest
             }
         }
         
+        public virtual ForgotPasswordParams ForgotPasswordParams
+        {
+            get
+            {
+                if ((this.mForgotPasswordParams == null))
+                {
+                    this.mForgotPasswordParams = new ForgotPasswordParams();
+                }
+                return this.mForgotPasswordParams;
+            }
+        }
+        
+        public virtual ForgotPasswordAssertExpectedValues ForgotPasswordAssertExpectedValues
+        {
+            get
+            {
+                if ((this.mForgotPasswordAssertExpectedValues == null))
+                {
+                    this.mForgotPasswordAssertExpectedValues = new ForgotPasswordAssertExpectedValues();
+                }
+                return this.mForgotPasswordAssertExpectedValues;
+            }
+        }
+        
+        public virtual ForgotPasswordInvalidEmailParams ForgotPasswordInvalidEmailParams
+        {
+            get
+            {
+                if ((this.mForgotPasswordInvalidEmailParams == null))
+                {
+                    this.mForgotPasswordInvalidEmailParams = new ForgotPasswordInvalidEmailParams();
+                }
+                return this.mForgotPasswordInvalidEmailParams;
+            }
+        }
+        
+        public virtual ForgotPasswordInvalidEmailAssertExpectedValues ForgotPasswordInvalidEmailAssertExpectedValues
+        {
+            get
+            {
+                if ((this.mForgotPasswordInvalidEmailAssertExpectedValues == null))
+                {
+                    this.mForgotPasswordInvalidEmailAssertExpectedValues = new ForgotPasswordInvalidEmailAssertExpectedValues();
+                }
+                return this.mForgotPasswordInvalidEmailAssertExpectedValues;
+            }
+        }
+        
+        public virtual ProfilePasswordResetParams ProfilePasswordResetParams
+        {
+            get
+            {
+                if ((this.mProfilePasswordResetParams == null))
+                {
+                    this.mProfilePasswordResetParams = new ProfilePasswordResetParams();
+                }
+                return this.mProfilePasswordResetParams;
+            }
+        }
+        
         public UIMsnInternetExplorerWindow UIMsnInternetExplorerWindow
         {
             get
@@ -1570,6 +1811,18 @@ namespace Stardome.UITest
                 return this.mUIManageyourAccountIntWindow;
             }
         }
+        
+        public UILoginInternetExploreWindow11 UILoginInternetExploreWindow11
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow11 == null))
+                {
+                    this.mUILoginInternetExploreWindow11 = new UILoginInternetExploreWindow11();
+                }
+                return this.mUILoginInternetExploreWindow11;
+            }
+        }
         #endregion
         
         #region Fields
@@ -1627,6 +1880,16 @@ namespace Stardome.UITest
         
         private ProfileResetPasswordLoginParams mProfileResetPasswordLoginParams;
         
+        private ForgotPasswordParams mForgotPasswordParams;
+        
+        private ForgotPasswordAssertExpectedValues mForgotPasswordAssertExpectedValues;
+        
+        private ForgotPasswordInvalidEmailParams mForgotPasswordInvalidEmailParams;
+        
+        private ForgotPasswordInvalidEmailAssertExpectedValues mForgotPasswordInvalidEmailAssertExpectedValues;
+        
+        private ProfilePasswordResetParams mProfilePasswordResetParams;
+        
         private UIMsnInternetExplorerWindow mUIMsnInternetExplorerWindow;
         
         private UIHomePageInternetExplWindow mUIHomePageInternetExplWindow;
@@ -1660,6 +1923,8 @@ namespace Stardome.UITest
         private UILoginInternetExploreWindow10 mUILoginInternetExploreWindow10;
         
         private UIManageyourAccountIntWindow mUIManageyourAccountIntWindow;
+        
+        private UILoginInternetExploreWindow11 mUILoginInternetExploreWindow11;
         #endregion
     }
     
@@ -2067,19 +2332,44 @@ namespace Stardome.UITest
         
         #region Fields
         /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
         /// Type '********' in 'Current password' text box
         /// </summary>
-        public string UICurrentpasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        public string UICurrentpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'Current password' text box
+        /// </summary>
+        public string UICurrentpasswordEditSendKeys = "{Tab}";
         
         /// <summary>
         /// Type '********' in 'New password' text box
         /// </summary>
-        public string UINewpasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        public string UINewpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'New password' text box
+        /// </summary>
+        public string UINewpasswordEditSendKeys = "{Tab}";
         
         /// <summary>
         /// Type '********' in 'Confirm new password' text box
         /// </summary>
-        public string UIConfirmnewpasswordEditPassword = "MTnqGLWWNjOWwjF8wGxtdQhZ43ocezNy";
+        public string UIConfirmnewpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
         #endregion
     }
     
@@ -2358,6 +2648,117 @@ namespace Stardome.UITest
         #endregion
     }
     
+    /// <summary>
+    /// Parameters to be passed into 'ForgotPassword'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ForgotPasswordParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Type 'timmychandy@gmail.com' in 'Your account email' text box
+        /// </summary>
+        public string UIYouraccountemailEditText = "timmychandy@gmail.com";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ForgotPasswordAssert'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ForgotPasswordAssertExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'An email has been send to your email add' pane equals ' An email has been send to your email address. Please check your email for instructions on resetting the password'
+        /// </summary>
+        public string UIAnemailhasbeensendtoPaneInnerText = " An email has been send to your email address. Please check your email for instru" +
+            "ctions on resetting the password";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ForgotPasswordInvalidEmail'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ForgotPasswordInvalidEmailParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Type 'timmychandy@hotmail.com' in 'Your account email' text box
+        /// </summary>
+        public string UIYouraccountemailEditText = "timmychandy@hotmail.com";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ForgotPasswordInvalidEmailAssert'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ForgotPasswordInvalidEmailAssertExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'InnerText' property of 'No user found by that email.' custom control equals 'No user found by that email.'
+        /// </summary>
+        public string UINouserfoundbythatemaCustomInnerText = "No user found by that email.";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ProfilePasswordReset'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ProfilePasswordResetParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type '********' in 'Current password' text box
+        /// </summary>
+        public string UICurrentpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'Current password' text box
+        /// </summary>
+        public string UICurrentpasswordEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'New password' text box
+        /// </summary>
+        public string UINewpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'New password' text box
+        /// </summary>
+        public string UINewpasswordEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Confirm new password' text box
+        /// </summary>
+        public string UIConfirmnewpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        #endregion
+    }
+    
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
     public class UIMsnInternetExplorerWindow : BrowserWindow
     {
@@ -2370,6 +2771,7 @@ namespace Stardome.UITest
             this.WindowTitles.Add("msn");
             this.WindowTitles.Add("Blank Page");
             this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Lost Password");
             #endregion
         }
         
@@ -2736,12 +3138,39 @@ namespace Stardome.UITest
                 return this.mUITheusernameorpassworCustom;
             }
         }
+        
+        public HtmlHyperlink UIRecoverHyperlink
+        {
+            get
+            {
+                if ((this.mUIRecoverHyperlink == null))
+                {
+                    this.mUIRecoverHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIRecoverHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIRecoverHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIRecoverHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIRecoverHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Recover";
+                    this.mUIRecoverHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Account/LostPassword";
+                    this.mUIRecoverHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIRecoverHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Account/LostPassword";
+                    this.mUIRecoverHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIRecoverHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/Account/LostPassword\"";
+                    this.mUIRecoverHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUIRecoverHyperlink.WindowTitles.Add("Log in");
+                    #endregion
+                }
+                return this.mUIRecoverHyperlink;
+            }
+        }
         #endregion
         
         #region Fields
         private HtmlInputButton mUILoginButton;
         
         private HtmlCustom mUITheusernameorpassworCustom;
+        
+        private HtmlHyperlink mUIRecoverHyperlink;
         #endregion
     }
     
@@ -3767,6 +4196,7 @@ namespace Stardome.UITest
             this.SearchProperties[WinWindow.PropertyNames.ClassName] = "Chrome_WidgetWin_1";
             this.WindowTitles.Add("Log in - Google Chrome");
             this.WindowTitles.Add("localhost:2129/Admin/Users - Google Chrome");
+            this.WindowTitles.Add("Lost Password - Google Chrome");
             #endregion
         }
         
@@ -3986,6 +4416,40 @@ namespace Stardome.UITest
                 return this.mUIChromeLegacyWindowWindow17;
             }
         }
+        
+        public WinWindow UILoginGoogleChromeWindow1
+        {
+            get
+            {
+                if ((this.mUILoginGoogleChromeWindow1 == null))
+                {
+                    this.mUILoginGoogleChromeWindow1 = new WinWindow(this);
+                    #region Search Criteria
+                    this.mUILoginGoogleChromeWindow1.SearchProperties[WinWindow.PropertyNames.Name] = "Log in - Google Chrome";
+                    this.mUILoginGoogleChromeWindow1.SearchConfigurations.Add(SearchConfiguration.DisambiguateChild);
+                    this.mUILoginGoogleChromeWindow1.WindowTitles.Add("Log in - Google Chrome");
+                    this.mUILoginGoogleChromeWindow1.WindowTitles.Add("Lost Password - Google Chrome");
+                    #endregion
+                }
+                return this.mUILoginGoogleChromeWindow1;
+            }
+        }
+        
+        public WinControl UILostPasswordGoogleChDocument
+        {
+            get
+            {
+                if ((this.mUILostPasswordGoogleChDocument == null))
+                {
+                    this.mUILostPasswordGoogleChDocument = new WinControl(this);
+                    #region Search Criteria
+                    this.mUILostPasswordGoogleChDocument.SearchProperties[UITestControl.PropertyNames.ControlType] = "Document";
+                    this.mUILostPasswordGoogleChDocument.WindowTitles.Add("Lost Password - Google Chrome");
+                    #endregion
+                }
+                return this.mUILostPasswordGoogleChDocument;
+            }
+        }
         #endregion
         
         #region Fields
@@ -4024,6 +4488,10 @@ namespace Stardome.UITest
         private UIChromeLegacyWindowWindow16 mUIChromeLegacyWindowWindow16;
         
         private UIChromeLegacyWindowWindow17 mUIChromeLegacyWindowWindow17;
+        
+        private WinWindow mUILoginGoogleChromeWindow1;
+        
+        private WinControl mUILostPasswordGoogleChDocument;
         #endregion
     }
     
@@ -4773,6 +5241,7 @@ namespace Stardome.UITest
             this.WindowTitles.Add("Log in");
             this.WindowTitles.Add("Index");
             this.WindowTitles.Add("Manage your Account");
+            this.WindowTitles.Add("http://localhost:2129/Admin/Users");
             #endregion
         }
         
@@ -4911,6 +5380,18 @@ namespace Stardome.UITest
                 return this.mUILogoutFormCustom;
             }
         }
+        
+        public UIBodyPane11 UIBodyPane1
+        {
+            get
+            {
+                if ((this.mUIBodyPane1 == null))
+                {
+                    this.mUIBodyPane1 = new UIBodyPane11(this);
+                }
+                return this.mUIBodyPane1;
+            }
+        }
         #endregion
         
         #region Fields
@@ -4923,6 +5404,8 @@ namespace Stardome.UITest
         private UIBodyPane1 mUIBodyPane;
         
         private UILogoutFormCustom4 mUILogoutFormCustom;
+        
+        private UIBodyPane11 mUIBodyPane1;
         #endregion
     }
     
@@ -5026,6 +5509,79 @@ namespace Stardome.UITest
     }
     
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane11 : HtmlDiv
+    {
+        
+        public UIBodyPane11(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Manage your Account. \r\n\r\n\r\n\r\n \r\n\r\n\r\n\r\nSi";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\" style=\"min-height: 700px;\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Manage your Account");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlCustom UICurrentpasswordCustom
+        {
+            get
+            {
+                if ((this.mUICurrentpasswordCustom == null))
+                {
+                    this.mUICurrentpasswordCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUICurrentpasswordCustom.SearchProperties["TagName"] = "LI";
+                    this.mUICurrentpasswordCustom.SearchProperties["Id"] = null;
+                    this.mUICurrentpasswordCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUICurrentpasswordCustom.FilterProperties["Class"] = null;
+                    this.mUICurrentpasswordCustom.FilterProperties["ControlDefinition"] = null;
+                    this.mUICurrentpasswordCustom.FilterProperties["InnerText"] = "Current password\r\n ";
+                    this.mUICurrentpasswordCustom.FilterProperties["TagInstance"] = "2";
+                    this.mUICurrentpasswordCustom.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUICurrentpasswordCustom;
+            }
+        }
+        
+        public HtmlInputButton UIUpdatepasswordButton
+        {
+            get
+            {
+                if ((this.mUIUpdatepasswordButton == null))
+                {
+                    this.mUIUpdatepasswordButton = new HtmlInputButton(this);
+                    #region Search Criteria
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Update password";
+                    this.mUIUpdatepasswordButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "type=\"submit\" value=\"Update password\"";
+                    this.mUIUpdatepasswordButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "5";
+                    this.mUIUpdatepasswordButton.WindowTitles.Add("Manage your Account");
+                    #endregion
+                }
+                return this.mUIUpdatepasswordButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlCustom mUICurrentpasswordCustom;
+        
+        private HtmlInputButton mUIUpdatepasswordButton;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
     public class UILoginInternetExploreWindow8 : BrowserWindow
     {
         
@@ -5037,6 +5593,7 @@ namespace Stardome.UITest
             this.WindowTitles.Add("Log in");
             this.WindowTitles.Add("http://localhost:2129/Admin/Users");
             this.WindowTitles.Add("http://localhost:2129/Admin/Settings");
+            this.WindowTitles.Add("Manage your Account");
             #endregion
         }
         
@@ -5638,6 +6195,18 @@ namespace Stardome.UITest
                 return this.mUIDeleteButton1;
             }
         }
+        
+        public UILoginCustom1 UILoginCustom
+        {
+            get
+            {
+                if ((this.mUILoginCustom == null))
+                {
+                    this.mUILoginCustom = new UILoginCustom1(this);
+                }
+                return this.mUILoginCustom;
+            }
+        }
         #endregion
         
         #region Fields
@@ -5700,6 +6269,8 @@ namespace Stardome.UITest
         private HtmlButton mUICancelButton2;
         
         private UIDeleteButton1 mUIDeleteButton1;
+        
+        private UILoginCustom1 mUILoginCustom;
         #endregion
     }
     
@@ -6485,6 +7056,29 @@ namespace Stardome.UITest
                 return this.mUIDeleteButton1;
             }
         }
+        
+        public HtmlDiv UIItemPane
+        {
+            get
+            {
+                if ((this.mUIItemPane == null))
+                {
+                    this.mUIItemPane = new HtmlDiv(this);
+                    #region Search Criteria
+                    this.mUIItemPane.SearchProperties[HtmlDiv.PropertyNames.Id] = null;
+                    this.mUIItemPane.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+                    this.mUIItemPane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = null;
+                    this.mUIItemPane.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+                    this.mUIItemPane.FilterProperties[HtmlDiv.PropertyNames.Class] = "jtable-busy-panel-background jtable-busy-panel-background-invisible";
+                    this.mUIItemPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "class=\"jtable-busy-panel-background jtable-busy-panel-background-invisible\" style" +
+                        "=\"width: 960px; height: 132px; display: block;\"";
+                    this.mUIItemPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "8";
+                    this.mUIItemPane.WindowTitles.Add("http://localhost:2129/Admin/Users");
+                    #endregion
+                }
+                return this.mUIItemPane;
+            }
+        }
         #endregion
         
         #region Fields
@@ -6505,6 +7099,8 @@ namespace Stardome.UITest
         private HtmlButton mUIEditRecordButton1;
         
         private HtmlButton mUIDeleteButton1;
+        
+        private HtmlDiv mUIItemPane;
         #endregion
     }
     
@@ -6832,6 +7428,56 @@ namespace Stardome.UITest
         
         #region Fields
         private HtmlSpan mUIDeletePane;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginCustom1 : HtmlCustom
+    {
+        
+        public UILoginCustom1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "SECTION";
+            this.SearchProperties["Id"] = "login";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"login\"";
+            this.FilterProperties["TagInstance"] = "1";
+            this.WindowTitles.Add("http://localhost:2129/Admin/Users");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UIABHyperlink
+        {
+            get
+            {
+                if ((this.mUIABHyperlink == null))
+                {
+                    this.mUIABHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIABHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIABHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIABHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIABHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "ab";
+                    this.mUIABHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Account/Manage";
+                    this.mUIABHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = "Manage";
+                    this.mUIABHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Account/Manage";
+                    this.mUIABHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = "username";
+                    this.mUIABHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "title=\"Manage\" class=\"username\" href=\"/A";
+                    this.mUIABHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+                    this.mUIABHyperlink.WindowTitles.Add("http://localhost:2129/Admin/Users");
+                    #endregion
+                }
+                return this.mUIABHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUIABHyperlink;
         #endregion
     }
     
@@ -7165,13 +7811,13 @@ namespace Stardome.UITest
             }
         }
         
-        public UILoginCustom1 UILoginCustom
+        public UILoginCustom2 UILoginCustom
         {
             get
             {
                 if ((this.mUILoginCustom == null))
                 {
-                    this.mUILoginCustom = new UILoginCustom1(this);
+                    this.mUILoginCustom = new UILoginCustom2(this);
                 }
                 return this.mUILoginCustom;
             }
@@ -7183,7 +7829,7 @@ namespace Stardome.UITest
         
         private HtmlDiv mUIMainTreePane;
         
-        private UILoginCustom1 mUILoginCustom;
+        private UILoginCustom2 mUILoginCustom;
         #endregion
     }
     
@@ -7259,10 +7905,10 @@ namespace Stardome.UITest
     }
     
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
-    public class UILoginCustom1 : HtmlCustom
+    public class UILoginCustom2 : HtmlCustom
     {
         
-        public UILoginCustom1(UITestControl searchLimitContainer) : 
+        public UILoginCustom2(UITestControl searchLimitContainer) : 
                 base(searchLimitContainer)
         {
             #region Search Criteria
@@ -7491,6 +8137,279 @@ namespace Stardome.UITest
         
         #region Fields
         private HtmlHyperlink mUILogoffHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow11 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow11()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("Log in");
+            this.WindowTitles.Add("Lost Password");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UILostPasswordDocument UILostPasswordDocument
+        {
+            get
+            {
+                if ((this.mUILostPasswordDocument == null))
+                {
+                    this.mUILostPasswordDocument = new UILostPasswordDocument(this);
+                }
+                return this.mUILostPasswordDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UILostPasswordDocument mUILostPasswordDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILostPasswordDocument : HtmlDocument
+    {
+        
+        public UILostPasswordDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "Lost Password";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Account/LostPassword";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Account/LostPassword";
+            this.WindowTitles.Add("Lost Password");
+            #endregion
+        }
+        
+        #region Properties
+        public UIBodyPane6 UIBodyPane
+        {
+            get
+            {
+                if ((this.mUIBodyPane == null))
+                {
+                    this.mUIBodyPane = new UIBodyPane6(this);
+                }
+                return this.mUIBodyPane;
+            }
+        }
+        
+        public HtmlEdit UIYouraccountemailEdit
+        {
+            get
+            {
+                if ((this.mUIYouraccountemailEdit == null))
+                {
+                    this.mUIYouraccountemailEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIYouraccountemailEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "Email";
+                    this.mUIYouraccountemailEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "Email";
+                    this.mUIYouraccountemailEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "Your account email";
+                    this.mUIYouraccountemailEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIYouraccountemailEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIYouraccountemailEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIYouraccountemailEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"Email\" id=\"Email\" type=\"text\" valu";
+                    this.mUIYouraccountemailEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "2";
+                    this.mUIYouraccountemailEdit.WindowTitles.Add("Lost Password");
+                    #endregion
+                }
+                return this.mUIYouraccountemailEdit;
+            }
+        }
+        
+        public UIBodyPane12 UIBodyPane1
+        {
+            get
+            {
+                if ((this.mUIBodyPane1 == null))
+                {
+                    this.mUIBodyPane1 = new UIBodyPane12(this);
+                }
+                return this.mUIBodyPane1;
+            }
+        }
+        
+        public UIBodyPane21 UIBodyPane2
+        {
+            get
+            {
+                if ((this.mUIBodyPane2 == null))
+                {
+                    this.mUIBodyPane2 = new UIBodyPane21(this);
+                }
+                return this.mUIBodyPane2;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIBodyPane6 mUIBodyPane;
+        
+        private HtmlEdit mUIYouraccountemailEdit;
+        
+        private UIBodyPane12 mUIBodyPane1;
+        
+        private UIBodyPane21 mUIBodyPane2;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane6 : HtmlDiv
+    {
+        
+        public UIBodyPane6(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Password Recovery\r\n\r\n\r\n\r\n\r\nLost Password";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\" style=\"min-height: 700px;\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Lost Password");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlInputButton UIEmailLinkButton
+        {
+            get
+            {
+                if ((this.mUIEmailLinkButton == null))
+                {
+                    this.mUIEmailLinkButton = new HtmlInputButton(this);
+                    #region Search Criteria
+                    this.mUIEmailLinkButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUIEmailLinkButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUIEmailLinkButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Email Link";
+                    this.mUIEmailLinkButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUIEmailLinkButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUIEmailLinkButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUIEmailLinkButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "type=\"submit\" value=\"Email Link\"";
+                    this.mUIEmailLinkButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "3";
+                    this.mUIEmailLinkButton.WindowTitles.Add("Lost Password");
+                    #endregion
+                }
+                return this.mUIEmailLinkButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlInputButton mUIEmailLinkButton;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane12 : HtmlDiv
+    {
+        
+        public UIBodyPane12(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "An email has been send to your email add";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\" style=\"min-height: 700px;\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Lost Password");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlSpan UIAnemailhasbeensendtoPane
+        {
+            get
+            {
+                if ((this.mUIAnemailhasbeensendtoPane == null))
+                {
+                    this.mUIAnemailhasbeensendtoPane = new HtmlSpan(this);
+                    #region Search Criteria
+                    this.mUIAnemailhasbeensendtoPane.SearchProperties[HtmlDiv.PropertyNames.Id] = null;
+                    this.mUIAnemailhasbeensendtoPane.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+                    this.mUIAnemailhasbeensendtoPane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "An email has been send to your email add";
+                    this.mUIAnemailhasbeensendtoPane.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+                    this.mUIAnemailhasbeensendtoPane.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+                    this.mUIAnemailhasbeensendtoPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = null;
+                    this.mUIAnemailhasbeensendtoPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "1";
+                    this.mUIAnemailhasbeensendtoPane.WindowTitles.Add("Lost Password");
+                    #endregion
+                }
+                return this.mUIAnemailhasbeensendtoPane;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlSpan mUIAnemailhasbeensendtoPane;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane21 : HtmlDiv
+    {
+        
+        public UIBodyPane21(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Password Recovery\r\n\r\n\r\nNo user found by ";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\" style=\"min-height: 700px;\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("Lost Password");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlCustom UINouserfoundbythatemaCustom
+        {
+            get
+            {
+                if ((this.mUINouserfoundbythatemaCustom == null))
+                {
+                    this.mUINouserfoundbythatemaCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUINouserfoundbythatemaCustom.SearchProperties["TagName"] = "LI";
+                    this.mUINouserfoundbythatemaCustom.SearchProperties["Id"] = null;
+                    this.mUINouserfoundbythatemaCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUINouserfoundbythatemaCustom.FilterProperties["Class"] = null;
+                    this.mUINouserfoundbythatemaCustom.FilterProperties["ControlDefinition"] = null;
+                    this.mUINouserfoundbythatemaCustom.FilterProperties["InnerText"] = "No user found by that email.";
+                    this.mUINouserfoundbythatemaCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUINouserfoundbythatemaCustom.WindowTitles.Add("Lost Password");
+                    #endregion
+                }
+                return this.mUINouserfoundbythatemaCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlCustom mUINouserfoundbythatemaCustom;
         #endregion
     }
 }

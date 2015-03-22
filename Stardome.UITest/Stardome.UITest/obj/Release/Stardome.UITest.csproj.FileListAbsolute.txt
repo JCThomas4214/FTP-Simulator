@@ -9,3 +9,4 @@ D:\UF ENG\CEN3031\Stardome\StardomeProject\Stardome.UITest\Stardome.UITest\bin\R
 D:\UF ENG\CEN3031\Stardome\StardomeProject\Stardome.UITest\Stardome.UITest\bin\Release\Stardome.UITest.pdb
 D:\UF ENG\CEN3031\Stardome\StardomeProject\Stardome.UITest\Stardome.UITest\obj\Release\Stardome.UITest.dll
 D:\UF ENG\CEN3031\Stardome\StardomeProject\Stardome.UITest\Stardome.UITest\obj\Release\Stardome.UITest.pdb
+D:\UF ENG\CEN3031\Stardome\StardomeProject\Stardome.UITest\Stardome.UITest\obj\Release\Stardome.UITest.csprojResolveAssemblyReference.cache
