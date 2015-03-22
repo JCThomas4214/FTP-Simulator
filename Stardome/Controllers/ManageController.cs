@@ -11,11 +11,20 @@ namespace Stardome.Controllers
 {
     public class ManageController : Controller
     {
+        private readonly AdminController adminController;
         //
         // GET: /Manage/
-        public ActionResult Actions(String username = null)
+        public ManageController(AdminController anAdminController)
         {
-            AdminController adminController = new AdminController();
+            adminController = anAdminController;
+        }
+        public ManageController()
+        {
+            adminController = new AdminController();
+        }
+        
+        public ActionResult Actions()
+        {
             ContentModel model = new ContentModel
             {
                 RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
@@ -35,7 +44,6 @@ namespace Stardome.Controllers
             int uploadedFiles = 0;
             int existingFiles = 0;
             int incorrectFiles = 0;
-            ManageController manageController = new ManageController();
 
             foreach (HttpPostedFileBase file in files)
             {
@@ -44,26 +52,31 @@ namespace Stardome.Controllers
                     var extension = Path.GetExtension(file.FileName);
                     if (!allowedExtensions.Contains(extension))
                     {
-                        //ViewBag.Message = "Incorrect file type";
-                        //Files with an extension that we don't allow, won't be uploaded
+                        // Files with an extension that we don't allow, won't be uploaded
                         ++incorrectFiles;
                     }
-                    else try
-                        {   //Upload files to the folder TestUploads. If the folder doesn't exist, it creates it.
+                    else
+                    {
+                        try
+                        {
+                            // Upload files to the directory lastSelected. If the folder doesn't exist, it creates it.
                             string filePath = lastSelected;
-                            bool exists = System.IO.Directory.Exists(Server.MapPath(filePath));
-                            if (!exists) { System.IO.Directory.CreateDirectory(Server.MapPath(filePath)); }
+                            bool exists = Directory.Exists(Server.MapPath(filePath));
+                            if (!exists)
+                            {
+                                Directory.CreateDirectory(Server.MapPath(filePath));
+                            }
                             string path = Path.Combine(Server.MapPath(filePath),
-                                                       Path.GetFileName(file.FileName));
+                                Path.GetFileName(file.FileName));
                             if (!System.IO.File.Exists(path))
                             {
+                                // Updloaded file to directory
                                 file.SaveAs(path);
-                                //ViewBag.Message = "File uploaded successfully";
                                 ++uploadedFiles;
                             }
                             else
                             {
-                                //ViewBag.Message = "At least 1 file already exists. Please rename it to upload it.";
+                                // This file name already exists in current directory
                                 ++existingFiles;
                             }
 
@@ -72,33 +85,31 @@ namespace Stardome.Controllers
                         {
                             ViewBag.Message = "Could not upload file(s)";
                         }
+                    }
                 }
             }
             if (existingFiles > 0)
             {
-                if (existingFiles == 1)
-                    results.Add(String.Format("1 file already exists. Please rename it."));
-                else
-                    results.Add(String.Format(existingFiles + " files already exist. Please rename them."));
-
+                results.Add(existingFiles == 1
+                    ? "1 file already exists. Please rename it."
+                    : String.Format("{0} files already exist. Please rename them.", existingFiles));
             }
 
             if (incorrectFiles > 0)
             {
-                if (incorrectFiles == 1)
-                    results.Add(String.Format(" 1 file is of the wrong type."));
-                else
-                    results.Add(String.Format(incorrectFiles + " files are of the wrong type."));
+                results.Add(incorrectFiles == 1
+                    ? "1 file is of the wrong type."
+                    : String.Format("{0} files are of the wrong type.", incorrectFiles));
             }
+            if (uploadedFiles > 0)
+            {
+                results.Add(uploadedFiles == 1
+                    ? "1 file uploaded successfully."
+                    : String.Format("{0} files uploaded successfully.", uploadedFiles));
+                ViewBag.Message = "Uploaded to " + lastSelected;
+            }
+            
 
-            if (uploadedFiles == 1)
-                results.Add(String.Format(" 1 file uploaded successfully."));
-            else
-                results.Add(String.Format(uploadedFiles + " files uploaded successfully."));
-
-            ViewBag.Message = "Uploading to " + lastSelected;
-
-            AdminController adminController = new AdminController();
             ContentModel model = new ContentModel
             {
                 RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
@@ -110,15 +121,31 @@ namespace Stardome.Controllers
 
             return View(model);
         }
-        
-        [HttpPost]
-        public ActionResult DeleteFile(string filePath)
+
+        public ActionResult ByUser()
         {
-            System.IO.File.Delete(Server.MapPath("~") + filePath);
-            return null;
+            ContentModel model = new ContentModel
+            {
+                RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
+                RoleId = adminController.GetUserRoleId(User.Identity.Name)
+            };
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
+            adminController.GetValue(Headers.Content);
+
+            return View(model);
         }
 
+        public ActionResult ByFolder()
+        {
+            ContentModel model = new ContentModel
+            {
+                RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
+                RoleId = adminController.GetUserRoleId(User.Identity.Name)
+            };
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
+            adminController.GetValue(Headers.Content);
 
+            return View(model);
+        }
     }
-
 }
