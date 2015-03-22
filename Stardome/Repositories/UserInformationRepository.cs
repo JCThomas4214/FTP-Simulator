@@ -33,5 +33,11 @@ namespace Stardome.Repositories
         {
             return sdContext.UserInformations;
         }
+
+        public void Add(UserInformation user)
+        {
+            sdContext.UserInformations.Add(user);
+            sdContext.SaveChanges();
+        }
     }
 }

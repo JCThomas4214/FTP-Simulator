@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Stardome.DomainObjects;
 
 namespace Stardome.Models
@@ -28,5 +27,6 @@ namespace Stardome.Models
         public string RootPath { get; set; }   
         public string SelectedDir { get; set; }
         public List<string> List { get; set; }
+        public List<User> UserList { get; set; } 
     }
 }

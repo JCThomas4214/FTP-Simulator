@@ -15,12 +15,12 @@
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
-        }
+        };
 
         public enum EmailType
         {
             ChangePassword,
             AccountVerify,
-        }
+        };
     }
 }

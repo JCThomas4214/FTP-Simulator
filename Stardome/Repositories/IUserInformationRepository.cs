@@ -5,5 +5,6 @@ namespace Stardome.Repositories
 {
     public interface IUserInformationRepository : IObjectRepository<UserInformation>
     {
+        void Add(UserInformation user);
     }
 }

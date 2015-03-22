@@ -188,7 +188,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DomainObjects\Access.cs">
       <DependentUpon>StartdomeContent.tt</DependentUpon>

@@ -62,12 +62,12 @@ namespace Stardome.Tests.Controllers
             
             userAuthCredentialAdmin = new UserAuthCredential
             {
-                RoleId = 1
+                RoleId = (int)Enums.Roles.Admin
             };
             
             userAuthCredentialProducer = new UserAuthCredential
             {
-                RoleId = 2
+                RoleId = (int)Enums.Roles.Producer
             };
 
 
@@ -99,7 +99,7 @@ namespace Stardome.Tests.Controllers
             userAuthCredential1 = new UserAuthCredential
             {
                 Id = 4,
-                Role = new Role {Id = 2},
+                Role = new Role { Id = (int)Enums.Roles.Producer },
                 Username = "username1",
                 UserInformations = new Collection<UserInformation>
                 {
@@ -114,7 +114,7 @@ namespace Stardome.Tests.Controllers
             userAuthCredential2 = new UserAuthCredential
             {
                 Id = 5,
-                Role = new Role { Id = 3 },
+                Role = new Role { Id = (int)Enums.Roles.User },
                 Username = "username2",
                 UserInformations = new Collection<UserInformation>
                 {
@@ -129,13 +129,13 @@ namespace Stardome.Tests.Controllers
             userAuthCredentialNoUserInfo = new UserAuthCredential
             {
                 Id = 3,
-                Role = new Role { Id = 3 },
+                Role = new Role { Id = (int)Enums.Roles.User },
                 Username = "username3"
             };
             userAuthCredentialInactive = new UserAuthCredential
             {
                 Id = 2,
-                Role = new Role { Id = 4 },
+                Role = new Role { Id = (int)Enums.Roles.InActive },
                 Username = "username4",
                 UserInformations = new Collection<UserInformation>
                 {
@@ -150,13 +150,13 @@ namespace Stardome.Tests.Controllers
             userAuthCredentialNoUserInfo1 = new UserAuthCredential
             {
                 Id = 6,
-                Role = new Role { Id = 3 },
+                Role = new Role { Id = (int)Enums.Roles.User },
                 Username = "username6"
             };
             userAuthCredentialInactive1 = new UserAuthCredential
             {
                 Id = 7,
-                Role = new Role { Id = 4 },
+                Role = new Role { Id = (int)Enums.Roles.InActive },
                 Username = "username7",
                 UserInformations = new Collection<UserInformation>
                 {
@@ -175,7 +175,7 @@ namespace Stardome.Tests.Controllers
                 FirstName = "fname",
                 LastName = "lname",
                 EmailAddress = "newEmail",
-                RoleId = 3
+                RoleId = (int)Enums.Roles.User
             };
             userUpdate1 = new User
             {
@@ -183,7 +183,7 @@ namespace Stardome.Tests.Controllers
                 FirstName = "fname",
                 LastName = "lname",
                 EmailAddress = "newEmail",
-                RoleId = 3
+                RoleId = (int)Enums.Roles.User
             };
             
         }
@@ -392,7 +392,7 @@ namespace Stardome.Tests.Controllers
                 FirstName = "fname",
                 LastName = "lname",
                 EmailAddress = "newEmail",
-                RoleId = 3
+                RoleId = (int)Enums.Roles.User
             };
 
             aMockUserAuthCredentialService.Setup(aService => aService.GetById(userUpdate.Id)).Returns(new UserAuthCredential());

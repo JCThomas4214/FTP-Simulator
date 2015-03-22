@@ -24,7 +24,7 @@ namespace Stardome.Services.Domain
 
         public void AddAUser(UserInformation aUser)
         {
-            repository.Save(aUser);
+            repository.Add(aUser);
         }
     }
 }
