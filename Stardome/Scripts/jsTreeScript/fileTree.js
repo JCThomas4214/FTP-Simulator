@@ -134,7 +134,7 @@
 
         function dropD() {
             console.log(subList[0][1]);
-            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">Dropdown<span class=\"caret\"></span></button>');
+            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">'+subList[0][1]+'<span class=\"caret\"></span></button>');
             htmlDDlist.push('<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">');
             for (var i = 0; i < subList.length; i++) {
                 htmlDDlist.push('<li role="presentation"><a role="menuitem" tabindex="-1" id=\"' + subList[i][0] + '\" href="#">' + subList[i][1] + '</a></li>');
@@ -143,12 +143,13 @@
             document.getElementById('dropD').innerHTML = htmlDDlist.join("");
 
             $(function () {
-                $(".dropdown-menu li a").click(function () {
+                $(".dropdown-menu li a").click(function () {    //this is the on click function for the dropdown
                     $(".btn:first-child").text($(this).text());
                     $(".btn:first-child").val($(this).text());
-                    Tree($(this).attr('id'));
+                    Tree($(this).attr('id'));                   //reinitialization of the filetree based off what was clicked                                                                
+                    setTimeout(function () { call(); }, 100);   //call() keeps checkboxes consistant with what's in the download list. Using 100ms delay to wait for the DOM
 
-                    setTimeout(function () { call(); }, 100);
+                    //TODO: when a new folder is selected change the upload path to selected root "$(this).attr('id')"
                 });
             });
         }
