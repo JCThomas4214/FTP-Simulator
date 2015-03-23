@@ -25,10 +25,12 @@ namespace Stardome.Controllers
         
         public ActionResult Actions()
         {
+            List<string> dummy = new List<string>();
             ContentModel model = new ContentModel
             {
                 RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
-                RoleId = adminController.GetUserRoleId(User.Identity.Name)
+                RoleId = adminController.GetUserRoleId(User.Identity.Name),
+                List = dummy
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             adminController.GetValue(Headers.Content);
@@ -44,50 +46,53 @@ namespace Stardome.Controllers
             int uploadedFiles = 0;
             int existingFiles = 0;
             int incorrectFiles = 0;
-
-            foreach (HttpPostedFileBase file in files)
+            if (files != null)
             {
-                if (file != null && file.ContentLength > 0)
+                foreach (HttpPostedFileBase file in files)
                 {
-                    var extension = Path.GetExtension(file.FileName);
-                    if (!allowedExtensions.Contains(extension))
+                    if (file != null && file.ContentLength > 0)
                     {
-                        // Files with an extension that we don't allow, won't be uploaded
-                        ++incorrectFiles;
-                    }
-                    else
-                    {
-                        try
+                        var extension = Path.GetExtension(file.FileName);
+                        if (!allowedExtensions.Contains(extension))
                         {
-                            // Upload files to the directory lastSelected. If the folder doesn't exist, it creates it.
-                            string filePath = lastSelected;
-                            bool exists = Directory.Exists(Server.MapPath(filePath));
-                            if (!exists)
-                            {
-                                Directory.CreateDirectory(Server.MapPath(filePath));
-                            }
-                            string path = Path.Combine(Server.MapPath(filePath),
-                                Path.GetFileName(file.FileName));
-                            if (!System.IO.File.Exists(path))
-                            {
-                                // Updloaded file to directory
-                                file.SaveAs(path);
-                                ++uploadedFiles;
-                            }
-                            else
-                            {
-                                // This file name already exists in current directory
-                                ++existingFiles;
-                            }
-
+                            // Files with an extension that we don't allow, won't be uploaded
+                            ++incorrectFiles;
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            ViewBag.Message = "Could not upload file(s)";
+                            try
+                            {
+                                // Upload files to the directory lastSelected. If the folder doesn't exist, it creates it.
+                                string filePath = lastSelected;
+                                bool exists = Directory.Exists(Path.GetFullPath(filePath));
+                                if (!exists)
+                                {
+                                    Directory.CreateDirectory(Path.GetFullPath(filePath));
+                                }
+                                string path = Path.Combine(Path.GetFullPath(filePath),
+                                    Path.GetFileName(file.FileName));
+                                if (!System.IO.File.Exists(path))
+                                {
+                                    // Updloaded file to directory
+                                    file.SaveAs(path);
+                                    ++uploadedFiles;
+                                }
+                                else
+                                {
+                                    // This file name already exists in current directory
+                                    ++existingFiles;
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                ViewBag.Message = "Could not upload file(s)";
+                            }
                         }
                     }
                 }
             }
+            
             if (existingFiles > 0)
             {
                 results.Add(existingFiles == 1

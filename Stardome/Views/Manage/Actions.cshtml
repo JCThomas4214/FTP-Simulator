@@ -59,19 +59,24 @@
 
     @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
     {
-        using (Html.BeginForm("Actions", "Manage", FormMethod.Post))
-        {
+        using (Html.BeginForm("Actions", "Manage", new {lastSelected = Model.RootPath}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {   
             <label id="lastDir"></label>
-            <input type="hidden" name="lastSelected" id="lastSelected" value="" />
+            //<input type="hidden" name="lastSelected" id="lastSelected" value=" " />
             <label for="file">Upload File</label>
             <input type="file" name="files" multiple="multiple" />
             <br>
             <br>
-            <input type="submit" value="Upload Selected Files" />
+            <input type="submit" value="Upload Files" />
             <br>
             @ViewBag.Message<br>
+            foreach (var element in Model.List)
+    {
+        <p>@Html.DisplayFor(m => element)</p>
+    }
         }
     }
+   
 </body>
 </html>
 

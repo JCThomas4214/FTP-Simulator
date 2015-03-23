@@ -33,7 +33,7 @@ namespace Stardome.Tests.Controllers
             aMockRoleService = new Mock<IRoleService>();
             controllerContext = new Mock<ControllerContext>();
             principal = new Mock<IPrincipal>();
-            
+
             adminController = new AdminController(aMockUserAuthCredentialService.Object, aMockSiteSettingsService.Object, aMockRoleService.Object);
             manageController = new ManageController(adminController);
 
@@ -90,20 +90,20 @@ namespace Stardome.Tests.Controllers
                 }
             };
         }
-        
+
         [TestMethod]
         public void Actions_Admin()
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialAdmin);
             aMockSiteSettingsService.Setup(aService => aService.GetFilePath()).Returns("C:\\test\\123_4\\");
             aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Content)).Returns(new SiteSetting() { Value = "content" });
-            
+
             ViewResult result = manageController.Actions() as ViewResult;
             ContentModel resultsModel = result.Model as ContentModel;
 
             Boolean isTrue = resultsModel.RoleId == (int)Enums.Roles.Admin;
             isTrue = isTrue && String.Equals(resultsModel.RootPath, "C:/test/123_4/");
-            Assert.IsTrue( isTrue );
+            Assert.IsTrue(isTrue);
         }
 
         [TestMethod]
@@ -116,7 +116,7 @@ namespace Stardome.Tests.Controllers
             ViewResult result = manageController.Actions() as ViewResult;
             ContentModel resultsModel = result.Model as ContentModel;
 
-            Boolean isTrue = resultsModel.RoleId == (int) Enums.Roles.Producer;
+            Boolean isTrue = resultsModel.RoleId == (int)Enums.Roles.Producer;
             isTrue = isTrue && String.Equals(resultsModel.RootPath, "C:/test/123_4/");
             Assert.IsTrue(isTrue);
         }
@@ -135,5 +135,6 @@ namespace Stardome.Tests.Controllers
             isTrue = isTrue && String.Equals(resultsModel.RootPath, "C:/test/123_4/");
             Assert.IsTrue(isTrue);
         }
+
     }
 }
