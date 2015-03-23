@@ -191,7 +191,7 @@ namespace Stardome.Tests.Controllers
         [TestMethod]
         public void Users_Admin()
         {
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Users)).Returns(new SiteSetting() { Value = "users" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Users)).Returns(new SiteSetting() { Value = "users" });
             ViewResult result = controller.Users() as ViewResult;
             Assert.IsTrue(result.ViewBag.Message.Equals("users") && result.ViewBag.showAdminMenu);
         }
@@ -200,7 +200,7 @@ namespace Stardome.Tests.Controllers
         public void Users_Producer()
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialProducer);
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Users)).Returns(new SiteSetting() { Value = "users" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Users)).Returns(new SiteSetting() { Value = "users" });
             ViewResult result = controller.Users() as ViewResult;
             Assert.IsTrue(result.ViewBag.Message.Equals("users") && !result.ViewBag.showAdminMenu);
         }
@@ -208,7 +208,7 @@ namespace Stardome.Tests.Controllers
         [TestMethod]
         public void Content_Admin()
         {
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Content)).Returns(new SiteSetting() { Value = "content" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
             ViewResult result = controller.Content() as ViewResult;
 
             Assert.IsTrue(result.ViewBag.Message.Equals("content") && result.ViewBag.showAdminMenu);
@@ -218,7 +218,7 @@ namespace Stardome.Tests.Controllers
         public void Content_Producer()
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialProducer);
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Content)).Returns(new SiteSetting() { Value = "content" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
             ViewResult result = controller.Content() as ViewResult;
 
             Assert.IsTrue(result.ViewBag.Message.Equals("content") && !result.ViewBag.showAdminMenu);
@@ -228,7 +228,7 @@ namespace Stardome.Tests.Controllers
         public void Settings()
         {
             aMockSiteSettingsService.Setup(aService => aService.GetAll()).Returns(siteSettings);
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Settings)).Returns(new SiteSetting() { Value = "settings" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Settings)).Returns(new SiteSetting() { Value = "settings" });
 
             ViewResult result = controller.Settings() as ViewResult;
             SettingModel resultsModel = result.Model as SettingModel;
@@ -247,7 +247,7 @@ namespace Stardome.Tests.Controllers
         {
             IEnumerable<SiteSetting> siteSettings = new List<SiteSetting>();
             aMockSiteSettingsService.Setup(aService => aService.GetAll()).Returns(siteSettings);
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Settings)).Returns(new SiteSetting() { Value = "settings" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Settings)).Returns(new SiteSetting() { Value = "settings" });
 
             ViewResult result = controller.Settings() as ViewResult;
             SettingModel resultsModel = result.Model as SettingModel;
@@ -264,7 +264,7 @@ namespace Stardome.Tests.Controllers
             };
             aMockSiteSettingsService.Setup(aService => aService.UpdateSiteSettings(settingModelNew.Settings)).Returns(successMessage);
             aMockSiteSettingsService.Setup(aService => aService.GetAll()).Returns(siteSettingsNew);
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Settings)).Returns(new SiteSetting() { Value = "settings" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Settings)).Returns(new SiteSetting() { Value = "settings" });
 
             ViewResult result = controller.Settings(settingModelNew) as ViewResult;
             SettingModel resultsModel = result.Model as SettingModel;
@@ -282,7 +282,7 @@ namespace Stardome.Tests.Controllers
             };
             aMockSiteSettingsService.Setup(aService => aService.UpdateSiteSettings(null)).Returns(failureMessage);
             aMockSiteSettingsService.Setup(aService => aService.GetAll()).Returns(new List<SiteSetting>());
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Settings)).Returns(new SiteSetting() { Value = "settings" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Settings)).Returns(new SiteSetting() { Value = "settings" });
 
             ViewResult result = controller.Settings(settingModel) as ViewResult;
             SettingModel resultsModel = result.Model as SettingModel;

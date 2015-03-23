@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Security.Principal;
-using System.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Stardome.Controllers;
 using System.Web.Mvc;
@@ -11,7 +9,6 @@ using Stardome.DomainObjects;
 using Stardome.Services.Domain;
 using Stardome.Services.Application;
 using Stardome.Models;
-using System.Collections.Generic;
 
 namespace Stardome.Tests.Controllers
 {
@@ -97,8 +94,6 @@ namespace Stardome.Tests.Controllers
             var result = (RedirectToRouteResult)controller.RedirectToLocal((int)Enums.Roles.InActive);
             Assert.IsTrue(Equals("Login", result.RouteValues["action"]) && Equals("Account", result.RouteValues["controller"]));
         }
-
-
 
         [TestMethod]
         public void Manage_ChangePasswordSuccess()
@@ -228,5 +223,22 @@ namespace Stardome.Tests.Controllers
             Assert.AreEqual("Something went horribly wrong!", result.ViewBag.Message);
         }
 
+        //[TestMethod]
+        //public void Register()
+        //{
+        //    User userAdded = new User
+        //    {
+        //        Id = 1,
+        //        EmailAddress = "email",
+        //        FirstName = "fname",
+        //        LastName = "lname",
+        //        RoleId = (int) Enums.Roles.Admin,
+        //        Username = "username"
+        //    };
+        //    // Don't have to mock CreateUserAndAccount because need to return null
+        //    aMockAuthenticationProvider.Setup(aService => aService.GetUserId(userAdded.Username)).Returns(1);
+        //    aMockAuthenticationProvider.Setup(aService => aService.GeneratePasswordResetToken(userAdded.Username, It.IsAny<int>())).Returns("token");
+        //    ActionResult result = controller.Register(userAdded);
+        //}
     }
 }

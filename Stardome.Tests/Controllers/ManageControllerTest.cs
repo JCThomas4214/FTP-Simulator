@@ -98,7 +98,7 @@ namespace Stardome.Tests.Controllers
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialAdmin);
             aMockSiteSettingsService.Setup(aService => aService.GetFilePath()).Returns("C:\\test\\123_4\\");
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Content)).Returns(new SiteSetting() { Value = "content" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
 
             ViewResult result = manageController.Actions() as ViewResult;
             ContentModel resultsModel = result.Model as ContentModel;
@@ -113,7 +113,7 @@ namespace Stardome.Tests.Controllers
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialProducer);
             aMockSiteSettingsService.Setup(aService => aService.GetFilePath()).Returns("C:\\test\\123_4\\");
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Content)).Returns(new SiteSetting() { Value = "content" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
 
             ViewResult result = manageController.Actions() as ViewResult;
             ContentModel resultsModel = result.Model as ContentModel;
@@ -128,7 +128,7 @@ namespace Stardome.Tests.Controllers
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialUser);
             aMockSiteSettingsService.Setup(aService => aService.GetFilePath()).Returns("C:\\test\\123_4\\");
-            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(Headers.Content)).Returns(new SiteSetting() { Value = "content" });
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
 
             ViewResult result = manageController.Actions() as ViewResult;
             ContentModel resultsModel = result.Model as ContentModel;

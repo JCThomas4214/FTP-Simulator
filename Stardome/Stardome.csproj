@@ -242,10 +242,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Headers.Designer.cs">
+    <Compile Include="SiteSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Headers.resx</DependentUpon>
+      <DependentUpon>SiteSettings.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Repository\IObjectRepository.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -611,9 +611,9 @@
     <Folder Include="Views\Producer\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Headers.resx">
+    <EmbeddedResource Include="SiteSettings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Headers.Designer.cs</LastGenOutput>
+      <LastGenOutput>SiteSettings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

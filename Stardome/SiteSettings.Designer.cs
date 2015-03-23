@@ -22,14 +22,14 @@ namespace Stardome {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Headers {
+    public class SiteSettings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Headers() {
+        internal SiteSettings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Stardome {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Stardome.Headers", typeof(Headers).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Stardome.SiteSettings", typeof(SiteSettings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,47 @@ namespace Stardome {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Welcome to stardome.com. Activate your Account.
+        /// </summary>
+        public static string ActivateSubject {
+            get {
+                return ResourceManager.GetString("ActivateSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content Header.
         /// </summary>
         public static string Content {
             get {
                 return ResourceManager.GetString("Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New User Email Body.
+        /// </summary>
+        public static string NewEmailBody {
+            get {
+                return ResourceManager.GetString("NewEmailBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Reset Email Body.
+        /// </summary>
+        public static string PWRestBody {
+            get {
+                return ResourceManager.GetString("PWRestBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset your password for stardome.com.
+        /// </summary>
+        public static string ResetSubject {
+            get {
+                return ResourceManager.GetString("ResetSubject", resourceCulture);
             }
         }
         

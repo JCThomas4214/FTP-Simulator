@@ -33,7 +33,7 @@ namespace Stardome.Controllers
                 List = dummy
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(Headers.Content);
+            adminController.GetValue(SiteSettings.Content);
 
             return View(model);
         }
@@ -122,7 +122,7 @@ namespace Stardome.Controllers
                 List = results
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(Headers.Content);
+            adminController.GetValue(SiteSettings.Content);
 
             return View(model);
         }
@@ -135,7 +135,7 @@ namespace Stardome.Controllers
                 RoleId = adminController.GetUserRoleId(User.Identity.Name)
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(Headers.Content);
+            adminController.GetValue(SiteSettings.Content);
 
             return View(model);
         }
@@ -148,7 +148,7 @@ namespace Stardome.Controllers
                 RoleId = adminController.GetUserRoleId(User.Identity.Name)
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(Headers.Content);
+            adminController.GetValue(SiteSettings.Content);
 
             return View(model);
         }
