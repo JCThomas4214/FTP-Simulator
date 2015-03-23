@@ -110,11 +110,12 @@
             }
         }
 
-        function insertItem(number, file) {            
-            htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + file + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id)\"></li>');
+        function insertItem(number, file) {
+            var split0 = file.split("\\");           
+            var split1 = split0[split0.length - 1].split("\/");           
+            htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + split1[split1.length-1] + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id)\"></li>');
             fileList.push(file);
-            check(fileList[number]);
-            console.log(fileList);
+            check(fileList[number]);            
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
 
@@ -130,13 +131,11 @@
                 tmp++;                    
                 htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
                 htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
-            }
-            console.log(fileList);
+            }            
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
 
-        function dropD() {
-            console.log(subList[0][1]);
+        function dropD() {           
             htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">'+subList[0][1]+'<span class=\"caret\"></span></button>');
             htmlDDlist.push('<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">');
             for (var i = 0; i < subList.length; i++) {
@@ -169,7 +168,7 @@
                 if (items[0] == true) {
                     deleteItem(items[1]); //deleteItem will delete an object in the list at position item[1]                   
                 }
-                else {
+                else {                    
                     insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]                    
                 }
             }, function (dir) {
@@ -177,7 +176,7 @@
             });
             $('.jqueryFileTree').contextMenu({
                 // define which elements trigger this menu
-                selector: "a.file",
+                selector: "a",
                 // define the elements of the menu
 
                 items: {

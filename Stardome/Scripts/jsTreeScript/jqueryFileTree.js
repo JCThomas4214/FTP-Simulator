@@ -44,9 +44,7 @@ if(jQuery) (function($){
 						
 			$(this).each( function() {
 
-			    function showTree(element, dir) {
-			        console.log(element);
-			        console.log(dir);
+			    function showTree(element, dir) {			       
 					$(element).addClass('wait');
 					$(".jqueryFileTree.start").remove();
 					$.post(options.script,
@@ -54,16 +52,14 @@ if(jQuery) (function($){
 						dir: dir,
 						multiSelect: options.multiSelect
 					})					
-					.done(function (data) {
-					    //console.log(data);					    
+					.done(function (data) {					   				    
 						$(element).find('.start').html('');
 						$(element).removeClass('wait').append(data);
-						if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });
-						console.log("in showtree");
+						if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });						
 						bindTree(element);
 
 						//$(this).parent().removeClass('collapsed').addClass('expanded');
-
+						call();     // if files are on the download list it checks them
 						_trigger($(this), 'filetreeexpanded', data);
 					})
 					.fail(function(){
@@ -85,20 +81,20 @@ if(jQuery) (function($){
 						    if ($(this).parent().hasClass('collapsed')) {
 						        //dire($(this).attr('rel'));
 								// Expand
-								_trigger($(this), 'filetreeexpand', data);
-								console.log("in expand");                                
+								_trigger($(this), 'filetreeexpand', data);								                           
 								if( !options.multiFolder ) {
 									$(this).parent().parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 									$(this).parent().parent().find('LI.directory').removeClass('expanded').addClass('collapsed');
 								}
 
 								$(this).parent().removeClass('collapsed').addClass('expanded');
-								$(this).parent().find('UL').remove(); // cleanup								
+								$(this).parent().find('UL').remove(); // cleanup
+								console.log($(this).attr('rel'));
+								console.log($(this).parent());
 								showTree( $(this).parent(), encodeURIComponent($(this).attr('rel').match( /.*\// )) );
 							} else {
 								// Collapse
-								_trigger($(this), 'filetreecollapse', data);
-								console.log("in collapse");                                
+								_trigger($(this), 'filetreecollapse', data);								                             
 								$(this).parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 								$(this).parent().removeClass('expanded').addClass('collapsed');
 
@@ -109,7 +105,7 @@ if(jQuery) (function($){
 							file($(this).attr('rel'));
 
 							_trigger($(this), 'filetreeclicked', data);
-						}
+						}						
 						return false;
 					});
 					// Prevent A from triggering the # on non-click events

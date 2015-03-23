@@ -37,7 +37,7 @@
         root = "C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\"; //subList[0][0];@*'@Model.RootPath';*@  
         $(document).ready(function () {
 
-            if ('@Model.RoleId' != 1) {
+            if ('@Model.RoleId' == 1) {
                 lastSelected = subList[0][0];
                 dropD();
                 Tree(subList[0][0]);
