@@ -2,7 +2,10 @@
 		var htmlList = new Array;
 		var root = "C:/Users/";
 		var t = new String;
-
+		var lastSelected = new String;
+		
+    
+		
 		function call(number) {
 		    for (var i = 0; i < fileList.length; i++) {		        
 		        try{check(fileList[i]);}
@@ -148,7 +151,7 @@
                     $(".btn:first-child").val($(this).text());
                     Tree($(this).attr('id'));                   //reinitialization of the filetree based off what was clicked                                                                
                     setTimeout(function () { call(); }, 100);   //call() keeps checkboxes consistant with what's in the download list. Using 100ms delay to wait for the DOM
-
+                    lastSelected = $(this).attr('id');
                     //TODO: when a new folder is selected change the upload path to selected root "$(this).attr('id')"
                 });
             });
@@ -247,7 +250,4 @@
             
         }
 
-        $(document).ready(function () {
-             dropD();
-		     Tree(root);    
-         });
+        
