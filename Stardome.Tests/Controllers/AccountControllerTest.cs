@@ -190,16 +190,16 @@ namespace Stardome.Tests.Controllers
             Assert.AreEqual("Login", result.RouteValues["action"]);
         }
 
-        [TestMethod]
-        public void LostPassword() //POST Method
-        {
-            aMockAuthenticationProvider.Setup(AP => AP.GeneratePasswordResetToken("username1", 15)).Returns("token");
-            aMockUserAuthCredentialService.Setup(aService => aService.GetByEmail("email1@email.com")).Returns(userAuthCredential1);
-            LostPasswordModel lpm = new LostPasswordModel();
-            lpm.Email = "email1@email.com";
-            var result = (ViewResult)controller.LostPassword(lpm);
-            Assert.AreEqual(true, result.ViewData.ModelState.IsValid);
-        }
+        //[TestMethod]
+        //public void LostPassword() //POST Method
+        //{
+        //    aMockAuthenticationProvider.Setup(AP => AP.GeneratePasswordResetToken("username1", 15)).Returns("token");
+        //    aMockUserAuthCredentialService.Setup(aService => aService.GetByEmail("email1@email.com")).Returns(userAuthCredential1);
+        //    LostPasswordModel lpm = new LostPasswordModel();
+        //    lpm.Email = "email1@email.com";
+        //    var result = (ViewResult)controller.LostPassword(lpm);
+        //    Assert.AreEqual(true, result.ViewData.ModelState.IsValid);
+        //}
 
         [TestMethod]
         public void ResetPassword() //POST Method

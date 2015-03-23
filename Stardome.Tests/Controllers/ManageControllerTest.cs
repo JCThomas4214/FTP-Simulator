@@ -138,25 +138,25 @@ namespace Stardome.Tests.Controllers
             Assert.IsTrue(isTrue);
         }
 
-        [TestMethod]
-        public void Upload_Action_Test()
-        {
-            var httpContextMock = new Mock<HttpContextBase>();
-            var serverMock = new Mock<HttpServerUtilityBase>();
-            serverMock.Setup(x => x.MapPath(@"C:\Stardome:")).Returns(@"c:\Stardome");
-            httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
-            var sut = new ManageController();
-            sut.ControllerContext = new ControllerContext(httpContextMock.Object, new RouteData(), sut);
+        //[TestMethod]
+        //public void Upload_Action_Test()
+        //{
+        //    var httpContextMock = new Mock<HttpContextBase>();
+        //    var serverMock = new Mock<HttpServerUtilityBase>();
+        //    serverMock.Setup(x => x.MapPath(@"C:\Stardome:")).Returns(@"c:\Stardome");
+        //    httpContextMock.Setup(x => x.Server).Returns(serverMock.Object);
+        //    var sut = new ManageController();
+        //    sut.ControllerContext = new ControllerContext(httpContextMock.Object, new RouteData(), sut);
 
-            var file1Mock = new Mock<HttpPostedFileBase>();
-            file1Mock.Setup(x => x.FileName).Returns("file1.txt");
-            var file2Mock = new Mock<HttpPostedFileBase>();
-            file2Mock.Setup(x => x.FileName).Returns("file2.doc");
-            var files = new[] { file1Mock.Object, file2Mock.Object };
-            var actual = sut.Actions(files, @"C:\Stardome");
+        //    var file1Mock = new Mock<HttpPostedFileBase>();
+        //    file1Mock.Setup(x => x.FileName).Returns("file1.txt");
+        //    var file2Mock = new Mock<HttpPostedFileBase>();
+        //    file2Mock.Setup(x => x.FileName).Returns("file2.doc");
+        //    var files = new[] { file1Mock.Object, file2Mock.Object };
+        //    var actual = sut.Actions(files, @"C:\Stardome");
 
-            file1Mock.Verify(x => x.SaveAs(@"c:\Stardome\file1.txt"));
-            file2Mock.Verify(x => x.SaveAs(@"c:\Stardome\file2.doc"));
-        }
+        //    file1Mock.Verify(x => x.SaveAs(@"c:\Stardome\file1.txt"));
+        //    file2Mock.Verify(x => x.SaveAs(@"c:\Stardome\file2.doc"));
+        //}
     }
 }

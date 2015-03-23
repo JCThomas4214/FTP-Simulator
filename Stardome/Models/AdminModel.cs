@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Stardome.DomainObjects;
+using System.Web.Mvc;
 
 namespace Stardome.Models
 {
     public class MainModel
     {
         public int RoleId { get; set; }
+        public JsonResult RolesList { get; set; }
     }
 
     public class User : MainModel

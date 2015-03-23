@@ -37,6 +37,7 @@ namespace Stardome.Controllers
             MainModel model = new MainModel
             {
                 RoleId = GetUserRoleId(User.Identity.Name)
+                //RolesList = GetRoles()
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             GetValue(SiteSettings.Users);

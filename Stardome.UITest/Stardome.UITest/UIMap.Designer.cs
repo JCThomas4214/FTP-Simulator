@@ -953,15 +953,6 @@ namespace Stardome.UITest
             // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
             Playback.PlaybackSettings.ContinueOnError = true;
 
-            // Mouse hover 'Cancel' button at (1, 1)
-            Mouse.Hover(uICancelButton2, new Point(1, 1));
-
-            // Mouse hover 'Cancel Save' pane at (1, 1)
-            Mouse.Hover(uICancelSavePane, new Point(1, 1));
-
-            // Mouse hover 'Save' button at (1, 1)
-            Mouse.Hover(uISaveButton3, new Point(1, 1));
-
             // Reset flag to ensure that play back stops if there is an error.
             Playback.PlaybackSettings.ContinueOnError = false;
 

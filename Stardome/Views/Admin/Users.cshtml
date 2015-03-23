@@ -6,7 +6,7 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-
+        var roles = '@Url.Action("GetRoles", "Admin")';
         $('#UserTableContainer').jtable({
             title: 'User List',
             paging: true, //Enable paging
@@ -46,9 +46,14 @@
                 RoleId: {
                     title: 'Role',
                     list: true,
-                    options: function () {
-                        return '@Url.Action("GetRoles", "Admin")';
+                    options: {
+                        '1': 'Admin',
+                        '2': 'Producer',
+                        '3': 'Client',
+                        '4' : 'Inactive'
+
                     }
+                    
                 }
             }
         });
