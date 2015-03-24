@@ -182,7 +182,7 @@
                     insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]                    
                 }
             }, function (dir) {
-                console.log(dir);
+                lastSelected = dir;
             });
             $('.jqueryFileTree').contextMenu({
                 // define which elements trigger this menu
@@ -232,7 +232,8 @@
                         icon: "add",
                         callback: function (key, opt) {                            
                             var m = "clicked: " + key + " on " + $(this).attr('rel');
-                            window.console && console.log(m) || alert(m);
+                            //window.console && console.log(m) || alert(m);
+                            lastSelected = m;
                         },
                         disabled: function (key, opt) {
                             if ($(this).parent().attr('id') == "file") {

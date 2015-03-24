@@ -19,8 +19,9 @@ UL.jqueryFileTree LI {
 	list-style: none;
 	padding: 0px;
 	padding-left: 0px;        
-	margin: 5px;
+	margin-left: 7px;
 	white-space: nowrap;
+    vertical-align: middle;
 }
 
 .FTCB {

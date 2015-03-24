@@ -28,13 +28,13 @@
 if(jQuery) (function($){
 
 	$.extend($.fn, {
-		fileTree: function(options, file) {
+		fileTree: function(options, file, dire) {
 			// Default options
 			if( options.root			=== undefined ) options.root			= '/';
 			if( options.script			=== undefined ) options.script			= '/files/filetree';
 			if( options.folderEvent		=== undefined ) options.folderEvent		= 'click';
-			if( options.expandSpeed		=== undefined ) options.expandSpeed		= 750;
-			if( options.collapseSpeed	=== undefined ) options.collapseSpeed	= 750;
+			if( options.expandSpeed		=== undefined ) options.expandSpeed		= 350;
+			if( options.collapseSpeed	=== undefined ) options.collapseSpeed	= 350;
 			if( options.expandEasing	=== undefined ) options.expandEasing	= null;
 			if( options.collapseEasing	=== undefined ) options.collapseEasing	= null;
 			if( options.multiFolder		=== undefined ) options.multiFolder		= true;
@@ -79,7 +79,7 @@ if(jQuery) (function($){
 
 						if( $(this).parent().hasClass('directory') ) {
 						    if ($(this).parent().hasClass('collapsed')) {
-						        //dire($(this).attr('rel'));
+						        dire($(this).attr('rel'));
 								// Expand
 								_trigger($(this), 'filetreeexpand', data);								                           
 								if( !options.multiFolder ) {
@@ -88,17 +88,15 @@ if(jQuery) (function($){
 								}
 
 								$(this).parent().removeClass('collapsed').addClass('expanded');
-								$(this).parent().find('UL').remove(); // cleanup
-								console.log($(this).attr('rel'));
-								console.log($(this).parent());
+								$(this).parent().find('UL').remove(); // cleanup								
 								showTree( $(this).parent(), encodeURIComponent($(this).attr('rel').match( /.*\// )) );
 							} else {
 								// Collapse
 								_trigger($(this), 'filetreecollapse', data);								                             
 								$(this).parent().find('UL').slideUp({ duration: options.collapseSpeed, easing: options.collapseEasing });
 								$(this).parent().removeClass('expanded').addClass('collapsed');
-
-								//_trigger($(this), 'filetreecollapsed', data);
+								lastSelected = root;
+								_trigger($(this), 'filetreecollapsed', data);
 							}
 						} else {
 							// this is a file click, return file information
