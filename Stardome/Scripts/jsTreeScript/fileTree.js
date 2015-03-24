@@ -2,9 +2,19 @@
 		var htmlList = new Array;
 		var root = "C:/Users/";
 		var t = new String;
-		var lastSelected = new String;
-		
-    
+		var lastSelected = new String;		
+
+		function initializer(Role) {
+		    if (Role != 1) {        //1 = Admin, 2 = Producer, 3 = User
+		        lastSelected = subList[0][0];
+		        dropD();
+		        Tree(subList[0][0]);
+		    }
+		    else {
+		        lastSelected = root;
+		        Tree(root);
+		    }
+		}
 		
 		function call(number) {
 		    for (var i = 0; i < fileList.length; i++) {		        
@@ -220,7 +230,7 @@
                     "upload": {
                         name: "Upload to",
                         icon: "add",
-                        callback: function (key, opt) {
+                        callback: function (key, opt) {                            
                             var m = "clicked: " + key + " on " + $(this).attr('rel');
                             window.console && console.log(m) || alert(m);
                         },

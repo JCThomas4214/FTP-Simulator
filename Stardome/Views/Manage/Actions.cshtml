@@ -26,29 +26,21 @@
 <head>
     <meta charset="utf-8">
     <title>Content</title>
-    <script type="text/javascript">       
+    <script type="text/javascript">
 
-        var htmlDDlist = new Array;
-        var subList = new Array;
-        subList[0] = ["C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\ABC\\", "ABC"];
-        subList[1] = ["C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\CNN\\", "CNN"];
-        subList[2] = ["C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\FOX\\", "FOX"];
+    var htmlDDlist = new Array;
+    var subList = new Array;
+    subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\ABC\\', "ABC"];
+    subList[1] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\CNN\\', "CNN"];
+    subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\FOX\\', "FOX"];
 
-        root = "C:\\Users\\Jason\\Documents\\Stardome\\trunk\\Stardome\\Stardome\\"; //subList[0][0];@*'@Model.RootPath';*@  
-        $(document).ready(function () {
+        root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
 
-            if ('@Model.RoleId' != 1) {
-                lastSelected = subList[0][0];
-                dropD();
-                Tree(subList[0][0]);
-            }
-            else {
-                lastSelected = root;
-                Tree(root);
-            }
-        });
-         
-    </script>
+    $(document).ready(function () {
+        var Role = '@Model.RoleId';
+        initializer(Role);
+    });
+</script>
 
 </head>
 <body>
