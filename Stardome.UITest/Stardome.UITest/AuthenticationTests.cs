@@ -88,16 +88,7 @@ namespace Stardome.UITest
             uIAssertUserName.SearchProperties.Add("TagName", "A");
             Assert.AreEqual(TestContext.DataRow[0].ToString(), uIAssertUserName.InnerText);
 
-
-            Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.Disabled;
-            HtmlHyperlink uILogOff = new HtmlHyperlink(browzer);
-            uILogOff.TechnologyName = "Web";
-            uILogOff.SearchProperties.Add("ControlType", "Hyperlink");
-            uILogOff.SearchProperties.Add("TagName", "A");
-            uILogOff.SearchProperties.Add("Innertext", "Log off");
-            Mouse.Click(uILogOff);
-
-        }
+       }
 
         #region Additional test attributes
 

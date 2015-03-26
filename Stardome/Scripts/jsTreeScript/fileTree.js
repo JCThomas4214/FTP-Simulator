@@ -59,7 +59,7 @@
         }
 
         function downloadMP3(filePath) {
-            window.open("/Services/Application/FileDownloadPage.aspx?FilePath=" + filePath); //TODO: Change the location for Filedownloadpage.aspx
+            window.open("/Services/Application/FileDownloadPage.aspx?Mode=1&FilePath=" + filePath); //TODO: Change the location for Filedownloadpage.aspx
         }
 
         function aud_play_pause(file) {
@@ -72,6 +72,14 @@
             } else {
                 myAudio.pause();
                 document.getElementById(file).src = "/Images/play.png";
+            }
+        }
+
+        function downloadAsZip()
+        {
+            if (fileList.length>0) {
+                $('<form method="post" action="/Services/Application/FileDownloadPage.aspx?Mode=2" ><input type="hidden" name="selectedFiles" value="' + fileList + '">' +
+                    '</form>').submit();
             }
         }
 

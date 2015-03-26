@@ -31,7 +31,7 @@ namespace Stardome.UITest
             BrowserWindow browzer = BrowserWindow.Launch("http://localhost:2129/");
             this.UIMap.UpdateAllSettings();
             this.UIMap.AssertUpdateAllSettings();
-            this.UIMap.UpdateAllSettingsLogOff();
+           // this.UIMap.UpdateAllSettingsLogOff();
         }
 
 

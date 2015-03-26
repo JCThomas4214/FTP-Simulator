@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Stardome.DomainObjects;
 using Stardome.Models;
+using System.IO.Compression;
+using Ionic.Zip;
 
 namespace Stardome.Controllers
 {
@@ -159,5 +161,6 @@ namespace Stardome.Controllers
             System.IO.File.Delete(Server.MapPath("~") + filePath);
             return null;
         }
+
     }
 }

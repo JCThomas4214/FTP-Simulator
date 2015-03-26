@@ -61,27 +61,30 @@
     </div>
 
     <div id="dialog-confirm"></div>
-
-    @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
-    {
-        using (Html.BeginForm("Actions", "Manage", new {lastSelected = Model.RootPath}, FormMethod.Post, new { enctype = "multipart/form-data" })) //lastSelected must equal 
-        {   
-            <label id="lastDir"></label>
-            //<input type="hidden" name="lastSelected" id="lastSelected" value=" " />
-            <label for="file">Upload File</label>
-            <input type="file" name="files" multiple="multiple" />
-            <br>
-            <br>
-            <input type="submit" value="Upload Files" />
-            <br>
-            @ViewBag.Message<br>
-            foreach (var element in Model.List)
-    {
-        <p>@Html.DisplayFor(m => element)</p>
-    }
+    <div style="float:left; width:600px">
+        @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
+        {
+            using (Html.BeginForm("Actions", "Manage", new { lastSelected = Model.RootPath }, FormMethod.Post, new { enctype = "multipart/form-data" })) //lastSelected must equal
+            {
+                <label id="lastDir"></label>
+                //<input type="hidden" name="lastSelected" id="lastSelected" value=" " />
+                <label for="file">Upload File</label>
+                <input type="file" name="files" multiple="multiple" />
+                <br>
+                <br>
+                <input type="submit" value="Upload Files" />
+                <br>
+                @ViewBag.Message<br>
+                foreach (var element in Model.List)
+                {
+                    <p>@Html.DisplayFor(m => element)</p>
+                }
+            }
         }
-    }
-   
+    </div>
+    <div>
+        <button onclick="downloadAsZip()" >Download as Zip</button>
+    </div>
 </body>
 </html>
 
