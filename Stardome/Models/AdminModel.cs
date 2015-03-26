@@ -29,6 +29,14 @@ namespace Stardome.Models
         public string RootPath { get; set; }   
         public string SelectedDir { get; set; }
         public List<string> List { get; set; }
-        public List<User> UserList { get; set; } 
+        public List<User> UserList { get; set; }
+        public List<User> SelectedUsers { get; set; }
+        public PostedUsers PostedUsers { get; set; }
+
+    }
+
+    public class PostedUsers
+    {
+        public int[] UserIds { get; set; }
     }
 }
