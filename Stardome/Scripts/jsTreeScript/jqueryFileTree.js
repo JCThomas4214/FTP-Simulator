@@ -56,7 +56,7 @@ if(jQuery) (function($){
 						$(element).find('.start').html('');
 						$(element).removeClass('wait').append(data);
 						if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });						
-						bindTree(element);
+						bindTree(element);						
 
 						//$(this).parent().removeClass('collapsed').addClass('expanded');
 						call();     // if files are on the download list it checks them

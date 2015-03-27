@@ -28,16 +28,17 @@
     <title>Content</title>
     <script type="text/javascript">
 
+    var Role = '@Model.RoleId';
     var htmlDDlist = new Array;
     var subList = new Array;
+
     subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\ABC\\', "ABC"];
     subList[1] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\CNN\\', "CNN"];
     subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\FOX\\', "FOX"];
 
         root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
 
-    $(document).ready(function () {
-        var Role = '@Model.RoleId';
+    $(document).ready(function () {        
         initializer(Role);
     });
 </script>
@@ -84,6 +85,11 @@
     </div>
     <div>
         <button onclick="downloadAsZip()" >Download as Zip</button>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br />
+    <div>
+        <h1 id="qunit-header">QUnit Tests</h1>
+        <ol id="qunit-tests"></ol>
     </div>
 </body>
 </html>

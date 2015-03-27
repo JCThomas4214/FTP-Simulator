@@ -57,7 +57,8 @@ namespace Stardome
                       "~/Scripts/jsTreeScript/jquery.contextMenu.js",
                       "~/Scripts/jsTreeScript/jquery.ui.position.js",
                       "~/Scripts/jsTreeScript/jquery.easing.js",
-                      "~/Scripts/jsTreeScript/fileTree.js"
+                      "~/Scripts/jsTreeScript/fileTree.js",
+                      "~/Scripts/jsTreeScript/test.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/jsTree").Include(

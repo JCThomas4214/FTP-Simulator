@@ -28,13 +28,11 @@
 		    }
 		}
 
-		function check(box) {
-		    //console.log(box);
+		function check(box) {		    
             document.getElementById(box).checked = true;            
         }
 
-        function uncheck(box) {
-            //console.log(box);
+        function uncheck(box) {            
             document.getElementById(box).checked = false;           
         }
 
@@ -138,7 +136,8 @@
             var split1 = split0[split0.length - 1].split("\/");           
             htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + split1[split1.length-1] + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id)\"></li>');
             fileList.push(file);
-            check(fileList[number]);            
+            try{check(fileList[number]);}
+            catch(e){}
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
         }
 
@@ -278,7 +277,7 @@
         function Tree_Permissions(root) {
             $('#MainTree').fileTree({
                 root: root,
-                script: '../Scripts/jqueryPermissionsFileTree.aspx',
+                script: '../Scripts/jqueryPermissionsFileTree.aspx',                
                 multiFolder: false,
                 folderEvent: 'dblclick'
             }, function (file) {
