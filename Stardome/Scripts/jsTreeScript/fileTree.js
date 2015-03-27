@@ -8,11 +8,11 @@
 		    if (Role != 1) {        //1 = Admin, 2 = Producer, 3 = User
 		        lastSelected = subList[0][0];
 		        dropD();
-		        Tree(subList[0][0]);
+		        Tree(subList[0][0],Role);
 		    }
 		    else {
 		        lastSelected = root;
-		        Tree(root);
+		        Tree(root, Role);
 		    }
 		}
 
@@ -179,10 +179,11 @@
             });
         }
 
-        function Tree(root) {
+        function Tree(root, Role) {
             $('#MainTree').fileTree({
                 root: root,
-                script: '../Scripts/jqueryFileTree.aspx',
+                role: Role,
+                script: '../Scripts/jqueryFileTree.aspx?Role='+Role,
                 multiFolder: false,
                 folderEvent: 'dblclick'
             }, function (file) {                
