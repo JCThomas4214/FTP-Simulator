@@ -1,11 +1,12 @@
 ﻿@using Stardome.DomainObjects
-@using MvcCheckBoxList.Model 
+@using MvcCheckBoxList.Model
 
 ﻿@model Stardome.Models.ContentModel
 @Scripts.Render("~/Scripts/jsTree")
 @Styles.Render("~/Content/jsTree")
-@if (Request.IsAuthenticated == false) {
-     Response.Redirect("~/Account/Login");
+@if (Request.IsAuthenticated == false)
+{
+    Response.Redirect("~/Account/Login");
 
 }
 @if (Model.RoleId != (int)Enums.Roles.Admin)
@@ -24,32 +25,40 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Content</title>         
+    <title>Content</title>
     <script type="text/javascript">
 
-    var htmlDDlist = new Array;
-    var subList = new Array;
-    subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\ABC\\', "ABC"];
-    subList[1] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\CNN\\', "CNN"];
-    subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\FOX\\', "FOX"];
+        root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
 
-    root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
-
-    $(document).ready(function () {
-        var Role = '@Model.RoleId';
-        initializer(Role);
-    });
+        $(document).ready(function () {
+            var Role = '@Model.RoleId';
+            initializer_Permissions(Role);
+        });
     </script>
 
 
 
 </head>
-    <body>
-
-        <div style="float:left; height:500px; width:200px">
+<body>
+    <div style="width:1000px">
+        <div style="width:200px; float:left; display:inline-block;">Select User/Users</div>
+        <div style="width:500px; display:inline-block">Select Folder/Folders</div>
+        <div style="width:200px; display:inline-block">Selected Folders</div>
+    </div>
+    <div style="clear:left;height:500px;">
+        <div style="float:left;  width:200px; display:inline-block">
             @Html.CheckBoxListFor(m => m.PostedUsers.UserIds, m => m.UserList, m => m.Id, m => m.Username,
                                                                      m => m.SelectedUsers, Position.Vertical, x => new { @class = "styled_checkbox" })
         </div>
-        <div id="MainTree"></div>
-    </body>
+
+        <div id="MainTree" style="width:500px; display:inline-block"></div>
+        <div style="width:200px; display:inline-block"></div>
+
+    </div>
+    <div style="width:1000px">
+        <input type="submit" value="Update" />
+        <input type="submit" value="Cancel" />
+
+    </div>
+</body>
 </html>  

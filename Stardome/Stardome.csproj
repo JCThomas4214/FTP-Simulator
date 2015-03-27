@@ -437,6 +437,7 @@
     <Content Include="Scripts\jtable\external\json2.min.js" />
     <Content Include="Scripts\jtable\jquery.jtable.js" />
     <Content Include="Scripts\jtable\jquery.jtable.min.js" />
+    <Content Include="Scripts\jqueryPermissionsFileTree.aspx" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.bd.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.ca.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.cz.js" />

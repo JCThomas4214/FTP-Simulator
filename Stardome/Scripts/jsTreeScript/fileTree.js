@@ -15,6 +15,11 @@
 		        Tree(root);
 		    }
 		}
+
+		function initializer_Permissions(Role) {
+		        lastSelected = root;
+		        Tree_Permissions(root);
+		}
 		
 		function call(number) {
 		    for (var i = 0; i < fileList.length; i++) {		        
@@ -269,3 +274,25 @@
         }
 
         
+        function Tree_Permissions(root) {
+            $('#MainTree').fileTree({
+                root: root,
+                script: '../Scripts/jqueryPermissionsFileTree.aspx',
+                multiFolder: false,
+                folderEvent: 'dblclick'
+            }, function (file) {
+                var items = new Array; //array that contrains check outputs
+                items = checkVal(file);    //check will return, true or false and position if the file is already in the list
+                if (items[0] == true) {
+                    deleteItem(items[1]); //deleteItem will delete an object in the list at position item[1]                   
+                }
+                else {
+                    insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]                    
+                }
+            }, function (dir) {
+                lastSelected = dir;
+            });
+           
+
+
+        }
