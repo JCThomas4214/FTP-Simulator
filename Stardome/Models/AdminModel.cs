@@ -16,6 +16,13 @@ namespace Stardome.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
+
+        public string DisplayName {
+            get
+            {
+                return FirstName + " " + LastName + "(" + Username + ")";
+            }
+         }
         public string EmailAddress { get; set; }
     }
 
@@ -30,13 +37,7 @@ namespace Stardome.Models
         public string SelectedDir { get; set; }
         public List<string> List { get; set; }
         public List<User> UserList { get; set; }
-        public List<User> SelectedUsers { get; set; }
-        public PostedUsers PostedUsers { get; set; }
-
     }
 
-    public class PostedUsers
-    {
-        public int[] UserIds { get; set; }
-    }
+
 }

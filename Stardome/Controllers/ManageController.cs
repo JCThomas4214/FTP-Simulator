@@ -149,6 +149,20 @@ namespace Stardome.Controllers
             return View(model);
         }
 
+
+        public ActionResult GetFolderPermissionsForUser(int UserId)
+        {
+
+            FolderUserAccessModel model = new FolderUserAccessModel
+            {
+               
+            };
+            ViewBag.showAdminMenu = model.User.RoleId == (int)Enums.Roles.Admin;
+            adminController.GetValue(SiteSettings.Content);
+
+            return View(model);
+        }
+
         public ActionResult ByFolder()
         {
             ContentModel model = new ContentModel

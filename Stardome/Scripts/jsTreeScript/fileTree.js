@@ -1,5 +1,8 @@
 		var fileList = new Array;
 		var htmlList = new Array;
+		var selectedUsers = new Array;
+		var selectedFolders = new Array;
+
 		var root = "C:/Users/";
 		var t = new String;
 		var lastSelected = new String;		
@@ -34,6 +37,33 @@
 
         function uncheck(box) {            
             document.getElementById(box).checked = false;           
+        }
+
+        function checkFolderPermissions(dir)
+        {
+            //debugger
+            if (document.getElementById(dir).checked == true) {
+                var folderCheckboxes = document.querySelectorAll('[name$="UserPermissionFolder"]'); // //document.getElementsByName("UserPermissionFolder");
+                for (x = 0 ; x < folderCheckboxes.length ; x++) {
+                    
+                    id = folderCheckboxes[x].getAttribute("id");
+                    if (id.indexOf(dir) == 0) {
+                        selectedFolders.push(id)
+                        check(id)
+                    }
+                }
+                // selectedFolders.push(dir)
+            }
+            else {
+                debugger
+               
+                var checkBox = document.getElementById(dir);
+                folderName = checkBox.name;
+                ParentFolder = checkBox.id.replace("/" + folderName, "");
+                var ParentCheckBox = document.getElementById(ParentFolder);
+                ParentCheckBox.checked = false;
+                
+            }
         }
 
         function checkB(file) {           
