@@ -157,10 +157,16 @@ namespace Stardome.Controllers
             {
                
             };
-            ViewBag.showAdminMenu = model.User.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(SiteSettings.Content);
+            //ViewBag.showAdminMenu = model.User.RoleId == (int)Enums.Roles.Admin;
+            //adminController.GetValue(SiteSettings.Content);
 
             return View(model);
+        }
+
+        public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders)
+        {
+
+            var x = 1;
         }
 
         public ActionResult ByFolder()

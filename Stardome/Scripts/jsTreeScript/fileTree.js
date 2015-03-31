@@ -41,31 +41,90 @@
 
         function checkFolderPermissions(dir)
         {
-            //debugger
-            if (document.getElementById(dir).checked == true) {
-                var folderCheckboxes = document.querySelectorAll('[name$="UserPermissionFolder"]'); // //document.getElementsByName("UserPermissionFolder");
-                for (x = 0 ; x < folderCheckboxes.length ; x++) {
+            debugger
+            if (document.getElementById(dir).checked == true) {                         // Folder Checked
+              
+                var index = selectedFolders.indexOf(dir);                               // Folder dosner exisit in the list
+                if (index == -1)
+                {
                     
-                    id = folderCheckboxes[x].getAttribute("id");
-                    if (id.indexOf(dir) == 0) {
-                        selectedFolders.push(id)
-                        check(id)
+                    // Removing the sub folders from list--may not remove all if the folder is not expanded
+                    FolderName = document.getElementById(dir);
+                    var subFolders = document.querySelectorAll('[id*=' + FolderName.name + ']');
+                    for (x = 0 ; x < subFolders.length ; x++) {
+                        subFolderId = subFolders[x].getAttribute("id");
+                        var subFolderIndex = selectedFolders.indexOf(subFolderId);
+                        if(subFolderIndex > -1)
+                            selectedFolders.splice(subFolderIndex, 1);
+
                     }
+                    selectedFolders.push(dir)       // Adding Selected folder to list
+                    document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("");
                 }
-                // selectedFolders.push(dir)
-            }
-            else {
-                debugger
-               
-                var checkBox = document.getElementById(dir);
-                folderName = checkBox.name;
-                ParentFolder = checkBox.id.replace("/" + folderName, "");
-                var ParentCheckBox = document.getElementById(ParentFolder);
-                ParentCheckBox.checked = false;
                 
             }
+            else {                                                                  //Folder unchecked
+               
+                var ParentFolder;
+                do                                                                 // Uncheck all the parent folders recursively
+                {
+                    var index = selectedFolders.indexOf(dir);
+                    // Remove the unchecked folders from list
+                    if (index > -1)
+                    {
+                        FolderName = document.getElementById(dir);
+                        var subFolders = document.querySelectorAll('[id*=' + FolderName.name +']');
+                        for (x = 0 ; x < subFolders.length ; x++) {
+                            subFolderId = subFolders[x].getAttribute("id");
+                            var SubFolderCheckBox = document.getElementById(subFolderId);
+                            if (SubFolderCheckBox.checked == true && selectedFolders.indexOf(subFolderId) == -1) {
+                                selectedFolders.push(subFolderId)
+                            }
+                        }
+                        selectedFolders.splice(index,1);
+
+                    }
+                    
+                    // uncheck the parent folder
+                    var checkBox = document.getElementById(dir);
+                    folderName = checkBox.name;
+                    ParentFolder = checkBox.id.replace("/" + folderName, "");
+                    var ParentCheckBox = document.getElementById(ParentFolder);
+                    ParentCheckBox.checked = false;
+                    dir = ParentFolder;
+                }
+                while (ParentFolder.toString().endsWith("Stardome") == false)       // Repeat untill it reaches Stardome folder
+
+                }
+            
         }
 
+        function updatePermissions()
+        {
+            UserId = $('#ddlUsers').val();
+            if (UserId >0)
+            {
+                $.ajax({
+                    url: "/Manage/UpdateFolderPermissions",
+                    type: "POST",
+                    data: JSON.stringify({ UserId: UserId, SelectedFolders: selectedFolders }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.statusText);
+                    },
+                    success: function (result) {
+                    },
+                    async: true,
+                    processData: false
+                });
+            }
+
+        }
+
+        String.prototype.endsWith = function(suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
         function checkB(file) {           
             var items = new Array;
             items = checkVal(file);
@@ -169,6 +228,7 @@
             try{check(fileList[number]);}
             catch(e){}
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+
         }
 
         function deleteItem(number) {
