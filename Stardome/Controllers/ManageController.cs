@@ -166,7 +166,7 @@ namespace Stardome.Controllers
         public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders)
         {
 
-            var x = 1;
+            
         }
 
         public ActionResult ByFolder()

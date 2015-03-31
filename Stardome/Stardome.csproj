@@ -248,6 +248,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\FolderPermissionRepository.cs" />
+    <Compile Include="Repositories\IFolderPermissionRepository.cs" />
+    <Compile Include="Services\Domain\FolderPermissionService.cs" />
+    <Compile Include="Services\Domain\IFolderPermissionService.cs" />
     <Compile Include="SiteSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
