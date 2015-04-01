@@ -2,6 +2,7 @@
 		var htmlList = new Array;
 		var selectedUsers = new Array;
 		var selectedFolders = new Array;
+		var selectedFolderNames = new Array;
 
 		var root = "C:/Users/";
 		var t = new String;
@@ -54,11 +55,14 @@
                     for (x = 0 ; x < subFolders.length ; x++) {
                         subFolderId = subFolders[x].getAttribute("id");
                         var subFolderIndex = selectedFolders.indexOf(subFolderId);
-                        if(subFolderIndex > -1)
+                        if (subFolderIndex > -1) {
                             selectedFolders.splice(subFolderIndex, 1);
+                            selectedFolderNames.splice(subFolderIndex, 1)
+                        }
 
                     }
                     selectedFolders.push(dir)       // Adding Selected folder to list
+                    selectedFolderNames.push(FolderName.name)
                     document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("");
                 }
                 
@@ -79,9 +83,11 @@
                             var SubFolderCheckBox = document.getElementById(subFolderId);
                             if (SubFolderCheckBox.checked == true && selectedFolders.indexOf(subFolderId) == -1) {
                                 selectedFolders.push(subFolderId)
+                                selectedFolderNames.push(SubFolderCheckBox.name)
                             }
                         }
-                        selectedFolders.splice(index,1);
+                        selectedFolders.splice(index, 1);
+                        selectedFolderNames.splice(index, 1)
 
                     }
                     
@@ -107,7 +113,7 @@
                 $.ajax({
                     url: "/Manage/UpdateFolderPermissions",
                     type: "POST",
-                    data: JSON.stringify({ UserId: UserId, SelectedFolders: selectedFolders }),
+                    data: JSON.stringify({ UserId: UserId, SelectedFolders: selectedFolders, SelectedFolderNames: selectedFolderNames }),
                     dataType: 'json',
                     contentType: 'application/json',
                     error: function (xhr) {

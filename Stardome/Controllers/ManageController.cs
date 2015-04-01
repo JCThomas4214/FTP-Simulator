@@ -7,21 +7,28 @@ using System.Web.Mvc;
 using Stardome.DomainObjects;
 using Stardome.Models;
 using System.Web.Script.Serialization;
+using Stardome.Services.Domain;
+using Stardome.Repositories;
 
 namespace Stardome.Controllers
 {
     public class ManageController : Controller
     {
         private readonly AdminController adminController;
+        private readonly IFolderService folderService;
+        private readonly IAccessService accessService;
         //
         // GET: /Manage/
         public ManageController(AdminController anAdminController)
         {
             adminController = anAdminController;
+            //TODO: ass folderService
         }
         public ManageController()
         {
             adminController = new AdminController();
+            folderService = new FolderService(new FolderRepository(new StardomeEntitiesCS()));
+            accessService = new AccessService(new AccessRepository(new StardomeEntitiesCS()));
         }
         
         public ActionResult Actions()
@@ -160,9 +167,23 @@ namespace Stardome.Controllers
             return View(model);
         }
 
-        public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders)
+        public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
         {
+            // Delete all the current perssions
+            // Add New Permissions
+            // Add Access Table
+            foreach (string selectedFolder in SelectedFolderNames)
+            {
+                if (accessService.GetAccessByFolderName(selectedFolder) == null)
+                { 
+                    Access a = new Access();
+                    a.UserId = UserId;
+                    a.FolderId = folderService.GetFolderByFolderName(selectedFolder).Id;
+                    a.DateGiven=DateTime.Now;
+                    accessService.AddAccess(a);
+                }
 
+            }
             
         }
 

@@ -36,15 +36,11 @@ public partial class StardomeEntitiesCS : DbContext
 
     public DbSet<Action> Actions { get; set; }
 
-    public DbSet<File> Files { get; set; }
-
     public DbSet<Folder> Folders { get; set; }
 
     public DbSet<Log> Logs { get; set; }
 
     public DbSet<Role> Roles { get; set; }
-
-    public DbSet<Status> Status { get; set; }
 
     public DbSet<UserAuthCredential> UserAuthCredentials { get; set; }
 

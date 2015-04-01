@@ -23,8 +23,6 @@ public partial class Folder
 
         this.Accesses = new HashSet<Access>();
 
-        this.Files = new HashSet<File>();
-
     }
 
 
@@ -34,7 +32,7 @@ public partial class Folder
 
     public string Path { get; set; }
 
-    public string CreatedBy { get; set; }
+    public Nullable<int> CreatedBy { get; set; }
 
     public Nullable<System.DateTime> CreatedOn { get; set; }
 
@@ -42,15 +40,9 @@ public partial class Folder
 
     public Nullable<System.DateTime> ModifiedOn { get; set; }
 
-    public int StatusId { get; set; }
-
 
 
     public virtual ICollection<Access> Accesses { get; set; }
-
-    public virtual ICollection<File> Files { get; set; }
-
-    public virtual Status Status { get; set; }
 
 }
 

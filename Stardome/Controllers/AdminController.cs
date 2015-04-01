@@ -16,12 +16,14 @@ namespace Stardome.Controllers
         private readonly IUserAuthCredentialService userAuthCredentialService;
         private readonly ISiteSettingsService siteSettingsService;
         private readonly IRoleService roleService;
+        
 
         public AdminController()
         {
             userAuthCredentialService = new UserAuthCredentialService(new UserAuthCredentialRepository(new StardomeEntitiesCS()));
             siteSettingsService = new SiteSettingsService(new SiteSettingsRepository(new StardomeEntitiesCS()));
             roleService = new RoleService(new RoleRepository(new StardomeEntitiesCS()));
+            
         }
 
         public AdminController(IUserAuthCredentialService aUserAuthCredentialService, ISiteSettingsService aSiteSettingsService, IRoleService aRoleService)
@@ -29,6 +31,7 @@ namespace Stardome.Controllers
             userAuthCredentialService = aUserAuthCredentialService;
             siteSettingsService = aSiteSettingsService;
             roleService = aRoleService;
+           
         }
 
         // Admin/Users

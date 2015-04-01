@@ -33,5 +33,46 @@ namespace Stardome.Repositories
         {
             return sdContext.Folders;
         }
+
+        public string AddFolder(Folder folder)
+        {
+            string msg="Updated successfully";
+            try
+            {
+                sdContext.Folders.Add(folder);
+                sdContext.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                msg = ex.Message;
+            }
+            
+            return msg;
+        }
+
+        public string DeleteFolder(Folder folder)
+        {
+            string msg = "Deleted successfully";
+            try
+            {
+                Delete(folder);
+            }
+            catch (System.Exception ex)
+            {
+                msg = ex.Message;
+            }
+
+            return msg;
+        }
+
+        public Folder GetFolderByFolderName(string FolderName)
+        {
+            return sdContext.Folders.SingleOrDefault(x => x.Name == FolderName);
+        }
+
+        public Folder GetFolderByFolderPath(string FolderPath)
+        {
+            return sdContext.Folders.SingleOrDefault(x => x.Path == FolderPath);
+        }
     }
 }
