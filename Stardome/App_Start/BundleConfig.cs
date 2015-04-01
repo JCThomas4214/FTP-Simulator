@@ -49,7 +49,7 @@ namespace Stardome
                 "~/Scripts/jtable/themes/basic/jtable_basic.min.css",
                 "~/Scripts/jtable/themes/jqueryui/jtable_jqueryui.css"
                 ));
-            //
+            
             //jstree
             bundles.Add(new ScriptBundle("~/Scripts/jsTree").Include(
                       "~/Scripts/jsTreeScript/jstree.js",                      
@@ -71,6 +71,17 @@ namespace Stardome
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                       "~/Scripts/bootstrap/js/bootstrap.js"
+                      ));
+
+            //bootstrap
+            bundles.Add(new StyleBundle("~/Content/bootstrapToggle").Include(
+                        "~/Content/themes/bootstrap/css/bootstrap-toggle.css",
+                        "~/Content/themes/bootstrap/css/bootstrap-toggle.min.css"
+                        ));
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrapToggle").Include(
+                      "~/Scripts/bootstrap/js/bootstrap-toggle.js",
+                      "~/Scripts/bootstrap/js/bootstrap-toggle.min.js",
+                      "~/Scripts/bootstrap/js/bootstrap-toggle.min.js.map"
                       ));
         }
     }

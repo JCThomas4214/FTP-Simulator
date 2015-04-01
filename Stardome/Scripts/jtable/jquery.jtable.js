@@ -277,7 +277,7 @@ THE SOFTWARE.
             this._createTableBody();
         },
 
-        /* Creates header (all column headers) of the table.
+        /* Creates header (all column SiteSettings) of the table.
         *************************************************************************/
         _createTableHead: function () {
             var $thead = $('<thead></thead>')
@@ -331,7 +331,7 @@ THE SOFTWARE.
             return $th;
         },
 
-        /* Creates an empty header cell that can be used as command column headers.
+        /* Creates an empty header cell that can be used as command column SiteSettings.
         *************************************************************************/
         _createEmptyCommandHeader: function () {
             var $th = $('<th></th>')
@@ -458,7 +458,6 @@ THE SOFTWARE.
 
             //listAction may be a function, check if it is
             if ($.isFunction(self.options.actions.listAction)) {
-
                 //Execute the function
                 var funcResult = self.options.actions.listAction(self._lastPostData, self._createJtParamsForLoading());
 
@@ -478,8 +477,12 @@ THE SOFTWARE.
             } else { //assume listAction as URL string.
 
                 //Generate URL (with query string parameters) to load records
-                var loadUrl = self._createRecordLoadUrl();
-
+                var loadUrl;
+                if (showAllUsers != null) {
+                    loadUrl = showAllUsers ? self._createAllRecordLoadUrl() : self._createRecordLoadUrl();
+                } else {
+                    loadUrl = self._createRecordLoadUrl();
+                }
                 //Load data from server using AJAX
                 self._ajax({
                     url: loadUrl,
@@ -500,6 +503,10 @@ THE SOFTWARE.
         *************************************************************************/
         _createRecordLoadUrl: function () {
             return this.options.actions.listAction;
+        },
+
+        _createAllRecordLoadUrl: function () {
+            return this.options.actions.listAllAction;
         },
 
         _createJtParamsForLoading: function() {
@@ -990,7 +997,6 @@ THE SOFTWARE.
             this._$toolbarDiv = $('<div />')
             .addClass('jtable-toolbar')
             .appendTo(this._$titleDiv);
-
             for (var i = 0; i < this.options.toolbar.items.length; i++) {
                 this._addToolBarItem(this.options.toolbar.items[i]);
             }
@@ -1982,10 +1988,12 @@ THE SOFTWARE.
 
             //Events
             recordAdded: function (event, data) { },
+            recordShowAll: function (event, data) { },
 
             //Localization
             messages: {
-                addNewRecord: 'Add new record'
+                addNewRecord: ' Add new record',
+                showAllRecords: 'Show all Records'
             }
         },
 
@@ -3595,6 +3603,7 @@ THE SOFTWARE.
         _create: $.hik.jtable.prototype._create,
         _setOption: $.hik.jtable.prototype._setOption,
         _createRecordLoadUrl: $.hik.jtable.prototype._createRecordLoadUrl,
+        _createAllRecordLoadUrl: $.hik.jtable.prototype._createAllRecordLoadUrl,
         _createJtParamsForLoading: $.hik.jtable.prototype._createJtParamsForLoading,
         _addRowToTable: $.hik.jtable.prototype._addRowToTable,
         _addRow: $.hik.jtable.prototype._addRow,
@@ -3906,6 +3915,13 @@ THE SOFTWARE.
             return loadUrl;
         },
 
+        /* Overrides _createAllRecordLoadUrl method to add paging info to URL.
+        *************************************************************************/
+        _createAllRecordLoadUrl: function () {
+            var loadUrl = base._createAllRecordLoadUrl.apply(this, arguments);
+            loadUrl = this._addPagingInfoToUrl(loadUrl, this._currentPageNo);
+            return loadUrl;
+        },
         /* Overrides _createJtParamsForLoading method to add paging parameters to jtParams object.
         *************************************************************************/
         _createJtParamsForLoading: function () {
@@ -4192,6 +4208,7 @@ THE SOFTWARE.
         _normalizeFieldOptions: $.hik.jtable.prototype._normalizeFieldOptions,
         _createHeaderCellForField: $.hik.jtable.prototype._createHeaderCellForField,
         _createRecordLoadUrl: $.hik.jtable.prototype._createRecordLoadUrl,
+        _createAllRecordLoadUrl: $.hik.jtable.prototype._createAllRecordLoadUrl,
         _createJtParamsForLoading: $.hik.jtable.prototype._createJtParamsForLoading
     };
 
@@ -4250,6 +4267,14 @@ THE SOFTWARE.
         *************************************************************************/
         _createRecordLoadUrl: function () {
             var loadUrl = base._createRecordLoadUrl.apply(this, arguments);
+            loadUrl = this._addSortingInfoToUrl(loadUrl);
+            return loadUrl;
+        },
+
+        /* Overrides _createAllRecordLoadUrl to add sorting specific info to URL.
+        *************************************************************************/
+        _createAllRecordLoadUrl: function () {
+            var loadUrl = base._createAllRecordLoadUrl.apply(this, arguments);
             loadUrl = this._addSortingInfoToUrl(loadUrl);
             return loadUrl;
         },
@@ -4749,7 +4774,7 @@ THE SOFTWARE.
         _normalizeColumnWidths: function () {
 
             //Set command column width
-            var commandColumnHeaders = this._$table
+            var commandColumnSiteSettings = this._$table
                 .find('>thead th.jtable-command-column-header')
                 .data('width-in-percent', 1)
                 .css('width', '1%');
@@ -4768,7 +4793,7 @@ THE SOFTWARE.
 
             //Calculate width of each column
             var columnWidhts = {};
-            var availableWidthInPercent = 100.0 - commandColumnHeaders.length;
+            var availableWidthInPercent = 100.0 - commandColumnSiteSettings.length;
             headerCells.each(function () {
                 var $cell = $(this);
                 if ($cell.is(':visible')) {

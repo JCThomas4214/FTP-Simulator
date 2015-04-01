@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
@@ -88,7 +89,36 @@ namespace Stardome.Controllers
 
         // Gets all the users that are not InActive and contain userInformation 
         [HttpPost]
-        public JsonResult GetUsers()
+        public JsonResult GetActiveUsers(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            IList<User> users = GetUsersHelper();
+            IEnumerable<User> t = users.Where(x => x.RoleId != (int) Enums.Roles.InActive);
+            users = users.Where(x => x.RoleId != (int) Enums.Roles.InActive).ToList();
+            users = GetUsersSortSize(t, jtStartIndex, jtPageSize, jtSorting);
+            return Json(new { Result = "OK", Records = users, TotalRecordCount = users.Count });
+        }
+
+        // Gets all the users that are not InActive and contain userInformation 
+        [HttpPost]
+        public JsonResult GetAllUsers(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            IList<User> users = GetUsersHelper();
+            users = GetUsersSortSize(users, jtStartIndex, jtPageSize, jtSorting);
+            return Json(new { Result = "OK", Records = users, TotalRecordCount = users.Count });
+        }
+
+        private List<User> GetUsersSortSize(IEnumerable<User> users, int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            if (jtSorting != null)
+            {
+                users = users.OrderBy(jtSorting);
+            }
+            int maxPageSize = jtPageSize <= users.Count() ? jtPageSize : users.Count();
+            users = users.ToList().GetRange(jtStartIndex, maxPageSize);
+            
+            return users.ToList();
+        } 
+        private IList<User> GetUsersHelper()
         {
             IList<User> users = new List<User>();
             IList<UserAuthCredential> userAuthCredentials = userAuthCredentialService.GetUserAuthCredentials().ToList();
@@ -97,7 +127,7 @@ namespace Stardome.Controllers
             foreach (UserAuthCredential credential in userAuthCredentials)
             {
                 UserInformation userInformation = credential.UserInformations.FirstOrDefault();
-                if (userInformation != null && credential.Role.Id != (int)Enums.Roles.InActive)
+                if (userInformation != null)
                 {
                     users.Add(new User
                     {
@@ -110,10 +140,10 @@ namespace Stardome.Controllers
                     });
                 }
             }
-            return Json(new { Result = "OK", Records = users, TotalRecordCount = users.Count });
+            return users;
         }
-
-        // By Deleting the User it makes the User InActive so that the user is still stored in the database
+        
+            // By Deleting the User it makes the User InActive so that the user is still stored in the database
         [HttpPost]
         public JsonResult DeleteUser(User user)
         {

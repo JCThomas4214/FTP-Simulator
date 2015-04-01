@@ -1,10 +1,11 @@
 ﻿@using Stardome.DomainObjects
 @model Stardome.Models.MainModel
-@if (Model.RoleId != (int) Enums.Roles.Admin)
+@if (Model.RoleId != (int)Enums.Roles.Admin)
 {
     Response.Redirect("~/Admin/Content");
 }
 <script type="text/javascript">
+    var showAllUsers = false;
     $(document).ready(function () {
         var roles = '@Url.Action("GetRoles", "Admin")';
         $('#UserTableContainer').jtable({
@@ -12,9 +13,9 @@
             paging: true, //Enable paging
             pageSize: 20, //Set page size (default: 20)
             sorting: true, //Enable sorting
-            defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '@Url.Action("GetUsers", "Admin")',
+                listAction: '@Url.Action("GetActiveUsers", "Admin")',
+                listAllAction: '@Url.Action("GetAllUsers", "Admin")',
                 deleteAction: '@Url.Action("DeleteUser", "Admin")',
                 updateAction: '@Url.Action("UpdateUser", "Admin")',
                 createAction: '@Url.Action("Register", "Account")',
@@ -24,28 +25,34 @@
                     key: true,
                     create: false,
                     edit: false,
-                    list: false
+                    list: false,
+                    sorting: true
                 },
                 FirstName: {
                     title: 'First Name',
-                    width: '23%'
+                    width: '23%',
+                    sorting: true
                 },
                 LastName: {
                     title: 'Last Name',
-                    width: '23%'
+                    width: '23%',
+                    sorting: true
                 },
                 EmailAddress: {
                     title: 'Email address',
-                    list: true
+                    list: true,
+                    sorting: true
                 },
                 Username: {
                     title: 'Username',
                     edit: false,
-                    list: true
+                    list: true,
+                    sorting: true
                 },
                 RoleId: {
                     title: 'Role',
                     list: true,
+                    sorting: true,
                     options: {
                         '1': 'Admin',
                         '2': 'Producer',
@@ -59,6 +66,13 @@
         });
 
         $('#UserTableContainer').jtable('load');
+    });
+
+    $(function() {
+        $('#toggle-active').change(function() {
+            showAllUsers = !showAllUsers;
+            $('#UserTableContainer').jtable('load');
+        });
     });
 
 </script>
@@ -78,4 +92,6 @@
         </div>
     </section>
 }
+<div style="margin: 10px;"><input id="toggle-active" checked type="checkbox" data-toggle="toggle" data-on="Active Users" data-off="All Users" data-offstyle="info"></div>
+
 <div id="UserTableContainer"></div>

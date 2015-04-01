@@ -53,6 +53,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -355,6 +358,13 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap-toggle.css" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap-toggle.min.css" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\jsTree\32px.png" />
     <Content Include="Content\themes\jsTree\40px.png" />
     <Content Include="Content\themes\jsTree\images\application.png" />
@@ -408,10 +418,22 @@
     <Content Include="Images\ProviderTile.PNG" />
     <Content Include="Images\SD_Logo_Horz_2lines_April2014.png" />
     <Content Include="Images\UserProfile.png" />
+    <Content Include="Scripts\bootstrap\js\bootstrap-toggle.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap-toggle.min.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\js\npm.js" />
     <Content Include="Scripts\jquery-prompt.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Content\themes\jsTree\images\Thumbs.db" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\themes\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\bootstrap\js\bootstrap-toggle.min.js.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />

@@ -303,7 +303,7 @@ namespace Stardome.Tests.Controllers
             };
             aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
 
-            var data = Json.Decode(Json.Encode(controller.GetUsers().Data));
+            var data = Json.Decode(Json.Encode(controller.GetActiveUsers().Data));
             Boolean isTrue = data["TotalRecordCount"] == 2;
             isTrue = isTrue && data["Records"][0]["Id"] == 4;
             isTrue = isTrue && String.Equals(data["Records"][0]["EmailAddress"], "email1");
@@ -327,7 +327,7 @@ namespace Stardome.Tests.Controllers
             };
             aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
 
-            var data = Json.Decode(Json.Encode(controller.GetUsers().Data));
+            var data = Json.Decode(Json.Encode(controller.GetActiveUsers().Data));
 
             Assert.IsTrue(data["TotalRecordCount"] == 0);
         }
@@ -342,7 +342,7 @@ namespace Stardome.Tests.Controllers
             };
             aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
 
-            var data = Json.Decode(Json.Encode(controller.GetUsers().Data));
+            var data = Json.Decode(Json.Encode(controller.GetActiveUsers().Data));
 
             Assert.IsTrue(data["TotalRecordCount"] == 0);
         }
@@ -359,7 +359,7 @@ namespace Stardome.Tests.Controllers
             };
             aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
 
-            var data = Json.Decode(Json.Encode(controller.GetUsers().Data));
+            var data = Json.Decode(Json.Encode(controller.GetActiveUsers().Data));
 
             Assert.IsTrue(data["TotalRecordCount"] == 0);
         }

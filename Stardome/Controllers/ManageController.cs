@@ -6,9 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Stardome.DomainObjects;
 using Stardome.Models;
-using System.IO.Compression;
-using Ionic.Zip;
-using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 
 namespace Stardome.Controllers
@@ -133,7 +130,7 @@ namespace Stardome.Controllers
 
         public ActionResult ByUser()
         {
-            string users = new JavaScriptSerializer().Serialize(adminController.GetUsers().Data);
+            string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers().Data);
             users=users.Remove(0,users.IndexOf('['));
             users = users.Remove(users.IndexOf(']')+1, (users.Length - users.IndexOf(']'))-1);
             ContentModel model = new ContentModel
