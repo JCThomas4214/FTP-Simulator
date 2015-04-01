@@ -9,6 +9,7 @@ using Stardome.Models;
 using System.Web.Script.Serialization;
 using Stardome.Services.Domain;
 using Stardome.Repositories;
+using WebMatrix.WebData;
 
 namespace Stardome.Controllers
 {
@@ -201,9 +202,26 @@ namespace Stardome.Controllers
         [HttpPost]
        public ActionResult DeleteFile(string filePath)
         {
+            
             System.IO.File.Delete(Server.MapPath("~") + filePath);
             return null;
         }
 
+        [HttpPost]
+        public ActionResult AddFile(string filePath)
+        {
+            
+
+            System.IO.Directory.CreateDirectory(Server.MapPath("~") + filePath);
+            Folder f= new Folder();
+            f.Name="Cnn 1";
+            f.ModifiedOn=DateTime.Now;
+            f.Path = "";
+            //f.ModifiedBy = WebSecurity.CurrentUserId;
+
+
+            folderService.AddFolder(f);
+            return null;
+        }
     }
 }
