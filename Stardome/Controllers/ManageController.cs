@@ -17,6 +17,7 @@ namespace Stardome.Controllers
     {
         private readonly AdminController adminController;
         private readonly IFolderService folderService;
+        private readonly IAccessService accessService;
         //
         // GET: /Manage/
         public ManageController(AdminController anAdminController)
@@ -28,6 +29,7 @@ namespace Stardome.Controllers
         {
             adminController = new AdminController();
             folderService = new FolderService(new FolderRepository(new StardomeEntitiesCS()));
+            accessService = new AccessService(new AccessRepository(new StardomeEntitiesCS()));
         }
         
         public ActionResult Actions()

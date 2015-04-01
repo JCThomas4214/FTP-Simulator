@@ -31,7 +31,7 @@
           <Property Name="Path" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Logs">
