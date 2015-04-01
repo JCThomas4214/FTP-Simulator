@@ -245,10 +245,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\AccessRepository.cs" />
-    <Compile Include="Repositories\IAccessRepository.cs" />
-    <Compile Include="Services\Domain\AccessService.cs" />
-    <Compile Include="Services\Domain\IAccessService.cs" />
     <Compile Include="SiteSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -562,6 +558,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Services\Application\FileDownloadPage.aspx" />
+    <Content Include="System.Linq.Dynamic.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
