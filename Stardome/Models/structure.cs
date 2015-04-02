@@ -10,9 +10,4 @@ namespace Stardome.Models
     {
         public IList<Folder> folder { get; set; }
     }
-
-    public class FolderUserAccessModel : Structure
-    {
-        public User User { get; set; }
-    }
 }

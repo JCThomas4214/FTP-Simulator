@@ -138,7 +138,8 @@ namespace Stardome.Controllers
 
         public ActionResult ByUser()
         {
-            string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers().Data);
+            
+            string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers(0,100).Data);
             users=users.Remove(0,users.IndexOf('['));
             users = users.Remove(users.IndexOf(']')+1, (users.Length - users.IndexOf(']'))-1);
             ContentModel model = new ContentModel
@@ -147,7 +148,9 @@ namespace Stardome.Controllers
                 RoleId = adminController.GetUserRoleId(User.Identity.Name),
 
                 UserList = (new JavaScriptSerializer()).Deserialize<List<User>>(users)
+                
             };
+            
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             adminController.GetValue(SiteSettings.Content);
 
@@ -155,17 +158,20 @@ namespace Stardome.Controllers
         }
 
 
-        public ActionResult GetFolderPermissionsForUser(int UserId)
+        public JsonResult GetFolderPermissionsForUser(int UserId)
         {
-
-            FolderUserAccessModel model = new FolderUserAccessModel
+            List<Access> accesses = accessService.GetAccessByUserId(UserId);
+            List<string> folderIds =new List<string>();
+            List<string> folderNames = new List<string>();
+            foreach (Access access in accesses)
             {
-               
-            };
-            //ViewBag.showAdminMenu = model.User.RoleId == (int)Enums.Roles.Admin;
-            //adminController.GetValue(SiteSettings.Content);
+                folderIds.Add((access.Folder.Path));
+                folderNames.Add((access.Folder.Name));
+            }
 
-            return View(model);
+            return Json(new { Result = "OK", folderIds = folderIds,folderNames=folderNames, TotalRecordCount = accesses.Count });
+
+            
         }
 
         public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
@@ -173,9 +179,19 @@ namespace Stardome.Controllers
             // Delete all the current perssions
             // Add New Permissions
             // Add Access Table
+            List<Access> accesses = accessService.GetAccessByUserId(UserId);
+            foreach (Access access in accesses)
+            {
+                if (!(SelectedFolderNames.Exists(a => a.Equals(access.Folder.Name))))
+                {
+                    accessService.DeleteAccess(access);
+                }
+            }
+
             foreach (string selectedFolder in SelectedFolderNames)
             {
-                if (accessService.GetAccessByFolderName(selectedFolder) == null)
+                
+                if (accessService.GetAccessByFolderName(selectedFolder, UserId) == null )
                 { 
                     Access a = new Access();
                     a.UserId = UserId;

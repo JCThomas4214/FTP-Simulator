@@ -27,9 +27,7 @@ public partial class Access
     public Nullable<System.DateTime> DateTaken { get; set; }
 
     public int Id { get; set; }
-
-
-
+    
     public virtual Folder Folder { get; set; }
 
     public virtual UserAuthCredential UserAuthCredential { get; set; }

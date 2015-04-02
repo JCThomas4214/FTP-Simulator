@@ -11,7 +11,7 @@
 	foreach (System.IO.DirectoryInfo di_child in di.GetDirectories())
     {
         Response.Write("\t<li id=\"folder\" class=\"directory collapsed\"><input class=\"FTCB\" type=\"checkbox\" name='" + di_child.Name + "' onclick=\"checkFolderPermissions(this.id)\" id=\"" + dir + di_child.Name +
-                    "\" rel=\"" + dir +  "\"><a href=\"#\" rel=\"" + dir + di_child.Name + "/\">" + di_child.Name + "</a></li>\n");
+                    "\" rel=\"" + dir + "\"><a href=\"#\" name='" + di_child.Name + "' id=\"" + dir + di_child.Name + "/\" rel=\"" + dir + di_child.Name + "/\">" + di_child.Name + "</a></li>\n");
     }  
 
 	Response.Write("</ul>");

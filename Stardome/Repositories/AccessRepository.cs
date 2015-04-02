@@ -31,21 +31,22 @@ namespace Stardome.Repositories
         }
 
 
-        public Access GetAccessByFolderName(string FolderName)
+        public Access GetAccessByFolderName(string FolderName, int UserID)
         {
             Folder f = sdContext.Folders.FirstOrDefault(x => x.Name == FolderName);
-           return sdContext.Accesses.SingleOrDefault(a => a.FolderId == f.Id );
+           return sdContext.Accesses.SingleOrDefault(a => a.FolderId == f.Id && a.UserId == UserID );
         }
-        public Access GetAccessByFolderPath(string FolderPath)
+        public Access GetAccessByFolderPath(string FolderPath, int UserID)
         {
                 Folder f = sdContext.Folders.FirstOrDefault(x => x.Name == FolderPath);
-                return sdContext.Accesses.SingleOrDefault(a => a.FolderId == f.Id);
+                return sdContext.Accesses.SingleOrDefault(a => a.FolderId == f.Id && a.UserId == UserID);
 
         }
         public List<Access> GetAccessByUserId(int UserId)
         {
             return Find(aAccess => aAccess.UserId.Equals(UserId)).ToList();
         }
+
 
         public String AddAccess(Access aAccess)
         {

@@ -9,8 +9,8 @@ namespace Stardome.Services.Domain
 {
     public interface IAccessService
     {
-        Access GetAccessByFolderName(string FolderName);
-        Access GetAccessByFolderPath(string FolderPath);
+        Access GetAccessByFolderName(string FolderName, int UserID);
+        Access GetAccessByFolderPath(string FolderPath, int UserID);
         List<Access> GetAccessByUserId(int UserId);
         String AddAccess(Access aAccess);
         String DeleteAccess(Access aAccess);

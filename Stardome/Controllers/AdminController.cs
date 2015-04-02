@@ -114,7 +114,7 @@ namespace Stardome.Controllers
         {
             if (jtSorting != null)
             {
-                users = users.OrderBy(jtSorting);
+                //users = users.OrderBy(jtSorting);
             }
             int maxPageSize = jtPageSize <= users.Count() ? jtPageSize : users.Count();
             users = users.ToList().GetRange(jtStartIndex, maxPageSize);

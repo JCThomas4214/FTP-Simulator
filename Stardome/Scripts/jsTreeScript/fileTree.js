@@ -21,7 +21,7 @@
 		}
 
 		function initializer_Permissions(Role) {
-		        lastSelected = root;
+		    lastSelected = root;
 		        Tree_Permissions(root);
 		}
 		
@@ -29,6 +29,10 @@
 		    for (var i = 0; i < fileList.length; i++) {		        
 		        try{check(fileList[i]);}
                 catch(e){console.log(fileList[i] + "is not in the current file tree")}
+		    }
+		    for (var i = 0; i < selectedFolders.length; i++) {
+		        try { check(selectedFolders[i]); }
+		        catch (e) { console.log(selectedFolders[i] + "is not in the current file tree") }
 		    }
 		}
 
@@ -42,8 +46,7 @@
 
         function checkFolderPermissions(dir)
         {
-            debugger
-            if (document.getElementById(dir).checked == true) {                         // Folder Checked
+               if (document.getElementById(dir).checked == true) {                         // Folder Checked
               
                 var index = selectedFolders.indexOf(dir);                               // Folder dosner exisit in the list
                 if (index == -1)
@@ -63,7 +66,7 @@
                     }
                     selectedFolders.push(dir)       // Adding Selected folder to list
                     selectedFolderNames.push(FolderName.name)
-                    document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("");
+                    document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("<br \>");
                 }
                 
             }
@@ -298,7 +301,6 @@
             }
             htmlDDlist.push('</div>');
             document.getElementById('dropD').innerHTML = htmlDDlist.join("");
-
             $(function () {
                 $(".dropdown-menu li a").click(function () {    //this is the on click function for the dropdown
                     $(".btn:first-child").text($(this).text());
@@ -417,15 +419,61 @@
                 var items = new Array; //array that contrains check outputs
                 items = checkVal(file);    //check will return, true or false and position if the file is already in the list
                 if (items[0] == true) {
-                    deleteItem(items[1]); //deleteItem will delete an object in the list at position item[1]                   
+                    //deleteItem(items[1]); //deleteItem will delete an object in the list at position item[1]                   
                 }
                 else {
-                    insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]                    
+                    //insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]                    
                 }
             }, function (dir) {
                 lastSelected = dir;
             });
-           
+            $('.jqueryPermissionsFileTree').contextMenu({
+                // define which elements trigger this menu
+                selector: "a",
+                // define the elements of the menu
+
+                items: {
+                    "AddUsers": {
+                        name: "Add Users to this folder",
+                        icon: "AddUsers",
+                        callback: function (key, opt) {
+                            AddUsers($(this).attr('id'), $(this).attr('name'));
+                        },
+                        disabled: function (key, opt) {
+                            if ($(this).parent().attr('id') != "folder") {
+                                return true;
+                            }
+                            else
+                                return false;
+                        }
+                    }
 
 
+                }
+                // there's more, have a look at the demos and docs...
+            });
+
+
+        }
+
+        function AddUsers(FolderId, FolderName)
+        {
+            debugger
+            $("#AddUserstoAFolder").dialog({
+                resizable: false,
+                modal: true,
+                title: "Select users to be added to this Folder",
+                height: 300,
+                width: 400,
+                buttons: {
+                    "Yes": function () {
+                        $(this).dialog('close');
+                        callback(true, file);
+                    },
+                    "No": function () {
+                        $(this).dialog('close');
+                        callback(false, file);
+                    }
+                }
+            });
         }

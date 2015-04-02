@@ -27,13 +27,11 @@
     <meta charset="utf-8">
     <title>Content</title>
     <script type="text/javascript">
-
         root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
-
         $(document).ready(function () {
             $('#ddlUsers').change(function () {
                 var UserId = $(this).val();
-                if (UserId> 0) {
+                if (UserId > 0) {
                     $.ajax({
                         url: "/Manage/GetFolderPermissionsForUser",
                         type: "POST",
@@ -41,30 +39,30 @@
                         dataType: 'json',
                         contentType: 'application/json',
                         error: function (xhr) {
+                            debugger
                             alert('Error: ' + xhr.statusText);
                         },
                         success: function (result) {
+                            Tree_Permissions(root);
+                            selectedFolders.length = 0;
+                            selectedFolderNames.length = 0;
+                            selectedFolders = result.folderIds.slice();
+                            selectedFolderNames = result.folderNames.slice();
+                            debugger;
                         },
                         async: true,
                         processData: false
                     });
                 }
-                
-            });
 
+            });
 
             var Role = '@Model.RoleId';
             initializer_Permissions(Role);
-           
+
         });
 
-
-       
-
     </script>
-
-
-
 </head>
 <body>
     <div style="width:1100px">
@@ -72,16 +70,10 @@
         <div style="width:500px; display:inline-block">Select Folder/Folders</div>
         <div style="width:200px; display:inline-block">Selected Folders</div>
     </div>
-    <div style="clear:left;height:500px;">
-        <div style="float:left;  width:300px; display:inline-block">
 
-            @*@foreach (var usrs in Model.UserList)
-            {
-                <input type="checkbox" name="SelectedGroups" value="@usrs.Id" id="@usrs.Id" onclick="getUserPermissions(this.id)" />
-                    <label for="@usrs.Id" style="display:inline">@usrs.DisplayName</label>
-                <br />
-            }*@
-            @Html.DropDownList("UserList", new SelectList(Model.UserList, "Id", "DisplayName"), "--Select a User--", new {@id = "ddlUsers" })
+    <div style="clear:left;height:1100px;">
+        <div style="float:left;  width:300px; display:inline-block">
+            @Html.DropDownList("UserList", new SelectList(Model.UserList, "Id", "DisplayName"), "--Select a User--", new { @id = "ddlUsers" })
         </div>
 
         <div id="MainTree" style="width:500px; display:inline-block"></div>
@@ -93,5 +85,18 @@
         <input type="submit" value="Cancel" />
 
     </div>
+    <div id="AddUserstoAFolder" style="display:none">
+
+        @foreach (var usrs in Model.UserList)
+        {
+            <input type="checkbox" name="SelectedGroups" value="@usrs.Id" id="@usrs.Id" onclick="getUserPermissions(this.id)" />
+            <label for="@usrs.Id" style="display:inline">@usrs.DisplayName</label>
+            <br />
+        }
+
+    </div>
+
 </body>
+
+
 </html>  

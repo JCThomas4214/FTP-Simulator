@@ -16,13 +16,13 @@ namespace Stardome.Services.Domain
             repository = aRepository;
         }
 
-        public Access GetAccessByFolderName(string FolderName)
+        public Access GetAccessByFolderName(string FolderName, int UserID)
         {
-            return repository.GetAccessByFolderName(FolderName);
+            return repository.GetAccessByFolderName(FolderName, UserID);
         }
-        public Access GetAccessByFolderPath(string FolderPath)
+        public Access GetAccessByFolderPath(string FolderPath, int UserID)
         {
-            return repository.GetAccessByFolderPath(FolderPath);
+            return repository.GetAccessByFolderPath(FolderPath, UserID);
         }
         public List<Access> GetAccessByUserId(int UserId)
         {
@@ -37,6 +37,7 @@ namespace Stardome.Services.Domain
         {
             return repository.DeleteAccess(aAccess);
         }
+
     
     }
 
