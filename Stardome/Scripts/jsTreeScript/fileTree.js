@@ -173,6 +173,43 @@
             }
         }
 
+        function createFolder() {           
+            $("#dialog-confirm").html("<form><input type=\"text\" name=\"name\" id=\"txt2\" class=\"text ui-widget-content ui-corner-all\" /></form>");
+            // Define the Dialog and its properties.
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                modal: true,
+                title: "Name The Folder.",
+                height: 167,
+                width: 400,
+                buttons: {
+                    "Create": function () {
+                        $(this).dialog('close');                        
+                        console.log($("#txt2").val());
+                        callBackFolder($("#txt2").val());
+                    },
+                    "Cancel": function () {
+                        $(this).dialog('close');                       
+                    }
+                }
+            });
+        }
+
+        function callBackFolder(Name) {
+            $.ajax({
+                url: "/Manage/CreateFolder/?Name=" + Name,
+                type: "POST",
+                data: {Name: Name },
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                },
+                async: true,
+                processData: false
+            });
+        }
+
         function downloadAsZip()
         {
             if (fileList.length>0) {
@@ -190,7 +227,7 @@
                 resizable: false,
                 modal: true,
                 title: "Are you sure?",
-                height: 150,
+                height: 160,
                 width: 400,
                 buttons: {
                     "Yes": function () {
@@ -299,21 +336,21 @@
                 // define the elements of the menu
 
                 items: {
-                    download: {
-                        name: "Download",
+                    "create folder": {
+                        name: "Create Folder",
                         icon: "copy",
                         callback: function (key, opt) {
-
+                            createFolder();
                         },
                         disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') == "folder") {
+                            if ($(this).parent().attr('id') != "folder") {
                                 return true;
                             }
                             else
                                 return false;
                         }
                     },
-                    "download list": {
+                    "delete": {
                         name: "Add/Remove file",
                         icon: "edit",
                         callback: function (key, opt) {

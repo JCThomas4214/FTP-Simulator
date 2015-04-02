@@ -32,9 +32,9 @@
     var htmlDDlist = new Array;
     var subList = new Array;
 
-    subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\ABC\\', "ABC"];
-    subList[1] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\CNN\\', "CNN"];
-    subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\FOX\\', "FOX"];
+    subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\ABC\\', "ABC"];
+    subList[1] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\CNN\\', "CNN"];
+    subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\FOX\\', "FOX"];
 
         root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
 
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div id="dialog-confirm"></div>
+    <div id="dialog-confirm"></div>    
     <div style="float:left; width:600px">
         @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
         {

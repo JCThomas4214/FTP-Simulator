@@ -210,6 +210,20 @@ namespace Stardome.Controllers
         }
 
         [HttpPost]
+        public ActionResult CreateFolder(string Name)
+        {
+            System.IO.Directory.CreateDirectory(Server.MapPath("~/Stardome") + "\\Stardome\\" + Name);
+            Folder f = new Folder();
+            f.Name = Name;
+            f.Path = "\\Stardome\\" + Name;
+            f.CreatedBy = 0;
+            f.CreatedOn = DateTime.Now;
+            folderService.AddFolder(f);
+
+            return null;
+        }        
+
+        [HttpPost]
         public ActionResult AddFile(string filePath)
         {
             
