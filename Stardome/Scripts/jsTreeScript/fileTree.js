@@ -54,7 +54,7 @@
                     
                     // Removing the sub folders from list--may not remove all if the folder is not expanded
                     FolderName = document.getElementById(dir);
-                    var subFolders = document.querySelectorAll('[id*=' + FolderName.name + ']');
+                    var subFolders = document.querySelectorAll('[id*=\'' + FolderName.name + '\']');
                     for (x = 0 ; x < subFolders.length ; x++) {
                         subFolderId = subFolders[x].getAttribute("id");
                         var subFolderIndex = selectedFolders.indexOf(subFolderId);
@@ -72,7 +72,8 @@
             }
             else {                                                                  //Folder unchecked
                
-                var ParentFolder;
+                   var ParentFolder;
+                   debugger
                 do                                                                 // Uncheck all the parent folders recursively
                 {
                     var index = selectedFolders.indexOf(dir);
@@ -80,7 +81,7 @@
                     if (index > -1)
                     {
                         FolderName = document.getElementById(dir);
-                        var subFolders = document.querySelectorAll('[id*=' + FolderName.name +']');
+                        var subFolders = document.querySelectorAll('[id*=\'' + FolderName.name +'\']');
                         for (x = 0 ; x < subFolders.length ; x++) {
                             subFolderId = subFolders[x].getAttribute("id");
                             var SubFolderCheckBox = document.getElementById(subFolderId);
@@ -120,7 +121,7 @@
                     dataType: 'json',
                     contentType: 'application/json',
                     error: function (xhr) {
-                        alert('Error: ' + xhr.statusText);
+                        //alert('Error: ' + xhr.statusText);
                     },
                     success: function (result) {
                     },
@@ -134,6 +135,7 @@
         String.prototype.endsWith = function(suffix) {
             return this.indexOf(suffix, this.length - suffix.length) !== -1;
         };
+
         function checkB(file) {           
             var items = new Array;
             items = checkVal(file);
@@ -210,7 +212,7 @@
                 type: "POST",
                 data: {Path: tmp },
                 error: function (xhr) {
-                    alert('Error: ' + xhr.statusText);
+                   // alert('Error: ' + xhr.statusText);
                 },
                 success: function (result) {
                 },
@@ -302,7 +304,7 @@
                     type: "POST",
                     data: { filePath: filePath },
                     error: function (xhr) {
-                        alert('Error: ' + xhr.statusText);
+                        //alert('Error: ' + xhr.statusText);
                     },
                     success: function (result) {
                     },
@@ -497,24 +499,84 @@
 
         }
 
-        function AddUsers(FolderId, FolderName)
+        function AddUsers(folderId, folderName)
         {
-            debugger
-            $("#AddUserstoAFolder").dialog({
+            $("#AddUserstoFolder").dialog({
+                open: function (event, ui) {
+                    $.ajax({
+                        url: "/Manage/GetUserPermissionsForFolder",
+                        type: "POST",
+                        data: JSON.stringify({ folderName: folderName }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        error: function (xhr) {
+                        },
+                        success: function (result) {
+                            activeUsers = document.getElementsByTagName('input');
+                            for (var i = 0; i < activeUsers.length; i++) {
+                                if (activeUsers[i].getAttribute('type') == 'checkbox' && activeUsers[i].getAttribute('name')=='chkUserId')
+                                    activeUsers[i].checked = false;
+                            }
+                            selectedUsers.length = 0;
+                            selectedUsers = result.selectedUsers.slice();
+                            for (var i = 0; i < selectedUsers.length; i++) {
+                                document.getElementById(selectedUsers[i]).checked = true;
+                            }
+                        },
+                        async: true,
+                        processData: false
+                    });
+
+                },
+
                 resizable: false,
                 modal: true,
                 title: "Select users to be added to this Folder",
                 height: 300,
                 width: 400,
                 buttons: {
-                    "Yes": function () {
+                    "Grant Permission": function () {
                         $(this).dialog('close');
-                        callback(true, file);
+                        grantPermissiontoFolder(folderId, folderName);
                     },
-                    "No": function () {
+                    "Cancel": function () {
                         $(this).dialog('close');
-                        callback(false, file);
+                        
                     }
                 }
+                
             });
+        }
+
+        function addUsertoList(UserId)
+        {
+            if (document.getElementById(UserId).checked == true) {
+                selectedUsers.push(UserId);
+            }
+            else {
+                var index = selectedUsers.indexOf(UserId);                               // Folder dosner exisit in the list
+                if (index > -1)
+                    selectedUsers.splice(index, 1);
+            }
+
+            
+        }
+
+        function grantPermissiontoFolder(folderId, folderName)
+        {
+            $.ajax({
+                url: "/Manage/GrantPermissionToFolder",
+                type: "POST",
+                data: JSON.stringify({ folderId: folderId, folderName: folderName, selectedUsers: selectedUsers }),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                   // alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                },
+                async: true,
+                processData: false
+            });
+
         }

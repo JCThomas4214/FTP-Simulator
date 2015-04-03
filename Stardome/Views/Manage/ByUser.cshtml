@@ -39,8 +39,8 @@
                         dataType: 'json',
                         contentType: 'application/json',
                         error: function (xhr) {
-                            debugger
-                            alert('Error: ' + xhr.statusText);
+                            
+                            //alert('Error: ' + xhr.statusText);
                         },
                         success: function (result) {
                             Tree_Permissions(root);
@@ -85,11 +85,11 @@
         <input type="submit" value="Cancel" />
 
     </div>
-    <div id="AddUserstoAFolder" style="display:none">
+    <div id="AddUserstoFolder" style="display:none">
 
         @foreach (var usrs in Model.UserList)
         {
-            <input type="checkbox" name="SelectedGroups" value="@usrs.Id" id="@usrs.Id" onclick="getUserPermissions(this.id)" />
+            <input type="checkbox" name="chkUserId" value="@usrs.Id" id="@usrs.Id" onclick="addUsertoList(this.id)" />
             <label for="@usrs.Id" style="display:inline">@usrs.DisplayName</label>
             <br />
         }

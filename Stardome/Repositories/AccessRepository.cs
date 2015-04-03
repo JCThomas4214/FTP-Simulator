@@ -30,12 +30,12 @@ namespace Stardome.Repositories
             return sdContext.Accesses;
         }
 
-
         public Access GetAccessByFolderName(string FolderName, int UserID)
         {
             Folder f = sdContext.Folders.FirstOrDefault(x => x.Name == FolderName);
            return sdContext.Accesses.SingleOrDefault(a => a.FolderId == f.Id && a.UserId == UserID );
         }
+
         public Access GetAccessByFolderPath(string FolderPath, int UserID)
         {
                 Folder f = sdContext.Folders.FirstOrDefault(x => x.Name == FolderPath);

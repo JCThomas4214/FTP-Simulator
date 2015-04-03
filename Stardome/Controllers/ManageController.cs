@@ -176,9 +176,6 @@ namespace Stardome.Controllers
 
         public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
         {
-            // Delete all the current perssions
-            // Add New Permissions
-            // Add Access Table
             List<Access> accesses = accessService.GetAccessByUserId(UserId);
             foreach (Access access in accesses)
             {
@@ -277,5 +274,49 @@ namespace Stardome.Controllers
             folderService.AddFolder(f);
             return null;
         }
+
+        public void GrantPermissionToFolder(string folderId, string folderName, List<string> selectedUsers)
+        {
+
+            List<Access> accesses = folderService.GetFolderByFolderName(folderName).Accesses.ToList();
+            foreach (Access access in accesses)
+            {
+                if (!(selectedUsers.Exists(a => a.Equals(access.UserId.ToString()))))
+                {
+                    accessService.DeleteAccess(access);
+                }
+            }
+
+            foreach (string userId in selectedUsers)
+            {
+                int fId = folderService.GetFolderByFolderName(folderName).Id;
+                List<Access> access = accessService.GetAccessByUserId(Convert.ToInt32(userId));
+                if  (!(access.Exists(a => a.FolderId == fId)))
+                {
+                    Access a = new Access();
+                    a.UserId = Convert.ToInt32(userId);
+                    a.FolderId = fId;
+                    a.DateGiven = DateTime.Now;
+                    accessService.AddAccess(a);
+                }
+
+            }
+        }
+
+        public JsonResult GetUserPermissionsForFolder(string folderName)
+        {
+            List<Access> accesses = folderService.GetFolderByFolderName(folderName).Accesses.ToList();
+            List<string> selectedUsers = new List<string>();
+           foreach (Access access in accesses)
+            {
+                selectedUsers.Add(access.UserId.ToString());
+                
+            }
+
+           return Json(new { Result = "OK", selectedUsers = selectedUsers, TotalRecordCount = accesses.Count });
+
+        }
+        
+ 
     }
 }

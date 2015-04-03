@@ -20,6 +20,8 @@ namespace Stardome.Services.Domain
         {
             return repository.GetAccessByFolderName(FolderName, UserID);
         }
+
+
         public Access GetAccessByFolderPath(string FolderPath, int UserID)
         {
             return repository.GetAccessByFolderPath(FolderPath, UserID);
