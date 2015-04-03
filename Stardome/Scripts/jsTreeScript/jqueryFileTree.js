@@ -39,7 +39,8 @@ if(jQuery) (function($){
 			if( options.collapseEasing	=== undefined ) options.collapseEasing	= null;
 			if( options.multiFolder		=== undefined ) options.multiFolder		= true;
 			if( options.loadMessage		=== undefined ) options.loadMessage		= 'Loading...';
-			if( options.multiSelect		=== undefined ) options.multiSelect		= false;
+			if (options.multiSelect === undefined) options.multiSelect = false;
+			if (options.expanded == undefined) options.expanded = '';
 
 						
 			$(this).each( function() {
@@ -53,13 +54,27 @@ if(jQuery) (function($){
 						multiSelect: options.multiSelect
 					})					
 					.done(function (data) {					   				    
-						$(element).find('.start').html('');
-						$(element).removeClass('wait').append(data);
-						if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });						
-						bindTree(element);						
+					    $(element).find('.start').html('');
+					    $(element).removeClass('wait').append(data);
+					    if( options.root == dir ) $(element).find('UL:hidden').show(); else $(element).find('UL:hidden').slideDown({ duration: options.expandSpeed, easing: options.expandEasing });						
+					    bindTree(element);					
 
-						//$(this).parent().removeClass('collapsed').addClass('expanded');
-						call();     // if files are on the download list it checks them
+					    //$(this).parent().removeClass('collapsed').addClass('expanded');
+					    call();     // if files are on the download list it checks them
+
+					    if (Role == 1) {
+					        if (options.expanded != null) {
+					            $(element).find('.directory.collapsed').each(function (i, f) {					                
+					                console.log(options.expanded);
+					                console.log($(f).children().attr('rel'));					                
+					                console.log(root + options.expanded);
+					                if ($(f).children().attr('rel') == root + options.expanded) {					                    
+					                    showTree($(f), escape($(f).children().attr('rel').match(/.*\//)));
+					                    $(f).removeClass('collapsed').addClass('expanded');
+					                };
+					            });
+					        }
+					    }					
 						_trigger($(this), 'filetreeexpanded', data);
 					})
 					.fail(function(){

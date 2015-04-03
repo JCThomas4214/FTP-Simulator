@@ -363,8 +363,8 @@
 
         function Tree(root, Role) {
             $('#MainTree').fileTree({
-                root: root,
-                role: Role,
+                root: root,               
+                expanded: 'Stardome/',
                 script: '../Scripts/jqueryFileTree.aspx?Role='+Role,
                 multiFolder: false,
                 folderEvent: 'dblclick'
