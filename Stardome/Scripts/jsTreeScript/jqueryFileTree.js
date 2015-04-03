@@ -63,11 +63,8 @@ if(jQuery) (function($){
 					    call();     // if files are on the download list it checks them
 
 					    if (Role == 1) {
-					        if (options.expanded != null) {
-					            $(element).find('.directory.collapsed').each(function (i, f) {					                
-					                console.log(options.expanded);
-					                console.log($(f).children().attr('rel'));					                
-					                console.log(root + options.expanded);
+					        if (options.expanded != null) { 
+					            $(element).find('.directory.collapsed').each(function (i, f) {						               
 					                if ($(f).children().attr('rel') == root + options.expanded) {					                    
 					                    showTree($(f), escape($(f).children().attr('rel').match(/.*\//)));
 					                    $(f).removeClass('collapsed').addClass('expanded');
