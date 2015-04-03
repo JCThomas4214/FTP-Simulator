@@ -10,7 +10,7 @@
 	System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(dir);
 	Response.Write("<ul class=\"jqueryFileTree\" style=\"display: none;\">\n");
 	foreach (System.IO.DirectoryInfo di_child in di.GetDirectories())
-        Response.Write("\t<li class=\"directory collapsed\"><a href=\"#\" rel=\"" + dir + di_child.Name + "/\">" + di_child.Name + "</a></li>\n");
+        Response.Write("\t<li class=\"directory collapsed\"><a href=\"#\" name='" + di_child.Name + "' rel=\"" + dir + di_child.Name + "/\">" + di_child.Name + "</a></li>\n");
 	foreach (System.IO.FileInfo fi in di.GetFiles())
 	{
 		string ext = ""; 

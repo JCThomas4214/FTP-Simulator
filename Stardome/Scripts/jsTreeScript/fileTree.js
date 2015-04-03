@@ -193,9 +193,7 @@
                         var tmp = Path.substring(Path.indexOf("/"), Path.length);
                         while (tmp.search("/") != -1) {
                             tmp = tmp.replace("/", "\\");
-                        }
-                        console.log($("#txt2").val());
-                        console.log(tmp);
+                        }                        
                         callBackFolder($("#txt2").val(), tmp);                       
                     },
                     "Cancel": function () {
@@ -206,11 +204,11 @@
         }
 
         function callBackFolder(Name, Path) {
-            var tmp = Path + "\\" + Name + "\\";
+            //var tmp = Path + "\\" + Name + "\\";
             $.ajax({
-                url: "/Manage/CreateFolder/?Path=" + tmp,
+                url: "/Manage/CreateFolder/?Path=" + Path + "&Name=" + Name,
                 type: "POST",
-                data: {Path: tmp },
+                data: {Path: Path, Name: Name },
                 error: function (xhr) {
                    // alert('Error: ' + xhr.statusText);
                 },
@@ -222,7 +220,7 @@
             Tree(root, Role);
         }
 
-        function deleteFolder(Path) {
+        function deleteFolder(Name, Path) {
             $("#dialog-confirm").html("");
             // Define the Dialog and its properties.
             $("#dialog-confirm").dialog({
@@ -237,10 +235,8 @@
                         var tmp = Path.substring(Path.indexOf("/"), Path.length);
                         while (tmp.search("/") != -1) {
                             tmp = tmp.replace("/", "\\");
-                        }
-                        console.log($("#txt2").val());
-                        console.log(tmp);
-                        CBdelFolder(tmp);                       
+                        }                        
+                        CBdelFolder(Name, tmp);                       
                     },
                     "No": function () {
                         $(this).dialog('close');
@@ -249,11 +245,11 @@
             });
         }
 
-        function CBdelFolder(Path) {            
+        function CBdelFolder(Name, Path) {            
             $.ajax({
-                url: "/Manage/DeleteFolder/?Path=" + Path,
+                url: "/Manage/DeleteFolder/?Path=" + Path + "&Name=" + Name,
                 type: "POST",
-                data: { Path: Path },
+                data: { Path: Path, Name: Name },
                 error: function (xhr) {
                     alert('Error: ' + xhr.statusText);
                 },
@@ -342,7 +338,7 @@
                 htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
                 htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
             }            
-            document.getElementById('selectedFileList').innerHTML = htmlList.join("");
+            document.getElementById('selectedFileList').innerHTML = htmlList.join("");           
         }
 
         function dropD() {           
@@ -352,7 +348,7 @@
                 htmlDDlist.push('<li role="presentation"><a role="menuitem" tabindex="-1" id=\"' + subList[i][0] + '\" href="#">' + subList[i][1] + '</a></li>');
             }
             htmlDDlist.push('</div>');
-            document.getElementById('dropD').innerHTML = htmlDDlist.join("");
+            document.getElementById('dropD').innerHTML = htmlDDlist.join("");            
             $(function () {
                 $(".dropdown-menu li a").click(function () {    //this is the on click function for the dropdown
                     $(".btn:first-child").text($(this).text());
@@ -384,69 +380,45 @@
             }, function (dir) {
                 lastSelected = dir;
             });
-            $('.jqueryFileTree').contextMenu({
-                // define which elements trigger this menu
-                selector: "a",
-                // define the elements of the menu
+            if (Role == 1) {
+                $('.jqueryFileTree').contextMenu({
+                    // define which elements trigger this menu
+                    selector: "a",
+                    // define the elements of the menu
 
-                items: {
-                    "create folder": {
-                        name: "Create Folder",
-                        icon: "createFolder",
-                        callback: function (key, opt) {                            
-                            createFolder($(this).attr("rel"));                                             
-                        },
-                        disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') == "file") {
-                                return true;
+                    items: {
+                        "create folder": {
+                            name: "Create Folder",
+                            icon: "createFolder",
+                            callback: function (key, opt) {
+                                createFolder($(this).attr("rel"));
+                            },
+                            disabled: function (key, opt) {
+                                if (($(this).parent().attr('id') == "file") || Role != 1) {
+                                    return true;
+                                }
+                                else
+                                    return false;
                             }
-                            else
-                                return false;
-                        }
-                    },
-                    "delete folder": {
-                        name: "Delete Folder",
-                        icon: "deleteFolder",
-                        callback: function (key, opt) {
-                            deleteFolder($(this).attr("rel"));
                         },
-                        disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') == "file") {
-                                return true;
+                        "delete folder": {
+                            name: "Delete Folder",
+                            icon: "deleteFolder",
+                            callback: function (key, opt) {
+                                deleteFolder($(this).attr("name"), $(this).attr("rel"));
+                            },
+                            disabled: function (key, opt) {
+                                if (($(this).parent().attr('id') == "file") || Role != 1) {
+                                    return true;
+                                }
+                                else
+                                    return false;
                             }
-                            else
-                                return false;
-                        }
-                    },
-                    //"upload": {
-                    //    name: "Upload to",
-                    //    icon: "add",
-                    //    callback: function (key, opt) {                            
-                    //        var m = "clicked: " + key + " on " + $(this).attr('rel');
-                    //        //window.console && console.log(m) || alert(m);
-                    //        lastSelected = m;
-                    //    },
-                    //    disabled: function (key, opt) {
-                    //        if ($(this).parent().attr('id') == "file") {
-                    //            return true;
-                    //        }
-                    //        else
-                    //            return false;
-                    //    }
-                    //},
-                    //"sep1": "---------",
-                    //"quit": {
-                    //    name: "Quit",
-                    //    icon: "quit",
-                    //    callback: function (key, opt) {
-                    //        console.log(key);
-                    //    }
-
-                    //}
-                }
-                // there's more, have a look at the demos and docs...
-            });
-            
+                        },
+                    }
+                    // there's more, have a look at the demos and docs...
+                });
+            }
             
             
         }
@@ -481,14 +453,7 @@
                         icon: "AddUsers",
                         callback: function (key, opt) {
                             AddUsers($(this).attr('id'), $(this).attr('name'));
-                        },
-                        disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') != "folder") {
-                                return true;
-                            }
-                            else
-                                return false;
-                        }
+                        }                        
                     }
 
 

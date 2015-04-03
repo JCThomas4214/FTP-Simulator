@@ -36,4 +36,7 @@ test("Perform test on Dropdowns menu", function () {
         equals(htmlDDlist.length, 3 + subList.length, "htmlDDlist should be 3 + subList");
         document.getElementById('dropD').innerHTML = "";
     }
+    else {
+        equals(htmlDDlist.length, 3 + subList.length, "htmlDDlist should be 3 + subList");
+    }
 });
