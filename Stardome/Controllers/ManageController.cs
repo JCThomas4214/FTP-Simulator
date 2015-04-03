@@ -226,18 +226,40 @@ namespace Stardome.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateFolder(string Name)
+        public ActionResult CreateFolder(string Path)
         {
-            System.IO.Directory.CreateDirectory(Server.MapPath("~/Stardome") + "\\Stardome\\" + Name);
+            System.IO.Directory.CreateDirectory(Server.MapPath("~/Stardome/Stardome") + Path);
             Folder f = new Folder();
-            f.Name = Name;
-            f.Path = "\\Stardome\\" + Name;
+            //String Name = Path;
+            //while (Name.IndexOf("\\") != Name.Length -1)
+            //{
+            //    Name = Name.Substring(Name.IndexOf("\\"), Name.Length);
+            //}
+
+            f.Name = Path;
+            f.Path = Path;
             f.CreatedBy = 0;
             f.CreatedOn = DateTime.Now;
             folderService.AddFolder(f);
 
             return null;
-        }        
+        }
+
+        [HttpPost]
+        public ActionResult DeleteFolder(string Path)
+        {
+            System.IO.Directory.Delete(Server.MapPath("~/Stardome/Stardome") + Path);
+            Folder f = new Folder();
+            //String Name = Path;
+            //while (Name.IndexOf("\\") != Name.Length -1)
+            //{
+            //    Name = Name.Substring(Name.IndexOf("\\"), Name.Length);
+            //}            
+            f.Path = Path;                        
+            folderService.DeleteFolder(f);
+
+            return null;
+        }
 
         [HttpPost]
         public ActionResult AddFile(string filePath)

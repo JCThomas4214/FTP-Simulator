@@ -176,7 +176,7 @@
             }
         }
 
-        function createFolder() {           
+        function createFolder(Path) {           
             $("#dialog-confirm").html("<form><input type=\"text\" name=\"name\" id=\"txt2\" class=\"text ui-widget-content ui-corner-all\" /></form>");
             // Define the Dialog and its properties.
             $("#dialog-confirm").dialog({
@@ -188,8 +188,13 @@
                 buttons: {
                     "Create": function () {
                         $(this).dialog('close');                        
+                        var tmp = Path.substring(Path.indexOf("/"), Path.length);
+                        while (tmp.search("/") != -1) {
+                            tmp = tmp.replace("/", "\\");
+                        }
                         console.log($("#txt2").val());
-                        callBackFolder($("#txt2").val());
+                        console.log(tmp);
+                        callBackFolder($("#txt2").val(), tmp);                       
                     },
                     "Cancel": function () {
                         $(this).dialog('close');                       
@@ -198,11 +203,12 @@
             });
         }
 
-        function callBackFolder(Name) {
+        function callBackFolder(Name, Path) {
+            var tmp = Path + "\\" + Name + "\\";
             $.ajax({
-                url: "/Manage/CreateFolder/?Name=" + Name,
+                url: "/Manage/CreateFolder/?Path=" + tmp,
                 type: "POST",
-                data: {Name: Name },
+                data: {Path: tmp },
                 error: function (xhr) {
                     alert('Error: ' + xhr.statusText);
                 },
@@ -211,6 +217,50 @@
                 async: true,
                 processData: false
             });
+            Tree(root, Role);
+        }
+
+        function deleteFolder(Path) {
+            $("#dialog-confirm").html("");
+            // Define the Dialog and its properties.
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                modal: true,
+                title: "Are you sure you want to delete this folder?",
+                height: 167,
+                width: 400,
+                buttons: {
+                    "Yes": function () {
+                        $(this).dialog('close');
+                        var tmp = Path.substring(Path.indexOf("/"), Path.length);
+                        while (tmp.search("/") != -1) {
+                            tmp = tmp.replace("/", "\\");
+                        }
+                        console.log($("#txt2").val());
+                        console.log(tmp);
+                        CBdelFolder(tmp);                       
+                    },
+                    "No": function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        }
+
+        function CBdelFolder(Path) {            
+            $.ajax({
+                url: "/Manage/DeleteFolder/?Path=" + Path,
+                type: "POST",
+                data: { Path: Path },
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                },
+                async: true,
+                processData: false
+            });
+            Tree(root, Role);
         }
 
         function downloadAsZip()
@@ -305,7 +355,7 @@
                 $(".dropdown-menu li a").click(function () {    //this is the on click function for the dropdown
                     $(".btn:first-child").text($(this).text());
                     $(".btn:first-child").val($(this).text());
-                    Tree($(this).attr('id'));                   //reinitialization of the filetree based off what was clicked                                                                
+                    Tree($(this).attr('id'), Role);                   //reinitialization of the filetree based off what was clicked                                                                
                     setTimeout(function () { call(); }, 100);   //call() keeps checkboxes consistant with what's in the download list. Using 100ms delay to wait for the DOM
                     lastSelected = $(this).attr('id');
                     //TODO: when a new folder is selected change the upload path to selected root "$(this).attr('id')"
@@ -340,9 +390,9 @@
                 items: {
                     "create folder": {
                         name: "Create Folder",
-                        icon: "copy",
-                        callback: function (key, opt) {
-                            createFolder();
+                        icon: "createFolder",
+                        callback: function (key, opt) {                            
+                            createFolder($(this).attr("rel"));                                             
                         },
                         disabled: function (key, opt) {
                             if ($(this).parent().attr('id') != "folder") {
@@ -352,54 +402,45 @@
                                 return false;
                         }
                     },
-                    "delete": {
-                        name: "Add/Remove file",
-                        icon: "edit",
+                    "delete folder": {
+                        name: "Delete Folder",
+                        icon: "deleteFolder",
                         callback: function (key, opt) {
-                            var items = new Array;
-                            items = checkVal($(this).attr('rel'));
-                            if (items[0] == true) {
-                                deleteItem(items[1]);
-                                //uncheck($(this).attr('rel'));
-                            }
-                            else {
-                                insertItem(items[1], $(this).attr('rel'));
-                                //check($(this).attr('rel'));
-                            }
+                            deleteFolder($(this).attr("rel"));
                         },
                         disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') == "folder") {
+                            if ($(this).parent().attr('id') != "folder") {
                                 return true;
                             }
                             else
                                 return false;
                         }
                     },
-                    "upload": {
-                        name: "Upload to",
-                        icon: "add",
-                        callback: function (key, opt) {                            
-                            var m = "clicked: " + key + " on " + $(this).attr('rel');
-                            //window.console && console.log(m) || alert(m);
-                            lastSelected = m;
-                        },
-                        disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') == "file") {
-                                return true;
-                            }
-                            else
-                                return false;
-                        }
-                    },
-                    "sep1": "---------",
-                    "quit": {
-                        name: "Quit",
-                        icon: "quit",
-                        callback: function (key, opt) {
-                            console.log(key);
-                        }
+                    //"upload": {
+                    //    name: "Upload to",
+                    //    icon: "add",
+                    //    callback: function (key, opt) {                            
+                    //        var m = "clicked: " + key + " on " + $(this).attr('rel');
+                    //        //window.console && console.log(m) || alert(m);
+                    //        lastSelected = m;
+                    //    },
+                    //    disabled: function (key, opt) {
+                    //        if ($(this).parent().attr('id') == "file") {
+                    //            return true;
+                    //        }
+                    //        else
+                    //            return false;
+                    //    }
+                    //},
+                    //"sep1": "---------",
+                    //"quit": {
+                    //    name: "Quit",
+                    //    icon: "quit",
+                    //    callback: function (key, opt) {
+                    //        console.log(key);
+                    //    }
 
-                    }
+                    //}
                 }
                 // there's more, have a look at the demos and docs...
             });
