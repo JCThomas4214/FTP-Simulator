@@ -97,8 +97,8 @@
 .context-menu-item.icon-add { background-image: url(ContextImages/page_white_add.png); }
 .context-menu-item.icon-quit { background-image: url(ContextImages/door.png); }
 .context-menu-item.icon-AddUsers { background-image: url(ContextImages/AddUsers.png); }
-.context-menu-item.icon-createFolder { background-image: url(ContextImages/rsz_create_dir.png); }
-.context-menu-item.icon-deleteFolder { background-image: url(ContextImages/rsz_delete_dir.png); }
+.context-menu-item.icon-createFolder { background-image: url(ContextImages/rsz_create_dir2.png); }
+.context-menu-item.icon-deleteFolder { background-image: url(ContextImages/rsz_delete_dir2.png); }
 
 /* vertically align inside labels */
 .context-menu-input > label > * { vertical-align: top; }
