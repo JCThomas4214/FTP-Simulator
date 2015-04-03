@@ -397,7 +397,7 @@
                             createFolder($(this).attr("rel"));                                             
                         },
                         disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') != "folder") {
+                            if ($(this).parent().attr('id') == "file") {
                                 return true;
                             }
                             else
@@ -411,7 +411,7 @@
                             deleteFolder($(this).attr("rel"));
                         },
                         disabled: function (key, opt) {
-                            if ($(this).parent().attr('id') != "folder") {
+                            if ($(this).parent().attr('id') == "file") {
                                 return true;
                             }
                             else
