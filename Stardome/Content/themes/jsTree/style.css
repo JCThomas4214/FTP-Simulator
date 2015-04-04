@@ -12,7 +12,7 @@ div .innerwrap {
 }
 #MainTree {    
     width:50%; 
-    height: 400px;   
+    height: 350px;   
     overflow:auto;
     /*border:2px solid salmon;*/ 
     float:left;
