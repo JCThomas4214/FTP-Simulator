@@ -3,6 +3,9 @@
 		var selectedUsers = new Array;
 		var selectedFolders = new Array;
 		var selectedFolderNames = new Array;
+		var htmlDDlist = new Array;
+		var subList = new Array;
+
 
 		var root = "C:/Users/";
 		var t = new String;
@@ -10,9 +13,7 @@
 
 		function initializer(Role) {
 		    if (Role != 1) {        //1 = Admin, 2 = Producer, 3 = User
-		        lastSelected = subList[0][0];
-		        dropD();
-		        Tree(subList[0][0],Role);
+		       findPermissions(UserId);	        
 		    }
 		    else {
 		        lastSelected = root;
@@ -23,6 +24,28 @@
 		function initializer_Permissions(Role) {
 		    lastSelected = root;
 		        Tree_Permissions(root);
+		}
+
+		function findPermissions(Id) {
+		    $.ajax({
+		        url: "/Manage/GetFolderPermissionsForUser/?UserId=" + Id,
+		        type: "POST",
+		        data: {UserId: Id},
+		        error: function (xhr) {
+		            //alert('Error: ' + xhr.statusText);
+		        },
+		        success: function (result) {		            
+		            for (var i = 0; i < result.folderNames.length; i++) {
+		                subList[i] = [root + "Stardome\\" + result.folderNames[i] + "\\", result.folderNames[i]];
+		                console.log(subList[i]);
+		            }		            
+		            lastSelected = subList[0][0];
+		            dropD();
+		            Tree(subList[0][0], Role);
+		        },
+		        async: false,
+		        processData: false
+		    });
 		}
 		
 		function call(number) {

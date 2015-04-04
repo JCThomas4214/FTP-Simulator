@@ -28,17 +28,18 @@
     <title>Content</title>
     <script type="text/javascript">
 
-    var Role = '@Model.RoleId';
-    var htmlDDlist = new Array;
-    var subList = new Array;
+        var Role = '@Model.RoleId';  
+        var UserId = '@WebSecurity.CurrentUserId';
 
-    subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\ABC\\', "ABC"];
+    @*subList[0] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\ABC\\', "ABC"];
     subList[1] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\CNN\\', "CNN"];
-    subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\FOX\\', "FOX"];
+    subList[2] = ['@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome/Stardome"))' + '\\FOX\\', "FOX"];*@
 
-        root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
+    root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
 
-    $(document).ready(function () {        
+    $(document).ready(function () {
+        
+
         initializer(Role);
     });
 </script>

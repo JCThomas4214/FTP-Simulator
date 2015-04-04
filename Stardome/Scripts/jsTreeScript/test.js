@@ -30,13 +30,9 @@ test("Perform test on insertItem", function () {
     equals(fileList.length, tmp - 1, "FileList should decrease in length");    
 });
 
-test("Perform test on Dropdowns menu", function () {
-    if (Role == 1) {
-        dropD();
-        equals(htmlDDlist.length, 3 + subList.length, "htmlDDlist should be 3 + subList");
-        document.getElementById('dropD').innerHTML = "";
-    }
-    else {
+setTimeout(function () { test("Perform test on Dropdowns menu", function () {
+    if (Role != 1) {        
         equals(htmlDDlist.length, 3 + subList.length, "htmlDDlist should be 3 + subList");
     }
 });
+ }, 2000);
