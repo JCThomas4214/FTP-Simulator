@@ -51,12 +51,32 @@
 		function call(number) {
 		    for (var i = 0; i < fileList.length; i++) {		        
 		        try{check(fileList[i]);}
-                catch(e){console.log(fileList[i] + "is not in the current file tree")}
+		        catch(e){console.log(fileList[i] + "is not in the current file tree")}
 		    }
 		    for (var i = 0; i < selectedFolders.length; i++) {
 		        try { check(selectedFolders[i]); }
 		        catch (e) { console.log(selectedFolders[i] + "is not in the current file tree") }
 		    }
+		    
+		    
+		}
+
+		function folderTraversalDown(dir) {
+		    ParentFolder = document.getElementById(dir);
+		    ParentFolder.checked = true;
+		    try {
+		        subFolders = ParentFolder.parentNode.children[2].children
+		    }
+		    catch (err) {
+		        subFolders = null;
+		    }
+		    if (subFolders != null) {
+		        for (x = 0 ; x < subFolders.length ; x++) {
+		            var SubFolderCheckBox = subFolders[x].firstChild;
+		            SubFolderCheckBox.checked = true
+		            folderTraversalDown(SubFolderCheckBox.id);
+		            }
+		        }
 		}
 
 		function check(box) {		    
@@ -69,28 +89,39 @@
 
         function checkFolderPermissions(dir)
         {
+            debugger
                if (document.getElementById(dir).checked == true) {                         // Folder Checked
               
                 var index = selectedFolders.indexOf(dir);                               // Folder dosner exisit in the list
                 if (index == -1)
                 {
                     
-                    // Removing the sub folders from list--may not remove all if the folder is not expanded
+                    // Removing the sub folders from list
+                    var TempPath = new Array
+                    var TempName = new Array
                     FolderName = document.getElementById(dir);
-                    var subFolders = document.querySelectorAll('[id*=\'' + FolderName.name + '\']');
-                    for (x = 0 ; x < subFolders.length ; x++) {
-                        subFolderId = subFolders[x].getAttribute("id");
-                        var subFolderIndex = selectedFolders.indexOf(subFolderId);
-                        if (subFolderIndex > -1) {
-                            selectedFolders.splice(subFolderIndex, 1);
-                            selectedFolderNames.splice(subFolderIndex, 1)
+                    var i=0;
+                    for (x = 0 ; x < selectedFolders.length ; x++) {
+                        if (!selectedFolders[x].startsWith(dir))
+                        {
+                            TempName[i] = selectedFolderNames[x];
+                            TempPath[i] = selectedFolders[x];
+
+                            i++;
                         }
 
                     }
-                    selectedFolders.push(dir)       // Adding Selected folder to list
-                    selectedFolderNames.push(FolderName.name)
-                    document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("<br \>");
+                    selectedFolders.length = 0;
+                    selectedFolderNames.length = 0;
+                    selectedFolders = TempPath.slice();
+                    selectedFolderNames = TempName.slice();
                 }
+                selectedFolders.push(dir)       // Adding Selected folder to list
+                selectedFolderNames.push(FolderName.name)
+                folderTraversalUp(dir);
+
+                document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("<br \>");
+                
                 
             }
             else {                                                                  //Folder unchecked
@@ -132,6 +163,47 @@
             
         }
 
+        function folderTraversalUp(dir)
+        {
+            folder = document.getElementById(dir);
+            ParentFolder = folder.parentElement.parentElement.previousSibling.parentElement.children[0] 
+            subFolders = ParentFolder.parentNode.children[2].children
+            if (subFolders != null)
+            {
+                var isAllSiblingsChecked = true;
+                // check if all siglings are checked
+                for (x = 0 ; x < subFolders.length ; x++) {
+                    var SubFolderCheckBox = subFolders[x].firstChild;
+                    if (SubFolderCheckBox.checked == false)
+                    {   // break if one is not checked
+                        isAllSiblingsChecked = false;
+                        break;
+                    }
+                }
+
+                if (isAllSiblingsChecked)
+                {
+                    ParentFolder.checked = true; // Check the parent node
+                    //Remove entries of subfolders from the arrays
+                    for (x = 0 ; x < subFolders.length ; x++) {
+                        var SubFolderCheckBoxId = subFolders[x].firstChild.id;
+                        var index = selectedFolders.indexOf(SubFolderCheckBoxId);
+                        if (index > -1) {
+                            selectedFolders.splice(index, 1);
+                            selectedFolderNames.splice(index, 1)
+                        }
+                    }
+                    var index = selectedFolders.indexOf(ParentFolder.id);
+                    if (index == -1) {
+                        selectedFolders.push(ParentFolder.id);
+                    }
+                    folderTraversalUp(ParentFolder.id);
+                }
+                    
+                    
+            }
+        }
+
         function updatePermissions()
         {
             UserId = $('#ddlUsers').val();
@@ -157,6 +229,10 @@
 
         String.prototype.endsWith = function(suffix) {
             return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
+
+        String.prototype.startsWith = function (str){
+            return this.indexOf(str) === 0;
         };
 
         function checkB(file) {           
