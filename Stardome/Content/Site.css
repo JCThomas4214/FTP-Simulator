@@ -183,7 +183,7 @@ footer {
 
 /* menu
 ----------------------------------------------------------*/
-ul#menu {
+/*ul#menu {
     font-size: 1.3em;
     font-weight: 600;
     margin: 0 0 5px;
@@ -220,15 +220,15 @@ ul#menu {
         margin-left: 150px;
         padding-left: 0 !important;
         padding-top: 5px;
-    }
+    }*/
 
-ul#ContentMenu li {
+/*ul#ContentMenu li {
     display: list-item;
     text-align: left;
     background-color: #f7f7f7;
     padding: 5px 10px 5px 10px;
     border: 1px solid #7ac0da;
-}
+}*/
 
 .caret {
     display: inline-block;

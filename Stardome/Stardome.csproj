@@ -562,6 +562,11 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Services\Application\FileDownloadPage.aspx" />
+    <Content Include="Stardome\Stardome\ABC\01 Demacia Rising.mp3" />
+    <Content Include="Stardome\Stardome\ABC\02 Tidecaller.mp3" />
+    <Content Include="Stardome\Stardome\CNN\03 Tiny Masterpiece Of Evil.mp3" />
+    <Content Include="Stardome\Stardome\CNN\05 Quinn And Valor.mp3" />
+    <Content Include="Stardome\Stardome\FOX\04 The Curse Of The Sad Mummy.mp3" />
     <Content Include="System.Linq.Dynamic.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -633,6 +638,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Stardome\Stardome\CNN\CNN English\" />
+    <Folder Include="Stardome\Stardome\CNN\CNN Spanish\" />
     <Folder Include="Views\Clients\" />
     <Folder Include="Views\Producer\" />
   </ItemGroup>

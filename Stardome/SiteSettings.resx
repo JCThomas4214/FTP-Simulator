@@ -123,6 +123,9 @@
   <data name="Content" xml:space="preserve">
     <value>Content Header</value>
   </data>
+  <data name="ContentByUser" xml:space="preserve">
+    <value>Content Permissions Header</value>
+  </data>
   <data name="NewEmailBody" xml:space="preserve">
     <value>New User Email Body</value>
   </data>

@@ -152,7 +152,7 @@ namespace Stardome.Controllers
             };
             
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(SiteSettings.Content);
+            adminController.GetValue(SiteSettings.ContentByUser);
 
             return View(model);
         }

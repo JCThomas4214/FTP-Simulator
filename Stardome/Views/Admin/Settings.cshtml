@@ -49,14 +49,14 @@
                                     @Html.HiddenFor(m => Model.Settings[i].Category)
                                 </b>
                             </td>
-                            <td>@Html.TextBoxFor(m => Model.Settings[i].Value)
+                            <td>@Html.TextBoxFor(m => Model.Settings[i].Value, new { @class = "form-control"})
                             </td>
                         </tr>
                     }
                 </table>
             
             <div style="width:650px; clear:left; float:left;">
-                <input type="submit" value="Update" />
+                <td><button type="submit" class="btn btn-primary">Update</button></td>
             </div>
         </section>
     </fieldset>

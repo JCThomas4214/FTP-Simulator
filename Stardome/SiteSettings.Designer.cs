@@ -79,6 +79,15 @@ namespace Stardome {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Content Permissions Header.
+        /// </summary>
+        public static string ContentByUser {
+            get {
+                return ResourceManager.GetString("ContentByUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New User Email Body.
         /// </summary>
         public static string NewEmailBody {
