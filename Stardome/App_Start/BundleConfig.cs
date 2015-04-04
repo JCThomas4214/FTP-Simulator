@@ -67,6 +67,7 @@ namespace Stardome
                         "~/Content/themes/jsTree/jquery.contextMenu.css"));
             //bootstrap
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                        "~/Content/themes/bootstrap/css/bootstrap-theme.css",
                         "~/Content/themes/bootstrap/css/bootstrap.css"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
@@ -83,6 +84,7 @@ namespace Stardome
                       "~/Scripts/bootstrap/js/bootstrap-toggle.min.js",
                       "~/Scripts/bootstrap/js/bootstrap-toggle.min.js.map"
                       ));
+            
         }
     }
 }

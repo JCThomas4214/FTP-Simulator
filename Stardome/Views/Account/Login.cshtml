@@ -1,4 +1,6 @@
 ﻿@model Stardome.Models.LoginModel
+@*@Scripts.Render("~/Scripts/bootstrap")*@
+@Styles.Render("~/Content/bootstrap")
 
 @{
     ViewBag.Title = "Log in";
@@ -32,10 +34,11 @@
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>
         </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
+        <button type="submit" class="btn btn-primary" value="Log in">Log in</button>
+        @*<input type="submit" value="Log in" />*@
+    </fieldset><br />
     <p>
-        @Html.ActionLink("Recover", "LostPassword") if you forgot password.
+        @Html.ActionLink("Recover", "LostPassword")if you forgot password.
     </p>
 }
 </section>
