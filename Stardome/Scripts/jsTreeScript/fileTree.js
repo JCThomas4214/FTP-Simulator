@@ -15,8 +15,7 @@
 		    if (Role != 1) {        //1 = Admin, 2 = Producer, 3 = User
 		       findPermissions(UserId);	        
 		    }
-		    else {
-                debugger
+		    else {                
 		        lastSelected = root;
 		        Tree(root, Role);
 		    }
