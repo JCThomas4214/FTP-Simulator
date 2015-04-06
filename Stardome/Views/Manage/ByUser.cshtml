@@ -9,6 +9,9 @@
     Response.Redirect("~/Account/Login");
 
 }
+@{
+    ViewBag.Title = "Manage Content Permissions";
+}
 @if (Model.RoleId != (int)Enums.Roles.Admin)
 {
     Response.Redirect("~/Account/Login");
@@ -22,10 +25,8 @@
         </div>
     </section>
 }
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Content</title>
+
+
     <script type="text/javascript">
         root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
         $(document).ready(function () {
@@ -63,8 +64,7 @@
         });
 
     </script>
-</head>
-<body>
+
     <div style="width:1100px">
         <div style="width:300px; float:left; display:inline-block;">Select User</div>
         <div style="width:500px; display:inline-block">Select Folder/Folders</div>
@@ -94,7 +94,3 @@
 
     </div>
 
-</body>
-
-
-</html>  

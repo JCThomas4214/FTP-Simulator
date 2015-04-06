@@ -46,6 +46,7 @@ namespace Stardome.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+
             if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
                 int roleId = userAuthCredentialService.GetByUsername(authenticationProvider.CurrentUserName()).Role.Id;
@@ -66,7 +67,6 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-
            string password = userAuthCredentialService.EncryptPassword(model.Password);
            
 
@@ -88,7 +88,6 @@ namespace Stardome.Controllers
         public ActionResult LogOff()
         {
             authenticationProvider.Logout();
-
             return RedirectToAction("Login", "Account");
         }
 
@@ -184,7 +183,6 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-
             if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
                 bool changePasswordSucceeded;
@@ -260,6 +258,7 @@ namespace Stardome.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
+           
             if (ModelState.IsValid)
             {
                 bool resetResponse = authenticationProvider.ResetPassword(model.ReturnToken,

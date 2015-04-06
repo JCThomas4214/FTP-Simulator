@@ -5,7 +5,7 @@
 		var selectedFolderNames = new Array;
 		var htmlDDlist = new Array;
 		var subList = new Array;
-		var currentFolderforUpload;
+
 
 		var root = "C:/Users/";
 		var t = new String;
@@ -16,6 +16,7 @@
 		       findPermissions(UserId);	        
 		    }
 		    else {
+                debugger
 		        lastSelected = root;
 		        Tree(root, Role);
 		    }
@@ -438,7 +439,7 @@
             fileList.push(file);
             try {
                 check(fileList[number]);
-                currentFolderforUpload = file;
+                
             }
             catch(e){}
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
@@ -499,6 +500,7 @@
                 }
             }, function (dir) {
                 lastSelected = dir;
+                document.getElementById('lastSelectedFolder').value = lastSelected;
             });
             if (Role == 1) {
                 $('.jqueryFileTree').contextMenu({

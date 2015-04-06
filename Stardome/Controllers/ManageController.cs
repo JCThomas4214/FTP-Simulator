@@ -43,12 +43,13 @@ namespace Stardome.Controllers
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             adminController.GetValue(SiteSettings.Content);
-            ViewBag.Title = "Manage Contents";
+            ViewBag.Message = "Manage Contents";
+           
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Actions(IEnumerable<HttpPostedFileBase> files, string lastSelected)
+        public ActionResult Actions(IEnumerable<HttpPostedFileBase> files, string root, string lastSelectedFolder)
         {
             var r = new List<UploadFilesResult>();
             List<string> results = new List<string>();
@@ -77,12 +78,13 @@ namespace Stardome.Controllers
                             try
                             {
                                 // Upload files to the directory lastSelected. If the folder doesn't exist, it creates it.
-                                string filePath = lastSelected;
-                                bool exists = Directory.Exists(Path.GetFullPath(filePath));
-                                if (!exists)
-                                {
-                                    Directory.CreateDirectory(Path.GetFullPath(filePath));
-                                }
+                                //string filePath = lastSelected;
+                                //bool exists = Directory.Exists(Path.GetFullPath(filePath));
+                                //if (!exists)
+                                //{
+                                //    Directory.CreateDirectory(Path.GetFullPath(filePath));
+                                //}
+                                string filePath = lastSelectedFolder;
                                 string path = Path.Combine(Path.GetFullPath(filePath),
                                     Path.GetFileName(file.FileName));
                                 if (!System.IO.File.Exists(path))
@@ -100,7 +102,7 @@ namespace Stardome.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ViewBag.Message = "Could not upload file(s)";
+                                ViewBag.StatusMessage = "Could not upload file(s)";
                             }
 
                             r.Add(new UploadFilesResult()
@@ -133,7 +135,8 @@ namespace Stardome.Controllers
                 results.Add(uploadedFiles == 1
                     ? "1 file uploaded successfully."
                     : String.Format("{0} files uploaded successfully.", uploadedFiles));
-                ViewBag.Message = "Uploaded to " + lastSelected;
+                ViewBag.StatusMessage = "Uploaded to " + lastSelectedFolder;
+
             }
             
 
@@ -145,13 +148,15 @@ namespace Stardome.Controllers
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             adminController.GetValue(SiteSettings.Content);
-
+            ViewBag.Message = "Manage Contents";
+            
             return View(model);
         }
 
         public ActionResult ByUser()
         {
             ViewBag.message = "Manage Content Permissions";
+           
             string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers(0,100).Data);
             users=users.Remove(0,users.IndexOf('['));
             users = users.Remove(users.IndexOf(']')+1, (users.Length - users.IndexOf(']'))-1);
@@ -215,20 +220,21 @@ namespace Stardome.Controllers
             
         }
 
-        public ActionResult ByFolder()
-        {
-            List<string> dummy = new List<string>();
-            ContentModel model = new ContentModel
-            {
-                RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
-                RoleId = adminController.GetUserRoleId(User.Identity.Name),
-                List = dummy
-            };
-            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(SiteSettings.Content);
+        //public ActionResult ByFolder()
+        //{
 
-            return View(model);
-        }
+        //    List<string> dummy = new List<string>();
+        //    ContentModel model = new ContentModel
+        //    {
+        //        RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
+        //        RoleId = adminController.GetUserRoleId(User.Identity.Name),
+        //        List = dummy
+        //    };
+        //    ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
+        //    adminController.GetValue(SiteSettings.Content);
+
+        //    return View(model);
+        //}
 
         [HttpPost]
        public ActionResult DeleteFile(string filePath)
@@ -263,22 +269,22 @@ namespace Stardome.Controllers
             return null;
         }
 
-        [HttpPost]
-        public ActionResult AddFile(string filePath)
-        {
+        //[HttpPost]
+        //public ActionResult AddFile(string filePath)
+        //{
             
 
-            System.IO.Directory.CreateDirectory(Server.MapPath("~") + filePath);
-            Folder f= new Folder();
-            f.Name="Cnn 1";
-            f.ModifiedOn=DateTime.Now;
-            f.Path = "";
-            //f.ModifiedBy = WebSecurity.CurrentUserId;
+        //    System.IO.Directory.CreateDirectory(Server.MapPath("~") + filePath);
+        //    Folder f= new Folder();
+        //    f.Name="Cnn 1";
+        //    f.ModifiedOn=DateTime.Now;
+        //    f.Path = "";
+        //    //f.ModifiedBy = WebSecurity.CurrentUserId;
 
 
-            folderService.AddFolder(f);
-            return null;
-        }
+        //    folderService.AddFolder(f);
+        //    return null;
+        //}
 
         public void GrantPermissionToFolder(string folderId, string folderName, List<string> selectedUsers)
         {
