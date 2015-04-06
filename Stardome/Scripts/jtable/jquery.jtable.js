@@ -372,6 +372,7 @@ THE SOFTWARE.
                 title: self.options.messages.error,
                 buttons: [{
                     text: self.options.messages.close,
+                            'class': 'btn btn-primary',
                     click: function () {
                         self._$errorDialogDiv.dialog('close');
                     }
@@ -2040,12 +2041,14 @@ THE SOFTWARE.
                 buttons:
                         [{ //Cancel button
                             text: self.options.messages.cancel,
+                            'class': 'btn btn-primary',
                             click: function () {
                                 self._$addRecordDiv.dialog('close');
                             }
                         }, { //Save button
                             id: 'AddRecordDialogSaveButton',
                             text: self.options.messages.save,
+                            'class': 'btn btn-primary',
                             click: function () {
                                 self._onSaveClickedOnCreateForm();
                             }
@@ -2394,12 +2397,14 @@ THE SOFTWARE.
                 buttons:
                         [{  //cancel button
                             text: self.options.messages.cancel,
+                            'class': 'btn btn-primary',
                             click: function () {
                                 self._$editDiv.dialog('close');
                             }
                         }, { //save button
                             id: 'EditDialogSaveButton',
                             text: self.options.messages.save,
+                            'class': 'btn btn-primary',
                             click: function () {
                                 self._onSaveClickedOnEditForm();
                             }
@@ -2851,11 +2856,13 @@ THE SOFTWARE.
                 buttons:
                         [{  //cancel button
                             text: self.options.messages.cancel,
+                            'class': 'btn btn-primary',
                             click: function () {
                                 self._$deleteRecordDiv.dialog("close");
                             }
                         }, {//delete button
                             id: 'DeleteDialogButton',
+                            'class': 'btn btn-primary',
                             text: self.options.messages.deleteText,
                             click: function () {
 
