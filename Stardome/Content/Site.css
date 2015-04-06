@@ -259,7 +259,7 @@ header .content-wrapper {
         background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         color: #3e5667;
-        padding: 20px 40px 30px 40px;
+        padding: 20px 40px 10px 40px;
     }
 
     .featured hgroup.title h1, .featured hgroup.title h2 {

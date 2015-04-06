@@ -69,26 +69,14 @@ namespace Stardome
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                         "~/Content/themes/bootstrap/css/bootstrap-theme.css",
                         "~/Content/themes/bootstrap/css/bootstrap.css",
-                        "~/Content/themes/bootstrap/css/bootstrap-toggle.css"));
+                        "~/Content/themes/bootstrap/css/bootstrap-toggle.css",
+                        "~/Content/themes/bootstrap/css/bootstrap-select.css"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                       "~/Scripts/bootstrap/js/bootstrap.js",
-                      "~/Scripts/bootstrap/js/bootstrap-toggle.js"
+                      "~/Scripts/bootstrap/js/bootstrap-toggle.js",
+                      "~/Scripts/bootstrap/js/bootstrap-select.js"
                       ));
-
-            //bootstrap
-            bundles.Add(new StyleBundle("~/Content/bootstrapToggle").Include(
-                
-                        "~/Content/themes/bootstrap/css/bootstrap-toggle.min.css",
-                        "~/Content/themes/bootstrap/css/bootstrap-toggle.css"
-                        ));
-            bundles.Add(new ScriptBundle("~/Scripts/bootstrapToggle").Include(
-                      
-                      "~/Scripts/bootstrap/js/bootstrap-toggle.min.js",
-                      "~/Scripts/bootstrap/js/bootstrap-toggle.js"//,
-                      //"~/Scripts/bootstrap/js/bootstrap-toggle.min.js.map"
-                      ));
-            
         }
     }
 }
