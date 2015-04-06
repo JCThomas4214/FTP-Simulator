@@ -43,7 +43,7 @@ namespace Stardome.Controllers
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             adminController.GetValue(SiteSettings.Content);
-
+            ViewBag.Title = "Manage Contents";
             return View(model);
         }
 
@@ -151,7 +151,7 @@ namespace Stardome.Controllers
 
         public ActionResult ByUser()
         {
-            
+            ViewBag.message = "Manage Content Permissions";
             string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers(0,100).Data);
             users=users.Remove(0,users.IndexOf('['));
             users = users.Remove(users.IndexOf(']')+1, (users.Length - users.IndexOf(']'))-1);

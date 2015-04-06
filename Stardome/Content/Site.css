@@ -1,5 +1,6 @@
 ﻿html, body {
     height: 100%;
+    
 }
 
 html {
@@ -16,6 +17,7 @@ body {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
+  
 }
 
 a {
@@ -105,23 +107,29 @@ h5, h6 {
 #body {
     /*background-color: #efeeef;*/
     clear: both;
-    padding-bottom: 35px;
+    padding-bottom: 50px;
 }
 
 .main-content {
     padding-left: 10px;
     padding-top: 30px;
+    padding-bottom: 50px;
 }
 
 header .content-wrapper {    
     padding-top: 20px;
 }
 
-footer {
+#footer {
     clear: both;
     background-color: #e2e2e2;
     font-size: .8em;
-    height: 100px;
+    height: 50px;
+    max-height: 100px;
+    position:fixed;
+    bottom:0 !important	;
+    left:0; 
+    width:100%;
 }
 
 

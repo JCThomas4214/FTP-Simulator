@@ -5,7 +5,7 @@
 		var selectedFolderNames = new Array;
 		var htmlDDlist = new Array;
 		var subList = new Array;
-
+		var currentFolderforUpload;
 
 		var root = "C:/Users/";
 		var t = new String;
@@ -122,7 +122,7 @@
                 selectedFolderNames.push(FolderName.name);
                 folderTraversalUp(dir);
 
-                document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("<br \>");
+              //  document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("<br \>");
                 
                 
             }
@@ -436,7 +436,10 @@
             var split1 = split0[split0.length - 1].split("\/");           
             htmlList.push('<li  id=\"' + number + '\" name=\"' + file + '\">' + split1[split1.length-1] + '<img src="\\Images\\Delete.png" id=\"' + number + '\" onclick=\"deleteItem(this.id)\"></li>');
             fileList.push(file);
-            try{check(fileList[number]);}
+            try {
+                check(fileList[number]);
+                currentFolderforUpload = file;
+            }
             catch(e){}
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");
 
