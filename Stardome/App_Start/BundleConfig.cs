@@ -57,8 +57,7 @@ namespace Stardome
                       "~/Scripts/jsTreeScript/jquery.contextMenu.js",
                       "~/Scripts/jsTreeScript/jquery.ui.position.js",
                       "~/Scripts/jsTreeScript/jquery.easing.js",
-                      "~/Scripts/jsTreeScript/fileTree.js",
-                      "~/Scripts/jsTreeScript/test.js"
+                      "~/Scripts/jsTreeScript/fileTree.js"                      
                       ));
 
             bundles.Add(new StyleBundle("~/Content/jsTree").Include(
@@ -78,6 +77,11 @@ namespace Stardome
                       "~/Scripts/bootstrap/js/bootstrap.js",
                       "~/Scripts/bootstrap/js/bootstrap-toggle.js",
                       "~/Scripts/bootstrap/js/bootstrap-select.js"
+                      ));
+
+            //js testing bundles
+            bundles.Add(new ScriptBundle("~/Scripts/test").Include(
+                      "~/Scripts/jsTreeScript/test.js"
                       ));
         }
     }

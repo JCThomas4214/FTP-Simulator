@@ -1,9 +1,9 @@
 ﻿@using Stardome.DomainObjects
 ﻿@model Stardome.Models.ContentModel
 @Scripts.Render("~/Scripts/jsTree")
-@Scripts.Render("~/Scripts/bootstrap")
+@Scripts.Render("~/Scripts/test")
 @Styles.Render("~/Content/jsTree")
-@Styles.Render("~/Content/bootstrap")
+
 @if (Request.IsAuthenticated == false)
 {
     Response.Redirect("~/Account/Login");
@@ -83,16 +83,18 @@
         <table style="width: 100%">
             <tr>
             <td style="width: 40%">
-                <div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-primary btn-file">
-                                Browse&hellip; <input type="file" multiple name="files">
+                
+                    <div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                    Browse&hellip; <input type="file" multiple name="files">
+                                </span>
                             </span>
-                        </span>
-                        <input type="text" class="form-control" readonly>
+                            <input type="text" class="form-control" readonly>
+                        </div>
                     </div>
-                </div>
+                
             </td>
             <td><button type="submit" class="btn btn-primary">Upload Files</button></td>
             <td style="width: 30%"></td>
@@ -103,11 +105,11 @@
 
 
                 <br>
-                @ViewBag.Message<br>
+                @*@ViewBag.Message<br>
                 foreach (var element in Model.List)
                 {
                     <p>@Html.DisplayFor(m => element)</p>
-                }
+                }*@
             }
         }
     </div>
@@ -115,9 +117,9 @@
                 
     </div>
     <br /><br /><br /><br /><br /><br /><br />
-    <div>
+    @*<div>
         <h1 id="qunit-header">QUnit Tests</h1>
         <ol id="qunit-tests"></ol>
-    </div>
+    </div>*@
 
 

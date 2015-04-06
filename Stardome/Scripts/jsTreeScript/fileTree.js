@@ -325,13 +325,15 @@
             Tree(root, Role);
         }
 
+
+
         function deleteFolder(Name, Path) {
-            $("#dialog-confirm").html("");
+            $("#dialog-confirm").html("Are you sure you want to delete this folder?");
             // Define the Dialog and its properties.
             $("#dialog-confirm").dialog({
                 resizable: false,
                 modal: true,
-                title: "Are you sure you want to delete this folder?",
+                title: "Delete Folder",
                 height: 167,
                 width: 400,
                 buttons: [
