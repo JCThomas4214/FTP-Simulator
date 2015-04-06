@@ -15,6 +15,10 @@ UL.jqueryFileTree LI {
 	white-space: nowrap;    
 }
 
+#file {
+    padding-left: 0px;
+}
+
 .FTCB {
     margin-left: 3px;
     margin-right:3px;
@@ -48,10 +52,10 @@ UL.jqueryFileTree A:hover {
 
 
 /* Core Styles */
-.jqueryFileTree LI.directory { background: url(images/rsz_dir2closed.png) no-repeat; background-position: 0px 1px;}
-.jqueryFileTree LI.expanded { background: url(images/rsz_dir2open.png) no-repeat; background-position: 0px 1px;}
+.jqueryFileTree LI.directory { background: url(images/rsz_dir2closed.png) no-repeat; background-position: 1px 1px;}
+.jqueryFileTree LI.expanded { background: url(images/rsz_dir2open.png) no-repeat; background-position: 1px 1px;}
 /*.jqueryFileTree LI.file { background: url(images/file.png) left top no-repeat; }*/
-.jqueryFileTree LI.wait { background: url(images/spinner.gif) no-repeat; background-position: 0px 1px;}
+.jqueryFileTree LI.wait { background: url(images/spinner.gif) no-repeat; background-position: 1px 1px;}
 /* File Extensions*/
 /*.jqueryFileTree LI.ext_3gp { background: url(images/film.png) left top no-repeat; }
 .jqueryFileTree LI.ext_afp { background: url(images/code.png) left top no-repeat; }

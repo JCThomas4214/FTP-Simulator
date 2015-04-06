@@ -70,7 +70,9 @@ namespace Stardome
                         "~/Content/themes/bootstrap/css/bootstrap-theme.css",
                         "~/Content/themes/bootstrap/css/bootstrap.css",
                         "~/Content/themes/bootstrap/css/bootstrap-toggle.css",
-                        "~/Content/themes/bootstrap/css/bootstrap-select.css"));
+                        "~/Content/themes/bootstrap/css/bootstrap.css.map",
+                        "~/Content/themes/bootstrap/css/bootstrap-select.css",
+                        "~/Content/themes/bootstrap/css/bootstrap-select.css.map"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                       "~/Scripts/bootstrap/js/bootstrap.js",
