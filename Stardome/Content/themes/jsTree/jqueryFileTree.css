@@ -15,27 +15,11 @@ UL.jqueryFileTree LI {
 	white-space: nowrap;    
 }
 
-#file {
-	list-style: none;
-	padding: 0px;
-	padding-left: 0px;        
-	margin-left: 7px;
-	white-space: nowrap;
-    vertical-align: middle;
-}
-
 .FTCB {
-    width: 18px;
-    height: 18px;
-    padding: 0;
-    margin-left: 2px;
-    margin-right:4px;
-    margin-top: 0;
-    margin-bottom: 0;
-    vertical-align: bottom;
-    position: relative;
-    
-    *overflow: hidden;
+    margin-left: 3px;
+    margin-right:3px;
+    margin-top: 3px;
+    vertical-align: top;
 }
 
 #FTbutton {
@@ -51,11 +35,11 @@ UL.jqueryFileTree LI .clicked {
 	font-weight: bold;
 }
 
-UL.jqueryFileTree A {
+UL.jqueryFileTree A {    
 	color: #333;
 	text-decoration: none;
 	display: inline-block;
-	padding: 0px 2px;
+	padding: 0px 2px;  
 }
 
 UL.jqueryFileTree A:hover {
@@ -64,10 +48,10 @@ UL.jqueryFileTree A:hover {
 
 
 /* Core Styles */
-.jqueryFileTree LI.directory { background: url(images/rsz_dir2closed.png) left top no-repeat; }
-.jqueryFileTree LI.expanded { background: url(images/rsz_dir2open.png) left top no-repeat; }
+.jqueryFileTree LI.directory { background: url(images/rsz_dir2closed.png) no-repeat; background-position: 0px 1px;}
+.jqueryFileTree LI.expanded { background: url(images/rsz_dir2open.png) no-repeat; background-position: 0px 1px;}
 /*.jqueryFileTree LI.file { background: url(images/file.png) left top no-repeat; }*/
-.jqueryFileTree LI.wait { background: url(images/spinner.gif) left top no-repeat; }
+.jqueryFileTree LI.wait { background: url(images/spinner.gif) no-repeat; background-position: 0px 1px;}
 /* File Extensions*/
 /*.jqueryFileTree LI.ext_3gp { background: url(images/film.png) left top no-repeat; }
 .jqueryFileTree LI.ext_afp { background: url(images/code.png) left top no-repeat; }
