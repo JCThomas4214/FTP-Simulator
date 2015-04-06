@@ -500,7 +500,7 @@
             if (Role == 1) {
                 $('.jqueryFileTree').contextMenu({
                     // define which elements trigger this menu
-                    selector: "a",
+                    selector: ".jqueryFileTree",
                     // define the elements of the menu
 
                     items: {
@@ -561,7 +561,7 @@
             });
             $('.jqueryPermissionsFileTree').contextMenu({
                 // define which elements trigger this menu
-                selector: "a",
+                selector: ".jqueryFileTree",
                 // define the elements of the menu
 
                 items: {
