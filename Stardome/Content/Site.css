@@ -463,6 +463,7 @@ input, textarea {
     margin: 5px 0 6px 0;
     padding: 5px;
     width: 300px;
+    border-radius: 4px;
 }
 
 textarea {
