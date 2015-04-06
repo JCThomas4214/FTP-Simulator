@@ -51,11 +51,13 @@
 		function call(number) {
 		    for (var i = 0; i < fileList.length; i++) {		        
 		        try{check(fileList[i]);}
-		        catch(e){console.log(fileList[i] + "is not in the current file tree")}
+		        catch(e){console.log(fileList[i] + "is not in the current file tree");
+		        }
 		    }
 		    for (var i = 0; i < selectedFolders.length; i++) {
 		        try { check(selectedFolders[i]); }
-		        catch (e) { console.log(selectedFolders[i] + "is not in the current file tree") }
+		        catch (e) { console.log(selectedFolders[i] + "is not in the current file tree");
+		        }
 		    }
 		    
 		    
@@ -65,7 +67,7 @@
 		    ParentFolder = document.getElementById(dir);
 		    ParentFolder.checked = true;
 		    try {
-		        subFolders = ParentFolder.parentNode.children[2].children
+		        subFolders = ParentFolder.parentNode.children[2].children;
 		    }
 		    catch (err) {
 		        subFolders = null;
@@ -73,7 +75,7 @@
 		    if (subFolders != null) {
 		        for (x = 0 ; x < subFolders.length ; x++) {
 		            var SubFolderCheckBox = subFolders[x].firstChild;
-		            SubFolderCheckBox.checked = true
+		            SubFolderCheckBox.checked = true;
 		            folderTraversalDown(SubFolderCheckBox.id);
 		            }
 		        }
@@ -89,16 +91,16 @@
 
         function checkFolderPermissions(dir)
         {
-            debugger
-               if (document.getElementById(dir).checked == true) {                         // Folder Checked
+            debugger;
+            if (document.getElementById(dir).checked == true) {                         // Folder Checked
               
                 var index = selectedFolders.indexOf(dir);                               // Folder dosner exisit in the list
                 if (index == -1)
                 {
                     
                     // Removing the sub folders from list
-                    var TempPath = new Array
-                    var TempName = new Array
+                    var TempPath = new Array;
+                    var TempName = new Array;
                     FolderName = document.getElementById(dir);
                     var i=0;
                     for (x = 0 ; x < selectedFolders.length ; x++) {
@@ -116,8 +118,8 @@
                     selectedFolders = TempPath.slice();
                     selectedFolderNames = TempName.slice();
                 }
-                selectedFolders.push(dir)       // Adding Selected folder to list
-                selectedFolderNames.push(FolderName.name)
+                selectedFolders.push(dir); // Adding Selected folder to list
+                selectedFolderNames.push(FolderName.name);
                 folderTraversalUp(dir);
 
                 document.getElementById('selectedFoldersList').innerHTML = selectedFolders.join("<br \>");
@@ -127,7 +129,7 @@
             else {                                                                  //Folder unchecked
                
                    var ParentFolder;
-                   debugger
+                   debugger;
                 do                                                                 // Uncheck all the parent folders recursively
                 {
                     var index = selectedFolders.indexOf(dir);
@@ -140,13 +142,12 @@
                             subFolderId = subFolders[x].getAttribute("id");
                             var SubFolderCheckBox = document.getElementById(subFolderId);
                             if (SubFolderCheckBox.checked == true && selectedFolders.indexOf(subFolderId) == -1) {
-                                selectedFolders.push(subFolderId)
-                                selectedFolderNames.push(SubFolderCheckBox.name)
+                                selectedFolders.push(subFolderId);
+                                selectedFolderNames.push(SubFolderCheckBox.name);
                             }
                         }
                         selectedFolders.splice(index, 1);
-                        selectedFolderNames.splice(index, 1)
-
+                        selectedFolderNames.splice(index, 1);
                     }
                     
                     // uncheck the parent folder
@@ -157,7 +158,7 @@
                     ParentCheckBox.checked = false;
                     dir = ParentFolder;
                 }
-                while (ParentFolder.toString().endsWith("Stardome") == false)       // Repeat untill it reaches Stardome folder
+                while (ParentFolder.toString().endsWith("Stardome") == false); // Repeat untill it reaches Stardome folder
 
                 }
             
@@ -166,8 +167,8 @@
         function folderTraversalUp(dir)
         {
             folder = document.getElementById(dir);
-            ParentFolder = folder.parentElement.parentElement.previousSibling.parentElement.children[0] 
-            subFolders = ParentFolder.parentNode.children[2].children
+            ParentFolder = folder.parentElement.parentElement.previousSibling.parentElement.children[0];
+            subFolders = ParentFolder.parentNode.children[2].children;
             if (subFolders != null)
             {
                 var isAllSiblingsChecked = true;
@@ -190,7 +191,7 @@
                         var index = selectedFolders.indexOf(SubFolderCheckBoxId);
                         if (index > -1) {
                             selectedFolders.splice(index, 1);
-                            selectedFolderNames.splice(index, 1)
+                            selectedFolderNames.splice(index, 1);
                         }
                     }
                     var index = selectedFolders.indexOf(ParentFolder.id);
@@ -277,31 +278,36 @@
             }
         }
 
-        function createFolder(Path) {           
-            $("#dialog-confirm").html("<form><input type=\"text\" name=\"name\" id=\"txt2\" class=\"text ui-widget-content ui-corner-all\" /></form>");
-            // Define the Dialog and its properties.
-            $("#dialog-confirm").dialog({
-                resizable: false,
-                modal: true,
-                title: "Name The Folder.",
-                height: 167,
-                width: 400,
-                buttons: {
-                    "Create": function () {
-                        $(this).dialog('close');                        
-                        var tmp = Path.substring(Path.indexOf("/"), Path.length);
-                        while (tmp.search("/") != -1) {
-                            tmp = tmp.replace("/", "\\");
-                        }                        
-                        callBackFolder($("#txt2").val(), tmp);                       
-                    },
-                    "Cancel": function () {
-                        $(this).dialog('close');                       
-                    }
-                }
-            });
-        }
-
+		function createFolder(Path) {
+		    $("#dialog-confirm").html("<form><input type=\"text\" name=\"name\" id=\"txt2\" class=\"text ui-widget-content ui-corner-all\" /></form>");
+		    // Define the Dialog and its properties.
+		    $("#dialog-confirm").dialog({
+		        resizable: false,
+		        modal: true,
+		        title: "Name The Folder.",
+		        height: 167,
+		        width: 400,
+		        buttons: [
+                    { // Create button
+		                text: 'Create',
+		                'class': 'btn btn-primary',
+		                click: function() {
+		                    $(this).dialog('close');
+		                    var tmp = Path.substring(Path.indexOf("/"), Path.length);
+		                    while (tmp.search("/") != -1) {
+		                        tmp = tmp.replace("/", "\\");
+		                    }
+		                    callBackFolder($("#txt2").val(), tmp);
+		                }
+		            }, { // Cancel button
+		                text: 'Cancel',
+		                'class': 'btn btn-primary',
+		                click: function() {
+		                    $(this).dialog('close');
+		                }
+		            }]
+		    });
+		}
         function callBackFolder(Name, Path) {
             //var tmp = Path + "\\" + Name + "\\";
             $.ajax({
@@ -328,19 +334,25 @@
                 title: "Are you sure you want to delete this folder?",
                 height: 167,
                 width: 400,
-                buttons: {
-                    "Yes": function () {
-                        $(this).dialog('close');
-                        var tmp = Path.substring(Path.indexOf("/"), Path.length);
-                        while (tmp.search("/") != -1) {
-                            tmp = tmp.replace("/", "\\");
-                        }                        
-                        CBdelFolder(Name, tmp);                       
-                    },
-                    "No": function () {
-                        $(this).dialog('close');
-                    }
-                }
+                buttons: [
+	                { // Yes button
+	                    text: 'Yes',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                        var tmp = Path.substring(Path.indexOf("/"), Path.length);
+	                        while (tmp.search("/") != -1) {
+	                            tmp = tmp.replace("/", "\\");
+	                        }
+	                        CBdelFolder(Name, tmp);
+	                    }
+	                }, { // No button
+	                    text: 'No',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                    }
+	                }]
             });
         }
 
@@ -379,16 +391,22 @@
                 title: "Are you sure?",
                 height: 160,
                 width: 400,
-                buttons: {
-                    "Yes": function () {
-                        $(this).dialog('close');
-                        callback(true, file);
-                    },
-                    "No": function () {
-                        $(this).dialog('close');
-                        callback(false, file);
-                    }
-                }
+                buttons: [
+	                { // Yes button
+	                    text: 'Yes',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                        callback(true, file);
+	                    }
+	                }, { // No button
+	                    text: 'No',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                        callback(false, file);
+	                    }
+	                }]
             });
         }
 
@@ -434,8 +452,8 @@
             fileList.splice(number, 1);
             for (var i = number; i < htmlList.length; i++) {                      
                 tmp++;                    
-                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
-                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"')
+                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"');
+                htmlList[i] = htmlList[i].replace('id=\"' + tmp + '\"', 'id=\"' + i + '\"');
             }            
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");           
         }
@@ -598,17 +616,21 @@
                 title: "Select users to be added to this Folder",
                 height: 300,
                 width: 400,
-                buttons: {
-                    "Grant Permission": function () {
-                        $(this).dialog('close');
-                        grantPermissiontoFolder(folderId, folderName);
-                    },
-                    "Cancel": function () {
-                        $(this).dialog('close');
-                        
-                    }
-                }
-                
+                buttons: [
+                    { // Grant Permission button
+	                    text: 'Grant Permission',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                        grantPermissiontoFolder(folderId, folderName);
+	                    }
+                    }, { // Cancel button
+	                    text: 'Cancel',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                    }
+                    }]
             });
         }
 
