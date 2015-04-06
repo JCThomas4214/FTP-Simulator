@@ -109,13 +109,8 @@ h5, h6 {
 }
 
 .main-content {
-    background: url("../Images/accent.png") no-repeat;
     padding-left: 10px;
     padding-top: 30px;
-}
-
-.featured + .main-content {
-    background: url("../Images/heroAccent.png") no-repeat;
 }
 
 header .content-wrapper {    
@@ -249,6 +244,7 @@ footer {
 
     .featured .content-wrapper {
         background-color: #7ac0da;
+        border-radius: 6px;
         background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
