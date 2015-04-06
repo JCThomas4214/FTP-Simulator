@@ -50,6 +50,7 @@ namespace Stardome.Controllers
         [HttpPost]
         public ActionResult Actions(IEnumerable<HttpPostedFileBase> files, string lastSelected)
         {
+            var r = new List<UploadFilesResult>();
             List<string> results = new List<string>();
             string[] allowedExtensions = new[] { ".mp3", ".txt", ".jpeg" };
             int uploadedFiles = 0;
@@ -61,6 +62,7 @@ namespace Stardome.Controllers
                 {
                     if (file != null && file.ContentLength > 0)
                     {
+                        //ViewBag.Message = "Hit ME!";
                         var extension = Path.GetExtension(file.FileName);
                         if (!allowedExtensions.Contains(extension))
                         {
@@ -69,6 +71,9 @@ namespace Stardome.Controllers
                         }
                         else
                         {
+                            HttpPostedFileBase hpf = file as HttpPostedFileBase;
+                            if (hpf.ContentLength == 0)
+                                continue;
                             try
                             {
                                 // Upload files to the directory lastSelected. If the folder doesn't exist, it creates it.
@@ -97,7 +102,15 @@ namespace Stardome.Controllers
                             {
                                 ViewBag.Message = "Could not upload file(s)";
                             }
+
+                            r.Add(new UploadFilesResult()
+                            {
+                                Name = hpf.FileName,
+                                Length = hpf.ContentLength,
+                                Type = hpf.ContentType
+                            }); 
                         }
+
                     }
                 }
             }
@@ -142,13 +155,14 @@ namespace Stardome.Controllers
             string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers(0,100).Data);
             users=users.Remove(0,users.IndexOf('['));
             users = users.Remove(users.IndexOf(']')+1, (users.Length - users.IndexOf(']'))-1);
+            List<string> dummy = new List<string>();
             ContentModel model = new ContentModel
             {
                 RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
                 RoleId = adminController.GetUserRoleId(User.Identity.Name),
 
-                UserList = (new JavaScriptSerializer()).Deserialize<List<User>>(users)
-                
+                UserList = (new JavaScriptSerializer()).Deserialize<List<User>>(users),
+                List = dummy
             };
             
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
@@ -203,10 +217,12 @@ namespace Stardome.Controllers
 
         public ActionResult ByFolder()
         {
+            List<string> dummy = new List<string>();
             ContentModel model = new ContentModel
             {
                 RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
-                RoleId = adminController.GetUserRoleId(User.Identity.Name)
+                RoleId = adminController.GetUserRoleId(User.Identity.Name),
+                List = dummy
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
             adminController.GetValue(SiteSettings.Content);

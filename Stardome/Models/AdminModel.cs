@@ -39,5 +39,12 @@ namespace Stardome.Models
         public List<User> UserList { get; set; }
     }
 
+    public class UploadFilesResult
+    {
+        public string Name { get; set; }
+        public int Length { get; set; }
+        public string Type { get; set; }
+    }
+
 
 }

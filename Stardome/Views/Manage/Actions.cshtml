@@ -76,7 +76,7 @@
     <div style="float:left; width:100%">
         @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
         {
-            using (Html.BeginForm("Actions", "Manage", new { lastSelected = Model.RootPath }, FormMethod.Post, new { enctype = "multipart/form-data" })) //lastSelected must equal
+            using (Html.BeginForm("Actions", "Manage", new {lastSelected = Model.RootPath}, FormMethod.Post, new { enctype = "multipart/form-data" })) //lastSelected must equal
             {
                 <label id="lastDir"></label>                
         <h4>Upload files</h4>
@@ -87,7 +87,7 @@
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-primary btn-file">
-                                Browse&hellip; <input type="file" multiple>
+                                Browse&hellip; <input type="file" multiple name="files">
                             </span>
                         </span>
                         <input type="text" class="form-control" readonly>
