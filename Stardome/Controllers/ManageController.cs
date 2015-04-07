@@ -49,7 +49,7 @@ namespace Stardome.Controllers
         }
 
         [HttpPost]
-        public ActionResult Actions(IEnumerable<HttpPostedFileBase> files, string root, string lastSelectedFolder)
+        public ActionResult Actions(IEnumerable<HttpPostedFileBase> files, string lastSelectedFolder)
         {
             var r = new List<UploadFilesResult>();
             List<string> results = new List<string>();

@@ -208,7 +208,7 @@
         function updatePermissions()
         {
             UserId = $('#ddlUsers').val();
-            if (UserId >0)
+            if (UserId > 0)
             {
                 $.ajax({
                     url: "/Manage/UpdateFolderPermissions",
@@ -279,13 +279,13 @@
         }
 
 		function createFolder(Path) {
-		    $("#dialog-confirm").html("<form><input type=\"text\" name=\"name\" id=\"txt2\" class=\"text ui-widget-content ui-corner-all\" /></form>");
+		    $("#dialog-confirm").html("Name of the folder.<form><input type=\"text\" name=\"name\" id=\"txt2\" class=\"text ui-widget-content ui-corner-all\" autocomplete=\"off\" /></form>");
 		    // Define the Dialog and its properties.
 		    $("#dialog-confirm").dialog({
 		        resizable: false,
 		        modal: true,
-		        title: "Name The Folder.",
-		        height: 167,
+		        title: "Create Folder",
+		        height: 200,
 		        width: 400,
 		        buttons: [
                     { // Create button
@@ -372,6 +372,61 @@
                 processData: false
             });
             Tree(root, Role);
+        }
+
+        function uploadFunc(Path) {            
+            $("#dialog-upload").dialog({
+                resizable: false,
+                modal: false,
+                title: "Upload to",
+                height: 167,
+                width: 400,
+                buttons: [
+                    { 
+	                    text: 'Upload',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        //console.log(document.getElementById("fileL").files);
+	                        //console.log(Path);
+	                        callBackUpload();
+	                    }
+	                }, { 
+	                    text: 'Cancel',
+	                    'class': 'btn btn-primary',
+	                    click: function () {
+	                        $(this).dialog('close');
+	                    }
+	                }]
+            });
+        }
+
+        function callBackUpload() {
+            console.log(files);
+            console.log(lastSelected);
+            //Change files into a bit stream
+            var formData = new FormData();
+            var totalFiles = document.getElementById("fileL").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("fileL").files[i];
+
+                formData.append('FileUpload', file);
+            }
+            //
+            $.ajax({
+                url: "/Manage/Actions",
+                type: "POST",
+                data: JSON.stringify({ files: formData, lastSelectedFolder: lastSelected }),
+                dataType: 'json',
+                contentType: 'application/json',
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+                },
+                success: function (result) {
+                },
+                async: true,
+                processData: false
+            });
+            Tree(root, Role);        
         }
 
         function downloadAsZip()
@@ -500,8 +555,7 @@
                     insertItem(items[1], file); //insertItem will insert an object into a list with value 'file' and postiion item[1]                    
                 }
             }, function (dir) {
-                lastSelected = dir;
-                document.getElementById('lastSelectedFolder').value = lastSelected;
+                lastSelected = dir;                
             });
             if (Role == 1) {
                 $('.jqueryFileTree').contextMenu({
@@ -517,7 +571,7 @@
                                 createFolder($(this).attr("rel"));
                             },
                             disabled: function (key, opt) {
-                                if (($(this).parent().attr('id') == "file") || Role != 1) {
+                              if (($(this).parent().attr('id') == "file") || Role != 1) {
                                     return true;
                                 }
                                 else
@@ -529,6 +583,22 @@
                             icon: "deleteFolder",
                             callback: function (key, opt) {
                                 deleteFolder($(this).attr("name"), $(this).attr("rel"));
+                            },
+                            disabled: function (key, opt) {
+                                if (($(this).parent().attr('id') == "file") || Role != 1) {
+                                    return true;
+                                }
+                                else
+                                    return false;
+                            }
+                        },
+                        "sep1": "---------",
+                        "Upload": {
+                            name: "Upload to",
+                            icon: "deleteFolder",
+                            callback: function (key, opt) {
+                                lastSelected = $(this).attr("rel");
+                                uploadFunc($(this).attr("rel"));
                             },
                             disabled: function (key, opt) {
                                 if (($(this).parent().attr('id') == "file") || Role != 1) {
