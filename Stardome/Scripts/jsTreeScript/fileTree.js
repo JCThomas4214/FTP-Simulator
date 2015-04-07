@@ -400,8 +400,7 @@
             });
         }
 
-        function callBackUpload() {
-            console.log(files);
+        function callBackUpload() {            
             console.log(lastSelected);
             //Change files into a bit stream
             var formData = new FormData();
