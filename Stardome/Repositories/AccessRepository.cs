@@ -50,7 +50,7 @@ namespace Stardome.Repositories
 
         public String AddAccess(Access aAccess)
         {
-            string msg = "Added successfully";
+            string msg = string.Empty;
             try
             {
                 sdContext.Accesses.Add(aAccess);
@@ -65,7 +65,7 @@ namespace Stardome.Repositories
         }
         public String DeleteAccess(Access aAccess)
         {
-            string msg = "Deleted successfully";
+            string msg = string.Empty;
             try
             {
                 Delete(aAccess);

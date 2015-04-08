@@ -20,6 +20,7 @@ namespace Stardome.UITest
     using Microsoft.VisualStudio.TestTools.UITesting;
     using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
     using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
+    using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
     using Mouse = Microsoft.VisualStudio.TestTools.UITesting.Mouse;
@@ -953,6 +954,15 @@ namespace Stardome.UITest
             // Set flag to allow play back to continue if non-essential actions fail. (For example, if a mouse hover action fails.)
             Playback.PlaybackSettings.ContinueOnError = true;
 
+            // Mouse hover 'Cancel' button at (1, 1)
+            Mouse.Hover(uICancelButton2, new Point(1, 1));
+
+            // Mouse hover 'Cancel Save' pane at (1, 1)
+            Mouse.Hover(uICancelSavePane, new Point(1, 1));
+
+            // Mouse hover 'Save' button at (1, 1)
+            Mouse.Hover(uISaveButton3, new Point(1, 1));
+
             // Reset flag to ensure that play back stops if there is an error.
             Playback.PlaybackSettings.ContinueOnError = false;
 
@@ -1212,6 +1222,83 @@ namespace Stardome.UITest
 
             // Click 'Update password' button
             Mouse.Click(uIUpdatepasswordButton, new Point(90, 10));
+        }
+        
+        /// <summary>
+        /// AddingPermissionsToUser - Use 'AddingPermissionsToUserParams' to pass parameters into this method.
+        /// </summary>
+        public void AddingPermissionsToUser()
+        {
+            #region Variable Declarations
+            HtmlEdit uIUsernameEdit = this.UILoginInternetExploreWindow12.UILoginDocument.UIUsernameEdit;
+            HtmlEdit uIPasswordEdit = this.UILoginInternetExploreWindow12.UILoginDocument.UIPasswordEdit;
+            HtmlHyperlink uIManageContentHyperlink = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UIMenuCustom.UIManageContentHyperlink;
+            HtmlHyperlink uIManagePermissionsbyUHyperlink = this.UILoginInternetExploreWindow8.UIHttplocalhost2129AdmDocument.UIDropdownMenuCustom.UIManagePermissionsbyUHyperlink;
+            HtmlComboBox uIUserListComboBox = this.UILoginInternetExploreWindow13.UIHttplocalhost2129ManDocument.UIUserListComboBox;
+            #endregion
+
+            // Type 'ab' in 'User name' text box
+            uIUsernameEdit.Text = this.AddingPermissionsToUserParams.UIUsernameEditText;
+
+            // Type '{Tab}' in 'User name' text box
+            Keyboard.SendKeys(uIUsernameEdit, this.AddingPermissionsToUserParams.UIUsernameEditSendKeys, ModifierKeys.None);
+
+            // Type '********' in 'Password' text box
+            uIPasswordEdit.Password = this.AddingPermissionsToUserParams.UIPasswordEditPassword;
+
+            // Type '{Enter}' in 'Password' text box
+            Keyboard.SendKeys(uIPasswordEdit, this.AddingPermissionsToUserParams.UIPasswordEditSendKeys, ModifierKeys.None);
+
+            // Click 'Manage Content' link
+            Mouse.Click(uIManageContentHyperlink, new Point(70, 13));
+
+            // Click 'Manage Permissions by User' link
+            Mouse.Click(uIManagePermissionsbyUHyperlink, new Point(44, 17));
+
+            // Select 'Site Administrator(ab)' in 'UserList' combo box
+            uIUserListComboBox.SelectedItem = this.AddingPermissionsToUserParams.UIUserListComboBoxSelectedItem;
+        }
+        
+        /// <summary>
+        /// ChangeSelection - Use 'ChangeSelectionParams' to pass parameters into this method.
+        /// </summary>
+        public void ChangeSelection()
+        {
+            #region Variable Declarations
+            HtmlHyperlink uIStardomeHyperlink1 = this.UILoginInternetExploreWindow13.UIHttplocalhost2129ManDocument.UIStardomeHyperlink1;
+            HtmlCheckBox uIABCCheckBox = this.UILoginInternetExploreWindow13.UIHttplocalhost2129ManDocument.UIABCCheckBox;
+            #endregion
+
+            // Double-Click 'Stardome' link
+            Mouse.DoubleClick(uIStardomeHyperlink1, new Point(33, 12));
+            Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.Disabled;
+            // Clear 'ABC' check box
+            uIABCCheckBox.Checked = this.ChangeSelectionParams.UIABCCheckBoxChecked;
+        }
+        
+        /// <summary>
+        /// UpdatePermission
+        /// </summary>
+        public void UpdatePermission()
+        {
+            #region Variable Declarations
+            HtmlButton uIUpdateButton = this.UILoginInternetExploreWindow13.UIHttplocalhost2129ManDocument.UIBodyPane.UIUpdateButton;
+            WpfCustom uIBreakpointSelected66Custom = this.UIStardomeDebuggingMicWindow.UIWpfTextViewHostCustom.UIGlyphMarginGridPane.UIBreakpointSelected66Custom;
+            WpfCustom uIBreakpointEnabled70Custom = this.UIStardomeDebuggingMicWindow.UIWpfTextViewHostCustom.UIGlyphMarginGridPane.UIBreakpointEnabled70Custom;
+            WpfMenuItem uIDebugTargetMenuItem = this.UIStardomeDebuggingMicWindow.UIDebugTargetMenu.UIDebugTargetMenuItem;
+            #endregion
+
+            // Click 'Update' button
+            Mouse.Click(uIUpdateButton, new Point(24, 18));
+
+            // Click 'Breakpoint - Selected;66' custom control
+            Mouse.Click(uIBreakpointSelected66Custom, new Point(5, 3));
+
+            // Click 'Breakpoint (Enabled);70' custom control
+            Mouse.Click(uIBreakpointEnabled70Custom, new Point(7, 6));
+
+            // Click 'Debug Target' menu item
+            Mouse.Click(uIDebugTargetMenuItem, new Point(21, 12));
         }
         
         #region Properties
@@ -1599,6 +1686,30 @@ namespace Stardome.UITest
             }
         }
         
+        public virtual AddingPermissionsToUserParams AddingPermissionsToUserParams
+        {
+            get
+            {
+                if ((this.mAddingPermissionsToUserParams == null))
+                {
+                    this.mAddingPermissionsToUserParams = new AddingPermissionsToUserParams();
+                }
+                return this.mAddingPermissionsToUserParams;
+            }
+        }
+        
+        public virtual ChangeSelectionParams ChangeSelectionParams
+        {
+            get
+            {
+                if ((this.mChangeSelectionParams == null))
+                {
+                    this.mChangeSelectionParams = new ChangeSelectionParams();
+                }
+                return this.mChangeSelectionParams;
+            }
+        }
+        
         public UIMsnInternetExplorerWindow UIMsnInternetExplorerWindow
         {
             get
@@ -1814,6 +1925,42 @@ namespace Stardome.UITest
                 return this.mUILoginInternetExploreWindow11;
             }
         }
+        
+        public UILoginInternetExploreWindow12 UILoginInternetExploreWindow12
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow12 == null))
+                {
+                    this.mUILoginInternetExploreWindow12 = new UILoginInternetExploreWindow12();
+                }
+                return this.mUILoginInternetExploreWindow12;
+            }
+        }
+        
+        public UILoginInternetExploreWindow13 UILoginInternetExploreWindow13
+        {
+            get
+            {
+                if ((this.mUILoginInternetExploreWindow13 == null))
+                {
+                    this.mUILoginInternetExploreWindow13 = new UILoginInternetExploreWindow13();
+                }
+                return this.mUILoginInternetExploreWindow13;
+            }
+        }
+        
+        public UIStardomeDebuggingMicWindow UIStardomeDebuggingMicWindow
+        {
+            get
+            {
+                if ((this.mUIStardomeDebuggingMicWindow == null))
+                {
+                    this.mUIStardomeDebuggingMicWindow = new UIStardomeDebuggingMicWindow();
+                }
+                return this.mUIStardomeDebuggingMicWindow;
+            }
+        }
         #endregion
         
         #region Fields
@@ -1881,6 +2028,10 @@ namespace Stardome.UITest
         
         private ProfilePasswordResetParams mProfilePasswordResetParams;
         
+        private AddingPermissionsToUserParams mAddingPermissionsToUserParams;
+        
+        private ChangeSelectionParams mChangeSelectionParams;
+        
         private UIMsnInternetExplorerWindow mUIMsnInternetExplorerWindow;
         
         private UIHomePageInternetExplWindow mUIHomePageInternetExplWindow;
@@ -1916,6 +2067,12 @@ namespace Stardome.UITest
         private UIManageyourAccountIntWindow mUIManageyourAccountIntWindow;
         
         private UILoginInternetExploreWindow11 mUILoginInternetExploreWindow11;
+        
+        private UILoginInternetExploreWindow12 mUILoginInternetExploreWindow12;
+        
+        private UILoginInternetExploreWindow13 mUILoginInternetExploreWindow13;
+        
+        private UIStardomeDebuggingMicWindow mUIStardomeDebuggingMicWindow;
         #endregion
     }
     
@@ -2747,6 +2904,56 @@ namespace Stardome.UITest
         /// Type '********' in 'Confirm new password' text box
         /// </summary>
         public string UIConfirmnewpasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'AddingPermissionsToUser'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class AddingPermissionsToUserParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Type 'ab' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditText = "ab";
+        
+        /// <summary>
+        /// Type '{Tab}' in 'User name' text box
+        /// </summary>
+        public string UIUsernameEditSendKeys = "{Tab}";
+        
+        /// <summary>
+        /// Type '********' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditPassword = "QWwOodIXpSM441BCNCWNvH9k+8fhegdI";
+        
+        /// <summary>
+        /// Type '{Enter}' in 'Password' text box
+        /// </summary>
+        public string UIPasswordEditSendKeys = "{Enter}";
+        
+        /// <summary>
+        /// Select 'Site Administrator(ab)' in 'UserList' combo box
+        /// </summary>
+        public string UIUserListComboBoxSelectedItem = "Site Administrator(ab)";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'ChangeSelection'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class ChangeSelectionParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Clear 'ABC' check box
+        /// </summary>
+        public bool UIABCCheckBoxChecked = false;
         #endregion
     }
     
@@ -5585,6 +5792,8 @@ namespace Stardome.UITest
             this.WindowTitles.Add("http://localhost:2129/Admin/Users");
             this.WindowTitles.Add("http://localhost:2129/Admin/Settings");
             this.WindowTitles.Add("Manage your Account");
+            this.WindowTitles.Add("✔ Log in");
+            this.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
             #endregion
         }
         
@@ -6198,6 +6407,30 @@ namespace Stardome.UITest
                 return this.mUILoginCustom;
             }
         }
+        
+        public UIContentMenuCustom UIContentMenuCustom
+        {
+            get
+            {
+                if ((this.mUIContentMenuCustom == null))
+                {
+                    this.mUIContentMenuCustom = new UIContentMenuCustom(this);
+                }
+                return this.mUIContentMenuCustom;
+            }
+        }
+        
+        public UIDropdownMenuCustom UIDropdownMenuCustom
+        {
+            get
+            {
+                if ((this.mUIDropdownMenuCustom == null))
+                {
+                    this.mUIDropdownMenuCustom = new UIDropdownMenuCustom(this);
+                }
+                return this.mUIDropdownMenuCustom;
+            }
+        }
         #endregion
         
         #region Fields
@@ -6262,6 +6495,10 @@ namespace Stardome.UITest
         private UIDeleteButton1 mUIDeleteButton1;
         
         private UILoginCustom1 mUILoginCustom;
+        
+        private UIContentMenuCustom mUIContentMenuCustom;
+        
+        private UIDropdownMenuCustom mUIDropdownMenuCustom;
         #endregion
     }
     
@@ -6837,12 +7074,39 @@ namespace Stardome.UITest
                 return this.mUIManageSettingsHyperlink;
             }
         }
+        
+        public HtmlHyperlink UIManageContentHyperlink
+        {
+            get
+            {
+                if ((this.mUIManageContentHyperlink == null))
+                {
+                    this.mUIManageContentHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIManageContentHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIManageContentHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIManageContentHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIManageContentHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Manage Content";
+                    this.mUIManageContentHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Admin/Users";
+                    this.mUIManageContentHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIManageContentHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Admin/Users#";
+                    this.mUIManageContentHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIManageContentHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"#\"";
+                    this.mUIManageContentHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "2";
+                    this.mUIManageContentHyperlink.WindowTitles.Add("http://localhost:2129/Admin/Users");
+                    #endregion
+                }
+                return this.mUIManageContentHyperlink;
+            }
+        }
         #endregion
         
         #region Fields
         private HtmlHyperlink mUIManageUsersHyperlink;
         
         private HtmlHyperlink mUIManageSettingsHyperlink;
+        
+        private HtmlHyperlink mUIManageContentHyperlink;
         #endregion
     }
     
@@ -7469,6 +7733,130 @@ namespace Stardome.UITest
         
         #region Fields
         private HtmlHyperlink mUIABHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIContentMenuCustom : HtmlCustom
+    {
+        
+        public UIContentMenuCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "UL";
+            this.SearchProperties["Id"] = "ContentMenu";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"ContentMenu\"";
+            this.FilterProperties["TagInstance"] = "2";
+            this.WindowTitles.Add("http://localhost:2129/Admin/Users");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlHyperlink UIManagePermissionsbyUHyperlink
+        {
+            get
+            {
+                if ((this.mUIManagePermissionsbyUHyperlink == null))
+                {
+                    this.mUIManagePermissionsbyUHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Manage Permissions by User";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Manage/ByUser";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Manage/ByUser";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/Manage/ByUser\"";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "2";
+                    this.mUIManagePermissionsbyUHyperlink.WindowTitles.Add("http://localhost:2129/Admin/Users");
+                    #endregion
+                }
+                return this.mUIManagePermissionsbyUHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlHyperlink mUIManagePermissionsbyUHyperlink;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIDropdownMenuCustom : HtmlCustom
+    {
+        
+        public UIDropdownMenuCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties["TagName"] = "UL";
+            this.SearchProperties["Id"] = "dropdownMenu";
+            this.SearchProperties[UITestControl.PropertyNames.Name] = null;
+            this.FilterProperties["Class"] = null;
+            this.FilterProperties["ControlDefinition"] = "id=\"dropdownMenu\"";
+            this.FilterProperties["TagInstance"] = "2";
+            this.WindowTitles.Add("http://localhost:2129/Admin/Users");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlCustom UIManageCustom
+        {
+            get
+            {
+                if ((this.mUIManageCustom == null))
+                {
+                    this.mUIManageCustom = new HtmlCustom(this);
+                    #region Search Criteria
+                    this.mUIManageCustom.SearchProperties["TagName"] = "LI";
+                    this.mUIManageCustom.SearchProperties["Id"] = null;
+                    this.mUIManageCustom.SearchProperties[UITestControl.PropertyNames.Name] = null;
+                    this.mUIManageCustom.FilterProperties["Class"] = null;
+                    this.mUIManageCustom.FilterProperties["ControlDefinition"] = null;
+                    this.mUIManageCustom.FilterProperties["InnerText"] = "Manage";
+                    this.mUIManageCustom.FilterProperties["TagInstance"] = "1";
+                    this.mUIManageCustom.WindowTitles.Add("http://localhost:2129/Admin/Users");
+                    #endregion
+                }
+                return this.mUIManageCustom;
+            }
+        }
+        
+        public HtmlHyperlink UIManagePermissionsbyUHyperlink
+        {
+            get
+            {
+                if ((this.mUIManagePermissionsbyUHyperlink == null))
+                {
+                    this.mUIManagePermissionsbyUHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = null;
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = null;
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIManagePermissionsbyUHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Manage Permissions by User";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Manage/ByUser";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Manage/ByUser";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "href=\"/Manage/ByUser\"";
+                    this.mUIManagePermissionsbyUHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "2";
+                    this.mUIManagePermissionsbyUHyperlink.WindowTitles.Add("http://localhost:2129/Admin/Users");
+                    #endregion
+                }
+                return this.mUIManagePermissionsbyUHyperlink;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlCustom mUIManageCustom;
+        
+        private HtmlHyperlink mUIManagePermissionsbyUHyperlink;
         #endregion
     }
     
@@ -8401,6 +8789,521 @@ namespace Stardome.UITest
         
         #region Fields
         private HtmlCustom mUINouserfoundbythatemaCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow12 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow12()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "✔ Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("✔ Log in");
+            this.WindowTitles.Add("http://localhost:2129/Admin/Users");
+            this.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UILoginDocument1 UILoginDocument
+        {
+            get
+            {
+                if ((this.mUILoginDocument == null))
+                {
+                    this.mUILoginDocument = new UILoginDocument1(this);
+                }
+                return this.mUILoginDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UILoginDocument1 mUILoginDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginDocument1 : HtmlDocument
+    {
+        
+        public UILoginDocument1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = "✔ Log in";
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/";
+            this.WindowTitles.Add("✔ Log in");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlEdit UIUsernameEdit
+        {
+            get
+            {
+                if ((this.mUIUsernameEdit == null))
+                {
+                    this.mUIUsernameEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIUsernameEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "UserName";
+                    this.mUIUsernameEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "UserName";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "User name";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "SINGLELINE";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"UserName\" id=\"UserName\" type=\"text";
+                    this.mUIUsernameEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "2";
+                    this.mUIUsernameEdit.WindowTitles.Add("✔ Log in");
+                    #endregion
+                }
+                return this.mUIUsernameEdit;
+            }
+        }
+        
+        public HtmlEdit UIPasswordEdit
+        {
+            get
+            {
+                if ((this.mUIPasswordEdit == null))
+                {
+                    this.mUIPasswordEdit = new HtmlEdit(this);
+                    #region Search Criteria
+                    this.mUIPasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "Password";
+                    this.mUIPasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Name] = "Password";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.LabeledBy] = "Password";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Title] = null;
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = null;
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "name=\"Password\" id=\"Password\" type=\"pass";
+                    this.mUIPasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "3";
+                    this.mUIPasswordEdit.WindowTitles.Add("✔ Log in");
+                    #endregion
+                }
+                return this.mUIPasswordEdit;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlEdit mUIUsernameEdit;
+        
+        private HtmlEdit mUIPasswordEdit;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UILoginInternetExploreWindow13 : BrowserWindow
+    {
+        
+        public UILoginInternetExploreWindow13()
+        {
+            #region Search Criteria
+            this.SearchProperties[UITestControl.PropertyNames.Name] = "✔ Log in";
+            this.SearchProperties[UITestControl.PropertyNames.ClassName] = "IEFrame";
+            this.WindowTitles.Add("✔ Log in");
+            this.WindowTitles.Add("http://localhost:2129/Admin/Users");
+            this.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+            #endregion
+        }
+        
+        public void LaunchUrl(System.Uri url)
+        {
+            this.CopyFrom(BrowserWindow.Launch(url));
+        }
+        
+        #region Properties
+        public UIHttplocalhost2129ManDocument UIHttplocalhost2129ManDocument
+        {
+            get
+            {
+                if ((this.mUIHttplocalhost2129ManDocument == null))
+                {
+                    this.mUIHttplocalhost2129ManDocument = new UIHttplocalhost2129ManDocument(this);
+                }
+                return this.mUIHttplocalhost2129ManDocument;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIHttplocalhost2129ManDocument mUIHttplocalhost2129ManDocument;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIHttplocalhost2129ManDocument : HtmlDocument
+    {
+        
+        public UIHttplocalhost2129ManDocument(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDocument.PropertyNames.Id] = null;
+            this.SearchProperties[HtmlDocument.PropertyNames.RedirectingPage] = "False";
+            this.SearchProperties[HtmlDocument.PropertyNames.FrameDocument] = "False";
+            this.FilterProperties[HtmlDocument.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/Manage/ByUser";
+            this.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "http://localhost:2129/Manage/ByUser";
+            this.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlComboBox UIUserListComboBox
+        {
+            get
+            {
+                if ((this.mUIUserListComboBox == null))
+                {
+                    this.mUIUserListComboBox = new HtmlComboBox(this);
+                    #region Search Criteria
+                    this.mUIUserListComboBox.SearchProperties[HtmlComboBox.PropertyNames.Id] = "ddlUsers";
+                    this.mUIUserListComboBox.SearchProperties[HtmlComboBox.PropertyNames.Name] = "UserList";
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.LabeledBy] = null;
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.Size] = "0";
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.Title] = null;
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.ItemCount] = "6";
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.Class] = null;
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.ControlDefinition] = "name=\"UserList\" id=\"ddlUsers\"";
+                    this.mUIUserListComboBox.FilterProperties[HtmlComboBox.PropertyNames.TagInstance] = "1";
+                    this.mUIUserListComboBox.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+                    #endregion
+                }
+                return this.mUIUserListComboBox;
+            }
+        }
+        
+        public HtmlHyperlink UIStardomeHyperlink
+        {
+            get
+            {
+                if ((this.mUIStardomeHyperlink == null))
+                {
+                    this.mUIStardomeHyperlink = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIStardomeHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = "D:\\UF ENG\\CEN3031\\Stardome\\StardomeProject\\Stardome\\Stardome\\Stardome/";
+                    this.mUIStardomeHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Name] = "Stardome";
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.InnerText] = "Stardome";
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Manage/ByUser";
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Manage/ByUser#";
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "name=\"Stardome\" id=\"D:\\UF ENG\\CEN3031\\St";
+                    this.mUIStardomeHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "9";
+                    this.mUIStardomeHyperlink.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+                    #endregion
+                }
+                return this.mUIStardomeHyperlink;
+            }
+        }
+        
+        public HtmlCheckBox UIABCCheckBox
+        {
+            get
+            {
+                if ((this.mUIABCCheckBox == null))
+                {
+                    this.mUIABCCheckBox = new HtmlCheckBox(this);
+                    #region Search Criteria
+                    this.mUIABCCheckBox.SearchProperties[HtmlCheckBox.PropertyNames.Id] = "D:\\UF ENG\\CEN3031\\Stardome\\StardomeProject\\Stardome\\Stardome\\Stardome/ABC";
+                    this.mUIABCCheckBox.SearchProperties[HtmlCheckBox.PropertyNames.Name] = "ABC";
+                    this.mUIABCCheckBox.FilterProperties[HtmlCheckBox.PropertyNames.Value] = "on";
+                    this.mUIABCCheckBox.FilterProperties[HtmlCheckBox.PropertyNames.LabeledBy] = null;
+                    this.mUIABCCheckBox.FilterProperties[HtmlCheckBox.PropertyNames.Title] = null;
+                    this.mUIABCCheckBox.FilterProperties[HtmlCheckBox.PropertyNames.Class] = "FTCB";
+                    this.mUIABCCheckBox.FilterProperties[HtmlCheckBox.PropertyNames.ControlDefinition] = "name=\"ABC\" class=\"FTCB\" id=\"D:\\UF ENG\\CE";
+                    this.mUIABCCheckBox.FilterProperties[HtmlCheckBox.PropertyNames.TagInstance] = "3";
+                    this.mUIABCCheckBox.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+                    #endregion
+                }
+                return this.mUIABCCheckBox;
+            }
+        }
+        
+        public UIBodyPane7 UIBodyPane
+        {
+            get
+            {
+                if ((this.mUIBodyPane == null))
+                {
+                    this.mUIBodyPane = new UIBodyPane7(this);
+                }
+                return this.mUIBodyPane;
+            }
+        }
+        
+        public HtmlHyperlink UIStardomeHyperlink1
+        {
+            get
+            {
+                if ((this.mUIStardomeHyperlink1 == null))
+                {
+                    this.mUIStardomeHyperlink1 = new HtmlHyperlink(this);
+                    #region Search Criteria
+                    this.mUIStardomeHyperlink1.SearchProperties[HtmlHyperlink.PropertyNames.Id] = "D:\\UF ENG\\CEN3031\\Stardome\\StardomeProject\\Stardome\\Stardome\\Stardome/";
+                    this.mUIStardomeHyperlink1.SearchProperties[HtmlHyperlink.PropertyNames.Name] = "Stardome";
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.Target] = null;
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.InnerText] = "Stardome";
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/Manage/ByUser";
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.Title] = null;
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "http://localhost:2129/Manage/ByUser#";
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.Class] = null;
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "name=\"Stardome\" id=\"D:\\UF ENG\\CEN3031\\St";
+                    this.mUIStardomeHyperlink1.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "8";
+                    this.mUIStardomeHyperlink1.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+                    #endregion
+                }
+                return this.mUIStardomeHyperlink1;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlComboBox mUIUserListComboBox;
+        
+        private HtmlHyperlink mUIStardomeHyperlink;
+        
+        private HtmlCheckBox mUIABCCheckBox;
+        
+        private UIBodyPane7 mUIBodyPane;
+        
+        private HtmlHyperlink mUIStardomeHyperlink1;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIBodyPane7 : HtmlDiv
+    {
+        
+        public UIBodyPane7(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[HtmlDiv.PropertyNames.Id] = "body";
+            this.SearchProperties[HtmlDiv.PropertyNames.Name] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "﻿           Content root = \'D:\\\\UF ENG\\\\";
+            this.FilterProperties[HtmlDiv.PropertyNames.Title] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.Class] = null;
+            this.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"body\" style=\"min-height: 700px;\"";
+            this.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            this.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+            #endregion
+        }
+        
+        #region Properties
+        public HtmlButton UIUpdateButton
+        {
+            get
+            {
+                if ((this.mUIUpdateButton == null))
+                {
+                    this.mUIUpdateButton = new HtmlButton(this);
+                    #region Search Criteria
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Id] = null;
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Name] = null;
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Update";
+                    this.mUIUpdateButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.Title] = null;
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.Class] = null;
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "onclick=\"updatePermissions()\"";
+                    this.mUIUpdateButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "1";
+                    this.mUIUpdateButton.WindowTitles.Add("http://localhost:2129/Manage/ByUser");
+                    #endregion
+                }
+                return this.mUIUpdateButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private HtmlButton mUIUpdateButton;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIStardomeDebuggingMicWindow : WpfWindow
+    {
+        
+        public UIStardomeDebuggingMicWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[WpfWindow.PropertyNames.Name] = "Stardome (Debugging) - Microsoft Visual Studio";
+            this.SearchProperties.Add(new PropertyExpression(WpfWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
+            this.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+            #endregion
+        }
+        
+        #region Properties
+        public UIWpfTextViewHostCustom UIWpfTextViewHostCustom
+        {
+            get
+            {
+                if ((this.mUIWpfTextViewHostCustom == null))
+                {
+                    this.mUIWpfTextViewHostCustom = new UIWpfTextViewHostCustom(this);
+                }
+                return this.mUIWpfTextViewHostCustom;
+            }
+        }
+        
+        public UIDebugTargetMenu UIDebugTargetMenu
+        {
+            get
+            {
+                if ((this.mUIDebugTargetMenu == null))
+                {
+                    this.mUIDebugTargetMenu = new UIDebugTargetMenu(this);
+                }
+                return this.mUIDebugTargetMenu;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIWpfTextViewHostCustom mUIWpfTextViewHostCustom;
+        
+        private UIDebugTargetMenu mUIDebugTargetMenu;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIWpfTextViewHostCustom : WpfCustom
+    {
+        
+        public UIWpfTextViewHostCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WpfControl.PropertyNames.ClassName] = null;
+            this.SearchProperties[WpfControl.PropertyNames.AutomationId] = "WpfTextViewHost";
+            this.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+            #endregion
+        }
+        
+        #region Properties
+        public UIGlyphMarginGridPane UIGlyphMarginGridPane
+        {
+            get
+            {
+                if ((this.mUIGlyphMarginGridPane == null))
+                {
+                    this.mUIGlyphMarginGridPane = new UIGlyphMarginGridPane(this);
+                }
+                return this.mUIGlyphMarginGridPane;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIGlyphMarginGridPane mUIGlyphMarginGridPane;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIGlyphMarginGridPane : WpfPane
+    {
+        
+        public UIGlyphMarginGridPane(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WpfPane.PropertyNames.ClassName] = "Uia.GlyphMarginGrid";
+            this.SearchProperties[WpfPane.PropertyNames.AutomationId] = "WpfEditorUIGlyphMarginGrid";
+            this.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+            #endregion
+        }
+        
+        #region Properties
+        public WpfCustom UIBreakpointSelected66Custom
+        {
+            get
+            {
+                if ((this.mUIBreakpointSelected66Custom == null))
+                {
+                    this.mUIBreakpointSelected66Custom = new WpfCustom(this);
+                    #region Search Criteria
+                    this.mUIBreakpointSelected66Custom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.TextMarker";
+                    this.mUIBreakpointSelected66Custom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "LineInformation;68";
+                    this.mUIBreakpointSelected66Custom.SearchProperties[WpfControl.PropertyNames.Instance] = "3";
+                    this.mUIBreakpointSelected66Custom.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+                    #endregion
+                }
+                return this.mUIBreakpointSelected66Custom;
+            }
+        }
+        
+        public WpfCustom UIBreakpointEnabled70Custom
+        {
+            get
+            {
+                if ((this.mUIBreakpointEnabled70Custom == null))
+                {
+                    this.mUIBreakpointEnabled70Custom = new WpfCustom(this);
+                    #region Search Criteria
+                    this.mUIBreakpointEnabled70Custom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.TextMarker";
+                    this.mUIBreakpointEnabled70Custom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "LineInformation;75";
+                    this.mUIBreakpointEnabled70Custom.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+                    #endregion
+                }
+                return this.mUIBreakpointEnabled70Custom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WpfCustom mUIBreakpointSelected66Custom;
+        
+        private WpfCustom mUIBreakpointEnabled70Custom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIDebugTargetMenu : WpfMenu
+    {
+        
+        public UIDebugTargetMenu(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WpfMenu.PropertyNames.Name] = "Debug Target";
+            this.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+            #endregion
+        }
+        
+        #region Properties
+        public WpfMenuItem UIDebugTargetMenuItem
+        {
+            get
+            {
+                if ((this.mUIDebugTargetMenuItem == null))
+                {
+                    this.mUIDebugTargetMenuItem = new WpfMenuItem(this);
+                    #region Search Criteria
+                    this.mUIDebugTargetMenuItem.SearchProperties[WpfMenuItem.PropertyNames.AutomationId] = "PART_FocusTarget";
+                    this.mUIDebugTargetMenuItem.WindowTitles.Add("Stardome (Debugging) - Microsoft Visual Studio");
+                    #endregion
+                }
+                return this.mUIDebugTargetMenuItem;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WpfMenuItem mUIDebugTargetMenuItem;
         #endregion
     }
 }

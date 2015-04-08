@@ -308,6 +308,7 @@
 		            }]
 		    });
 		}
+
         function callBackFolder(Name, Path) {
             //var tmp = Path + "\\" + Name + "\\";
             $.ajax({
@@ -324,8 +325,6 @@
             });
             Tree(root, Role);
         }
-
-
 
         function deleteFolder(Name, Path) {
             $("#dialog-confirm").html("Are you sure you want to delete this folder?");
@@ -376,8 +375,8 @@
 
         function uploadFunc(Path) {            
             $("#dialog-upload").dialog({
+                appendTo: 'uploadFile',
                 resizable: false,
-                modal: false,
                 title: "Upload to",
                 height: 167,
                 width: 400,
@@ -386,9 +385,8 @@
 	                    text: 'Upload',
 	                    'class': 'btn btn-primary',
 	                    click: function () {
-	                        //console.log(document.getElementById("fileL").files);
-	                        //console.log(Path);
 	                        callBackUpload();
+	                        $(this).dialog('close');
 	                    }
 	                }, { 
 	                    text: 'Cancel',
@@ -400,30 +398,29 @@
             });
         }
 
-        function callBackUpload() {            
-            console.log(lastSelected);
-            //Change files into a bit stream
+        function callBackUpload() {
+            debugger
             var formData = new FormData();
-            var totalFiles = document.getElementById("fileL").files.length;
+            var totalFiles = document.getElementById("fileUpload").files.length;
             for (var i = 0; i < totalFiles; i++) {
-                var file = document.getElementById("fileL").files[i];
+                var file = document.getElementById("fileUpload").files[i];
 
-                formData.append('FileUpload', file);
+                formData.append("fileUpload", file);
             }
-            //
+            formData.append('uploadFolder', JSON.stringify(lastSelected));
             $.ajax({
-                url: "/Manage/Actions",
                 type: "POST",
-                data: JSON.stringify({ files: formData, lastSelectedFolder: lastSelected }),
+                url: '/Manage/UploadFile',
+                data: formData,
                 dataType: 'json',
-                contentType: 'application/json',
-                error: function (xhr) {
-                    alert('Error: ' + xhr.statusText);
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response.UploadStatus);
                 },
-                success: function (result) {
-                },
-                async: true,
-                processData: false
+                error: function (response) {
+                    alert("There was error uploading the file. Check if a file with same name exist in the folder");
+                }
             });
             Tree(root, Role);        
         }
@@ -453,21 +450,22 @@
 	                    'class': 'btn btn-primary',
 	                    click: function () {
 	                        $(this).dialog('close');
-	                        callback(true, file);
+	                        callback(file);
+	                        Tree(root, Role);
 	                    }
 	                }, { // No button
 	                    text: 'No',
 	                    'class': 'btn btn-primary',
 	                    click: function () {
 	                        $(this).dialog('close');
-	                        callback(false, file);
+	                        
 	                    }
 	                }]
             });
         }
 
-        function callback(value, filePath) {
-            if (value) {
+        function callback(filePath) {
+            
                 $.ajax({
                     url: "/Manage/DeleteFile/?filePath=" + filePath,
                     type: "POST",
@@ -482,9 +480,6 @@
                 });
 
 
-            } else {
-                //Clicked No; do Nothing
-            }
         }
 
         function insertItem(number, file) {
@@ -593,8 +588,8 @@
                         },
                         "sep1": "---------",
                         "Upload": {
-                            name: "Upload to",
-                            icon: "deleteFolder",
+                            name: "Upload Files",
+                            icon: "uploadFile",
                             callback: function (key, opt) {
                                 lastSelected = $(this).attr("rel");
                                 uploadFunc($(this).attr("rel"));
@@ -614,11 +609,11 @@
             
             
         }
-
         
         function Tree_Permissions(root) {
             $('#MainTree').fileTree({
                 root: root,
+                expanded: 'Stardome/',
                 script: '../Scripts/jqueryPermissionsFileTree.aspx',                
                 multiFolder: false,
                 folderEvent: 'dblclick'

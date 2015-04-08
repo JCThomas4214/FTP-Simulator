@@ -49,21 +49,26 @@ namespace Stardome.Controllers
         }
 
         [HttpPost]
-        public ActionResult Actions(IEnumerable<HttpPostedFileBase> files, string lastSelectedFolder)
+        public JsonResult UploadFile()
         {
+            string strUploadStatus=string.Empty;
             var r = new List<UploadFilesResult>();
             List<string> results = new List<string>();
-            string[] allowedExtensions = new[] { ".mp3", ".txt", ".jpeg" };
+            string[] allowedExtensions = new[] { ".mp3", ".mp4" };
             int uploadedFiles = 0;
             int existingFiles = 0;
             int incorrectFiles = 0;
-            if (files != null)
+
+            string lastSelectedFolder = Request.Form[0];
+            lastSelectedFolder = lastSelectedFolder.Replace("\"", "").Replace("\\", "/");
+            if (Request.Files.Count>0)
             {
-                foreach (HttpPostedFileBase file in files)
+                for (int i = 0; i < Request.Files.Count; i++)
                 {
+                    var file = Request.Files[i];
                     if (file != null && file.ContentLength > 0)
                     {
-                        //ViewBag.Message = "Hit ME!";
+                        
                         var extension = Path.GetExtension(file.FileName);
                         if (!allowedExtensions.Contains(extension))
                         {
@@ -77,13 +82,6 @@ namespace Stardome.Controllers
                                 continue;
                             try
                             {
-                                // Upload files to the directory lastSelected. If the folder doesn't exist, it creates it.
-                                //string filePath = lastSelected;
-                                //bool exists = Directory.Exists(Path.GetFullPath(filePath));
-                                //if (!exists)
-                                //{
-                                //    Directory.CreateDirectory(Path.GetFullPath(filePath));
-                                //}
                                 string filePath = lastSelectedFolder;
                                 string path = Path.Combine(Path.GetFullPath(filePath),
                                     Path.GetFileName(file.FileName));
@@ -102,7 +100,7 @@ namespace Stardome.Controllers
                             }
                             catch (Exception ex)
                             {
-                                ViewBag.StatusMessage = "Could not upload file(s)";
+                                strUploadStatus = "Could not upload file(s)";
                             }
 
                             r.Add(new UploadFilesResult()
@@ -135,7 +133,7 @@ namespace Stardome.Controllers
                 results.Add(uploadedFiles == 1
                     ? "1 file uploaded successfully."
                     : String.Format("{0} files uploaded successfully.", uploadedFiles));
-                ViewBag.StatusMessage = "Uploaded to " + lastSelectedFolder;
+                strUploadStatus = "Uploaded to " + lastSelectedFolder;
 
             }
             
@@ -146,17 +144,14 @@ namespace Stardome.Controllers
                 RoleId = adminController.GetUserRoleId(User.Identity.Name),
                 List = results
             };
-            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(SiteSettings.Content);
-            ViewBag.Message = "Manage Contents";
             
-            return View(model);
+             return Json(new { Result = "OK", UploadStatus = strUploadStatus });
         }
 
         public ActionResult ByUser()
         {
             ViewBag.message = "Manage Content Permissions";
-           
+            ViewBag.StatusMessage = string.Empty;
             string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers(0,100).Data);
             users=users.Remove(0,users.IndexOf('['));
             users = users.Remove(users.IndexOf(']')+1, (users.Length - users.IndexOf(']'))-1);
@@ -193,14 +188,15 @@ namespace Stardome.Controllers
             
         }
 
-        public void UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
+        public ActionResult UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
         {
+            string errMsg = string.Empty;
             List<Access> accesses = accessService.GetAccessByUserId(UserId);
             foreach (Access access in accesses)
             {
                 if (!(SelectedFolderNames.Exists(a => a.Equals(access.Folder.Name))))
                 {
-                    accessService.DeleteAccess(access);
+                    errMsg = accessService.DeleteAccess(access);
                 }
             }
 
@@ -213,10 +209,16 @@ namespace Stardome.Controllers
                     a.UserId = UserId;
                     a.FolderId = folderService.GetFolderByFolderName(selectedFolder).Id;
                     a.DateGiven=DateTime.Now;
-                    accessService.AddAccess(a);
+                    errMsg = accessService.AddAccess(a);
                 }
 
             }
+            if (errMsg == string.Empty)
+                ViewBag.StatusMessage = "Updated Permissions Successfully";
+            else
+                ViewBag.StatusMessage = errMsg;
+
+            return View();
             
         }
 
@@ -288,16 +290,16 @@ namespace Stardome.Controllers
 
         public void GrantPermissionToFolder(string folderId, string folderName, List<string> selectedUsers)
         {
-
+           
             List<Access> accesses = folderService.GetFolderByFolderName(folderName).Accesses.ToList();
             foreach (Access access in accesses)
             {
                 if (!(selectedUsers.Exists(a => a.Equals(access.UserId.ToString()))))
                 {
-                    accessService.DeleteAccess(access);
+                   accessService.DeleteAccess(access);
                 }
             }
-
+            
             foreach (string userId in selectedUsers)
             {
                 int fId = folderService.GetFolderByFolderName(folderName).Id;
@@ -310,8 +312,9 @@ namespace Stardome.Controllers
                     a.DateGiven = DateTime.Now;
                     accessService.AddAccess(a);
                 }
-
             }
+
+
         }
 
         public JsonResult GetUserPermissionsForFolder(string folderName)

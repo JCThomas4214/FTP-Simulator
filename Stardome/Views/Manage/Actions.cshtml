@@ -25,101 +25,108 @@
     </section>
 }
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var Role = '@Model.RoleId';  
-        var UserId = '@WebSecurity.CurrentUserId';   
+    var Role = '@Model.RoleId';
+    var UserId = '@WebSecurity.CurrentUserId';
 
-        root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
-       
-        $(document).ready(function () {
-            initializer(Role);
+    root = '@System.Web.HttpUtility.JavaScriptStringEncode(Server.MapPath("~/Stardome"))' + '\\';
 
-            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+    $(document).ready(function () {
+        initializer(Role);
 
-                var input = $(this).parents('.input-group').find(':text'),
-                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+        $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
 
-                if (input.length) {
-                    input.val(log);
-                } else {
-                    if (log) alert(log);
-                }
+            var input = $(this).parents('.input-group').find(':text'),
+                log = numFiles > 1 ? numFiles + ' files selected' : label;
 
-            });
-        });
-        $(document).on('change', '.btn-file :file', function () {
-            debugger
-            var input = $(this),
-                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [numFiles, label]);
-        });
-    </script>
-
-    <div>
-        <table id="labels">
-            <tr>               
-                <td><div id="dropD"></div></td>
-                <td>Files For Download</td>
-            </tr>
-        </table>
-    </div>
-    <div class="outer">        
-        <div class="innerwrap">
-            <div id="MainTree"></div>
-            <div id="selectedFileList"></div>
-        </div>
-    </div>
-
-    <div id="dialog-confirm"></div>    
-    <div style="float:left; width:100%">
-        @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
-        {
-            using (Html.BeginForm("Actions", "Manage", new { root = Model.RootPath }, FormMethod.Post, new { enctype = "multipart/form-data" })) //lastSelected must equal
-            {
-                <input type="hidden" name="lastSelectedFolder" id="lastSelectedFolder" value="" />
-        <h4>Upload files</h4>
-        <table style="width: 100%">
-            <tr>
-            <td style="width: 40%">
-                
-                    <div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <span class="btn btn-primary btn-file">
-                                    Browse&hellip; <input type="file" multiple name="files">
-                                </span>
-                            </span>
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                
-            </td>
-            <td><button type="submit" class="btn btn-primary">Upload Files</button></td>
-            <td style="width: 30%"></td>
-            <td><button type="button" class="btn btn-primary" onclick="downloadAsZip()">Download as Zip</button></td>
-            </tr>
-     </table>
-
-
-
-                <br>
-                @*@ViewBag.Message<br>
-                foreach (var element in Model.List)
-                {
-                    <p>@Html.DisplayFor(m => element)</p>
-                }*@
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
             }
-        }
+
+        });
+        
+
+    });
+    $(document).on('change', '.btn-file :file', function () {
+        debugger
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+    });
+</script>
+
+<div>
+    <table id="labels">
+        <tr>
+            <td><div id="dropD"></div></td>
+            <td>Files For Download</td>
+        </tr>
+    </table>
+</div>
+<div class="outer">
+    <div class="innerwrap">
+        <div id="MainTree"></div>
+        <div id="selectedFileList"></div>
     </div>
-    <div>
-                
-    </div>
-    <br /><br /><br /><br /><br /><br /><br />
-    @*<div>
-        <h1 id="qunit-header">QUnit Tests</h1>
-        <ol id="qunit-tests"></ol>
-    </div>*@
+</div>
+
+<div id="dialog-confirm"></div>
+
+
+
+<div style="float:left; width:100%">
+    @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
+    {
+        
+
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 40%">
+
+                        <div id="dialog-upload" style="display:none" >
+                            <div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-primary btn-file">
+                                            Browse&hellip; <input id="fileUpload" type="file" multiple name="files">
+                                        </span>
+                                    </span>
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+                               
+                            </div>
+
+
+                        </div>
+
+                        @*<div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        Browse&hellip; <input type="file" multiple name="files">
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" readonly>
+                            </div>
+                        </div>*@
+
+                    </td>
+                    <td>@*<button type="button" class="btn btn-primary" id="btnUpload">Upload Files</button>*@</td>
+                    <td style="width: 30%"></td>
+                    <td><button type="button" class="btn btn-primary" onclick="downloadAsZip()">Download as Zip</button></td>
+                </tr>
+            </table>
+
+
+        
+    }
+</div>
+<div>
+
+</div>
 
 

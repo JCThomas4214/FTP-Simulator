@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationTests.cs" />
+    <Compile Include="FolderPermissionsByUserTest.cs" />
     <Compile Include="UserManagementTest.cs" />
     <Compile Include="UserProfileTest.cs" />
     <Compile Include="SiteSettingsTest.cs" />
