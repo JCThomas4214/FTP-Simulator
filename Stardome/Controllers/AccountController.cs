@@ -327,6 +327,8 @@ namespace Stardome.Controllers
             message.Subject = subject;
             message.Body = body;
             message.IsBodyHtml = true;
+            message.From = new MailAddress("donotreply@stardome.com", "Stardome Admin");
+            message.ReplyToList.Add("donotreply@stardome.com"); 
             SmtpClient smtp = new SmtpClient();
             
 
