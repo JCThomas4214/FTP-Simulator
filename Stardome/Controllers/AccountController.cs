@@ -308,7 +308,7 @@ namespace Stardome.Controllers
             string subject="", body="";
             UserInformation aUser = userAuthCredentialService.GetByUsername(userName).UserInformations.FirstOrDefault();
             // Email stuff
-            body = "Dear " + aUser.LastName + "<\br>";
+            body = "Dear " + aUser.LastName + "<br><br>";
             if (emailType == Enums.EmailType.AccountVerify)
             {
                  subject = "Welcome to stardome.com. Activate your Account";
@@ -319,14 +319,16 @@ namespace Stardome.Controllers
                 subject = "Reset your password for stardome.com";
                 body += siteSettingsService.GetById(7).Value; 
             }
-            body += "<\br> You link: " + resetLink;
+            body += "<br><br> Link: " + resetLink + "<br><br> Stardome Team"; 
 
             string from = "donotreply@stardome.com";
                         
             MailMessage message = new MailMessage(from, aUser.Email);
             message.Subject = subject;
             message.Body = body;
+            message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
+            
 
             //Add SMTP Server; Now runs on simulations
             // Emails will be in c:\email
