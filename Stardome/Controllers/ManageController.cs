@@ -250,8 +250,8 @@ namespace Stardome.Controllers
         [HttpPost]
         public ActionResult CreateFolder(string Path, string Name)
         {
-            string folderPath = "Stardome/Stardome" + Path + Name;
-            System.IO.Directory.CreateDirectory(Server.MapPath("~") + folderPath);
+            string folderPath = Path.Replace(Server.MapPath("~"),"") + Name;
+            System.IO.Directory.CreateDirectory(Path+ Name);
             Folder f = new Folder();          
 
             f.Name = Name;

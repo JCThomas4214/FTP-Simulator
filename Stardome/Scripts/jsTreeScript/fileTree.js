@@ -294,11 +294,12 @@
 		                'class': 'btn btn-primary',
 		                click: function() {
 		                    $(this).dialog('close');
-		                    var tmp = Path.substring(Path.indexOf("/"), Path.length);
-		                    while (tmp.search("/") != -1) {
-		                        tmp = tmp.replace("/", "\\");
-		                    }
-		                    callBackFolder($("#txt2").val(), tmp);
+                            debugger
+		                    //var tmp = Path.substring(Path.indexOf("/"), Path.length);
+		                    //while (tmp.search("/") != -1) {
+		                    //    tmp = tmp.replace("/", "\\");
+		                    //}
+		                    callBackFolder($("#txt2").val(), Path);
 		                }
 		            }, { // Cancel button
 		                text: 'Cancel',
