@@ -14,5 +14,6 @@ namespace Stardome.Services.Domain
         List<Access> GetAccessByUserId(int UserId);
         String AddAccess(Access aAccess);
         String DeleteAccess(Access aAccess);
+        Access GetById(int Id);
     }
 }

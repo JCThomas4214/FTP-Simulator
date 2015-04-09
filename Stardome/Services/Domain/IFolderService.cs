@@ -10,5 +10,6 @@ namespace Stardome.Services.Domain
         string DeleteFolder(Folder folder);
         Folder GetFolderByFolderName(string FolderName);
         Folder GetFolderByFolderPath(string FolderPath);
+        IEnumerable<Folder> GetFoldersStartingFolderPath(string FolderPath);
     }
 }

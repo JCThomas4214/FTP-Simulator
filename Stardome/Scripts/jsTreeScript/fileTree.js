@@ -197,6 +197,7 @@
                     var index = selectedFolders.indexOf(ParentFolder.id);
                     if (index == -1) {
                         selectedFolders.push(ParentFolder.id);
+                        selectedFolderNames.push(ParentFolder.name);
                     }
                     folderTraversalUp(ParentFolder.id);
                 }

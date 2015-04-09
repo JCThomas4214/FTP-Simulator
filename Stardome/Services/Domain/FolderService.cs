@@ -37,5 +37,10 @@ namespace Stardome.Services.Domain
         {
             return repository.GetFolderByFolderPath(FolderPath);
         }
+
+        public IEnumerable<Folder> GetFoldersStartingFolderPath(string FolderPath)
+        {
+            return repository.GetFoldersStartingFolderPath(FolderPath);
+        }
     }
 }

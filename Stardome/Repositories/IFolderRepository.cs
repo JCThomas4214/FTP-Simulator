@@ -15,5 +15,7 @@ namespace Stardome.Repositories
         Folder GetFolderByFolderName(string FolderName);
 
         Folder GetFolderByFolderPath(string FolderPath);
+
+        IEnumerable<Folder> GetFoldersStartingFolderPath(string FolderPath);
     }
 }

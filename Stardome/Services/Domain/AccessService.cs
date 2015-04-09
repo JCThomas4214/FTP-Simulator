@@ -35,6 +35,13 @@ namespace Stardome.Services.Domain
         {
             return repository.AddAccess(aAccess);
         }
+
+
+        public Access GetById(int Id)
+        {
+            return repository.GetById(Id);
+        }
+
         public String DeleteAccess(Access aAccess)
         {
             return repository.DeleteAccess(aAccess);

@@ -179,7 +179,8 @@ namespace Stardome.Controllers
             List<string> folderNames = new List<string>();
             foreach (Access access in accesses)
             {
-                folderIds.Add((access.Folder.Path));
+                string folderId = System.Web.HttpUtility.JavaScriptStringEncode(access.Folder.Path); // access.Folder.Path.Replace(@"\", @"\\");
+                folderIds.Add(access.Folder.Path);
                 folderNames.Add((access.Folder.Name));
             }
 
@@ -249,11 +250,12 @@ namespace Stardome.Controllers
         [HttpPost]
         public ActionResult CreateFolder(string Path, string Name)
         {
-            System.IO.Directory.CreateDirectory(Server.MapPath("~/Stardome/Stardome") + Path + Name);
+            string folderPath = "Stardome/Stardome" + Path + Name;
+            System.IO.Directory.CreateDirectory(Server.MapPath("~") + folderPath);
             Folder f = new Folder();          
 
             f.Name = Name;
-            f.Path = Path;
+            f.Path = folderPath;
             f.CreatedBy = WebSecurity.CurrentUserId;
             f.CreatedOn = DateTime.Now;
             folderService.AddFolder(f);
@@ -290,16 +292,32 @@ namespace Stardome.Controllers
 
         public void GrantPermissionToFolder(string folderId, string folderName, List<string> selectedUsers)
         {
-           
-            List<Access> accesses = folderService.GetFolderByFolderName(folderName).Accesses.ToList();
+            List<Access> accesses;
+            // Delete all the subfolder entries
+            foreach (string userId in selectedUsers)
+            {
+                accesses = accessService.GetAccessByUserId(Convert.ToInt32(userId));
+                foreach (Access access in accesses)
+                { 
+                    folderId=folderId.Replace(@"\\", @"\");
+                    if (access.Folder.Path.StartsWith(folderId) && access.Folder.Path != folderId)
+                    {
+                        accessService.DeleteAccess(access);
+                    }
+                }
+            }
+            
+            // Delete Access if user is unchecked
+            accesses = folderService.GetFolderByFolderName(folderName).Accesses.ToList();
             foreach (Access access in accesses)
             {
                 if (!(selectedUsers.Exists(a => a.Equals(access.UserId.ToString()))))
                 {
-                   accessService.DeleteAccess(access);
+                   accessService.DeleteAccess(accessService.GetById(access.Id));
                 }
             }
             
+            // Adding permissions to selected users
             foreach (string userId in selectedUsers)
             {
                 int fId = folderService.GetFolderByFolderName(folderName).Id;

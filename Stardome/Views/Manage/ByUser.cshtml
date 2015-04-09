@@ -44,12 +44,13 @@
                             //alert('Error: ' + xhr.statusText);
                         },
                         success: function (result) {
+                            debugger
                             Tree_Permissions(root);
                             selectedFolders.length = 0;
                             selectedFolderNames.length = 0;
                             selectedFolders = result.folderIds.slice();
                             selectedFolderNames = result.folderNames.slice();
-                            debugger;
+
                         },
                         async: true,
                         processData: false

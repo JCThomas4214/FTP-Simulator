@@ -72,7 +72,14 @@ namespace Stardome.Repositories
 
         public Folder GetFolderByFolderPath(string FolderPath)
         {
+            FolderPath = FolderPath.Replace(@"\\", @"\");
             return sdContext.Folders.SingleOrDefault(x => x.Path == FolderPath);
+        }
+
+        public IEnumerable<Folder> GetFoldersStartingFolderPath(string FolderPath)
+        {
+            FolderPath = FolderPath.Replace(@"\\", @"\");
+            return (IEnumerable<Folder>)sdContext.Folders.Where(x => x.Path.StartsWith(FolderPath));
         }
     }
 }
