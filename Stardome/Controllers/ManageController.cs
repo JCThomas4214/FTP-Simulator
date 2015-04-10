@@ -191,28 +191,33 @@ namespace Stardome.Controllers
 
         public ActionResult UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
         {
+
             string errMsg = string.Empty;
             List<Access> accesses = accessService.GetAccessByUserId(UserId);
+
             foreach (Access access in accesses)
             {
-                if (!(SelectedFolderNames.Exists(a => a.Equals(access.Folder.Name))))
+                if ((SelectedFolders == null) || (!(SelectedFolderNames.Exists(a => a.Equals(access.Folder.Name)))))
                 {
                     errMsg = accessService.DeleteAccess(access);
                 }
             }
 
-            foreach (string selectedFolder in SelectedFolderNames)
+            if (SelectedFolders != null)
             {
-                
-                if (accessService.GetAccessByFolderName(selectedFolder, UserId) == null )
-                { 
-                    Access a = new Access();
-                    a.UserId = UserId;
-                    a.FolderId = folderService.GetFolderByFolderName(selectedFolder).Id;
-                    a.DateGiven=DateTime.Now;
-                    errMsg = accessService.AddAccess(a);
-                }
+                foreach (string selectedFolder in SelectedFolderNames)
+                {
 
+                    if (accessService.GetAccessByFolderName(selectedFolder, UserId) == null)
+                    {
+                        Access a = new Access();
+                        a.UserId = UserId;
+                        a.FolderId = folderService.GetFolderByFolderName(selectedFolder).Id;
+                        a.DateGiven = DateTime.Now;
+                        errMsg = accessService.AddAccess(a);
+                    }
+
+                }
             }
             if (errMsg == string.Empty)
                 ViewBag.StatusMessage = "Updated Permissions Successfully";
@@ -223,21 +228,6 @@ namespace Stardome.Controllers
             
         }
 
-        //public ActionResult ByFolder()
-        //{
-
-        //    List<string> dummy = new List<string>();
-        //    ContentModel model = new ContentModel
-        //    {
-        //        RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
-        //        RoleId = adminController.GetUserRoleId(User.Identity.Name),
-        //        List = dummy
-        //    };
-        //    ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-        //    adminController.GetValue(SiteSettings.Content);
-
-        //    return View(model);
-        //}
 
         [HttpPost]
        public ActionResult DeleteFile(string filePath)
@@ -273,22 +263,6 @@ namespace Stardome.Controllers
             return null;
         }
 
-        //[HttpPost]
-        //public ActionResult AddFile(string filePath)
-        //{
-            
-
-        //    System.IO.Directory.CreateDirectory(Server.MapPath("~") + filePath);
-        //    Folder f= new Folder();
-        //    f.Name="Cnn 1";
-        //    f.ModifiedOn=DateTime.Now;
-        //    f.Path = "";
-        //    //f.ModifiedBy = WebSecurity.CurrentUserId;
-
-
-        //    folderService.AddFolder(f);
-        //    return null;
-        //}
 
         public void GrantPermissionToFolder(string folderId, string folderName, List<string> selectedUsers)
         {
