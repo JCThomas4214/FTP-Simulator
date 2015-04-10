@@ -380,7 +380,7 @@
                 appendTo: 'uploadFile',
                 resizable: false,
                 title: "Upload to",
-                height: 167,
+                height: 180,
                 width: 400,
                 buttons: [
                     { 
@@ -553,7 +553,8 @@
             }, function (dir) {
                 lastSelected = dir;                
             });
-            if (Role == 1) {
+            // Role= Admins or Producers
+            if (Role == 1 || Role == 2) {           
                 $('.jqueryFileTree').contextMenu({
                     // define which elements trigger this menu
                     selector: ".jqueryFileTree li a",
@@ -567,7 +568,7 @@
                                 createFolder($(this).attr("rel"));
                             },
                             disabled: function (key, opt) {
-                              if (($(this).parent().attr('id') == "file") || Role != 1) {
+                              if (($(this).parent().attr('id') == "file") ) {
                                     return true;
                                 }
                                 else
@@ -581,7 +582,7 @@
                                 deleteFolder($(this).attr("name"), $(this).attr("rel"));
                             },
                             disabled: function (key, opt) {
-                                if (($(this).parent().attr('id') == "file") || Role != 1) {
+                                if (($(this).parent().attr('id') == "file") ) {
                                     return true;
                                 }
                                 else
@@ -597,7 +598,7 @@
                                 uploadFunc($(this).attr("rel"));
                             },
                             disabled: function (key, opt) {
-                                if (($(this).parent().attr('id') == "file") || Role != 1) {
+                                if (($(this).parent().attr('id') == "file") ) {
                                     return true;
                                 }
                                 else
