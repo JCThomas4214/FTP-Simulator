@@ -96,7 +96,7 @@ namespace Stardome.Controllers
         [HttpPost]
         public JsonResult GetActiveUsers(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
-            IList<User> users = GetUsersHelper();
+            IList<User> users = GetUsersHelper(jtSorting);
             IEnumerable<User> activeUsers = users.Where(x => x.RoleId != (int) Enums.Roles.InActive);
 
             users = GetUsersSortSize(activeUsers, jtSorting);
@@ -134,7 +134,7 @@ namespace Stardome.Controllers
             return users.ToList();
         }
 
-        private IList<User> GetUsersHelper(string jtSorting = null)
+        private IList<User> GetUsersHelper(string jtSorting)
         {
             IList<User> users = new List<User>();
             IList<UserAuthCredential> userAuthCredentials;
@@ -144,14 +144,14 @@ namespace Stardome.Controllers
                 {
                     userAuthCredentials =
                         userAuthCredentialService.GetUserAuthCredentials()
-                            .OrderByDescending(aUser => aUser.Role)
+                            .OrderByDescending(aUser => aUser.Role.Role1)
                             .ToList();
                 }
                 else
                 {
                     userAuthCredentials =
                         userAuthCredentialService.GetUserAuthCredentials()
-                            .OrderBy(aUser => aUser.Role)
+                            .OrderBy(aUser => aUser.Role.Role1)
                             .ToList();
                 }
             }
