@@ -20,10 +20,11 @@ namespace Stardome.Controllers
         private readonly IAccessService accessService;
         //
         // GET: /Manage/
-        public ManageController(AdminController anAdminController)
+        public ManageController(AdminController anAdminController, IFolderService aFolderService, IAccessService anAccessService)
         {
             adminController = anAdminController;
-            //TODO: ass folderService
+            folderService = aFolderService;
+            accessService = anAccessService;
         }
         public ManageController()
         {
@@ -34,16 +35,14 @@ namespace Stardome.Controllers
         
         public ActionResult Actions()
         {
-            List<string> dummy = new List<string>();
             ContentModel model = new ContentModel
             {
                 RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
                 RoleId = adminController.GetUserRoleId(User.Identity.Name),
-                List = dummy
+                List = new List<string>()
             };
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(SiteSettings.Content);
-            ViewBag.Message = "Manage Contents";
+            ViewBag.Message = adminController.GetValue(SiteSettings.Content);
            
             return View(model);
         }
@@ -52,7 +51,7 @@ namespace Stardome.Controllers
         public JsonResult UploadFile()
         {
             string strUploadStatus=string.Empty;
-            var r = new List<UploadFilesResult>();
+            List<UploadFilesResult> uploadList = new List<UploadFilesResult>();
             List<string> results = new List<string>();
             string[] allowedExtensions = new[] { ".mp3", ".mp4" };
             int uploadedFiles = 0;
@@ -103,7 +102,7 @@ namespace Stardome.Controllers
                                 strUploadStatus = "Could not upload file(s)";
                             }
 
-                            r.Add(new UploadFilesResult()
+                            uploadList.Add(new UploadFilesResult()
                             {
                                 Name = hpf.FileName,
                                 Length = hpf.ContentLength,
@@ -137,15 +136,7 @@ namespace Stardome.Controllers
 
             }
             
-
-            ContentModel model = new ContentModel
-            {
-                RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
-                RoleId = adminController.GetUserRoleId(User.Identity.Name),
-                List = results
-            };
-            
-             return Json(new { Result = "OK", UploadStatus = strUploadStatus });
+            return Json(new { Result = "OK", UploadStatus = strUploadStatus });
         }
 
         public ActionResult ByUser()
@@ -166,11 +157,10 @@ namespace Stardome.Controllers
             };
             
             ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
-            adminController.GetValue(SiteSettings.ContentByUser);
+            ViewBag.Message = adminController.GetValue(SiteSettings.ContentByUser);
 
             return View(model);
         }
-
 
         public JsonResult GetFolderPermissionsForUser(int UserId)
         {
@@ -184,12 +174,12 @@ namespace Stardome.Controllers
                 folderNames.Add((access.Folder.Name));
             }
 
-            return Json(new { Result = "OK", folderIds = folderIds,folderNames=folderNames, TotalRecordCount = accesses.Count });
+            return Json(new { Result = "OK", folderIds = folderIds, folderNames=folderNames, TotalRecordCount = accesses.Count });
 
             
         }
 
-        public ActionResult UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
+        public JsonResult UpdateFolderPermissions(int UserId, List<String> SelectedFolders, List<string> SelectedFolderNames)
         {
 
             string errMsg = string.Empty;
@@ -220,14 +210,12 @@ namespace Stardome.Controllers
                 }
             }
             if (errMsg == string.Empty)
-                ViewBag.StatusMessage = "Updated Permissions Successfully";
-            else
-                ViewBag.StatusMessage = errMsg;
+                errMsg = "Updated Permissions Successfully";
 
-            return View();
+
+            return Json(new { resultMessage = errMsg }); ;
             
         }
-
 
         [HttpPost]
        public ActionResult DeleteFile(string filePath)
@@ -262,7 +250,6 @@ namespace Stardome.Controllers
 
             return null;
         }
-
 
         public void GrantPermissionToFolder(string folderId, string folderName, List<string> selectedUsers)
         {
@@ -322,7 +309,5 @@ namespace Stardome.Controllers
            return Json(new { Result = "OK", selectedUsers = selectedUsers, TotalRecordCount = accesses.Count });
 
         }
-        
- 
     }
 }

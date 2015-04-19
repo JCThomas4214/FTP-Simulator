@@ -55,7 +55,17 @@
 		        }
 		    }
 		    for (var i = 0; i < selectedFolders.length; i++) {
-		        try { check(selectedFolders[i]); }
+		        try {
+                    debugger
+		            var subFolders = document.querySelectorAll('[id*=' + selectedFolderNames[i] + ']');
+		            for (x = 0; x < subFolders.length; x++) {
+		                subFolderId = subFolders[x].getAttribute("id");
+		                var SubFolderCheckBox = document.getElementById(subFolderId);
+		                SubFolderCheckBox.checked = true;
+                    //document.getElementById(selectedFolders[i]).checked = true; 
+		           }
+
+		        }
 		        catch (e) { console.log(selectedFolders[i] + "is not in the current file tree");
 		        }
 		    }
@@ -221,6 +231,9 @@
                         //alert('Error: ' + xhr.statusText);
                     },
                     success: function (result) {
+                       
+                        document.getElementById('lblUpdateMessage').innerHTML = result.resultMessage;
+                      
                     },
                     async: true,
                     processData: false

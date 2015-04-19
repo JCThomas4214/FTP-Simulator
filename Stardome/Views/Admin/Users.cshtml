@@ -13,8 +13,8 @@
         var roles = '@Url.Action("GetRoles", "Admin")';
         $('#UserTableContainer').jtable({
             title: 'User List',
-            paging: true, //Enable paging
-            pageSize: 20, //Set page size (default: 20)
+            paging: false, //Enable paging
+            //pageSize: 20, //Set page size (default: 20)
             sorting: true, //Enable sorting
             actions: {
                 listAction: '@Url.Action("GetActiveUsers", "Admin")',

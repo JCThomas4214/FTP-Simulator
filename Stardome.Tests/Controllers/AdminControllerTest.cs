@@ -26,6 +26,8 @@ namespace Stardome.Tests.Controllers
         private AdminController controller;
         private UserAuthCredential userAuthCredentialAdmin;
         private UserAuthCredential userAuthCredentialProducer;
+        private UserAuthCredential userAuthCredentialUser;
+        private UserAuthCredential userAuthCredentialInActive;
 
         private string successMessage;
         private string failureMessage;
@@ -64,10 +66,18 @@ namespace Stardome.Tests.Controllers
             {
                 RoleId = (int)Enums.Roles.Admin
             };
-            
+
             userAuthCredentialProducer = new UserAuthCredential
             {
                 RoleId = (int)Enums.Roles.Producer
+            };
+            userAuthCredentialUser = new UserAuthCredential
+            {
+                RoleId = (int)Enums.Roles.User
+            };
+            userAuthCredentialInActive = new UserAuthCredential
+            {
+                RoleId = (int)Enums.Roles.InActive
             };
 
 
@@ -206,6 +216,24 @@ namespace Stardome.Tests.Controllers
         }
 
         [TestMethod]
+        public void Users_User()
+        {
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialUser);
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Users)).Returns(new SiteSetting() { Value = "users" });
+            ViewResult result = controller.Users() as ViewResult;
+            Assert.IsTrue(result.ViewBag.Message.Equals("users") && !result.ViewBag.showAdminMenu);
+        }
+
+        [TestMethod]
+        public void Users_InActive()
+        {
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialInActive);
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Users)).Returns(new SiteSetting() { Value = "users" });
+            ViewResult result = controller.Users() as ViewResult;
+            Assert.IsTrue(result.ViewBag.Message.Equals("users") && !result.ViewBag.showAdminMenu);
+        }
+
+        [TestMethod]
         public void Content_Admin()
         {
             aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
@@ -218,6 +246,26 @@ namespace Stardome.Tests.Controllers
         public void Content_Producer()
         {
             aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialProducer);
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
+            ViewResult result = controller.Content() as ViewResult;
+
+            Assert.IsTrue(result.ViewBag.Message.Equals("content") && !result.ViewBag.showAdminMenu);
+        }
+
+        [TestMethod]
+        public void Content_User()
+        {
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialUser);
+            aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
+            ViewResult result = controller.Content() as ViewResult;
+
+            Assert.IsTrue(result.ViewBag.Message.Equals("content") && !result.ViewBag.showAdminMenu);
+        }
+
+        [TestMethod]
+        public void Content_InActive()
+        {
+            aMockUserAuthCredentialService.Setup(aService => aService.GetByUsername("username")).Returns(userAuthCredentialInActive);
             aMockSiteSettingsService.Setup(aService => aService.FindSiteSetting(SiteSettings.Content)).Returns(new SiteSetting() { Value = "content" });
             ViewResult result = controller.Content() as ViewResult;
 
@@ -292,7 +340,7 @@ namespace Stardome.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetUsers()
+        public void GetActiveUsers()
         {
             IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
             {
@@ -304,20 +352,20 @@ namespace Stardome.Tests.Controllers
             aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
 
             var data = Json.Decode(Json.Encode(controller.GetActiveUsers().Data));
-            Boolean isTrue = data["TotalRecordCount"] == 0;
-            //isTrue = isTrue && data["Records"][0]["Id"] == 4;
-            //isTrue = isTrue && String.Equals(data["Records"][0]["EmailAddress"], "email1");
-            //isTrue = isTrue && String.Equals(data["Records"][0]["FirstName"], "Jane");
-            //isTrue = isTrue && String.Equals(data["Records"][0]["LastName"], "Doe");
-            //isTrue = isTrue && data["Records"][0]["RoleId"] == 2;
-            //isTrue = isTrue && String.Equals(data["Records"][0]["Username"], "username1");
-            //isTrue = isTrue && data["Records"][1]["Id"] == 5;
+            Boolean isTrue = data["TotalRecordCount"] == 2;
+            isTrue = isTrue && data["Records"][0]["Id"] == 4;
+            isTrue = isTrue && String.Equals(data["Records"][0]["EmailAddress"], "email1");
+            isTrue = isTrue && String.Equals(data["Records"][0]["FirstName"], "Jane");
+            isTrue = isTrue && String.Equals(data["Records"][0]["LastName"], "Doe");
+            isTrue = isTrue && data["Records"][0]["RoleId"] == 2;
+            isTrue = isTrue && String.Equals(data["Records"][0]["Username"], "username1");
+            isTrue = isTrue && data["Records"][1]["Id"] == 5;
 
             Assert.IsTrue(isTrue);
         }
 
         [TestMethod]
-        public void GetUsers_AllInactive()
+        public void GetActiveUsers_AllInactive()
         {
             IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
             {
@@ -333,7 +381,7 @@ namespace Stardome.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetUsers_AllNoUserInfo()
+        public void GetActiveUsers_AllNoUserInfo()
         {
             IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
             {
@@ -348,7 +396,7 @@ namespace Stardome.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetUsers_NoneReturned()
+        public void GetActiveUsers_NoneReturned()
         {
             IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
             {
@@ -362,6 +410,93 @@ namespace Stardome.Tests.Controllers
             var data = Json.Decode(Json.Encode(controller.GetActiveUsers().Data));
 
             Assert.IsTrue(data["TotalRecordCount"] == 0);
+        }
+
+        [TestMethod]
+        public void GetAllUsers()
+        {
+            IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
+            {
+                userAuthCredential1,
+                userAuthCredentialInactive,
+                userAuthCredential2,
+                userAuthCredentialNoUserInfo
+            };
+            aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
+
+            var data = Json.Decode(Json.Encode(controller.GetAllUsers().Data));
+            Boolean isTrue = data["TotalRecordCount"] == 3;
+            // userAuthCredential1
+            isTrue = isTrue && data["Records"][0]["Id"] == 4;
+            isTrue = isTrue && String.Equals(data["Records"][0]["EmailAddress"], "email1");
+            isTrue = isTrue && String.Equals(data["Records"][0]["FirstName"], "Jane");
+            isTrue = isTrue && String.Equals(data["Records"][0]["LastName"], "Doe");
+            isTrue = isTrue && data["Records"][0]["RoleId"] == 2;
+            isTrue = isTrue && String.Equals(data["Records"][0]["Username"], "username1");
+            // userAuthCredentialInactive
+            isTrue = isTrue && data["Records"][1]["Id"] == 2;
+            isTrue = isTrue && String.Equals(data["Records"][1]["EmailAddress"], "email3");
+            isTrue = isTrue && String.Equals(data["Records"][1]["FirstName"], "Not");
+            isTrue = isTrue && String.Equals(data["Records"][1]["LastName"], "Active");
+            isTrue = isTrue && data["Records"][1]["RoleId"] == (int)Enums.Roles.InActive;
+            isTrue = isTrue && String.Equals(data["Records"][1]["Username"], "username4");
+            // userAuthCredential2
+            isTrue = isTrue && data["Records"][2]["Id"] == 5;
+            isTrue = isTrue && String.Equals(data["Records"][2]["EmailAddress"], "email2");
+            isTrue = isTrue && String.Equals(data["Records"][2]["FirstName"], "John");
+            isTrue = isTrue && String.Equals(data["Records"][2]["LastName"], "Doe");
+            isTrue = isTrue && data["Records"][2]["RoleId"] == (int)Enums.Roles.User;
+            isTrue = isTrue && String.Equals(data["Records"][2]["Username"], "username2");
+
+            Assert.IsTrue(isTrue);
+        }
+
+        [TestMethod]
+        public void GetAllUsers_AllInactive()
+        {
+            IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
+            {
+                
+                userAuthCredentialInactive,
+                userAuthCredentialInactive1
+            };
+            aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
+
+            var data = Json.Decode(Json.Encode(controller.GetAllUsers().Data));
+
+            Assert.IsTrue(data["TotalRecordCount"] == 2);
+        }
+
+        [TestMethod]
+        public void GetAllUsers_AllNoUserInfo()
+        {
+            IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
+            {
+                userAuthCredentialNoUserInfo,
+                userAuthCredentialNoUserInfo1
+            };
+            aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
+
+            var data = Json.Decode(Json.Encode(controller.GetAllUsers().Data));
+
+            Assert.IsTrue(data["TotalRecordCount"] == 0);
+        }
+
+        [TestMethod]
+        public void GetAllUsers_AllInActiveOrNoUserInfo()
+        {
+            IEnumerable<UserAuthCredential> userAuthCredentials = new List<UserAuthCredential>
+            {
+                userAuthCredentialNoUserInfo,
+                userAuthCredentialNoUserInfo1,
+                userAuthCredentialInactive,
+                userAuthCredentialInactive1
+            };
+            aMockUserAuthCredentialService.Setup(aService => aService.GetUserAuthCredentials()).Returns(userAuthCredentials);
+
+            var data = Json.Decode(Json.Encode(controller.GetAllUsers().Data));
+
+            Assert.IsTrue(data["TotalRecordCount"] == 2);
         }
         
         [TestMethod]
@@ -490,6 +625,5 @@ namespace Stardome.Tests.Controllers
 
             Assert.IsTrue(String.Equals(result, "C:/test/123_4/"));
         }
-        //todo GetMainPath change for Producer and User
     }
 }
