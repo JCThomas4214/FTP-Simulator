@@ -2,8 +2,7 @@
 		var htmlList = new Array;
 		var selectedUsers = new Array;
 		var selectedFolders = new Array;
-		var selectedFolderNames = new Array;
-		var htmlDDlist = new Array;
+		var selectedFolderNames = new Array;		
 		var subList = new Array;
 
 
@@ -307,11 +306,11 @@
 		                'class': 'btn btn-primary',
 		                click: function() {
 		                    $(this).dialog('close');
-                            debugger
 		                    //var tmp = Path.substring(Path.indexOf("/"), Path.length);
 		                    //while (tmp.search("/") != -1) {
 		                    //    tmp = tmp.replace("/", "\\");
 		                    //}
+		                    console.log(Path);
 		                    callBackFolder($("#txt2").val(), Path);
 		                }
 		            }, { // Cancel button
@@ -338,8 +337,7 @@
                 async: true,
                 processData: false
             });
-
-            document.getElementById('dropD').innerHTML = "";
+            console.log($('#dropdown').children());
             initializer(Role);
         }
 
@@ -358,11 +356,11 @@
 	                    'class': 'btn btn-primary',
 	                    click: function () {
 	                        $(this).dialog('close');
-	                        var tmp = Path.substring(Path.indexOf("/"), Path.length);
-	                        while (tmp.search("/") != -1) {
-	                            tmp = tmp.replace("/", "\\");
-	                        }
-	                        CBdelFolder(Name, tmp);
+	                        //var tmp = Path.substring(Path.indexOf("/"), Path.length);
+	                        //while (tmp.search("/") != -1) {
+	                        //    tmp = tmp.replace("/", "\\");
+	                        //}
+	                        CBdelFolder(Name, Path);
 	                    }
 	                }, { // No button
 	                    text: 'No',
@@ -386,8 +384,7 @@
                 },
                 async: true,
                 processData: false
-            });
-            document.getElementById('dropD').innerHTML = "";
+            });           
             initializer(Role);
         }
 
@@ -531,8 +528,9 @@
             document.getElementById('selectedFileList').innerHTML = htmlList.join("");           
         }
 
-        function dropD() {           
-            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">'+subList[0][1]+'<span class=\"caret\"></span></button>');
+        function dropD() {
+            var htmlDDlist = new Array;
+            htmlDDlist.push('<div class="dropdown"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" rel=\"' + subList[0][0] + '\"data-toggle=\"dropdown\" aria-expanded=\"true\">' + subList[0][1] + '<span class=\"caret\"></span></button>');
             htmlDDlist.push('<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">');
             for (var i = 0; i < subList.length; i++) {
                 htmlDDlist.push('<li role="presentation"><a role="menuitem" tabindex="-1" id=\"' + subList[i][0] + '\" href="#">' + subList[i][1] + '</a></li>');
@@ -543,10 +541,11 @@
                 $(".dropdown-menu li a").click(function () {    //this is the on click function for the dropdown
                     $(".btn:first-child").text($(this).text());
                     $(".btn:first-child").val($(this).text());
+
+                    $(".btn:first-child").attr('rel', $(this).attr('id'));
                     Tree($(this).attr('id'), Role);                   //reinitialization of the filetree based off what was clicked                                                                
                     setTimeout(function () { call(); }, 100);   //call() keeps checkboxes consistant with what's in the download list. Using 100ms delay to wait for the DOM
-                    lastSelected = $(this).attr('id');
-                    //TODO: when a new folder is selected change the upload path to selected root "$(this).attr('id')"
+                    lastSelected = $(this).attr('id');                    
                 });
             });
         }

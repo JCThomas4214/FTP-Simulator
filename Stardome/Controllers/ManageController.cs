@@ -243,8 +243,8 @@ namespace Stardome.Controllers
 
         [HttpPost]
         public ActionResult DeleteFolder(string Path, string Name)
-        {
-            System.IO.Directory.Delete(Server.MapPath("~/Stardome/Stardome") + Path);
+        {           
+            System.IO.Directory.Delete(Path);
             Folder f = folderService.GetFolderByFolderName(Name);              
             folderService.DeleteFolder(f);
 
