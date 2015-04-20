@@ -39,15 +39,19 @@ namespace Stardome.Controllers
         // Admin/Users
         public ActionResult Users()
         {
-            // Get RoleId to check in the view that only the admin has access
-            MainModel model = new MainModel
+            if (ModelState.IsValid) //&& authenticationProvider.IsAuthenticated())
             {
-                RoleId = GetUserRoleId(User.Identity.Name)
-                //RolesList = GetRoles()
-            };
-            ViewBag.showAdminMenu = model.RoleId == (int) Enums.Roles.Admin;
-            ViewBag.Message = GetValue(SiteSettings.Users);
-            return View(model);
+                // Get RoleId to check in the view that only the admin has access
+                MainModel model = new MainModel
+                {
+                    RoleId = GetUserRoleId(User.Identity.Name)
+                    //RolesList = GetRoles()
+                };
+                ViewBag.showAdminMenu = model.RoleId == (int) Enums.Roles.Admin;
+                ViewBag.Message = GetValue(SiteSettings.Users);
+                return View(model);
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         // Admin/Content

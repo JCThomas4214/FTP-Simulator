@@ -338,7 +338,9 @@
                 async: true,
                 processData: false
             });
-            Tree(root, Role);
+
+            document.getElementById('dropD').innerHTML = "";
+            initializer(Role);
         }
 
         function deleteFolder(Name, Path) {
@@ -385,7 +387,8 @@
                 async: true,
                 processData: false
             });
-            Tree(root, Role);
+            document.getElementById('dropD').innerHTML = "";
+            initializer(Role);
         }
 
         function uploadFunc(Path) {            
@@ -431,10 +434,11 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    alert(response.UploadStatus);
+                    document.getElementById('lblUpdateMessage').innerHTML = "Uploaded Successfully"; //response.UploadStatus;
+                    //alert(response.UploadStatus);
                 },
                 error: function (response) {
-                    alert("There was error uploading the file. Check if a file with same name exist in the folder");
+                    document.getElementById('lblUpdateMessage').innerHTML = "There was error uploading the file. Check if a file with same name exist in the folder";
                 }
             });
             Tree(root, Role);        

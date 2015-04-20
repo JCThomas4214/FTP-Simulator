@@ -49,13 +49,15 @@ namespace Stardome.Controllers
             if (ModelState.IsValid && authenticationProvider.IsAuthenticated())
             {
                 int roleId = userAuthCredentialService.GetByUsername(authenticationProvider.CurrentUserName()).Role.Id;
-                return RedirectToLocal(roleId);
+                if (roleId == (int) Enums.Roles.Admin || roleId == (int) Enums.Roles.Producer ||
+                    roleId == (int) Enums.Roles.User)
+                {
+                    return RedirectToLocal(roleId);
+                }
+                ModelState.AddModelError("", "The user does not have access.");
             }
-            else
-            {
-                ViewBag.ReturnUrl = returnUrl;
-                return View();
-            }
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         //
@@ -300,9 +302,7 @@ namespace Stardome.Controllers
             // Generae password token that will be used in the email link to authenticate user
             var token = authenticationProvider.GeneratePasswordResetToken(userName);
             // Generate the html link sent via email
-            string resetLink = "<a href='"
-               + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
-               + "'>Reset Password Link</a>";
+            string resetLink = string.Empty;
 
             string subject="", body="";
             UserInformation aUser = userAuthCredentialService.GetByUsername(userName).UserInformations.FirstOrDefault();
@@ -310,11 +310,19 @@ namespace Stardome.Controllers
             body = "Dear " + aUser.LastName + "<br><br>";
             if (emailType == Enums.EmailType.AccountVerify)
             {
+                resetLink = "<a href='"
+               + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
+               + "'>Activate your Account</a>";
+
                  subject = "Welcome to stardome.com. Activate your Account";
                  body += siteSettingsService.GetById(6).Value;  
             }
             else if (emailType==Enums.EmailType.ChangePassword)
             {
+                resetLink = "<a href='"
+               + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
+               + "'>Reset Password Link</a>";
+
                 subject = "Reset your password for stardome.com";
                 body += siteSettingsService.GetById(7).Value; 
             }

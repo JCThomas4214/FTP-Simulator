@@ -47,7 +47,7 @@
             }
 
         });
-        
+
 
     });
     $(document).on('change', '.btn-file :file', function () {
@@ -62,7 +62,9 @@
 <div>
     <table id="labels">
         <tr>
-            <td><div id="dropD"></div></td>
+            <td>
+                <div id="dropD"></div>
+            </td>
             <td>Files For Download</td>
         </tr>
     </table>
@@ -78,33 +80,41 @@
 
 
 
-<div style="float:left; width:100%">
+<div style="float: left; width: 100%">
     @if (Model.RoleId == (int)Enums.Roles.Admin || Model.RoleId == (int)Enums.Roles.Producer)
     {
         <table style="width: 100%">
-                <tr>
-                    <td style="width: 40%">
-                        <div id="dialog-upload" style="display:none" >
-                            <div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <span class="btn btn-primary btn-file">
-                                            Browse&hellip; <input id="fileUpload" type="file" multiple name="files">
-                                        </span>
+            <tr>
+                <td style="width: 40%">
+                    <div id="dialog-upload" style="display: none">
+                        <div class="col-lg-6 col-sm-6 col-12" style="width: 100%">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">Browse&hellip;
+                                        <input id="fileUpload" type="file" multiple name="files">
                                     </span>
-                                    <input type="text" class="form-control" readonly>
-                                </div>
+                                </span>
+                                <input type="text" class="form-control" readonly>
                             </div>
                         </div>
-                    </td>
-                    <td></td>
-                    <td style="width: 30%"></td>
-                    <td><button type="button" class="btn btn-primary" onclick="downloadAsZip()">Download as Zip</button></td>
-                </tr>
+                    </div>
+                </td>
+                <td></td>
+
+
+            </tr>
         </table>
     }
+    <div style="width: 100%;">
+
+        <button type="button" class="btn-primary" onclick="downloadAsZip()">Download as Zip</button>
+
+    </div>
 </div>
 <div>
+    <p class="message-success">
+    <label id="lblUpdateMessage"></label>
+</p>
 
 </div>
 
