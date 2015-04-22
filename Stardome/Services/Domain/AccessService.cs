@@ -2,8 +2,6 @@
 using Stardome.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Stardome.Services.Domain
 {
@@ -16,35 +14,36 @@ namespace Stardome.Services.Domain
             repository = aRepository;
         }
 
-        public Access GetAccessByFolderName(string FolderName, int UserID)
+        public Access GetAccessByFolderName(string folderName, int userId)
         {
-            return repository.GetAccessByFolderName(FolderName, UserID);
+            return repository.GetAccessByFolderName(folderName, userId);
         }
 
 
-        public Access GetAccessByFolderPath(string FolderPath, int UserID)
+        public Access GetAccessByFolderPath(string folderPath, int userId)
         {
-            return repository.GetAccessByFolderPath(FolderPath, UserID);
-        }
-        public List<Access> GetAccessByUserId(int UserId)
-        {
-            return repository.GetAccessByUserId(UserId);
+            return repository.GetAccessByFolderPath(folderPath, userId);
         }
 
-        public String AddAccess(Access aAccess)
+        public List<Access> GetAccessByUserId(int userId)
         {
-            return repository.AddAccess(aAccess);
+            return repository.GetAccessByUserId(userId);
+        }
+
+        public String AddAccess(Access anAccess)
+        {
+            return repository.AddAccess(anAccess);
         }
 
 
-        public Access GetById(int Id)
+        public Access GetById(int id)
         {
-            return repository.GetById(Id);
+            return repository.GetById(id);
         }
 
-        public String DeleteAccess(Access aAccess)
+        public String DeleteAccess(Access anAccess)
         {
-            return repository.DeleteAccess(aAccess);
+            return repository.DeleteAccess(anAccess);
         }
 
     

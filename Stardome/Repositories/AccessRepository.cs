@@ -70,7 +70,7 @@ namespace Stardome.Repositories
             {
                 Delete(aAccess);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 msg = ex.Message;
             }

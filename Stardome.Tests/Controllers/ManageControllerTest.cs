@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Security.Principal;
+using System.Web;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -8,8 +11,6 @@ using Stardome.Controllers;
 using Stardome.DomainObjects;
 using Stardome.Models;
 using Stardome.Services.Domain;
-using System.Web;
-using System.Web.Routing;
 
 namespace Stardome.Tests.Controllers
 {
@@ -19,6 +20,8 @@ namespace Stardome.Tests.Controllers
         private Mock<IUserAuthCredentialService> aMockUserAuthCredentialService;
         private Mock<ISiteSettingsService> aMockSiteSettingsService;
         private Mock<IRoleService> aMockRoleService;
+        private Mock<IFolderService> aMockFolderService;
+        private Mock<IAccessService> aMockAccessService;
         private Mock<ControllerContext> controllerContext;
         private Mock<IPrincipal> principal;
         private AdminController adminController;
@@ -33,11 +36,13 @@ namespace Stardome.Tests.Controllers
             aMockUserAuthCredentialService = new Mock<IUserAuthCredentialService>();
             aMockSiteSettingsService = new Mock<ISiteSettingsService>();
             aMockRoleService = new Mock<IRoleService>();
+            aMockFolderService = new Mock<IFolderService>();
+            aMockAccessService = new Mock<IAccessService>();
             controllerContext = new Mock<ControllerContext>();
             principal = new Mock<IPrincipal>();
 
             adminController = new AdminController(aMockUserAuthCredentialService.Object, aMockSiteSettingsService.Object, aMockRoleService.Object);
-            manageController = new ManageController(adminController);
+            manageController = new ManageController(adminController, aMockFolderService.Object, aMockAccessService.Object);
 
             principal.SetupGet(x => x.Identity.Name).Returns("username");
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
@@ -158,5 +163,35 @@ namespace Stardome.Tests.Controllers
         //    file1Mock.Verify(x => x.SaveAs(@"c:\Stardome\file1.txt"));
         //    file2Mock.Verify(x => x.SaveAs(@"c:\Stardome\file2.doc"));
         //}
+
+       /* public ActionResult ByUser()
+        {
+            ViewBag.message = "Manage Content Permissions";
+            ViewBag.StatusMessage = string.Empty;
+            string users = new JavaScriptSerializer().Serialize(adminController.GetActiveUsers(0, 100).Data);
+            users = users.Remove(0, users.IndexOf('['));
+            users = users.Remove(users.IndexOf(']') + 1, (users.Length - users.IndexOf(']')) - 1);
+            List<string> dummy = new List<string>();
+            ContentModel model = new ContentModel
+            {
+                RootPath = adminController.GetMainPath(adminController.GetUserRoleId(User.Identity.Name)),
+                RoleId = adminController.GetUserRoleId(User.Identity.Name),
+
+                UserList = (new JavaScriptSerializer()).Deserialize<List<User>>(users),
+                List = dummy
+            };
+
+            ViewBag.showAdminMenu = model.RoleId == (int)Enums.Roles.Admin;
+            ViewBag.Message = adminController.GetValue(SiteSettings.ContentByUser);
+
+            return View(model);
+        }
+
+        [TestMethod]
+        public void ByUser()
+        {
+            
+        }*/
+
     }
 }

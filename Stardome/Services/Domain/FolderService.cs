@@ -28,19 +28,19 @@ namespace Stardome.Services.Domain
             return repository.DeleteFolder(folder);
         }
 
-        public Folder GetFolderByFolderName(string FolderName)
+        public Folder GetFolderByFolderName(string folderName)
         {
-            return repository.GetFolderByFolderName(FolderName);
+            return repository.GetFolderByFolderName(folderName);
         }
 
-        public Folder GetFolderByFolderPath(string FolderPath)
+        public Folder GetFolderByFolderPath(string folderPath)
         {
-            return repository.GetFolderByFolderPath(FolderPath);
+            return repository.GetFolderByFolderPath(folderPath);
         }
 
-        public IEnumerable<Folder> GetFoldersStartingFolderPath(string FolderPath)
+        public IEnumerable<Folder> GetFoldersStartingFolderPath(string folderPath)
         {
-            return repository.GetFoldersStartingFolderPath(FolderPath);
+            return repository.GetFoldersStartingFolderPath(folderPath);
         }
     }
 }
