@@ -374,6 +374,7 @@
 
         function CBdelFolder(Name, Path) {            
             $.ajax({
+
                 url: "/Manage/DeleteFolder/?Path=" + Path + "&Name=" + Name,
                 type: "POST",
                 data: { Path: Path, Name: Name },
